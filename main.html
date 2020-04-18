@@ -444,7 +444,8 @@
                             }).then((res)=>{
                                 console.log(res);
                                 document.querySelector(".swiper-slide-active").innerHTML = '';
-                                for(let i=0; i<res.length; i++){
+                                console.log(res.data.length);
+                                for(let i=0; i<res.data.length; i++){
                                     console.log(res.data[i]);
                                     let ExpirationTime = new Date(res.data[i].ExpirationTime);
                                     console.log(ExpirationTime);

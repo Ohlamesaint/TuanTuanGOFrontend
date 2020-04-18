@@ -14,14 +14,14 @@ $(document).ready(function(){
                     console.log(res);
                     console.log("789");
                     setTimeout(() => {
-                        window.location.replace('https://luffy.ee.ncku.edu.tw/~Shang/TuanTuanGO/pages/login.html');
+                        window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/login.html');
                     }, );
                 }else{
                     console.log(res);
                     console.log("456");
                     console.log(belowBar[i].children[1].textContent);
                     localStorage.setItem("target", i)
-                    window.location.replace('https://luffy.ee.ncku.edu.tw/~Shang/TuanTuanGO/pages/func.html');
+                    window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/func.html');
                 }
             }).catch(err=>{
                 console.log("123")
@@ -49,7 +49,7 @@ $(document).ready(function(){
                 // localStorage.setItem("target", 4)
                 $(tuanGoer).addClass("tuanGoeranimate");
                 tuanGoer.addEventListener("animationend", ()=>{
-                    window.location.replace('https://luffy.ee.ncku.edu.tw/~Shang/TuanTuanGO/pages/tuanGo.html');
+                    window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/tuanGo.html');
                 })
             }
         }).catch(err=>{

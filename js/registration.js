@@ -1,5 +1,6 @@
 var newUserSubmit = document.querySelector("#newUserSubmit");
 var newUser = document.forms.namedItem("newUser");
+var newProduct = document.forms.namedItem("newProduct");
 var headPaste = document.querySelector("#headPaste");
 var newProductSubmit = document.querySelector("#newProductSubmit");
 

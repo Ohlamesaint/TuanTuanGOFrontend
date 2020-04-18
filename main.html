@@ -444,20 +444,19 @@
                             }).then((res)=>{
                                 console.log(res);
                                 document.querySelector(".swiper-slide-active").innerHTML = '';
-                                console.log('12321');
-                                console.log(res.data.length);
+                                let card;
                                 for(let i=0; i<res.data.length; i++){
                                     console.log(res.data[i]);
                                     let ExpirationTime = new Date(res.data[i].ExpirationTime);
                                     console.log(ExpirationTime);
                                     console.log(ExpirationTime.toString().slice(0, 24));
-                                    let card = document.createElement('div');
+                                    card = document.createElement('div');
                                     card.innerHTML = `
                                     <div id="${res.data[i].TuanGOAddress}" class="card mb-5 mt-2">
                                         <img src="https://picsum.photos/400/200?image=10" class="card-img-top" alt="...">
                                         <div class="card-body" style="text-align : left; background: linear-gradient(rgb(192, 121, 121), rgb(145, 93, 93)); color: white">
                                             <h4 class="card-title" style=" font-size: 1.5rem">${res.data[i].TuanGOType?`$${res.data[i].disccountPrice} for Each`:`$${res.data[i].originalPrice}→$${res.data[i].disccountPrice}`}</h4>
-                                            <h5 class="card-text mb-1" style=" font-size: 1rem; line-height: 1.3rem">${res.data.productName}</h5>
+                                            <h5 class="card-text mb-1" style=" font-size: 1rem; line-height: 1.3rem">${res.data[i].productName}</h5>
                                             <p class="card-text">ExpirationTime: ${ExpirationTime.toString().slice(0, 24)}</p>
                                         </div>
                                     </div>

@@ -1,0 +1,176 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/******start******/
+*{
+    box-sizing: border-box;
+}
+
+*:active{
+    text-decoration: none;
+}
+
+body{
+    /* height: 100%; */
+    position: relative;
+}
+
+
+.below{
+    width: 100vw;
+    position: fixed;
+    height: 10%;
+    bottom: 0%;
+    left: 0%;
+    z-index: 9999;
+}
+
+footer ul{
+    background-color: aliceblue;
+    width: 100%;
+    height: 100%;
+}
+
+footer ul li{
+    width: 20vw;
+    height: 100%;
+    transition: background-color .3s ease, color .3s ease;
+}
+
+.actived{
+    background-color: rgb(145, 93, 93);
+    color: white;
+}
+
+.actived-word{
+    color: white !important;
+}
+
+.wrap{
+    width: 100%;
+    height: 80vh;
+    position: relative;
+}
+
+.wrap>div{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: -1;
+}
+
+#headPaste-outter{
+    height: 20vh;
+}
+
+#headPaste{
+    height: 100%;
+    width: 100%;
+    background-image: url(../public/img/76167.jpg);
+}
+
+.bg-setting{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.wrap>div.activePage{
+    z-index: 1;
+}
+
+#back{
+    display: inline;
+    font-size: 1rem;
+}
+
+#back:active{
+    text-decoration: none;
+}
+
+.animate{
+    opacity:0;
+    transform: translateY(20px);
+    transition: all .3s;
+}
+
+.fadeIn{
+    opacity:1;
+    transform: translateY(0px);
+}
+
+/* #back>p{
+    text-align: center;
+    line-height: 35px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    margin-left: 5px;
+}
+
+#back:after, #back:before{
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 30%;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-radius: 10px;
+    border: 10px solid transparent;
+    border-left-color:  rgba(192, 121, 121, 0.5);
+}
+#back:after{
+    margin-left: 5px;
+    border-left-color: white;
+} */

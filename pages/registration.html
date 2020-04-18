@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self';font-src 'self'; img-src 'self' data: https:; style-src 'self' ; script-src 'self'"> -->
+    
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+    crossorigin="anonymous">
+</head>
+<body>
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">User Registration</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Add Product </a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <form id="#newUser" enctype="multipart/form-data" name="newUser">
+                <label for="user">user: </label><br>
+                <input name="user" type="text"><br><br>
+                <label for="username">username: </label><br>
+                <input name="username" type="text"><br><br>
+                <label for="password">password: </label><br>
+                <input name="password" type="password"><br><br>
+                <label for="region">region: </label><br>
+                <select id="region" name="region">
+                    <option value="Taipei">台北</option>
+                    <option value="newTaipei">新北</option>
+                    <option value="Taoyuan">桃園</option>
+                    <option value="keelong">基隆</option>
+                    <option value="yilan">宜蘭</option>
+                    <option value="Hsinchu ">新竹</option>
+                    <option value="Miaoli">苗栗</option>
+                    <option value="Taichung">臺中</option>
+                    <option value="Changhua">彰化</option>
+                    <option value="Nantou">南投</option>
+                    <option value="Yunlin">雲林</option>
+                    <option value="Chiayi">嘉義</option>
+                    <option value="Tainan">臺南</option>
+                    <option value="Kaohsiung">高雄</option>
+                    <option value="Pingtung">屏東</option>
+                    <option value="Taitung">臺東</option>
+                    <option value="Hualien">花蓮</option>
+                    <option value="Penghu">澎湖</option>
+                    <option value="Kinmen">金門</option>
+                    <option value="Lienchiang">連江</option>
+                </select><br><br>
+                <label for="address">address: </label><br>
+                <input type="text" name="address" id="address"><br><br>
+                <label for="headPaste">head paste: </label><br>
+                <input name="headPaste" type="file" id="headPaste"><br><br>
+                <input type="submit" value="Send" id="newUserSubmit"><br>
+                <p id="error"></p>
+            </form>
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <form id="#newProduct" enctype="multipart/form-data" name="newProduct">
+                <label for="ID">ID: </label><br>
+                <input name="ID" type="text"><br><br>
+                <label for="productName">product name: </label><br>
+                <input name="productName" type="text"><br><br>
+                <label for="productType">product type: </label><br>
+                <select id="productType" name="productType">
+                    <option value="foods">品味美食</option>
+                    <option value="houseLife">居家生活</option>
+                    <option value="exerciseAndRelax">運動休閒</option>
+                    <option value="clothes">衣著良品</option>
+                    <option value="cleanOrPet">清潔日用/寵物</option>
+                </select><br><br>
+                <label for="price">price: </label><br>
+                <input name="price" type="number" id="price"><br><br>
+                <label for="unpackable">unpackable: </label><br>
+                <input name="unpackable" type="checkbox" id="unpackable"><br><br>
+                <label for="unpackableAmount">unpack amount: </label><br>
+                <input name="unpackableAmount" type="number" id="unpackableAmount" disabled><br><br>
+                <label for="hasPromotion">pomotion: </label><br>
+                <input name="hasPromotion" type="checkbox" id="hasPromotion"><br><br>
+                <label for="promotionLowestNum">lowest num: </label><br>
+                <input name="promotionLowestNum" type="number" id="promotionLowestNum" disabled><br><br>
+                <label for="promotionPrice">promote price: </label><br>
+                <input name="promotionPrice" type="number" id="promotionPrice" disabled><br><br>
+                <label for="productPhoto">product photo: </label><br>
+                <input name="productPhoto" type="file" id="productPhoto"><br><br>
+                <input type="submit" value="Send" id="newProductSubmit"><br>
+                <p id="errorProduct"></p>
+            </form>
+        </div>
+    </div>
+    
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<script src="../js/registration.js"></script>
+</html>

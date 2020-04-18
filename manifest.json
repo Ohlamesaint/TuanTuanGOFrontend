@@ -1,0 +1,21 @@
+{
+    "name" : "團團購",
+    "short_name" : "團團",
+    "display" : "standalone",
+    "start_url": "https://luffy.ee.ncku.edu.tw/~Shang/TuanTuanGO/main.html",
+    "background_color" : "#ffffff",
+    "theme_color" : "rgb(145, 93, 93)",
+    "orientation" : "protrait-primary",
+    "icons" :[
+        {
+            "src" : "./public/img/top1.png",
+            "type" : "image/png",
+            "sizes" : "192x192"
+        },
+        {
+            "src" : "./public/img/top.png",
+            "type" : "image/png",
+            "sizes" : "512x512"
+        }
+    ]
+}

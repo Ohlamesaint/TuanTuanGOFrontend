@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
+    <title>Main</title>
+    <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"> -->
+    
+    <script src="https://unpkg.com/swiper/js/swiper.js"></script>
+    <!-- <script src="https://unpkg.com/swiper/js/swiper.min.js"></script> -->
+    
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+        body::-webkit-scrollbar { 
+            display: none !important;
+        }
+        body{
+            outline: none;
+            user-select: none;
+            font-family: 'Baloo 2', 微軟正黑體, -apple-system, BlinkMacSystemFont,"Microsoft JhengHei", 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+        }
+        #login, #registration{
+            border-width: 2px;
+        }
+        .carousel-item{
+            height: 350px;
+            background-size: cover;
+            background-position: center center;
+        }
+        .carousel-indicators li:hover{
+            cursor: pointer;
+        }
+        .carousel-caption{
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        .bg-cover{
+            background-size: cover;
+            background-position: center center;
+        }
+        @media (min-width: 767px) { 
+            .text-md-dark{
+                color: black;
+            }
+        }
+        @media (max-width: 767px) {
+            .bg-md-light{
+                background-color: rgba(3, 3, 3, 0.3);
+                color: white;
+                border-radius: 5px;
+                padding: 1rem 1rem;
+            }
+        }
+        #Persons:focus > #beforeSelect{
+            display: none;
+        }
+    </style>
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="rgb(145, 93, 93)">
+    <!-- CODELAB: Add iOS meta tags and icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="TuanTuanGO">
+    <link rel="apple-touch-icon" href="./public/img/top2.png">
+    <!-- PWA -->
+</head>
+<body>
+    <header>
+        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+            <div class="carousel-inner">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleFade" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleFade" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleFade" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-item active" style="background-image: url(https://images.unsplash.com/photo-1492683513054-55277abccd99?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=);">
+                    <div class="carousel-caption d-none d-md-block p-3">
+                        <h2>一個人，田野間的輕鬆美味</h2>
+                        <p>城小中假上問，洲元化究變快歡專，臺正機上色從多空放我。來來中的來落行間我海府子成隨上事女，的石在朋經以定空他；級病期他，會性前集一於得當院應對分！意斯能己水成神錢。</p>
+                    </div>
+                </div>
+                <div class="carousel-item" style="background-image: url(https://images.unsplash.com/photo-1497668512640-fcbd959e5338?dpr=2&auto=format&fit=crop&w=1500&h=1001&q=80&cs=tinysrgb&crop=);">
+                    <div class="carousel-caption d-none d-md-block p-3">
+                        <h2>大口的放縱，毫無保留</h2>
+                        <p>組道心深的起一強理重麼變喜才她起寶事運果引物；生一越。為己的治應的了：有的兩懷華場前間不不存力：性張得燈表年健交公言要認才部黨岸家深此一和國專女特希這密年那報。</p>
+                    </div>
+                </div>
+                <div class="carousel-item" style="background-image: url(https://images.unsplash.com/photo-1453831362806-3d5577f014a4?dpr=2&auto=format&fit=crop&w=1500&h=1016&q=80&cs=tinysrgb&crop=);">
+                    <div class="carousel-caption d-none d-md-block p-3">
+                        <h2>愛戀的赤裸裸辣辣</h2>
+                        <p>件臺水則的看方府機英下英影加非！為走改幾少我住準愛地下。巴開上人在，但雜處權音生什有會能教！還話弟手大了。</p>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <section  class="topNavs sticky-top" >
+        <nav class="navbar navbar-expand-lg navbar-dark py-2" style="background-color: rgb(145, 93, 93); margin-bottom: -1px;">
+            <div class="container d-flex flex-row align-item-center">
+                <a class="navbar-brand font-weight-bolder align-self-center" href="#"><i class="fas fa-utensils mr-1"></i> 團團GO</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                
+                <div class="collapse navbar-collapse d-lg-flex align-item-center" id="navbarSupportedContent">
+                    <button id="login" type="button" class="btn btn-sm btn-outline-secondary mr-2 ml-3 px-2 py-1" data-toggle="modal" data-target="#modalsignin">登出</button>
+                    <button id="registration" class="btn btn-sm btn-secondary px-4 py-1" type="button" data-toggle="modal" data-target="#loginPrompt">註冊</button>
+                </div>
+            </div>
+        </nav>
+        <section style="overflow: scroll;">
+            <nav class="navbar navbar-expand-lg navbar-dark py-0" style="background-color: rgb(145, 93, 93); width:max-content;">
+                <div class="nav nav-tabs typeTabs" id="nav-tab" >
+                    <!-- <div class="swiper-pagination" style="background-color: rgb(145, 93, 93)"> -->
+                        <a style="color: white;" class="nav-item nav-link active" id="foods" data-toggle="tab" href="#foods" role="tab" aria-controls="nav-home" aria-selected="true">品味美食</a>
+                        <a style="color: white;" class="nav-item nav-link" id="houseLife" data-toggle="tab" href="#houseLife" role="tab" aria-controls="nav-profile" aria-selected="false">居家生活</a>
+                        <a style="color: white;" class="nav-item nav-link" id="exerciseAndRela" data-toggle="tab" href="#exerciseAndRelax" role="tab" aria-controls="nav-contact" aria-selected="false">運動休閒</a>
+                        <a style="color: white;" class="nav-item nav-link" id="clothes" data-toggle="tab" href="#clothes" role="tab" aria-controls="nav-home" aria-selected="false">衣著良品</a>
+                        <a style="color: white;" class="nav-item nav-link" id="cleanOrPet" data-toggle="tab" href="#cleanOrPet" role="tab" aria-controls="nav-profile" aria-selected="false">清潔日用/寵物</a>
+                        <!-- </div> -->
+                    </div>
+                </nav>
+            </section>
+        </section>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="card-columns" style="margin-bottom: 100px;">
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=1" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=5" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                        <div class="card p-3" style="background-color: rgba(192, 121, 121, 0.5);">
+                            <blockquote class="blockquote mb-0 card-body">
+                                <p>推播ADVERTISEMENT</p>
+                                <footer class="blockquote-footer">
+                                    <small class="text-muted">
+                                        Someone famous in <cite title="Source Title">Source Title</cite>
+                                    </small>
+                                </footer>
+                            </blockquote>
+                        </div>
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=20" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=30" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                        <div class="card p-3" style="background-color: rgba(192, 121, 121, 0.5);">
+                            <blockquote class="blockquote mb-0 card-body">
+                                <p>推播ADVERTISEMENT</p>
+                                <footer class="blockquote-footer">
+                                    <small class="text-muted">
+                                        Someone famous in <cite title="Source Title">Source Title</cite>
+                                    </small>
+                                </footer>
+                            </blockquote>
+                        </div>
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=50" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card-columns" style="margin-bottom: 100px;">
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=1" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=5" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                        <div class="card p-3" style="background-color: rgba(192, 121, 121, 0.5);">
+                            <blockquote class="blockquote mb-0 card-body">
+                                <p>推播ADVERTISEMENT</p>
+                                <footer class="blockquote-footer">
+                                    <small class="text-muted">
+                                        Someone famous in <cite title="Source Title">Source Title</cite>
+                                    </small>
+                                </footer>
+                            </blockquote>
+                        </div>
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=20" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=30" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                        <div class="card p-3" style="background-color: rgba(192, 121, 121, 0.5);">
+                            <blockquote class="blockquote mb-0 card-body">
+                                <p>推播ADVERTISEMENT</p>
+                                <footer class="blockquote-footer">
+                                    <small class="text-muted">
+                                        Someone famous in <cite title="Source Title">Source Title</cite>
+                                    </small>
+                                </footer>
+                            </blockquote>
+                        </div>
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=50" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card-columns" style="margin-bottom: 100px;">
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=1" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=5" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                        <div class="card p-3" style="background-color: rgba(192, 121, 121, 0.5);">
+                            <blockquote class="blockquote mb-0 card-body">
+                                <p>推播ADVERTISEMENT</p>
+                                <footer class="blockquote-footer">
+                                    <small class="text-muted">
+                                        Someone famous in <cite title="Source Title">Source Title</cite>
+                                    </small>
+                                </footer>
+                            </blockquote>
+                        </div>
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=20" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=30" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                        <div class="card p-3" style="background-color: rgba(192, 121, 121, 0.5);">
+                            <blockquote class="blockquote mb-0 card-body">
+                                <p>推播ADVERTISEMENT</p>
+                                <footer class="blockquote-footer">
+                                    <small class="text-muted">
+                                        Someone famous in <cite title="Source Title">Source Title</cite>
+                                    </small>
+                                </footer>
+                            </blockquote>
+                        </div>
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=50" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card-columns" style="margin-bottom: 100px;">
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=1" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=5" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                        <div class="card p-3" style="background-color: rgba(192, 121, 121, 0.5);">
+                            <blockquote class="blockquote mb-0 card-body">
+                                <p>推播ADVERTISEMENT</p>
+                                <footer class="blockquote-footer">
+                                    <small class="text-muted">
+                                        Someone famous in <cite title="Source Title">Source Title</cite>
+                                    </small>
+                                </footer>
+                            </blockquote>
+                        </div>
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=20" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=30" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                        <div class="card p-3" style="background-color: rgba(192, 121, 121, 0.5);">
+                            <blockquote class="blockquote mb-0 card-body">
+                                <p>推播ADVERTISEMENT</p>
+                                <footer class="blockquote-footer">
+                                    <small class="text-muted">
+                                        Someone famous in <cite title="Source Title">Source Title</cite>
+                                    </small>
+                                </footer>
+                            </blockquote>
+                        </div>
+                        <div class="card mt-3">
+                            <img src="https://picsum.photos/400/200?image=50" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card-columns" style="margin-bottom: 100px;">
+                    </div>
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            
+        </div>
+        <script>
+            var swiper = new Swiper('.swiper-container', {
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                    // renderBullet: function (index, className) {
+                        //     return '<a class="' + className + ' nav-item nav-link" id="nav-home-tab" data-toggle="tab" role="tab" aria-controls="nav-home" aria-selected="true">' + 品味美食 + '</a>';
+                        // },
+                    },
+                });
+                var typeTabLists = document.querySelectorAll(".typeTabs>a");
+                var swiperSlides = document.querySelectorAll(".swiper-slide");
+                for(let i=0; i<typeTabLists.length; i++){
+                    typeTabLists[i].addEventListener('click', (e)=>{
+                        e.preventDefault();
+                        swiper.slideTo(i, 0);
+                    })
+                }
+                swiper.on('transitionEnd', ()=>{
+                    for(let i=0; i<typeTabLists.length; i++){
+                        typeTabLists[i].classList.remove('active');
+                    }
+                    for(let i=0; i<swiperSlides.length; i++){
+                        if($(swiperSlides[i]).hasClass('swiper-slide-active')){
+                            typeTabLists[i].classList.add('active');
+                            axios({
+                                method: "post",
+                                withCredentials: true,
+                                url:"https://tuantuango.herokuapp.com/mainPageProducts",
+                                data:{
+                                    productType: typeTabLists[i].id
+                                }
+                            }).then((res)=>{
+                                console.log(res);
+                                document.querySelector(".swiper-slide-active").innerHTML = '';
+                                for(let i=0; i<res.length; i++){
+                                    console.log(res.data[i]);
+                                    let ExpirationTime = new Date(res.data[i].ExpirationTime);
+                                    console.log(ExpirationTime);
+                                    console.log(ExpirationTime.toString().slice(0, 24));
+                                    let card = document.createElement('div');
+                                    card.innerHTML = `
+                                    <div id="${res.data[i].TuanGOAddress}" class="card mb-5 mt-2">
+                                        <img src="https://picsum.photos/400/200?image=10" class="card-img-top" alt="...">
+                                        <div class="card-body" style="text-align : left; background: linear-gradient(rgb(192, 121, 121), rgb(145, 93, 93)); color: white">
+                                            <h4 class="card-title" style=" font-size: 1.5rem">${res.data[i].TuanGOType?`$${res.data[i].disccountPrice} for Each`:`$${res.data[i].originalPrice}→$${res.data[i].disccountPrice}`}</h4>
+                                            <h5 class="card-text mb-1" style=" font-size: 1rem; line-height: 1.3rem">${res.data.productName}</h5>
+                                            <p class="card-text">ExpirationTime: ${ExpirationTime.toString().slice(0, 24)}</p>
+                                        </div>
+                                    </div>
+                                    `;
+                                    document.addEventListener(`#${res.data[i].TuanGOAddress}`).addEventListener('click', ()=>{
+                                        
+                                    })
+                                    //console.log(document.querySelector(".swiper-slide-active"));
+                                    document.querySelector(".swiper-slide-active").appendChild(card);
+                                }
+                            }).catch((err)=>{
+                                throw new Error(err);
+                            })
+                        }
+                    }
+                })
+                
+            </script>
+            
+            
+            <div class="modal fade" id="modalsignin" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable rounded" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-warning text-light rounded-top">
+                            <h5 class="modal-title" id="exampleModalScrollableTitle">登入服務</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="#">
+                                <div class="form-group">
+                                    <label for="signInEmail">Email</label>
+                                    <input type="email" name="Email" id="signInEmail" class="form-control" placeholder="Enter Email">
+                                    <small class="form-text text-muted">
+                                        我們絕不會隨意將你的Email給予第三者
+                                    </small>
+                                </div>
+                                <p id="AccountValidCheck" style="height:1rem; line-height: 1rem;"></p>
+                                <div class="form-group">
+                                    <label for="signInPassword">Password</label>
+                                    <input type="password" name="Password" id="signInPassword" class="form-control" placeholder="Enter Password">
+                                </div>
+                                <p id="passwordValidCheck"></p>
+                            </form>
+                        </div>
+                        <div class="modal-footer rounded-bottom">
+                            <a href="#" id="toggleToRegistration" data-dismiss="modal" data-toggle="modal" data-target="#modalregistration" class="text-decoration-none">還沒有帳號?</a>
+                            <button type="button" class="btn btn-secondary ml-auto" data-dismiss="modal">Close</button>
+                            <button type="button" id="signOut" class="btn btn-primary">確認登出</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="below">
+                <ul class="d-flex flex-row justify-content-between align-items-center">
+                    <li class="d-flex flex-column justify-content-center align-items-center border">
+                        <i class="fas fa-address-card fa-2x mb-1" style="color: gray;"></i>
+                        <h3 style="color: gray;">我的帳戶</h3>
+                    </li>
+                    <li class="d-flex flex-column justify-content-center align-items-center border">
+                        <i class="fas fa-clone fa-2x mb-1" style="color: gray;"></i>
+                        <h3 style="color: gray;">目前參與</h3>
+                    </li>
+                    <li class="d-flex flex-column justify-content-center  align-items-center border">
+                        <i class="fas fa-wallet fa-2x mb-1" style="color: gray;"></i>
+                        <h3 style="color: gray;">電子錢包</h3>
+                    </li>
+                    <li class="d-flex flex-column justify-content-center  align-items-center border">
+                        <i class="fas fa-users fa-2x mb-1" style="color: gray;"></i>
+                        <h3 style="color: gray;">聯絡他人</h3>
+                    </li>
+                    <li class="d-flex flex-column justify-content-center  align-items-center border">
+                        <h3 style="color: rgb(145, 93, 93);">發起團購</h3>
+                    </li>
+                </ul>
+            </footer>
+            
+            <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                Launch demo modal
+            </button>  -->
+            
+            <div class="modal fade" id="loginPrompt" tabindex="-1" role="dialog" aria-labelledby="loginPromptText" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            You haven't login yet! Do you want to login?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <i id="tuanGoer" class="fas fa-running fa-2x mb-1" style="color: rgb(145, 93, 93);"></i>
+            
+            <script>
+                $(document).ready(function(){
+                    $("a[data-dismiss='modal'][data-toggle='modal']").on("click", function(e){
+                        var target = $(this).data("target");
+                        $(target).on("shown.bs.modal", function(){
+                            $("body").addClass("modal-open");
+                        })
+                    })
+                });
+            </script>
+            <div class="top">
+                <a href="#top">TOP</a>
+            </div>
+            <script src="./js/main.js"></script>
+            <script src="./app.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+        </body>
+        </html>

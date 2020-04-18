@@ -1,0 +1,300 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*************************/
+
+body{
+    transition: all 1s ease;
+    position: relative;
+}
+
+#wrap{
+    transition: all 1s ease;
+}
+
+.nav-tabs .nav-link {
+    border: 1px solid rgba(192, 121, 121, 0.5);
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: rgb(145, 93, 93);
+    background-color: #fff;
+    border-color: rgba(192, 121, 121, 0.5) rgba(192, 121, 121, 0.5) #fff;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link{
+    color: rgba(192, 121, 121, 0.5);
+    background-color: #fff;
+    border-color: transparent;
+    border-bottom-color: rgba(192, 121, 121, 0.5);
+    transition: all .3s;
+    margin: -0.25px;
+}
+
+#searchField{
+    transition: all .1s;
+}
+
+#searchField:focus{
+    border-bottom:2px solid rgba(192, 121, 121, 0.5);
+    border-right:2px solid rgba(192, 121, 121, 0.5);
+    border-top:2px solid rgb(145, 93, 93);
+    border-left:2px solid rgb(145, 93, 93);
+}
+
+.below{
+    width: 100vw;
+    position: fixed;
+    height: 10%;
+    bottom: 0%;
+    left: 0%;
+    z-index: 9999;
+    background-color: rgb(177, 177, 177);
+}
+
+#tuanGoer.tuanGoeranimate, #tuanGoer1.tuanGoeranimate, #tuanGoer2.tuanGoeranimate{
+    animation-name: tuanGo;
+    animation-duration: 1s;
+}
+@keyframes tuanGo{
+    15%{
+        left: 20% ;
+    }
+    100%{
+        left: 120% ;
+    }
+}
+
+body>i{
+    position: fixed;
+    bottom: 2.2%;
+    left: -10%;
+    z-index: 9999;
+    transition: left .5s ease-in !important;
+    color: rgb(145, 93, 93);
+}
+
+.firstMove{
+    left: 23%;
+}
+
+#contentOne, #contentTwo, #contentThree{
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: all 1s ease !important;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+}
+
+
+
+.contents{
+    position: relative;
+}
+
+footer{
+    opacity: 0;
+    transition: all 1s ease !important;
+}
+
+
+
+.hide{
+    opacity: 0 !important;
+    z-index: 2 !important;              /*高於前一畫面*/
+    /* height: 0 !important; */
+    display: none !important;
+}
+
+.showUp{
+    opacity: 1 !important;
+    z-index: 9 !important;
+    display: block !important;
+}
+
+.hideFooter{
+    opacity: 0 ;
+    z-index: -1 ;
+    display: none;
+}
+
+.showFooter{
+    opacity: 1 !important;
+    z-index: 500 !important;
+    display: block;
+}
+
+.topPhoto{
+    width: 100%;
+    height: 30vh;
+    background-image: url(../image/109999.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.name{
+    height: 10vh;
+    width: 100%;
+    padding: 0 10%;
+    font-size: 1rem;
+    text-align: center;
+    line-height: 10vh;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+#promoteTab, #unpackedTab{
+    position: relative;
+}
+
+
+#promoteFallback, #promoteForm, #unpackedFallback, #unpackedForm{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.zeroHeight{
+    height: 0px !important;
+}
+
+.animate{
+    opacity:0;
+    transform: translateY(20px);
+    transition: all 2s;
+}
+
+.fadeIn{
+    opacity:1;
+    transform: translateY(0px);
+}
+
+#dialog{
+    position: fixed;
+    opacity: 0;
+    z-index: -10;
+    top: 80%;
+    left: 30%;
+    height: 10vw;
+    width: 30vw;
+}
+
+.showDialog{
+    opacity: 1 !important;
+    z-index: 9999 !important;
+    display: block !important;
+}
+
+
+
+.path{
+    fill: none !important;
+    stroke: rgb(145, 93, 93);
+    stroke-width: 20 !important;
+}
+.path-line{
+    transition: opacity 1s ease-out, stroke-width 1s linear, stroke-dashoffset 2.3s ease-in-out !important;
+    stroke-width: 0;
+    opacity: 1.0;
+}
+.path-back{
+    opacity: 1;
+    fill: none;
+}
+
+.resize{
+    overflow: hidden;
+}
+
+
+#conclusion{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    transition: all 2s ease;
+    display: flexbox !important;
+    justify-content: center;
+}
+
+#wrapconclusion{
+    height: 50vh;
+    width: 100%;
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#wrapConclusion div{
+    height: 35vh;
+    width: 37vw;
+    position: absolute;
+    top: 28%;
+    left: 30.50%;
+    opacity: 0.3;
+}
+
+#wrapConclusion p{
+    color: rgb(145, 93, 93);
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.blur_effect { 
+    transition: all .2s ease;
+    filter:blur(2px);
+} 

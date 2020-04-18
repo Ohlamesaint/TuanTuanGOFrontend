@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>getUserMedia示例(test)</title>
+    <style>
+        video {
+            object-fit: cover;
+        }
+        
+        @media (min-width: 1000px) {
+            video {
+                height: 480px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    
+    <br />
+    <hr />
+    <video autoplay playsinline></video>
+    <script >
+        'use strict';
+        
+        var constraints = {
+            video: true
+        };
+        
+        var video = document.querySelector('video');
+        
+        function handleSuccess(stream) {
+            window.stream = stream; // only to make stream available to console
+            video.srcObject = stream;
+        }
+        
+        function handleError(error) {
+            console.log('getUserMedia error: ', error);
+        }
+        
+        navigator.mediaDevices.getUserMedia(constraints).
+        then(handleSuccess).catch(handleError);
+    </script>
+</body>
+
+</html>

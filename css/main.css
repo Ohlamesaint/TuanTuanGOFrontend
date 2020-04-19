@@ -180,3 +180,7 @@ footer ul li:last-child h3{
 .active{
     color: rgb(145, 93, 93) !important;
 }
+
+#loginPrompt{
+    transition: all .3s ease;
+}

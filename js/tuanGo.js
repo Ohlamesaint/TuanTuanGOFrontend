@@ -428,10 +428,8 @@ $(document).ready(()=>{
     document.querySelector("#comfirmMoveOn").addEventListener("click", ()=>{
         $("#dialog").addClass("showDialog");
         (function(){
-            console.log("654");
             return new Promise((resolve, reject)=>{
                 setTimeout(()=>{
-                    console.log("123")
                     $("#wrap").addClass("hide");
                     $("#tuanGoComfirm").modal("hide");
                     $("#dialog").removeClass("showDialog");

@@ -450,16 +450,16 @@
                                     let ExpirationTime = new Date(res.data[i].ExpirationTime);
                                     console.log(ExpirationTime.toString().slice(0, 24));
                                     card.push(document.createElement('div'));
-                                    // card[i].classList.add('container-fluid');
+                                    card[i].classList.add('card-columns');
                                     card[i].innerHTML = `
-                                        <div id="${res.data[i].TuanGOAddress.slice(2)}" class="w-100 card col-12 mb-5 mt-2" style="box-shadow: 1px 1px 1px 0px silver">
-                                            <img src="https://picsum.photos/400/200?image=10" class="card-img-top" alt="...">
-                                            <div class="card-body" style="text-align : left; background: white; color: rgb(145, 93, 93))">
-                                                <h4 class="card-title" style=" font-size: 1.5rem">${res.data[i].TuanGOType?`$${res.data[i].disccountPrice} for Each`:`$${res.data[i].originalPrice}→$${res.data[i].disccountPrice}`}</h4>
-                                                <h5 class="card-text mb-1" style=" font-size: 1rem; line-height: 1.3rem">${res.data[i].productName}</h5>
-                                                <p class="card-text">ExpirationTime: ${ExpirationTime.toString().slice(0, 24)}</p>
-                                            </div>
+                                    <div id="${res.data[i].TuanGOAddress.slice(2)}" class="w-100 card col-12 mb-5 mt-2" style="box-shadow: 1px 1px 1px 0px silver">
+                                        <img src="https://picsum.photos/400/200?image=10" class="card-img-top" alt="...">
+                                        <div class="card-body" style="text-align : left; background: white; color: rgb(145, 93, 93))">
+                                            <h4 class="card-title" style=" font-size: 1.5rem">${res.data[i].TuanGOType?`$${res.data[i].disccountPrice} for Each`:`$${res.data[i].originalPrice}→$${res.data[i].disccountPrice}`}</h4>
+                                            <h5 class="card-text mb-1" style=" font-size: 1rem; line-height: 1.3rem">${res.data[i].productName}</h5>
+                                            <p class="card-text">ExpirationTime: ${ExpirationTime.toString().slice(0, 24)}</p>
                                         </div>
+                                    </div>
                                     `;
                                     console.log(card);
                                     document.querySelector(".swiper-slide-active").appendChild(card[i]);

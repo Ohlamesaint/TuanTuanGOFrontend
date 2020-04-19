@@ -249,7 +249,7 @@
                                     document.querySelector(".swiper-slide-active>.card-columns").appendChild(card[i]);
                                     $(`#${res.data[i].TuanGOAddress.slice(2)}`).on('click', (e)=>{      //注意id綁定不包含0x
                                         e.preventDefault();
-                                        document.querySelector("#productModalTitle").textContent = $(e.target).children().children(h5).text();
+                                        document.querySelector("#productModalTitle").textContent = $(e.target).children().children('h5').text();
                                         console.log("clicked");
                                     })
                                     console.log("iterate");

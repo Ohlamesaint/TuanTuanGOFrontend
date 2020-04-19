@@ -462,7 +462,7 @@
                                     `;
                                     console.log(card);
                                     document.querySelector(".swiper-slide-active").appendChild(card[i]);
-                                    $(`#${res.data[i].TuanGOAddress}`).on('click', (e)=>{
+                                    $(`#${res.data[i].TuanGOAddress.slice(2)}`).on('click', (e)=>{
                                         e.preventDefault();
                                         console.log("clicked");
                                     })

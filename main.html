@@ -402,7 +402,7 @@
                     </div>
                 </div>
                 <div class="swiper-slide">
-                    <div class="card-columns" style="margin-bottom: 100px;">
+                    <!-- <div class="card-columns" style="margin-bottom: 100px;"> -->
                     </div>
                 </div>
             </div>
@@ -450,7 +450,7 @@
                                     let ExpirationTime = new Date(res.data[i].ExpirationTime);
                                     console.log(ExpirationTime.toString().slice(0, 24));
                                     card.push(document.createElement('div'));
-                                    card[i].classList.add('container');
+                                    card[i].classList.add('container-fluid');
                                     card[i].innerHTML = `
                                     <div class="row">
                                         <div id="${res.data[i].TuanGOAddress.slice(2)}" class="card col-12 mb-5 mt-2" style="box-shadow: 1px 1px 1px 0px silver">

@@ -169,9 +169,6 @@ footer ul li:last-child h3{
     50%{
         right: 8% ;
     }
-    /* 50%{
-        right: 6% ;
-    } */
     100%{
         right: -10% ;
     }
@@ -182,5 +179,5 @@ footer ul li:last-child h3{
 }
 
 #loginPrompt{
-    transition: all .3s ease;
+    transition: all 1s linear;
 }

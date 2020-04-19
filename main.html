@@ -250,7 +250,7 @@
                                     $(`#${res.data[i].TuanGOAddress.slice(2)}`).on('click', (e)=>{      //注意id綁定不包含0x
                                         e.preventDefault();
                                         console.log($(e.target).children('h5').text);
-                                        console.log(e.target);
+                                        console.log(e);
                                         document.querySelector("#productModalTitle").textContent = $(e.target).children('h5').text();
                                         console.log("clicked");
                                     })

@@ -256,7 +256,7 @@
                                     $(cardList[i]).on('click', (e)=>{      //注意id綁定不包含0x
                                         e.preventDefault();
                                         console.log(cardBuffer);
-                                        $("#JoinTuanGOProductName").text = cardBuffer[i].productName;
+                                        document.querySelector("#JoinTuanGOProductName").textContent = cardBuffer[i].productName;
                                         $("#JoinTuanGOTuanGOType").text = cardBuffer[i].TuanGOType?'unpack':'promote';
                                         $("#JoinTuanGOExpirationDate").text = new Date(cardBuffer[i].ExpirationTime).toString().slice(0, 24);
                                         

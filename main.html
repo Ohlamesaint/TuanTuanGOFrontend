@@ -270,10 +270,11 @@
                                                 if(j<num) TuanGOerLine += '<i class="fas fa-user"></i>';
                                                 else TuanGOerLine += '<i class="far fa-user"></i>';
                                             }
+                                            console.log(TuanGOerLine);
                                             document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine;
                                         }
                                         else{
-                                            document.querySelector("#JoinTuanGOTuanGOerLine").textContent = num+'/'+cardBuffer.TotalAmount;
+                                            document.querySelector("#JoinTuanGOTuanGOerLine").textContent = num+'/'+cardBuffer[i].TotalAmount;
                                         }
                                     })
                                 }

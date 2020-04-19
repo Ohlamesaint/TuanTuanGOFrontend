@@ -465,7 +465,7 @@
                                     `;
                                     console.log(card);
                                     document.querySelector(".swiper-slide-active").appendChild(card[i]);
-                                    $(`#${res.data[i].TuanGOAddress.slice(2)}`).on('click', (e)=>{
+                                    $(`#${res.data[i].TuanGOAddress.slice(2)}`).on('click', (e)=>{      //注意id綁定不包含0x
                                         e.preventDefault();
                                         console.log("clicked");
                                     })

@@ -210,9 +210,9 @@
                 swiper.on('transitionEnd', ()=>{
                     for(let i=0; i<typeTabLists.length; i++){
                         typeTabLists[i].classList.remove('active');
+                        $(swiperSlides[i]).removeClass('fadeIn');
                     }
                     for(let i=0; i<swiperSlides.length; i++){
-                        $(swiperSlides[i]).removeClass('fadeIn');
                         if($(swiperSlides[i]).hasClass('swiper-slide-active')){
                             typeTabLists[i].classList.add('active');
                             axios({

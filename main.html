@@ -235,7 +235,7 @@
                                     // card[i].classList.add('mt-3');
                                     // card[i].classList.add('mb-5');
                                     card[i].innerHTML = `
-                                    <div id="${res.data[i].TuanGOAddress.slice(2)}" herf="#card" class="w-100 card mt-3" style="box-shadow: 1px 1px 1px 0px silver">
+                                    <div id="${res.data[i].TuanGOAddress.slice(2)}"  data-toggle="modal" data-target="#productModal" class="w-100 card mt-3" style="box-shadow: 1px 1px 1px 0px silver">
                                         <img src="https://picsum.photos/400/200?image=10" class="card-img-top" alt="...">
                                         <div class="card-body" style="text-align : left; background: white; color: rgb(145, 93, 93))">
                                             <h4 class="card-title" style=" font-size: 1.5rem">${res.data[i].TuanGOType?`$${res.data[i].disccountPrice} for Each`:`$${res.data[i].originalPrice}→$${res.data[i].disccountPrice}`}</h4>
@@ -348,6 +348,67 @@
             </div>
             
             <i id="tuanGoer" class="fas fa-running fa-2x mb-1" style="color: rgb(145, 93, 93);"></i>
+            
+            <!-- 商品 Modal -->
+            <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid" style="margin-bottom: 4.5rem;">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card-columns mb-2" style="margin-bottom: 100px;">
+                                            <div class="card mt-3">
+                                                <img src="../image/109999.jpg" class="card-img-top" alt="...">
+                                                <div class="card-header" style="color: rgb(145, 93, 93)">
+                                                    Product Name
+                                                </div>
+                                                <div class="card-body p-3">
+                                                    <p class="card-text"></p>
+                                                </div>
+                                                <div class="card-header" style="color: rgb(145, 93, 93)">
+                                                    TuanGo Type
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="card-text"></p>
+                                                </div>
+                                                <div class="card-header" style="color: rgb(145, 93, 93)">
+                                                    Amount You Purchase
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="card-text font-weight-bold"></p>
+                                                </div>
+                                                <div class="card-header" style="color: rgb(145, 93, 93)">
+                                                    Cost
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="card-text font-weight-bold"></p>
+                                                </div>
+                                                <div class="card-header" style="color: rgb(145, 93, 93)">
+                                                    Expiration date
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="card-text"></p>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
             <script>
                 $(document).ready(function(){

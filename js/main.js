@@ -55,7 +55,7 @@ $(document).ready(function(){
                 })
                 $("#yes").on('click', ()=>{
                     setTimeout(() => {
-                        window.location.replace('https://luffy.ee.ncku.edu.tw/~Shang/TuanTuanGO/pages/login.html');
+                        window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/login.html');
                     }, );
                 })
                 // setTimeout(() => {
@@ -67,7 +67,7 @@ $(document).ready(function(){
                 // localStorage.setItem("target", 4)
                 $(tuanGoer).addClass("tuanGoeranimate");
                 tuanGoer.addEventListener("animationend", ()=>{
-                    window.location.replace('https://luffy.ee.ncku.edu.tw/~Shang/TuanTuanGO/pages/tuanGo.html');
+                    window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/tuanGo.html');
                 })
             }
         }).catch(err=>{

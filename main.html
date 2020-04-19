@@ -246,19 +246,22 @@
                                         </div>
                                     </div>
                                     `;
-                                    console.log(card);
-                                    // $(card[i]).sleep(500).children().addClass('fadeIn');
                                     document.querySelector(".swiper-slide-active>.card-columns").appendChild(card[i]);
-                                    $(`#${res.data[i].TuanGOAddress.slice(2)}`).on('click', (e)=>{      //注意id綁定不包含0x
+                                }
+                                $(swiperSlides[i]).addClass('fadeIn')
+                            }).then((res)=>{
+                                let cardList = document.querySelectorAll('.swiper-slide-active>.card-columns>div');
+                                // $(card[i]).sleep(500).children().addClass('fadeIn');
+                                for(let i=0; i<cardList.length; i++){
+                                    $(cardList[i]).on('click', (e)=>{      //注意id綁定不包含0x
                                         e.preventDefault();
                                         console.log(cardBuffer);
-                                        $("#JoinTuanGOProductName").text = cardBuffer[dataset.num].productName;
+                                        $("#JoinTuanGOProductName").text = cardBuffer[i].productName;
                                         $("#JoinTuanGOTuanGOType").text = cardBuffer[i].TuanGOType?'unpack':'promote';
                                         $("#JoinTuanGOExpirationDate").text = new Date(cardBuffer[i].ExpirationTime).toString().slice(0, 24);
                                         
                                     })
                                 }
-                                $(swiperSlides[i]).addClass('fadeIn')
                             }).catch((err)=>{
                                 throw new Error(err);
                             })

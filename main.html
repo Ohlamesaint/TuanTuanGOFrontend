@@ -450,7 +450,7 @@
                                     let ExpirationTime = new Date(res.data[i].ExpirationTime);
                                     console.log(ExpirationTime.toString().slice(0, 24));
                                     card.push(document.createElement('div'));
-                                    card.innerHTML = `
+                                    card[i].innerHTML = `
                                     <div id="${res.data[i].TuanGOAddress}" class="card mb-5 mt-2" style="box-shadow: 1px 1px 1px 0px silver">
                                         <img src="https://picsum.photos/400/200?image=10" class="card-img-top" alt="...">
                                         <div class="card-body" style="text-align : left; background: white; color: rgb(145, 93, 93))">

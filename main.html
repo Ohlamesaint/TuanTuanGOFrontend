@@ -269,7 +269,7 @@
                                             if(j<num) TuanGOerLine += '<i class="fas fa-user"></i>';
                                             else TuanGOerLine += '<i class="far fa-user"></i>';
                                         }
-                                        document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine;
+                                        document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + num+'/'+cardBuffer[i].TotalAmount;
                                     })
                                 }
                             }).catch((err)=>{
@@ -396,7 +396,7 @@
                                                 <div class="card-body" id="JoinTuanGOTuanGOType">
                                                     <p class="card-text"></p>
                                                 </div>
-                                                <div class="card-header" style="color: rgb(145, 93, 93)">
+                                                <div class="card-header" style="letter-space: 1px; color: rgb(145, 93, 93)">
                                                     TuanGOer Line
                                                 </div>
                                                 <div class="card-body" id="JoinTuanGOTuanGOerLine">

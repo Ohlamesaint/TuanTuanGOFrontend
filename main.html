@@ -464,7 +464,9 @@
                                     document.querySelector(".swiper-slide-active").appendChild(card);
                                     document.querySelector(`#${res.data[i].TuanGOAddress}`).addEventListener('click', (e)=>{
                                         e.preventDefault();
+                                        console.log("clicked");
                                     })
+                                    console.log("iterate");
                                 }
                             }).catch((err)=>{
                                 throw new Error(err);

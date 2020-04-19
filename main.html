@@ -462,10 +462,10 @@
                                     `;
                                     console.log(card);
                                     document.querySelector(".swiper-slide-active").appendChild(card[i]);
-                                    // document.querySelector(`#${res.data[i].TuanGOAddress}`).addEventListener('click', (e)=>{
-                                    //     e.preventDefault();
-                                    //     console.log("clicked");
-                                    // })
+                                    document.querySelector(`#${res.data[i].TuanGOAddress}`).addEventListener('click', (e)=>{
+                                        e.preventDefault();
+                                        console.log("clicked");
+                                    })
                                     console.log("iterate");
                                 }
                             }).catch((err)=>{

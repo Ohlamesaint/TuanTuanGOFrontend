@@ -472,7 +472,7 @@ $(document).ready(()=>{
                         document.querySelector("#wrapConclusion>p").textContent = "";
                         //網址
                         console.log(res);
-                        document.querySelector('#wrapConclusion').addClass('blur_effect');
+                        document.querySelector('#wrapConclusion').classList.add('blur_effect');
                         
                         // window.location.replace(res);
                     }).catch((err)=>{

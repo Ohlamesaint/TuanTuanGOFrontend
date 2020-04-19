@@ -21,7 +21,7 @@ $(document).ready(function(){
                     })
                     $("#yes").on('click', ()=>{
                         setTimeout(() => {
-                            window.location.replace('https://luffy.ee.ncku.edu.tw/~Shang/TuanTuanGO/pages/login.html');
+                            window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/login.html');
                         }, );
                     })
                     // console.log("789");
@@ -30,7 +30,7 @@ $(document).ready(function(){
                     console.log("456");
                     console.log(belowBar[i].children[1].textContent);
                     localStorage.setItem("target", i)
-                    window.location.replace('https://luffy.ee.ncku.edu.tw/~Shang/TuanTuanGO/pages/func.html');
+                    window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/func.html');
                 }
             }).catch(err=>{
                 console.log("123")

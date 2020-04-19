@@ -249,7 +249,9 @@
                                     document.querySelector(".swiper-slide-active>.card-columns").appendChild(card[i]);
                                     $(`#${res.data[i].TuanGOAddress.slice(2)}`).on('click', (e)=>{      //注意id綁定不包含0x
                                         e.preventDefault();
-                                        document.querySelector("#productModalTitle").textContent = $(e.target).children().children('h5').text();
+                                        console.log($(e.target).children('h5'));
+                                        console.log($(e.target));
+                                        document.querySelector("#productModalTitle").textContent = $(e.target).children('h5').text();
                                         console.log("clicked");
                                     })
                                     console.log("iterate");
@@ -366,7 +368,7 @@
                                     <div class="col-12">
                                         <div class="card-columns mb-2" style="margin-bottom: 100px;">
                                             <div class="card mt-3">
-                                                <img src="../image/109999.jpg" class="card-img-top" alt="...">
+                                                <img src="https://picsum.photos/400/200?image=10" class="card-img-top" alt="...">
                                                 <div class="card-header" style="color: rgb(145, 93, 93)">
                                                     Product Name
                                                 </div>

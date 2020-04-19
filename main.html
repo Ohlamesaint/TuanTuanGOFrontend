@@ -226,7 +226,7 @@
                                 console.log(res);
                                 document.querySelector(".swiper-slide-active>.card-columns").innerHTML = '';
                                 var card = [];
-                                var cardBuffer = res;
+                                var cardBuffer = res.data;
                                 for(let i=0; i<res.data.length; i++){
                                     console.log(res.data[i]);
                                     let ExpirationTime = new Date(res.data[i].ExpirationTime);
@@ -251,11 +251,10 @@
                                     $(`#${res.data[i].TuanGOAddress.slice(2)}`).on('click', (e)=>{      //注意id綁定不包含0x
                                         e.preventDefault();
                                         console.log(this);
-                                        $("#JoinTuanGOTuanGOType").text =  $(`#${res.data[i].TuanGOAddress.slice(2)}`).children().children('h4').text;
-                                        console.log($(`#${res.data[i].TuanGOAddress.slice(2)}`).children().children('h4'));
-                                        // $(`#${res.data[i].TuanGOAddress.slice(2)}`)
-                                        // $(`#${res.data[i].TuanGOAddress.slice(2)}`)
-                                        // document.querySelector("#productModalTitle").textContent = this.children('h5').text();
+                                        $("#JoinTuanGOProductName").text = cardBuffer[i].productName;
+                                        $("#JoinTuanGOTuanGOType").text = cardBuffer[i].TuanGOType?'unpack':'promote';
+                                        $("#JoinTuanGOExpirationDate").text = new Date(cardBuffer[i].ExpirationTime).toString().slice(0, 24);
+                                        
                                     })
                                 }
                                 $(swiperSlides[i]).addClass('fadeIn')

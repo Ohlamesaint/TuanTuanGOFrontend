@@ -165,23 +165,23 @@
         </section>
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
+                <div class="swiper-slide animate">
                     <div class="card-columns" style="margin-bottom: 100px;">
                     </div>
                 </div>
-                <div class="swiper-slide">
+                <div class="swiper-slide animate">
                     <div class="card-columns" style="margin-bottom: 100px;">
                     </div>
                 </div>
-                <div class="swiper-slide">
+                <div class="swiper-slide animate">
                     <div class="card-columns" style="margin-bottom: 100px;">
                     </div>
                 </div>
-                <div class="swiper-slide">
+                <div class="swiper-slide animate">
                     <div class="card-columns" style="margin-bottom: 100px;">
                     </div>
                 </div>
-                <div class="swiper-slide">
+                <div class="swiper-slide animate">
                     <div class="card-columns" style="margin-bottom: 100px;">
                     </div>
                 </div>
@@ -212,6 +212,7 @@
                         typeTabLists[i].classList.remove('active');
                     }
                     for(let i=0; i<swiperSlides.length; i++){
+                        $(swiperSlides[i]).removeClass('fadeIn');
                         if($(swiperSlides[i]).hasClass('swiper-slide-active')){
                             typeTabLists[i].classList.add('active');
                             axios({
@@ -234,7 +235,7 @@
                                     // card[i].classList.add('mt-3');
                                     // card[i].classList.add('mb-5');
                                     card[i].innerHTML = `
-                                    <div id="${res.data[i].TuanGOAddress.slice(2)}" class="animate w-100 card mt-3" style="box-shadow: 1px 1px 1px 0px silver">
+                                    <div id="${res.data[i].TuanGOAddress.slice(2)}" class="w-100 card mt-3" style="box-shadow: 1px 1px 1px 0px silver">
                                         <img src="https://picsum.photos/400/200?image=10" class="card-img-top" alt="...">
                                         <div class="card-body" style="text-align : left; background: white; color: rgb(145, 93, 93))">
                                             <h4 class="card-title" style=" font-size: 1.5rem">${res.data[i].TuanGOType?`$${res.data[i].disccountPrice} for Each`:`$${res.data[i].originalPrice}→$${res.data[i].disccountPrice}`}</h4>
@@ -244,7 +245,7 @@
                                     </div>
                                     `;
                                     console.log(card);
-                                    $(card[i]).children().addClass('fadeIn');
+                                    // $(card[i]).sleep(500).children().addClass('fadeIn');
                                     document.querySelector(".swiper-slide-active>.card-columns").appendChild(card[i]);
                                     $(`#${res.data[i].TuanGOAddress.slice(2)}`).on('click', (e)=>{      //注意id綁定不包含0x
                                         e.preventDefault();
@@ -252,6 +253,7 @@
                                     })
                                     console.log("iterate");
                                 }
+                                $(swiperSlides[i]).addClass('fadeIn')
                             }).catch((err)=>{
                                 throw new Error(err);
                             })

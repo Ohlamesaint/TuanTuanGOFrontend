@@ -444,12 +444,12 @@
                             }).then((res)=>{
                                 console.log(res);
                                 document.querySelector(".swiper-slide-active").innerHTML = '';
-                                let card;
+                                var card = [];
                                 for(let i=0; i<res.data.length; i++){
                                     console.log(res.data[i]);
                                     let ExpirationTime = new Date(res.data[i].ExpirationTime);
                                     console.log(ExpirationTime.toString().slice(0, 24));
-                                    card = document.createElement('div');
+                                    card.push(document.createElement('div'));
                                     card.innerHTML = `
                                     <div id="${res.data[i].TuanGOAddress}" class="card mb-5 mt-2" style="box-shadow: 1px 1px 1px 0px silver">
                                         <img src="https://picsum.photos/400/200?image=10" class="card-img-top" alt="...">
@@ -460,11 +460,11 @@
                                         </div>
                                     </div>
                                     `;
-                                    document.querySelector(".swiper-slide-active").appendChild(card);
-                                    document.querySelector(`#${res.data[i].TuanGOAddress}`).addEventListener('click', (e)=>{
-                                        e.preventDefault();
-                                        console.log("clicked");
-                                    })
+                                    document.querySelector(".swiper-slide-active").appendChild(card[i]);
+                                    // document.querySelector(`#${res.data[i].TuanGOAddress}`).addEventListener('click', (e)=>{
+                                    //     e.preventDefault();
+                                    //     console.log("clicked");
+                                    // })
                                     console.log("iterate");
                                 }
                             }).catch((err)=>{

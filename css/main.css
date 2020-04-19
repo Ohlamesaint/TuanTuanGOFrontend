@@ -186,7 +186,7 @@ footer ul li:last-child h3{
 .animate{
     opacity:0;
     transform: translateY(20px);
-    transition: all 1s;
+    transition: all .3s;
 }
 
 .fadeIn{

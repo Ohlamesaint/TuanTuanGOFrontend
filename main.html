@@ -190,6 +190,7 @@
             
         </div>
         <script>
+            var cardBuffer = [];
             var swiper = new Swiper('.swiper-container', {
                 pagination: {
                     el: '.swiper-pagination',
@@ -226,7 +227,7 @@
                                 console.log(res);
                                 document.querySelector(".swiper-slide-active>.card-columns").innerHTML = '';
                                 var card = [];
-                                var cardBuffer = res.data;
+                                cardBuffer = res.data;
                                 for(let i=0; i<res.data.length; i++){
                                     console.log(res.data[i]);
                                     let ExpirationTime = new Date(res.data[i].ExpirationTime);
@@ -236,7 +237,7 @@
                                     // card[i].classList.add('mt-3');
                                     // card[i].classList.add('mb-5');
                                     card[i].innerHTML = `
-                                    <div id="${res.data[i].TuanGOAddress.slice(2)}"  data-toggle="modal" data-target="#productModal" class="w-100 card mt-3" style="box-shadow: 1px 1px 1px 0px silver">
+                                    <div id="${res.data[i].TuanGOAddress.slice(2)}" data*-num=${i} data-toggle="modal" data-target="#productModal" class="w-100 card mt-3" style="box-shadow: 1px 1px 1px 0px silver">
                                         <img src="https://picsum.photos/400/200?image=10" class="card-img-top" alt="...">
                                         <div class="card-body" style="text-align : left; background: white; color: rgb(145, 93, 93))">
                                             <h4 class="card-title" style=" font-size: 1.5rem">${res.data[i].TuanGOType?`$${res.data[i].disccountPrice} for Each`:`$${res.data[i].originalPrice}→$${res.data[i].disccountPrice}`}</h4>
@@ -250,8 +251,8 @@
                                     document.querySelector(".swiper-slide-active>.card-columns").appendChild(card[i]);
                                     $(`#${res.data[i].TuanGOAddress.slice(2)}`).on('click', (e)=>{      //注意id綁定不包含0x
                                         e.preventDefault();
-                                        console.log(this);
-                                        $("#JoinTuanGOProductName").text = cardBuffer[i].productName;
+                                        console.log(cardBuffer);
+                                        $("#JoinTuanGOProductName").text = cardBuffer[dataset.num].productName;
                                         $("#JoinTuanGOTuanGOType").text = cardBuffer[i].TuanGOType?'unpack':'promote';
                                         $("#JoinTuanGOExpirationDate").text = new Date(cardBuffer[i].ExpirationTime).toString().slice(0, 24);
                                         

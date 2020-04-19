@@ -265,17 +265,11 @@
                                         cardBuffer[i].SoldAmounts.forEach(v => {
                                             num = num+v;
                                         })
-                                        if(cardBuffer[i].TotalAmount < 20){
-                                            for(let j=0; j<cardBuffer[i].TotalAmount; j++){
-                                                if(j<num) TuanGOerLine += '<i class="fas fa-user"></i>';
-                                                else TuanGOerLine += '<i class="far fa-user"></i>';
-                                            }
-                                            console.log(TuanGOerLine);
-                                            document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine;
+                                        for(let j=0; j<cardBuffer[i].TotalAmount; j++){
+                                            if(j<num) TuanGOerLine += '<i class="fas fa-user"></i>';
+                                            else TuanGOerLine += '<i class="far fa-user"></i>';
                                         }
-                                        else{
-                                            document.querySelector("#JoinTuanGOTuanGOerLine").textContent = num+'/'+cardBuffer[i].TotalAmount;
-                                        }
+                                        document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine;
                                     })
                                 }
                             }).catch((err)=>{

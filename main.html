@@ -251,7 +251,7 @@
                                         e.preventDefault();
                                         console.log(this);
                                         $("#JoinTuanGOTuanGOType").text =  $(`#${res.data[i].TuanGOAddress.slice(2)}`).children().children('h4').text;
-                                        
+                                        console.log($(`#${res.data[i].TuanGOAddress.slice(2)}`).children().children('h4'));
                                         // $(`#${res.data[i].TuanGOAddress.slice(2)}`)
                                         // $(`#${res.data[i].TuanGOAddress.slice(2)}`)
                                         // document.querySelector("#productModalTitle").textContent = this.children('h5').text();

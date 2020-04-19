@@ -249,6 +249,7 @@
                                     document.querySelector(".swiper-slide-active>.card-columns").appendChild(card[i]);
                                     $(`#${res.data[i].TuanGOAddress.slice(2)}`).on('click', (e)=>{      //注意id綁定不包含0x
                                         e.preventDefault();
+                                        document.querySelector("#productModalTitle").textContent = $(e.target).children(h5).text();
                                         console.log("clicked");
                                     })
                                     console.log("iterate");
@@ -354,7 +355,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                            <h5 class="modal-title" id="productModalTitle"></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

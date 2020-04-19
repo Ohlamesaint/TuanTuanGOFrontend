@@ -250,7 +250,10 @@
                                     $(`#${res.data[i].TuanGOAddress.slice(2)}`).on('click', (e)=>{      //注意id綁定不包含0x
                                         e.preventDefault();
                                         console.log(this);
-                                        document.querySelector("#productModalTitle").textContent = this.children('h5').text();
+                                        $("#JoinTuanGOTuanGOType").text =  $(`#${res.data[i].TuanGOAddress.slice(2)}`).children(h4).text;
+                                        // $(`#${res.data[i].TuanGOAddress.slice(2)}`)
+                                        // $(`#${res.data[i].TuanGOAddress.slice(2)}`)
+                                        // document.querySelector("#productModalTitle").textContent = this.children('h5').text();
                                     })
                                 }
                                 $(swiperSlides[i]).addClass('fadeIn')
@@ -369,31 +372,31 @@
                                                 <div class="card-header" style="color: rgb(145, 93, 93)">
                                                     Product Name
                                                 </div>
-                                                <div class="card-body p-3">
+                                                <div class="card-body p-3" id="JoinTuanGOProductName">
                                                     <p class="card-text"></p>
                                                 </div>
                                                 <div class="card-header" style="color: rgb(145, 93, 93)">
                                                     TuanGo Type
                                                 </div>
-                                                <div class="card-body">
+                                                <div class="card-body" id="JoinTuanGOTuanGOType">
                                                     <p class="card-text"></p>
                                                 </div>
                                                 <div class="card-header" style="color: rgb(145, 93, 93)">
-                                                    Amount You Purchase
+                                                    TuanGOer Line
                                                 </div>
-                                                <div class="card-body">
+                                                <div class="card-body" id="JoinTuanGOTuanGOerLine">
                                                     <p class="card-text font-weight-bold"></p>
                                                 </div>
                                                 <div class="card-header" style="color: rgb(145, 93, 93)">
                                                     Cost
                                                 </div>
-                                                <div class="card-body">
+                                                <div class="card-body" id="JoinTuanGOCost">
                                                     <p class="card-text font-weight-bold"></p>
                                                 </div>
                                                 <div class="card-header" style="color: rgb(145, 93, 93)">
                                                     Expiration date
                                                 </div>
-                                                <div class="card-body">
+                                                <div class="card-body" id="JoinTuanGOExpirationDate">
                                                     <p class="card-text"></p>
                                                 </div>
                                             </div>

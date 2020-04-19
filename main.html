@@ -244,7 +244,7 @@
                                     </div>
                                     `;
                                     console.log(card);
-                                    $(card[i]).addClass('fadeIn');
+                                    $(card[i]).children.addClass('fadeIn');
                                     document.querySelector(".swiper-slide-active>.card-columns").appendChild(card[i]);
                                     $(`#${res.data[i].TuanGOAddress.slice(2)}`).on('click', (e)=>{      //注意id綁定不包含0x
                                         e.preventDefault();

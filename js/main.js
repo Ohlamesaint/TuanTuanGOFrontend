@@ -129,7 +129,9 @@ $(document).ready(function(){
                             }
                         }).then((res)=>{
                             alert(res);
-                            window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html")
+                            setTimeout(()=>{
+                                window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html")
+                            }, 3000);
                         }).catch((err)=>{
                             console.log(err);
                         })

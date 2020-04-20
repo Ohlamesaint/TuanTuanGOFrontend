@@ -209,3 +209,13 @@ footer ul li:last-child h3{
     height: 100vh;
     overflow: scroll;
 }
+
+#JoinPageTopNav{
+    height: 10vh;
+    transform: translateY(10vh);
+    transition: all .3s linear;
+}
+
+#JoinPageTopNav.show{
+    transform: translateY(0vh);
+}

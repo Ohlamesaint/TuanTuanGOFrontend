@@ -102,4 +102,7 @@ $(document).ready(function(){
     document.querySelector("#JoinTuanGO").addEventListener("click", ()=>{
         document.querySelector("#TuanGOerJoinPage").classList.add("show");
     })
+    document.querySelector("#TuanGOerJoinPage").addEventListener("transitionend", ()=>{
+        document.querySelector("#JoinPageTopNav").classList.add('show');
+    })
 })

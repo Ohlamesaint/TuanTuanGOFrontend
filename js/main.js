@@ -113,10 +113,10 @@ $(document).ready(function(){
             document.querySelector("#unpackedTabInJoin").classList.add('active')
             document.querySelector("#TuanGOerPurchaseAmountInUnpack").addEventListener("change", ()=>{
                 if(!checkNum(document.querySelector("#TuanGOerPurchaseAmountInUnpack").value, JSON.parse(localStorage.getItem('unsoldProductAmount')))){
-                    document.querySelector("#availableAmountInUnpack").textContent = 'invalid number!'
+                    document.querySelector("#unpackedWarningText").textContent = 'invalid number!'
                     document.querySelector("#footerInJoin").classList.remove('show')
                 } else {
-                    document.querySelector("#availableAmountInUnpack").textContent = ''
+                    document.querySelector("#unpackedWarningText").textContent = ''
                     document.querySelector("#footerInJoin").classList.add('show')
                     document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", ()=>{
                         axios({
@@ -139,10 +139,10 @@ $(document).ready(function(){
             document.querySelector("#promoteTabInJoin").classList.add('active')
             document.querySelector("#TuanGOerPurchaseAmountInPromote").addEventListener("change", ()=>{
                 if(!checkNum(document.querySelector("#TuanGOerPurchaseAmountInPromote").value, JSON.parse(localStorage.getItem('unsoldProductAmount')))){
-                    document.querySelector("#availableAmountInPromote").textContent = 'invalid number!'
+                    document.querySelector("#unpackedWarningText").textContent = 'invalid number!'
                     document.querySelector("#footerInJoin").classList.remove('show')
                 } else {
-                    document.querySelector("#availableAmountInPromote").textContent = ''
+                    document.querySelector("#unpackedWarningText").textContent = ''
                     document.querySelector("#footerInJoin").classList.add('show');
                     document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", ()=>{
                         

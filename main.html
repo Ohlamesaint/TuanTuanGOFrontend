@@ -236,9 +236,6 @@
                                     let ExpirationTime = new Date(res.data[i].ExpirationTime);
                                     console.log(ExpirationTime.toString().slice(0, 24));
                                     card.push(document.createElement('div'));
-                                    // card[i].classList.add('card');
-                                    // card[i].classList.add('mt-3');
-                                    // card[i].classList.add('mb-5');
                                     card[i].innerHTML = `
                                     <div id="${res.data[i].TuanGOAddress.slice(2)}" data*-num=${i} data-toggle="modal" data-target="#productModal" class="w-100 card mt-3" style="box-shadow: 1px 1px 1px 0px silver">
                                         <img src="https://picsum.photos/400/200?image=10" class="card-img-top" alt="...">
@@ -258,6 +255,10 @@
                                 for(let i=0; i<cardList.length; i++){
                                     $(cardList[i]).on('click', (e)=>{      //注意id綁定不包含0x
                                         e.preventDefault();
+                                        for (const key in cardList[i]) {
+                                            localStorage.setItem(key, cardList[i].key)
+                                            console.log(cardList[i].key);
+                                        }
                                         document.querySelector("#JoinTuanGOProductName").textContent = cardBuffer[i].productName;
                                         document.querySelector("#JoinTuanGOTuanGOType").textContent = cardBuffer[i].TuanGOType?'unpack':'promote';
                                         document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(cardBuffer[i].ExpirationTime).toString().slice(0, 24);
@@ -441,14 +442,12 @@
                     <div id="topPhoto"></div>
                     <div id="name"></div>
                     <nav id="TuanGOType">
-                        <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-                            
-                            <a class="nav-item nav-link active" style="width: 50%; text-align: center;" id="promoteToggle" data-toggle="tab" href="#promoteTab" role="tab" aria-controls="nav-home" aria-selected="true">Promote</a>
-                            <a class="nav-item nav-link" style="width: 50%; text-align: center;" id="unpackToggle" data-toggle="tab" href="#unpackedTab" role="tab" aria-controls="nav-profile" aria-selected="false">Unpack</a>
+                        <div class="nav nav-tabs mb-3" id="TuanGOTypeName" role="tablist">
+
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="promoteTab" role="tabpanel" aria-labelledby="promoteToggle">
+                        <div class="tab-pane fade show" id="promoteTab" role="tabpanel" aria-labelledby="promoteToggle">
                             <div class="p-3 hide" id="promoteFallback" >
                                 <i class="fas fa-pray fa-2x mb-2" style="color: rgb(145, 93, 93)"></i>
                                 <p style="font-size: 1rem; color: rgb(145, 93, 93); letter-spacing: 2px;">Sorry, there's no promote event for now...</p>

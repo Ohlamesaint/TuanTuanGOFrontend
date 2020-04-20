@@ -100,6 +100,6 @@ $(document).ready(function(){
         })
     }, false)
     document.querySelector("#JoinTuanGO").addEventListener("click", ()=>{
-       element(TuanGOerJoinPage).classList.add('show');
+        document.querySelector("#TuanGOerJoinPage").classList.add("show");
     })
 })

@@ -265,6 +265,7 @@
                                         cardBuffer[i].SoldAmounts.forEach(v => {
                                             num = num+v;
                                         })
+                                        localStorage.setItem('unsoldProductAmount', cardBuffer[i].TotalAmount-num);
                                         for(let j=0; j<cardBuffer[i].TotalAmount; j++){
                                             if(j<num) TuanGOerLine += '<i class="fas fa-user"></i>';
                                             else TuanGOerLine += '<i class="far fa-user"></i>';
@@ -443,7 +444,7 @@
                         <div class="tab-pane fade show" id="promoteTabInJoin" role="tabpanel" aria-labelledby="promoteToggle">
                             <div id="promoteForm" class="p-3">
                                 <form name="promoteForm">
-                                    <label class="mb-3" style="color: rgb(145, 93, 93)" for="promoteProductNum" id="promoteProductNumLabel"></label>
+                                    <label class="mb-3" style="color: rgb(145, 93, 93)" for="promoteProductNum" id="promoteProductNumLabel">Amount you want to purchase: <p id="availableAmountInPromote"></p></label>
                                     <input type="number" name="promoteProductNum" id="promoteProductNum" class="mb-3"><br>
                                     <small id="promoteWarningText" class="mt-3" style="color: rgb(145, 93, 93);"></small>  
                                 </form>
@@ -452,7 +453,7 @@
                         <div class="tab-pane fade show" id="unpackedTabInJoin" role="tabpanel" aria-labelledby="unpackToggle">
                             <div id="unpackedForm" class="p-3">
                                 <form name="unpackedForm">
-                                    <label class="mb-3" style="color: rgb(145, 93, 93)" for="unpackedProductNum" id="unpackedProductNumLabel"></label>
+                                    <label class="mb-3" style="color: rgb(145, 93, 93)" for="unpackedProductNum" id="unpackedProductNumLabel">Amount you want to purchase: <p id="availableAmountInUnpack"></p></label>
                                     <input type="number" name="unpackedProductNum" id="unpackedProductNum" class="mb-3"><br>
                                     <small id="unpackedWarningText" class="mt-3" style="color: rgb(145, 93, 93);"></small>  
                                 </form>

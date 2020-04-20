@@ -486,14 +486,4 @@ $(document).ready(()=>{
             })
         })()
     })
-    // document.querySelector("#HoldOn").addEventListener("click", ()=>{
-    //     $("#dialog").removeClass("showDialog");
-    //     $(tuanGoer[2]).addClass('hide');
-    // })
-    // function conclusion(){
-    //     return new Promise((resolve, reject)=>{
-    //         $(body).addClass("hide");
-    
-    //     })
-    // }
 })

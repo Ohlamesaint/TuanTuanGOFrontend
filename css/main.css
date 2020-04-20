@@ -252,3 +252,9 @@ footer ul li:last-child h3{
     /* text-overflow:ellipsis; */
     /* white-space:nowrap; */
 }
+
+#TuanGOerJoinPageWrap>#TuanGOType{
+    font-size: 2rem;
+    color: rgb(145, 93, 93);
+    text-shadow: rgba(192, 121, 121, 0.5);
+}

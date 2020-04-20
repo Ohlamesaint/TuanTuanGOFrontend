@@ -266,7 +266,7 @@ footer ul li:last-child h3{
     width: 100vw;
     height: 10vh;
     line-height: 10vh;
-    transform: translateY(-10vh);
+    transform: translateY(10vh);
     text-align: center;
     font-size: 1.5rem;
     transition: all .3s linear;

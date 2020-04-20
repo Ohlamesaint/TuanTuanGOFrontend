@@ -262,9 +262,9 @@ footer ul li:last-child h3{
 #footerInJoin{
     position: fixed;
     left: 0;
-    top: 100vh;
+    top: 90vh;
     width: 100vw;
-    height: 90vh;
+    height: 10vh;
     line-height: 10vh;
     transform: translateY(10vh);
     text-align: center;

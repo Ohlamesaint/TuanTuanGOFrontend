@@ -1,8 +1,8 @@
 const staticCacheName = "site-static-v3";      //name of cache, CHANGE EVERY TIME//
 const assets = [
     "/",
-    "login.html",
-    "js/app.js",
+    // "login.html",
+    "app.js",
     "manifest.json",
     "sw.js",
     "https://code.jquery.com/jquery-3.2.1.slim.min.js",

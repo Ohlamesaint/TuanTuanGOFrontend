@@ -198,7 +198,7 @@ footer ul li:last-child h3{
     position: fixed;
     left: 0;
     top: 0;
-    height: 0vh;
+    height: 0px;
     width: 100vw;
     transition: all .5s ease;
     z-index: 1030;

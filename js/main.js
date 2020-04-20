@@ -122,6 +122,7 @@ $(document).ready(function(){
                         axios({
                             method: "post",
                             url: "https://tuantuango.herokuapp.com/join",
+                            withCredentials: true,
                             data: {
                                 contractAddress: TuanGOInform.TuanGOAddress,
                                 amount: document.querySelector("#TuanGOerPurchaseAmountInUnpack").value,

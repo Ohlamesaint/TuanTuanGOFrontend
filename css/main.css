@@ -275,6 +275,7 @@ footer ul li:last-child h3{
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10% auto;
 }
 #footerInJoin.show{
     transform: translateY(0vh);

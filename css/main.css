@@ -228,7 +228,7 @@ footer ul li:last-child h3{
 }
 
 #TuanGOerJoinPageWrap.show{
-    height: 90vh;
+    height: 80vh;
     transform: translateY(0vh);
     opacity: 1;
 }
@@ -257,4 +257,19 @@ footer ul li:last-child h3{
     font-size: 2rem;
     color: rgba(192, 121, 121, 0.5);
     text-shadow: 1px 1px rgb(145, 93, 93);
+}
+
+#footerInJoin{
+    width: 100vw;
+    height: 10vh;
+    line-height: 10vh;
+    transform: translateY(-10vh);
+    text-align: center;
+    font-size: 1.5rem;
+    transition: all .3s linear;
+    background-color: rgba(192, 121, 121, 0.5);
+    color: white;
+}
+#footerInJoin.show{
+    transform: translateY(0vh);
 }

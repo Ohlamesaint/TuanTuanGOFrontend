@@ -111,11 +111,35 @@ $(document).ready(function(){
             // unpack
             document.querySelector("#availableAmountInUnpack").textContent = `less than ${JSON.parse(localStorage.getItem('unsoldProductAmount'))+1}`
             document.querySelector("#unpackedTabInJoin").classList.add('active')
+            document.querySelector("#TuanGOerPurchaseAmountInUnpack").addEventListener("change", ()=>{
+                if(checkNum(document.querySelector("#TuanGOerPurchaseAmountInPromote").value, JSON.parse(localStorage.getItem('unsoldProductAmount')))){
+                    document.querySelector("#availableAmountInUnpack").textContent = 'invalid number!'
+                } else {
+                    document.querySelector("#availableAmountInPromote").textContent = ''
+                    
+                }
+            })
         } else{
             document.querySelector("#availableAmountInPromote").textContent = `less than ${JSON.parse(localStorage.getItem('unsoldProductAmount'))+1}`
             document.querySelector("#promoteTabInJoin").classList.add('active')
+            document.querySelector("#TuanGOerPurchaseAmountInPromote").addEventListener("change", ()=>{
+                if(checkNum(document.querySelector("#TuanGOerPurchaseAmountInPromote").value, JSON.parse(localStorage.getItem('unsoldProductAmount')))){
+                    document.querySelector("#availableAmountInPromote").textContent = 'invalid number!'
+                } else {
+                    document.querySelector("#availableAmountInPromote").textContent = ''
+
+                }
+            })
         }
         document.querySelector("#JoinPageTopNav").classList.add('show');
         document.querySelector("#TuanGOerJoinPageWrap").classList.add('show');
     })
 })
+
+function checkNum(num, border){
+    if(num == undefined||num == 0||num>border){
+        return false;
+    } else {
+        return true;
+    }
+}

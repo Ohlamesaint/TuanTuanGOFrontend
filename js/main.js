@@ -62,9 +62,6 @@ $(document).ready(function(){
                         window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/login.html');
                     }, );
                 })
-                // setTimeout(() => {
-                //     window.location.replace('./pages/login.html');
-                // }, );
             }else{
                 console.log(res);
                 console.log("45612357464");

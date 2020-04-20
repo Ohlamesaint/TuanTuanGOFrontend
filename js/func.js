@@ -99,7 +99,7 @@ $(document).ready(function(){
                     url: "https://tuantuango.herokuapp.com/profile",
                     withCredentials: true,
                 }).then(res=>{
-                    if(!res.data.signin){    //做保險
+                    if(!res.signin){    //做保險
                         console.log(res);
                         console.log("789");
                         setTimeout(() => {

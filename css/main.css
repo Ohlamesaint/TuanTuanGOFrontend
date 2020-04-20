@@ -260,6 +260,9 @@ footer ul li:last-child h3{
 }
 
 #footerInJoin{
+    position: fixed;
+    left: 0;
+    top: 90vh;
     width: 100vw;
     height: 10vh;
     line-height: 10vh;

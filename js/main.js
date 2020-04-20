@@ -107,7 +107,7 @@ $(document).ready(function(){
         let TuanGOInform = JSON.parse(localStorage.getItem("TuanGOInform"));
         document.querySelector("#TuanGOerJoinPageWrap>#name").textContent = TuanGOInform.productName;
         document.querySelector("#TuanGOerJoinPageWrap>#TuanGOType").textContent = TuanGOInform.TuanGOType?'unpack':'promote';
-        TuanGOInform.TuanGOType?document.querySelector("#availableAmountInUnpack").textContent = `less than ${JSON.parse(localstorage.getItem(unsoldProductAmount))+1}`:document.querySelector("#availableAmountInPromote").textContent = `less than ${JSON.parse(localstorage.getItem(unsoldProductAmount))+1}`
+        TuanGOInform.TuanGOType?document.querySelector("#availableAmountInUnpack").textContent = `less than ${JSON.parse(localStorage.getItem(unsoldProductAmount))+1}`:document.querySelector("#availableAmountInPromote").textContent = `less than ${JSON.parse(localStorage.getItem(unsoldProductAmount))+1}`
         if(TuanGOInform.TuanGOType){
             // unpack
             document.querySelector("#unpackedTabInJoin").classList.add('active')

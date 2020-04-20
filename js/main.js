@@ -112,7 +112,7 @@ $(document).ready(function(){
             document.querySelector("#availableAmountInUnpack").textContent = `less than ${JSON.parse(localStorage.getItem('unsoldProductAmount'))+1}`
             document.querySelector("#unpackedTabInJoin").classList.add('active')
             document.querySelector("#TuanGOerPurchaseAmountInUnpack").addEventListener("change", ()=>{
-                if(checkNum(document.querySelector("#TuanGOerPurchaseAmountInUnpack").value, JSON.parse(localStorage.getItem('unsoldProductAmount')))){
+                if(!checkNum(document.querySelector("#TuanGOerPurchaseAmountInUnpack").value, JSON.parse(localStorage.getItem('unsoldProductAmount')))){
                     document.querySelector("#availableAmountInUnpack").textContent = 'invalid number!'
                     document.querySelector("#footerInJoin").classList.remove('show')
                 } else {
@@ -124,7 +124,7 @@ $(document).ready(function(){
             document.querySelector("#availableAmountInPromote").textContent = `less than ${JSON.parse(localStorage.getItem('unsoldProductAmount'))+1}`
             document.querySelector("#promoteTabInJoin").classList.add('active')
             document.querySelector("#TuanGOerPurchaseAmountInPromote").addEventListener("change", ()=>{
-                if(checkNum(document.querySelector("#TuanGOerPurchaseAmountInPromote").value, JSON.parse(localStorage.getItem('unsoldProductAmount')))){
+                if(!checkNum(document.querySelector("#TuanGOerPurchaseAmountInPromote").value, JSON.parse(localStorage.getItem('unsoldProductAmount')))){
                     document.querySelector("#availableAmountInPromote").textContent = 'invalid number!'
                     document.querySelector("#footerInJoin").classList.remove('show')
                 } else {

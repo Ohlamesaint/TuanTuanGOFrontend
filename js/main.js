@@ -118,6 +118,20 @@ $(document).ready(function(){
                 } else {
                     document.querySelector("#availableAmountInUnpack").textContent = ''
                     document.querySelector("#footerInJoin").classList.add('show')
+                    document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", ()=>{
+                        axios({
+                            url: "https://tuantuango.herokuapp.com/join",
+                            data: {
+                                contractAddress: TuanGOInform.TuanGOAddress,
+                                amount: document.querySelector("#TuanGOerPurchaseAmountInUnpack").value,
+                            }
+                        }).then((res)=>{
+                            alert(res);
+                            window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html")
+                        }).catch((err)=>{
+                            console.log(err);
+                        })
+                    })
                 }
             })
         } else{
@@ -129,7 +143,10 @@ $(document).ready(function(){
                     document.querySelector("#footerInJoin").classList.remove('show')
                 } else {
                     document.querySelector("#availableAmountInPromote").textContent = ''
-                    document.querySelector("#footerInJoin").classList.add('show')
+                    document.querySelector("#footerInJoin").classList.add('show');
+                    document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", ()=>{
+                        
+                    })
                 }
             })
         }

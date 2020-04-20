@@ -255,10 +255,7 @@
                                 for(let i=0; i<cardList.length; i++){
                                     $(cardList[i]).on('click', (e)=>{      //注意id綁定不包含0x
                                         e.preventDefault();
-                                        for (let [key,value] of Object.entries(cardBuffer[i])) {
-                                            localStorage.setItem(key, JSON.stringify(value));
-                                            console.log(`${key}: ${value}`)
-                                        }
+                                        localStorage.setItem("TuanGOInform", JSON.stringify(cardBuffer[i]));
                                         document.querySelector("#JoinTuanGOProductName").textContent = cardBuffer[i].productName;
                                         document.querySelector("#JoinTuanGOTuanGOType").textContent = cardBuffer[i].TuanGOType?'unpack':'promote';
                                         document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(cardBuffer[i].ExpirationTime).toString().slice(0, 24);

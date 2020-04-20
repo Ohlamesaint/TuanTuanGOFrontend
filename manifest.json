@@ -2,7 +2,7 @@
     "name" : "團團購",
     "short_name" : "團團",
     "display" : "standalone",
-    "start_url": "https://luffy.ee.ncku.edu.tw/~Shang/TuanTuanGO/main.html",
+    "start_url": "https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html",
     "background_color" : "#ffffff",
     "theme_color" : "rgb(145, 93, 93)",
     "orientation" : "protrait-primary",

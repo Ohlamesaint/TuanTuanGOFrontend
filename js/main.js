@@ -109,10 +109,10 @@ $(document).ready(function(){
         document.querySelector("#TuanGOerJoinPageWrap>#TuanGOType").textContent = TuanGOInform.TuanGOType?'unpack':'promote';
         if(TuanGOInform.TuanGOType){
             // unpack
-            document.querySelector("#availableAmountInUnpack").textContent = `less than ${JSON.parse(localStorage.getItem(unsoldProductAmount))+1}`
+            document.querySelector("#availableAmountInUnpack").textContent = `less than ${JSON.parse(localStorage.getItem('unsoldProductAmount'))+1}`
             document.querySelector("#unpackedTabInJoin").classList.add('active')
         } else{
-            document.querySelector("#availableAmountInPromote").textContent = `less than ${JSON.parse(localStorage.getItem(unsoldProductAmount))+1}`
+            document.querySelector("#availableAmountInPromote").textContent = `less than ${JSON.parse(localStorage.getItem('unsoldProductAmount'))+1}`
             document.querySelector("#promoteTabInJoin").classList.add('active')
         }
         document.querySelector("#JoinPageTopNav").classList.add('show');

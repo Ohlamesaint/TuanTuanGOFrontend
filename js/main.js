@@ -108,11 +108,10 @@ $(document).ready(function(){
         document.querySelector("#TuanGOerJoinPageWrap>#name").textContent = TuanGOInform.productName;
         document.querySelector("#TuanGOerJoinPageWrap>#TuanGOType").textContent = TuanGOInform.TuanGOType?'unpack':'promote';
         if(TuanGOInform.TuanGOType){
-            document.querySelector("#TuanGOerJoinPageWrap>#promoteTab")
-            document.querySelector("#TuanGOerJoinPageWrap>#TuanGOType")
+            // unpack
+            document.querySelector("#TuanGOerJoinPageWrap>#unpackTab").classList.add('active')
+        } else{
+            document.querySelector("#TuanGOerJoinPageWrap>#promoteTab").classList.add('active')
         }
-        // document.querySelector("#TuanGOerJoinPageWrap>#TuanGOType").textContent = TuanGOInform.TuanGOType?'unpack':'promote';
-        document.querySelector("#JoinPageTopNav").classList.add('show');
-        document.querySelector("#TuanGOerJoinPageWrap").classList.add('show');
     })
 })

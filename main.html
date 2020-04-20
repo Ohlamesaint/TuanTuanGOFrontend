@@ -256,7 +256,7 @@
                                     $(cardList[i]).on('click', (e)=>{      //注意id綁定不包含0x
                                         e.preventDefault();
                                         for (let [key,value] of Object.entries(cardBuffer[i])) {
-                                            // localStorage.setItem(key[0], JSON.stringify(key[1]));
+                                            localStorage.setItem(key[0], JSON.stringify(key[1]));
                                             console.log(`${key}: ${value}`)
                                         }
                                         document.querySelector("#JoinTuanGOProductName").textContent = cardBuffer[i].productName;

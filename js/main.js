@@ -95,4 +95,7 @@ $(document).ready(function(){
             console.log(err);
         })
     }, false)
+    document.querySelector("#JoinTuanGO").addEventListener("click", ()=>{
+        
+    })
 })

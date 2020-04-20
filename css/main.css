@@ -217,5 +217,5 @@ footer ul li:last-child h3{
 }
 
 #JoinPageTopNav.show{
-    transform: translateY(0vh);
+    transform: translateY(-10vh);
 }

@@ -201,6 +201,7 @@ footer ul li:last-child h3{
     height: 0vh;
     width: 100vw;
     transition: all .5s ease;
+    z-index: 1030;
 }
 
 #TuanGOerJoinPage.show{

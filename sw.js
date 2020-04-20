@@ -45,12 +45,12 @@ self.addEventListener("fetch", evt => {
         caches.match(evt.request).then(cacheRes => {
             console.log(evt.request.url);
             return cacheRes || fetch(evt.request).then(fetchRes=>{
-                return caches.open(dynamicCache).then(cache=>{
-                    if(evt.request.url !== "https://tuantuango.herokuapp.com/signin" &&  evt.request.url !== "https://tuantuango.herokuapp.com/signOut" && evt.request.url !== "https://tuantuango.herokuapp.com/profile" && !(/^(https):\/\/(tuantuango.herokuapp.com)\/(products)\/([\d]{6})$/.test(evt.request.url))){
-                        cache.put(evt.request.url, fetchRes.clone());       //key and value
-                    }
+                // return caches.open(dynamicCache).then(cache=>{
+                //     if(evt.request.url !== "https://tuantuango.herokuapp.com/signin" &&  evt.request.url !== "https://tuantuango.herokuapp.com/signOut" && evt.request.url !== "https://tuantuango.herokuapp.com/profile" && !(/^(https):\/\/(tuantuango.herokuapp.com)\/(products)\/([\d]{6})$/.test(evt.request.url))){
+                //         cache.put(evt.request.url, fetchRes.clone());       //key and value
+                //     }
                     return fetchRes; 
-                })
+                // })
             }).catch(err => caches.match("pages/fallback.html").then(fallback => {return fallback}))
         })
     )

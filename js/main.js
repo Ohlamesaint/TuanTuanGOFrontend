@@ -2,6 +2,10 @@ var belowBar = document.querySelectorAll(".below>ul>li");
 var tuanGoer = document.querySelector("#tuanGoer");
 
 
+function element(ele){
+    document.querySelector(`#${ele}`);
+}
+
 $(document).ready(function(){
     for(let i=0; i<belowBar.length-1; i++){
         belowBar[i].addEventListener("click", (e)=>{
@@ -96,6 +100,6 @@ $(document).ready(function(){
         })
     }, false)
     document.querySelector("#JoinTuanGO").addEventListener("click", ()=>{
-        
+       element(TuanGOerJoinPage).classList.add('show');
     })
 })

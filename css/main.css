@@ -193,3 +193,17 @@ footer ul li:last-child h3{
     opacity:1;
     transform: translateY(0px);
 }
+
+#TuanGOerJoinPage{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 0vh;
+    width: 100vw;
+    transition: all .5s ease;
+}
+
+#TuanGOerJoinPage.show{
+    height: 100vh;
+    overflow: scroll;
+}

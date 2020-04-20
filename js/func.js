@@ -28,18 +28,18 @@ $(document).ready(function(){
             url: "https://tuantuango.herokuapp.com/profile",
             withCredentials: true,
         }).then(res=>{
-            // if(!res.data.signin){    //做保險
-            //     console.log(res);
-            //     console.log("789");
-            //     setTimeout(() => {
-            //         window.location.replace('./login.html');
-            //     }, );
-            // }else{
-                console.log(res.data.headPaste);
+            if(!res.data.signin){    //做保險
                 console.log(res);
-                document.querySelector("#user").textContent = res.data.user;
-                // document.querySelector("#region").textContent = res.data.username;
-                var blob = new Blob( [res.data.headPaste], { type: "image/jpg" } );
+                console.log("789");
+                setTimeout(() => {
+                    window.location.replace('./login.html');
+                }, );
+            }else{
+                console.log(res.headPaste);
+                console.log(res);
+                document.querySelector("#user").textContent = res.user;
+                // document.querySelector("#region").textContent = res.username;
+                var blob = new Blob( [res.headPaste], { type: "image/jpg" } );
                 console.log(blob);
                 var urlCreator = window.URL || window.webkitURL;
                 var imageUrl = urlCreator.createObjectURL( blob );
@@ -52,7 +52,7 @@ $(document).ready(function(){
                     // headPaste.setAttribute("style", `backgound-image: url(${reader.result})`);
                 })
                 reader.readAsDataURL(blob);
-            // }
+            }
         }).catch(err=>{
             throw new Error(err);  
         })
@@ -108,9 +108,9 @@ $(document).ready(function(){
                     }else{
                         console.log("success");
                         console.log(res);
-                        document.querySelector("#user").textContent = res.data.username;
-                        // document.querySelector("#region").textContent = res.data.username;
-                        var blob = new Blob( res.data.headPaste, { type: "image/jpg" } );
+                        document.querySelector("#user").textContent = res.username;
+                        // document.querySelector("#region").textContent = res.username;
+                        var blob = new Blob( res.headPaste, { type: "image/jpg" } );
                         var urlCreator = window.URL || window.webkitURL;
                         var imageUrl = urlCreator.createObjectURL( blob );
                         headPaste.setAttribute("style", `backgound-image: url(${imageUrl})`);

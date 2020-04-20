@@ -255,9 +255,9 @@
                                 for(let i=0; i<cardList.length; i++){
                                     $(cardList[i]).on('click', (e)=>{      //注意id綁定不包含0x
                                         e.preventDefault();
-                                        for (const key in cardList[i]) {
-                                            localStorage.setItem(key, cardList[i].key)
-                                            console.log(cardList[i].key);
+                                        for (const key in cardBuffer[i]) {
+                                            localStorage.setItem(key, cardBuffer[i].key)
+                                            console.log(cardBuffer[i].key);
                                         }
                                         document.querySelector("#JoinTuanGOProductName").textContent = cardBuffer[i].productName;
                                         document.querySelector("#JoinTuanGOTuanGOType").textContent = cardBuffer[i].TuanGOType?'unpack':'promote';

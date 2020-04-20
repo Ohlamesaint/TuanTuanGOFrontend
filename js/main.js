@@ -106,7 +106,5 @@ $(document).ready(function(){
     document.querySelector("#TuanGOerJoinPage").addEventListener("transitionend", ()=>{
         document.querySelector("#JoinPageTopNav").classList.add('show');
         document.querySelector("#TuanGOerJoinPageWrap").classList.add('show');
-        let TuanGOInform = JSON.parse(localStorage.getItem("TuanGOInform"));
-        console.log(TuanGOInform);
     })
 })

@@ -113,5 +113,7 @@ $(document).ready(function(){
         } else{
             document.querySelector("#TuanGOerJoinPageWrap>#promoteTab").classList.add('active')
         }
+        document.querySelector("#JoinPageTopNav").classList.add('show');
+        document.querySelector("#TuanGOerJoinPageWrap").classList.add('show');
     })
 })

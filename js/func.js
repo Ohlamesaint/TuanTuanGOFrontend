@@ -28,13 +28,13 @@ $(document).ready(function(){
             url: "https://tuantuango.herokuapp.com/profile",
             withCredentials: true,
         }).then(res=>{
-            if(!res.data.signin){    //做保險
-                console.log(res);
-                console.log("789");
-                setTimeout(() => {
-                    window.location.replace('./login.html');
-                }, );
-            }else{
+            // if(!res.data.signin){    //做保險
+            //     console.log(res);
+            //     console.log("789");
+            //     setTimeout(() => {
+            //         window.location.replace('./login.html');
+            //     }, );
+            // }else{
                 console.log(res.data.headPaste);
                 console.log(res);
                 document.querySelector("#user").textContent = res.data.user;
@@ -52,7 +52,7 @@ $(document).ready(function(){
                     // headPaste.setAttribute("style", `backgound-image: url(${reader.result})`);
                 })
                 reader.readAsDataURL(blob);
-            }
+            // }
         }).catch(err=>{
             throw new Error(err);  
         })

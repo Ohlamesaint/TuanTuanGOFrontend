@@ -120,6 +120,7 @@ $(document).ready(function(){
                     document.querySelector("#footerInJoin").classList.add('show')
                     document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", ()=>{
                         axios({
+                            method: "post",
                             url: "https://tuantuango.herokuapp.com/join",
                             data: {
                                 contractAddress: TuanGOInform.TuanGOAddress,

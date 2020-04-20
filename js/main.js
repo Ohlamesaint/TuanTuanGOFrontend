@@ -104,9 +104,9 @@ $(document).ready(function(){
         document.querySelector('body').setAttribute('style', "overflow: hidden");
     })
     document.querySelector("#TuanGOerJoinPage").addEventListener("transitionend", ()=>{
+        let TuanGOInform = JSON.parse(localStorage.getItem("TuanGOInform"));
+        document.querySelector("#TuanGOerJoinPageWrap>#name").textContent = TuanGOInform.productName;
         document.querySelector("#JoinPageTopNav").classList.add('show');
         document.querySelector("#TuanGOerJoinPageWrap").classList.add('show');
-        let TuanGOInform = JSON.parse(localStorage.getItem("TuanGOInform"));
-        console.log(TuanGOInform);
     })
 })

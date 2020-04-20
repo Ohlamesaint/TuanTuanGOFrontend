@@ -224,7 +224,7 @@ footer ul li:last-child h3{
     overflow: scroll;
     opacity: 0;
     transform: translateY(-10vh);
-    transition: opacity .3s linear, translateY .3 linear;
+    transition: opacity .3s linear, transform .3 linear;
 }
 
 #TuanGOerJoinPageWrap.show{

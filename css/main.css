@@ -220,13 +220,16 @@ footer ul li:last-child h3{
 }
 
 #TuanGOerJoinPageWrap{
-    height: 90vh;
+    height: 0vh;
     overflow: scroll;
     opacity: 0;
-    transition: all .3s linear;
+    transform: translateY(-10vh);
+    transition: opacity .3s linear, translateY .3 linear;
 }
 
 #TuanGOerJoinPageWrap.show{
+    height: 90vh;
+    transform: translateY(0vh);
     opacity: 1;
 }
 

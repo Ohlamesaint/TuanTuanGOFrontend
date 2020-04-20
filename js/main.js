@@ -139,6 +139,7 @@ $(document).ready(function(){
 })
 
 function checkNum(num, border){
+    console.log(num, border);
     if(num == undefined||num == 0||num>border){
         return false;
     } else {

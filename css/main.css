@@ -272,6 +272,9 @@ footer ul li:last-child h3{
     transition: all .3s linear;
     background-color: rgba(192, 121, 121, 0.5);
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #footerInJoin.show{
     transform: translateY(0vh);

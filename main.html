@@ -255,7 +255,7 @@
                                 for(let i=0; i<cardList.length; i++){
                                     $(cardList[i]).on('click', (e)=>{      //注意id綁定不包含0x
                                         e.preventDefault();
-                                        for (var key in cardList[i].entries()) {
+                                        for (var key in cardList.entries()) {
                                             localStorage.setItem(key[0], JSON.stringify(key[1]));
                                             console.log(cardList[i]);
                                             console.log(cardBuffer[i]);

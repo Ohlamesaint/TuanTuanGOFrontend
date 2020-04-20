@@ -107,6 +107,10 @@ $(document).ready(function(){
         let TuanGOInform = JSON.parse(localStorage.getItem("TuanGOInform"));
         document.querySelector("#TuanGOerJoinPageWrap>#name").textContent = TuanGOInform.productName;
         document.querySelector("#TuanGOerJoinPageWrap>#TuanGOType").textContent = TuanGOInform.TuanGOType?'unpack':'promote';
+        if(TuanGOInform.TuanGOType){
+            document.querySelector("#TuanGOerJoinPageWrap>#promoteTab")
+            document.querySelector("#TuanGOerJoinPageWrap>#TuanGOType")
+        }
         // document.querySelector("#TuanGOerJoinPageWrap>#TuanGOType").textContent = TuanGOInform.TuanGOType?'unpack':'promote';
         document.querySelector("#JoinPageTopNav").classList.add('show');
         document.querySelector("#TuanGOerJoinPageWrap").classList.add('show');

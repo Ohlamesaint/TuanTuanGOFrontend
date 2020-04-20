@@ -225,6 +225,7 @@ footer ul li:last-child h3{
 }
 
 #TuanGOerJoinPageWrap.show{
+    margin-top: 10vh;
     height: 90vh;
 }
 

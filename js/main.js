@@ -109,9 +109,9 @@ $(document).ready(function(){
         document.querySelector("#TuanGOerJoinPageWrap>#TuanGOType").textContent = TuanGOInform.TuanGOType?'unpack':'promote';
         if(TuanGOInform.TuanGOType){
             // unpack
-            document.querySelector("#unpackedTabInJoin").classList.add('show')
+            document.querySelector("#unpackedTabInJoin").classList.add('active')
         } else{
-            document.querySelector("#promoteTabInJoin").classList.add('show')
+            document.querySelector("#promoteTabInJoin").classList.add('active')
         }
         document.querySelector("#JoinPageTopNav").classList.add('show');
         document.querySelector("#TuanGOerJoinPageWrap").classList.add('show');

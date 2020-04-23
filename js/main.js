@@ -143,7 +143,7 @@ $(document).ready(function(){
                             withCredentials: true,
                             data: {
                                 contractAddress: TuanGOInform.TuanGOAddress,
-                                amount: document.querySelector("#TuanGOerPurchaseAmountInUnpack").value,
+                                amount: 0,
                             }
                         }).then((res)=>{
                             alert(res);

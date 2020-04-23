@@ -139,39 +139,22 @@ $(document).ready(function(){
                     document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", ()=>{
                         event.preventDefault();
                         console.log('123');
-                        var xhr;
-                        if(xhr && xhr.readyState != 4){
-                            xhr.abort();
-                        }
-                        xhr = $.ajax({
+                        axios({
+                            method: "post",
                             url: "https://tuantuango.herokuapp.com/join",
+                            withCredentials: true,
                             data: {
                                 contractAddress: TuanGOInform.TuanGOAddress,
                                 amount: document.querySelector("#TuanGOerPurchaseAmountInUnpack").value,
-                            },
-                            success: function(data) {
-                                alert(res);
-                                setTimeout(()=>{
-                                    window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html")
-                                }, 3000);
                             }
-                        });
-                        // axios({
-                        //     method: "post",
-                        //     url: "https://tuantuango.herokuapp.com/join",
-                        //     withCredentials: true,
-                        //     data: {
-                        //         contractAddress: TuanGOInform.TuanGOAddress,
-                        //         amount: document.querySelector("#TuanGOerPurchaseAmountInUnpack").value,
-                        //     }
-                        // }).then((res)=>{
-                        //     alert(res);
-                        //     setTimeout(()=>{
-                        //         window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html")
-                        //     }, 3000);
-                        // }).catch((err)=>{
-                        //     console.log(err);
-                        // })
+                        }).then((res)=>{
+                            alert(res);
+                            setTimeout(()=>{
+                                window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html")
+                            }, 3000);
+                        }).catch((err)=>{
+                            console.log(err);
+                        })
                     })
                 }
             })

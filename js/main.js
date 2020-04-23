@@ -11,7 +11,7 @@ $(document).ready(function(){
         belowBar[i].addEventListener("click", (e)=>{
             axios({
                 method:"get",
-                // withCredentials: true,
+                withCredentials: true,
                 url:"https://tuantuango.herokuapp.com/signin",
             }).then(res=>{
                 if(!res.data.signin){    //可以順便獲得會員profile
@@ -46,7 +46,7 @@ $(document).ready(function(){
     belowBar[4].addEventListener("click", ()=>{
         axios({
             method:"get",
-            // withCredentials: true,
+            withCredentials: true,
             url:"https://tuantuango.herokuapp.com/signin",
         }).then(res=>{
             if(!res.data.signin){    //可以順便獲得會員profile
@@ -81,7 +81,7 @@ $(document).ready(function(){
     signOut.addEventListener("click", (e)=>{
         axios({
             method:"get",
-            // withCredentials: true,
+            withCredentials: true,
             url:"https://tuantuango.herokuapp.com/signOut",
         }).then(res=>{
             if(res.data.signin){    //可以順便獲得會員profile
@@ -119,7 +119,7 @@ $(document).ready(function(){
                         axios({
                             method: "post",
                             url: "https://tuantuango.herokuapp.com/join",
-                            // withCredentials: true,
+                            withCredentials: true,
                             data: {
                                 contractAddress: TuanGOInform.TuanGOAddress,
                                 amount: document.querySelector("#TuanGOerPurchaseAmountInUnpack").value,

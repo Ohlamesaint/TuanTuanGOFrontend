@@ -129,7 +129,9 @@ $(document).ready(function(){
             // unpack
             document.querySelector("#availableAmountInUnpack").textContent = `less than ${JSON.parse(localStorage.getItem('unsoldProductAmount'))+1}`
             document.querySelector("#unpackedTabInJoin").classList.add('active')
+            console.log("out of changed");
             document.querySelector("#TuanGOerPurchaseAmountInUnpack").addEventListener("change", ()=>{
+                console.log("changed");
                 if(!checkNum(document.querySelector("#TuanGOerPurchaseAmountInUnpack").value, JSON.parse(localStorage.getItem('unsoldProductAmount')))){
                     document.querySelector("#unpackedWarningText").textContent = 'invalid number!'
                     document.querySelector("#footerInJoin").classList.remove('show')

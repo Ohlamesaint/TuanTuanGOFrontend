@@ -166,7 +166,8 @@ $(document).ready(function(){
                 } else {
                     document.querySelector("#unpackedWarningText").textContent = ''
                     document.querySelector("#footerInJoin").classList.add('show');
-                    document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", ()=>{
+                    document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", (event)=>{
+                        event.preventDefault();
                         axios({
                             method: "post",
                             url: "https://tuantuango.herokuapp.com/join",

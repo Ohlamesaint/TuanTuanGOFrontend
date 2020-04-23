@@ -117,11 +117,14 @@ $(document).ready(function(){
                 })
             } else {
                 document.querySelector("#TuanGOerJoinPage").classList.add("show");
+                console.log("show the tuango");
                 document.querySelector('body').setAttribute('style', "overflow: hidden");
             }
         })
     })
-    document.querySelector("#TuanGOerJoinPage").addEventListener("transitionend", ()=>{
+    document.querySelector("#TuanGOerJoinPage").addEventListener("transitionend", (e)=>{
+        e.preventDefault();
+        e.stopPropagation();
         let TuanGOInform = JSON.parse(localStorage.getItem("TuanGOInform"));
         document.querySelector("#TuanGOerJoinPageWrap>#name").textContent = TuanGOInform.productName;
         document.querySelector("#TuanGOerJoinPageWrap>#TuanGOType").textContent = TuanGOInform.TuanGOType?'unpack':'promote';
@@ -138,8 +141,9 @@ $(document).ready(function(){
                 } else {
                     document.querySelector("#unpackedWarningText").textContent = ''
                     document.querySelector("#footerInJoin").classList.add('show')
-                    document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", ()=>{
-                        event.preventDefault();
+                    document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", (e)=>{
+                        e.preventDefault();
+                        e.stopPropagation();
                         console.log('123');
                         axios({
                             method: "post",

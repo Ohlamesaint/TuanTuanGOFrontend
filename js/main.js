@@ -138,22 +138,40 @@ $(document).ready(function(){
                     document.querySelector("#footerInJoin").classList.add('show')
                     document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", ()=>{
                         event.preventDefault();
-                        axios({
-                            method: "post",
+                        console.log('123');
+                        var xhr;
+                        if(xhr && xhr.readyState != 4){
+                            xhr.abort();
+                        }
+                        xhr = $.ajax({
                             url: "https://tuantuango.herokuapp.com/join",
-                            withCredentials: true,
                             data: {
                                 contractAddress: TuanGOInform.TuanGOAddress,
                                 amount: document.querySelector("#TuanGOerPurchaseAmountInUnpack").value,
+                            },
+                            success: function(data) {
+                                alert(res);
+                                setTimeout(()=>{
+                                    window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html")
+                                }, 3000);
                             }
-                        }).then((res)=>{
-                            alert(res);
-                            setTimeout(()=>{
-                                window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html")
-                            }, 3000);
-                        }).catch((err)=>{
-                            console.log(err);
-                        })
+                        });
+                        // axios({
+                        //     method: "post",
+                        //     url: "https://tuantuango.herokuapp.com/join",
+                        //     withCredentials: true,
+                        //     data: {
+                        //         contractAddress: TuanGOInform.TuanGOAddress,
+                        //         amount: document.querySelector("#TuanGOerPurchaseAmountInUnpack").value,
+                        //     }
+                        // }).then((res)=>{
+                        //     alert(res);
+                        //     setTimeout(()=>{
+                        //         window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html")
+                        //     }, 3000);
+                        // }).catch((err)=>{
+                        //     console.log(err);
+                        // })
                     })
                 }
             })

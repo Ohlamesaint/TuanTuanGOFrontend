@@ -326,13 +326,7 @@ $(document).ready(function(){
                     url: "https://tuantuango.herokuapp.com/userWallet",
                     withCredentials: true,
                 }).then(res=>{
-                    if(!res.data.signin){    //做保險
-                        console.log(res);
-                        setTimeout(() => {
-                            window.location.replace('./login.html');
-                        }, );
-                    }else{
-                        console.log("success");
+                    console.log("success");
                         console.log(res);
                         $('#userForm').bootstrapValidator();
                         document.querySelector( "#money_send" ).addEventListener("click", async()=>{
@@ -351,7 +345,6 @@ $(document).ready(function(){
                             }
                         })
                         tl.resume();
-                    }
                 }).catch(err=>{
                     throw new Error(err);
                 })

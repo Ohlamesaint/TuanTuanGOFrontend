@@ -254,25 +254,25 @@
                                 // $(card[i]).sleep(500).children().addClass('fadeIn');
                                 for(let i=0; i<cardList.length; i++){
                                     $(cardList[i]).on('click', (e)=>{      //注意id綁定不包含0x
-                                        axios({
-                                            method:"get",
-                                            withCredentials: true,
-                                            url:"https://tuantuango.herokuapp.com/signin",
-                                        }).then(res=>{
-                                            if(!res.data.signin){    //可以順便獲得會員profile
-                                                console.log(res);
-                                                $("body").addClass("modal-open");
-                                                $("#loginPrompt").addClass("show").css("display", "block");
-                                                $("#not").on('click', ()=>{
-                                                    $("body").removeClass("modal-open");
-                                                    $("#loginPrompt").removeClass("show").css("display", "none");
-                                                })
-                                                $("#yes").on('click', ()=>{
-                                                    setTimeout(() => {
-                                                        window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/login.html');
-                                                    }, );
-                                                })
-                                            } else {
+                                        // axios({
+                                        //     method:"get",
+                                        //     withCredentials: true,
+                                        //     url:"https://tuantuango.herokuapp.com/signin",
+                                        // }).then(res=>{
+                                        //     if(!res.data.signin){    //可以順便獲得會員profile
+                                        //         console.log(res);
+                                        //         $("body").addClass("modal-open");
+                                        //         $("#loginPrompt").addClass("show").css("display", "block");
+                                        //         $("#not").on('click', ()=>{
+                                        //             $("body").removeClass("modal-open");
+                                        //             $("#loginPrompt").removeClass("show").css("display", "none");
+                                        //         })
+                                        //         $("#yes").on('click', ()=>{
+                                        //             setTimeout(() => {
+                                        //                 window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/login.html');
+                                        //             }, );
+                                        //         })
+                                        //     } else {
                                                 e.preventDefault();
                                                 localStorage.setItem("TuanGOInform", JSON.stringify(cardBuffer[i]));
                                                 document.querySelector("#JoinTuanGOProductName").textContent = cardBuffer[i].productName;
@@ -290,10 +290,10 @@
                                                     else TuanGOerLine += '<i class="far fa-user"></i>';
                                                 }
                                                 document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + cardBuffer[i].TotalAmount;
-                                            }
-                                        }).catch((err)=>{
-                                            console.log(err);
-                                        })
+                                            // }
+                                        // }).catch((err)=>{
+                                        //     console.log(err);
+                                        // })
                                         // e.preventDefault();
                                         // localStorage.setItem("TuanGOInform", JSON.stringify(cardBuffer[i]));
                                         // document.querySelector("#JoinTuanGOProductName").textContent = cardBuffer[i].productName;

@@ -238,7 +238,7 @@ $(document).ready(function(){
             }else{
                 console.log("success");
                 console.log(res);
-                document.addEventListener("#walletCash").textContent = res.data.walletCash
+                document.addEventListener("#walletCash").textContent = res.data.balance;
                 $('#userForm').bootstrapValidator();
                 tl.resume();
             }
@@ -326,27 +326,35 @@ $(document).ready(function(){
                     url: "https://tuantuango.herokuapp.com/userWallet",
                     withCredentials: true,
                 }).then(res=>{
-                    console.log("success");
+                    if(!res.data.signin){    //做保險
                         console.log(res);
+                        setTimeout(() => {
+                            window.location.replace('./login.html');
+                        }, );
+                    }else{
+                        console.log("success");
+                        console.log(res);
+                        document.addEventListener("#walletCash").textContent = res.data.balance;
                         $('#userForm').bootstrapValidator();
-                        document.querySelector( "#money_send" ).addEventListener("click", async()=>{
-                            var flag = $('#userForm').data("bootstrapValidator").isValid();
-                            if(flag) {
-                                console.log("send_money_post ",document.querySelector( "#nn" ).value);
-                                var message = document.createElement("p");
-                                message.innerText = "Wait for sending ...";
-                                document.querySelector( "#send_message" ).appendChild(message);
-                                await t();
-                                document.querySelector( "#send_message" ).removeChild(message);
-                                $('#store').modal('hide');
-                            }
-                            else{
-                                console.log("money error");
-                            }
-                        })
                         tl.resume();
+                    }
                 }).catch(err=>{
                     throw new Error(err);
+                })
+                document.querySelector( "#money_send" ).addEventListener("click", async()=>{
+                    var flag = $('#userForm').data("bootstrapValidator").isValid();
+                    if(flag) {
+                        console.log("send_money_post ",document.querySelector( "#nn" ).value);
+                        var message = document.createElement("p");
+                        message.innerText = "Wait for sending ...";
+                        document.querySelector( "#send_message" ).appendChild(message);
+                        await t();
+                        document.querySelector( "#send_message" ).removeChild(message);
+                        $('#store').modal('hide');
+                    }
+                    else{
+                        console.log("money error");
+                    }
                 })
             }
             else if(i == 1){

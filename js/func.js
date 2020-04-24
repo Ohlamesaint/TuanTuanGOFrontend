@@ -101,7 +101,6 @@ $(document).ready(function(){
                 console.log(res);
                 document.querySelector("#user").textContent = res.data.user;
                 document.querySelector("#username").textContent = res.data.username;
-                document.querySelector("#gender").textContent = "123";
                 document.querySelector("#phoneNumber").textContent = res.data.phoneNumber;
                 document.querySelector("#email").textContent = res.data.email;
                 document.querySelector("#address").textContent = res.data.address;
@@ -341,7 +340,6 @@ $(document).ready(function(){
                         console.log(res);
                         document.querySelector("#user").textContent = res.data.user;
                         document.querySelector("#username").textContent = res.data.username;
-                        document.querySelector("#gender").textContent = "123";
                         document.querySelector("#phoneNumber").textContent = res.data.phoneNumber;
                         document.querySelector("#email").textContent = res.data.email;
                         document.querySelector("#address").textContent = res.data.address;

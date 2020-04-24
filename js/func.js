@@ -468,10 +468,10 @@ $(document).ready(function(){
                 })
                 document.querySelector( "#money_send" ).addEventListener("click", async()=>{
                     if(mutex){
-                        document.querySelector( "#money_send" ).disabled = true;
                         var flag = $('#userForm').data("bootstrapValidator").isValid();
                         var message = document.createElement("p");
                         if(flag) {
+                            document.querySelector( "#money_send" ).disabled = true;
                             message.innerText = "Wait for sending ...";
                             document.querySelector( "#send_message" ).appendChild(message);
                             axios({
@@ -491,6 +491,7 @@ $(document).ready(function(){
                                 document.querySelector( "#send_message" ).removeChild(message);
                                 $('#store').modal('hide');
                                 console.log(res);
+                                document.querySelector( "#money_send" ).disabled = false;
                             }).catch((err) => {
                                 throw new Error(err);
                             })
@@ -502,7 +503,6 @@ $(document).ready(function(){
                             console.log("money error");
                         }
                         mutex = true;
-                        document.querySelector( "#money_send" ).disabled = false;
                     }
                 })
             }

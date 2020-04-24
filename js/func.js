@@ -4,6 +4,7 @@ var middleWraps = document.querySelectorAll(".wrap>div");
 var back = document.querySelector("#back");
 var middleWrapRowList = document.querySelectorAll(".wrap>div>div>.row")  
 var headPaste = document.querySelector( "#headPaste" );
+var mutex = true;
 const tl = new TimelineMax({repeat:-1});
 tl.staggerFrom(['#block_chain > path:nth-child(1)', '#block_chain > path:nth-child(2)', '#block_chain > path:nth-child(3)', '#block_chain > path:nth-child(4)','#block_chain > path:nth-child(5)','#block_chain > path:nth-child(6)','#block_chain > path:nth-child(7)','#block_chain > path:nth-child(8)','#block_chain > path:nth-child(9)','#block_chain > path:nth-child(10)','#block_chain > path:nth-child(11)','#block_chain > path:nth-child(12)','#block_chain > path:nth-child(13)','#block_chain > path:nth-child(14)','#block_chain > path:nth-child(15)','#block_chain > path:nth-child(16)','#block_chain > path:nth-child(17)','#block_chain > path:nth-child(18)','#block_chain > path:nth-child(19)','#block_chain > path:nth-child(20)','#block_chain > path:nth-child(21)','#block_chain > path:nth-child(22)','#block_chain > path:nth-child(23)','#block_chain > path:nth-child(24)'], 0.5, 
 {scaleY:0, scaleX: 0, transformOrigin: "center",ease: Bounce.easeOut, stagger:0.2});
@@ -338,36 +339,41 @@ $(document).ready(function(){
             throw new Error(err);
         })
         document.querySelector( "#money_send" ).addEventListener("click", async()=>{
-            var flag = $('#userForm').data("bootstrapValidator").isValid();
-            var message = document.createElement("p");
-            if(flag) {
-                message.innerText = "Wait for sending ...";
-                document.querySelector( "#send_message" ).appendChild(message);
-                axios({
-                    method: "POST",
-                    url: "https://tuantuango.herokuapp.com/sendMoney",
-                    withCredentials: true,
-                    data: {
-                        money: document.querySelector( "#nn" ).value
-                    }
-                }).then((res) => {
-                    if(res.data.success == false){
-                        alert('發生錯誤，加值失敗');
-                        throw new Error('send money failed');
-                    }
-                    document.querySelector( "#walletCash ").textContent = res.data.balance;
-                    document.querySelector( "#send_message" ).removeChild(message);
-                    $('#store').modal('hide');
-                    console.log(res);
-                }).catch((err) => {
-                    throw new Error(err);
-                })
-                console.log("send_money_post ",document.querySelector( "#nn" ).value);
-                // await t();
-            }
-            else{
-                message.innerText = "Invalid Number !";
-                console.log("money error");
+            if(mutex){
+                mutex = false;
+                var flag = $('#userForm').data("bootstrapValidator").isValid();
+                var message = document.createElement("p");
+                if(flag) {
+                    message.innerText = "Wait for sending ...";
+                    document.querySelector( "#send_message" ).appendChild(message);
+                    axios({
+                        method: "POST",
+                        url: "https://tuantuango.herokuapp.com/sendMoney",
+                        withCredentials: true,
+                        data: {
+                            money: document.querySelector( "#nn" ).value
+                        }
+                    }).then((res) => {
+                        if(res.data.success == false){
+                            alert('發生錯誤，加值失敗');
+                            throw new Error('send money failed');
+                        }
+                        alert('加值成功');
+                        document.querySelector( "#walletCash ").textContent = res.data.balance;
+                        document.querySelector( "#send_message" ).removeChild(message);
+                        $('#store').modal('hide');
+                        console.log(res);
+                    }).catch((err) => {
+                        throw new Error(err);
+                    })
+                    console.log("send_money_post ",document.querySelector( "#nn" ).value);
+                    // await t();
+                }
+                else{
+                    message.innerText = "Invalid Number !";
+                    console.log("money error");
+                }
+                mutex = true;
             }
         })
     }

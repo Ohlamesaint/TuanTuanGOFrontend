@@ -268,7 +268,7 @@ $(document).ready(function(){
                         alert('發生錯誤，加值失敗');
                         throw new Error('send money failed');
                     }
-                    document.querySelector( "#")
+                    document.querySelector( "#walletCash ").textContent = res.data.balance;
                     document.querySelector( "#send_message" ).removeChild(message);
                     $('#store').modal('hide');
                     console.log(res);

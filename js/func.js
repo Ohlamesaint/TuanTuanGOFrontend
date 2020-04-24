@@ -129,15 +129,6 @@ $(document).ready(function(){
                     $(cs).removeClass("fadeIn")
                 }
             }
-            
-            // var ch = middleWraps[i].children;
-            // let animateArray = Array.prototype.slice.call(animate);
-            // console.log(ch);
-            // var chArray = Array.from(ch);
-            // console.log(chArray)
-            // var list = animateArray.filter(ele => ch.include(ele));
-            // console.log(list);
-            // console.log(middleWraps[i])
             if(i != 2){
                 tl.pause();
             }
@@ -198,7 +189,6 @@ $(document).ready(function(){
                         console.log("money error");
                     }
                 })
-                //tl.set(['#block_chain > path:nth-child(1)', '#block_chain > path:nth-child(2)', '#block_chain > path:nth-child(3)', '#block_chain > path:nth-child(4)','#block_chain > path:nth-child(5)','#block_chain > path:nth-child(6)','#block_chain > path:nth-child(7)','#block_chain > path:nth-child(8)','#block_chain > path:nth-child(9)','#block_chain > path:nth-child(10)','#block_chain > path:nth-child(11)','#block_chain > path:nth-child(12)','#block_chain > path:nth-child(13)','#block_chain > path:nth-child(14)','#block_chain > path:nth-child(15)','#block_chain > path:nth-child(16)','#block_chain > path:nth-child(17)','#block_chain > path:nth-child(18)','#block_chain > path:nth-child(19)','#block_chain > path:nth-child(20)','#block_chain > path:nth-child(21)','#block_chain > path:nth-child(22)','#block_chain > path:nth-child(23)','#block_chain > path:nth-child(24)'], {clearProps: 'all'});
                 tl.resume();
             }
             else if(i == 1){
@@ -293,67 +283,6 @@ $(document).ready(function(){
                     }
                 });
             }
-            // <i class="fas ${belowBar[i].dataset.icon} mb-1 fa-1x"></i> |
-            // if(i == 1){                     //會員資料
-            //     axios({
-            //         method:"get",
-            //         withCredentials: true,
-            //         url:"https://tuantuango.herokuapp.com/signin",
-            //     }).then(res=>{
-            //         if(!res.data.signin){    //可以順便獲得會員profile
-            //             console.log(res);                                    
-            //             console.log("789");
-            //             setTimeout(() => {
-            //                 window.location.replace('./pages/login.html');
-            //             }, 1000);
-            //         }else{
-            //             console.log(res);
-            //             console.log("456");
-            //             window.location.replace('./pages/functions.html');
-            //         }
-            //     }).catch(err=>{
-            //         console.log("123")
-            //         console.log(err);
-            //     })
-            // }
-            // else if(i == 2){
-            //     //目前參與
-            
-            // }
-            // else if(i == 3){
-            //     //電子錢包
-            // }
-            // else if(i == 4){
-            //     //sns
-            // }
-            
         }, false)
     }
 })
-
-// belowBar[4].addEventListener("click", ()=>{
-//     axios({
-//         method:"get",
-//         withCredentials: true,
-//         url:"https://tuantuango.herokuapp.com/signin",
-//     }).then(res=>{
-//         if(!res.data.signin){    //可以順便獲得會員profile
-//             console.log(res);
-//             console.log("789");
-//             setTimeout(() => {
-//                 window.location.replace('./pages/login.html');
-//             }, );
-//         }else{
-//             console.log(res);
-//             // console.log("45612357464");
-//             // localStorage.setItem("target", 4)
-//             $(tuanGoer).addClass("tuanGoeranimate");
-//             tuanGoer.addEventListener("animationend", ()=>{
-//                 window.location.replace('./pages/tuanGo.html');
-//             })
-//         }
-//     }).catch(err=>{
-//         console.log("123")
-//         throw new Error(err);
-//     })
-// }, false)

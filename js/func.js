@@ -12,46 +12,72 @@ tl.staggerTo(['#block_chain > path:nth-child(1)', '#block_chain > path:nth-child
 tl.pause();
 let complete_list = [{
     name: "toilet",
+    img:"https://www.costco.com.tw/medias/sys_master/images/h19/hd6/11953562714142.jpg",
     count: 2,
     price: 30,
-    contract_address: 0x01
+    contract_address: 0x01,
+    TuanGOType:'unpack',
+    TotalAmount:12,
+    SoldAmounts:12,
+    ExpirationTime:1587743302000,
+    disccountPrice:60
 },{
     name: "wine",
+    img:"https://www.costco.com.tw/medias/sys_master/images/h06/hef/16020188528670.jpg",
     count: 2,
     price: 100,
-    contract_address: 0x02
-},{
-    name: "apple",
-    count: 2,
-    price: 69,
-    contract_address: 0x03
-},{
-    name: "orange",
-    count: 2,
-    price: 87,
-    contract_address: 0x04
+    contract_address: 0x02,
+    TuanGOType:'promote',
+    TotalAmount:5,
+    SoldAmounts:5,
+    ExpirationTime:1587513600000,
+    disccountPrice:250
 }
 ];
 let ongoing_list = [{
     name: "noodle",
+    img:"https://www.costco.com.tw/medias/sys_master/images/h83/h85/27140120117278.jpg",
     count: 2,
     price: 100,
-    contract_address: 0x06
+    contract_address: 0x06,
+    TuanGOType:'promote',
+    TotalAmount:12,
+    SoldAmounts:5,
+    ExpirationTime:1587743302000,
+    disccountPrice:100
 },{
     name: "cloth",
+    img:"https://www.costco.com.tw/medias/sys_master/images/ha5/hbc/26500719312926.jpg",
     count: 2,
     price: 69,
-    contract_address: 0x07
+    contract_address: 0x07,
+    TuanGOType:'unpack',
+    TotalAmount:2,
+    SoldAmounts:1,
+    ExpirationTime:1587743302000,
+    disccountPrice:99
 },{
     name: "brush",
+    img:"https://www.costco.com.tw/medias/sys_master/images/h44/he1/14072295915550.jpg",
     count: 2,
     price: 87,
-    contract_address: 0x08
+    contract_address: 0xa08,
+    TuanGOType:'unpack',
+    TotalAmount:6,
+    SoldAmounts:4,
+    ExpirationTime:1587743302000,
+    disccountPrice:87
 },{
     name: "bag",
+    img:"https://www.costco.com.tw/medias/sys_master/images/hc1/hb2/10151705411614.jpg",
     count: 2,
     price: 87,
-    contract_address: 0x08
+    contract_address: 0xd87,
+    TuanGOType:'promote',
+    TotalAmount:3,
+    SoldAmounts:1,
+    ExpirationTime:1587743302000,
+    disccountPrice:666
 }
 ];
 // function t(){
@@ -137,97 +163,154 @@ $(document).ready(function(){
                 }, );
             }else{
                 console.log("success");
-                console.log(res);
+                //console.log(res);
                 var target = document.querySelector( "#complete_list" );
+                var inx = 0;
                 complete_list.forEach(function(element, idx, array){
                     if (idx === array.length - 1){ 
-                        target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-last">
-                        <div class="card">
-                        <div class="card-body text-center">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                        <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
-                        <div class="colorgraph"></div>
-                        <div class="p-2 bd-highlight border bg-light">Commodity</div>
-                        <div class="p-2 bd-highlight">${element.name}</div>
-                        <div class="p-2 bd-highlight border bg-light">Amount</div>
-                        <div class="p-2 bd-highlight">${element.count}</div>
-                        <div class="p-2 bd-highlight border bg-light">Price</div>
-                        <div class="p-2 bd-highlight">${element.price}$</div>
-                        <div class="p-2 bd-highlight border bg-light">Contract Address</div>
-                        <div class="p-2 bd-highlight">${element.contract_address}</div>
-                        <div class="colorgraph"></div>
-                        </div>
-                        </div>
-                        </div>
+                        target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_complete">
+                            <div class="colorgraph"></div>
+                            <div class="card" data-toggle="modal" data-target="#productModal">
+                            <div class="text-center" style="padding-right: 1rem;">
+                            <div class="row" style="padding: 1rem;">
+                                <div class="col-4">
+                                    <img class="img-fluid w-100 h-100" src="${element.img}" alt="card image">
+                                </div>
+                                <div class="col-8">
+                                    <div class="row">
+                                        <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                                            Product Name
+                                        </div>
+                                        <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                                            ${element.name}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>  
+                            </div>
+                            <div class="colorgraph"></div>
                         </div>`
                     }
                     else{
-                        target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-top">
-                        <div class="card">
-                        <div class="card-body text-center">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                        <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
-                        <div class="colorgraph"></div>
-                        <div class="p-2 bd-highlight border bg-light">Commodity</div>
-                        <div class="p-2 bd-highlight">${element.name}</div>
-                        <div class="p-2 bd-highlight border bg-light">Amount</div>
-                        <div class="p-2 bd-highlight">${element.count}</div>
-                        <div class="p-2 bd-highlight border bg-light">Price</div>
-                        <div class="p-2 bd-highlight">${element.price}$</div>
-                        <div class="p-2 bd-highlight border bg-light">Contract Address</div>
-                        <div class="p-2 bd-highlight">${element.contract_address}</div>
-                        <div class="colorgraph"></div>
-                        </div>
-                        </div>
-                        </div>
+                        target.innerHTML += `<div class="mb-4 joinlist_complete">
+                            <div class="colorgraph"></div>
+                            <div class="card" data-toggle="modal" data-target="#productModal">
+                            <div class="text-center" style="padding-right: 1rem;">
+                            <div class="row" style="padding: 1rem;">
+                                <div class="col-4">
+                                    <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
+                                </div>
+                                <div class="col-8">
+                                    <div class="row">
+                                        <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                                            Product Name
+                                        </div>
+                                        <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                                            ${element.name}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>  
+                            </div>
+                            <div class="colorgraph"></div>
                         </div>`
                     }
                 });
+                let cardList = document.querySelectorAll('.joinlist_complete');
+                for(let i=0; i<cardList.length; i++){
+                    $(cardList[i]).on('click', (e)=>{      //注意id綁定不包含0x
+                        e.preventDefault();
+                        document.querySelector("#JoinTuanGOProductName").textContent = complete_list[i].name;
+                        document.querySelector("#ProductImg").src = complete_list[i].img;
+                        document.querySelector("#JoinTuanGOTuanGOType").textContent = complete_list[i].TuanGOType?'unpack':'promote';
+                        document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(complete_list[i].ExpirationTime).toString().slice(0, 24);
+                        document.querySelector("#JoinTuanGOCost").textContent = complete_list[i].disccountPrice +　"$ /per";
+                        var num = 0;
+                        var TuanGOerLine = "";
+                        num = complete_list[i].SoldAmounts;
+                        localStorage.setItem('unsoldProductAmount', complete_list[i].TotalAmount-num);
+                        for(let j=0; j<complete_list[i].TotalAmount; j++){
+                            if(j<num) TuanGOerLine += '<i class="fas fa-user"></i>';
+                            else TuanGOerLine += '<i class="far fa-user"></i>';
+                        }
+                        document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + complete_list[i].TotalAmount;
+                    })
+                };
                 target = document.querySelector( "#ongoing_list" );
                 ongoing_list.forEach(function(element, idx, array){
-                    if (idx === array.length - 1){ 
-                        target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-last">
-                        <div class="card">
-                        <div class="card-body text-center">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                        <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
-                        <div class="colorgraph"></div>
-                        <div class="p-2 bd-highlight border bg-light">Commodity</div>
-                        <div class="p-2 bd-highlight">${element.name}</div>
-                        <div class="p-2 bd-highlight border bg-light">Amount</div>
-                        <div class="p-2 bd-highlight">${element.count}</div>
-                        <div class="p-2 bd-highlight border bg-light">Price</div>
-                        <div class="p-2 bd-highlight">${element.price}$</div>
-                        <div class="p-2 bd-highlight border bg-light">Contract Address</div>
-                        <div class="p-2 bd-highlight">${element.contract_address}</div>
-                        <div class="colorgraph"></div>
-                        </div>
-                        </div>
-                        </div>
+                    if (idx === array.length - 1){
+                        target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_ongoing">
+                            <div class="colorgraph"></div>
+                            <div class="card" data-toggle="modal" data-target="#productModal">
+                            <div class="text-center" style="padding-right: 1rem;">
+                            <div class="row" style="padding: 1rem;">
+                                <div class="col-4">
+                                    <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
+                                </div>
+                                <div class="col-8">
+                                    <div class="row">
+                                        <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                                            Product Name
+                                        </div>
+                                        <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                                            ${element.name}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>  
+                            </div>
+                            <div class="colorgraph"></div>
                         </div>`
                     }
                     else{
-                        target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-top">
-                        <div class="card">
-                        <div class="card-body text-center">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                        <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
+                        target.innerHTML += `<div class="mb-4 joinlist_ongoing">
                         <div class="colorgraph"></div>
-                        <div class="p-2 bd-highlight border bg-light">Commodity</div>
-                        <div class="p-2 bd-highlight">${element.name}</div>
-                        <div class="p-2 bd-highlight border bg-light">Amount</div>
-                        <div class="p-2 bd-highlight">${element.count}</div>
-                        <div class="p-2 bd-highlight border bg-light">Price</div>
-                        <div class="p-2 bd-highlight">${element.price}$</div>
-                        <div class="p-2 bd-highlight border bg-light">Contract Address</div>
-                        <div class="p-2 bd-highlight">${element.contract_address}</div>
+                        <div class="card" data-toggle="modal" data-target="#productModal">
+                        <div class="text-center" style="padding-right: 1rem;">
+                        <div class="row" style="padding: 1rem;">
+                            <div class="col-4">
+                                <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
+                            </div>
+                            <div class="col-8">
+                                <div class="row">
+                                    <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                                        Product Name
+                                    </div>
+                                    <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                                        ${element.name}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>  
+                        </div>
                         <div class="colorgraph"></div>
-                        </div>
-                        </div>
-                        </div>
-                        </div>`
+                    </div>`
                     }
-                });
+                    let cardList2 = document.querySelectorAll('.joinlist_ongoing');
+                    for(let i=0; i<cardList2.length; i++){
+                        $(cardList2[i]).on('click', (e)=>{      //注意id綁定不包含0x
+                            e.preventDefault();
+                            document.querySelector("#JoinTuanGOProductName").textContent = ongoing_list[i].name;
+                            document.querySelector("#ProductImg").src = ongoing_list[i].img;
+                            document.querySelector("#JoinTuanGOTuanGOType").textContent = ongoing_list[i].TuanGOType?'unpack':'promote';
+                            document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(ongoing_list[i].ExpirationTime).toString().slice(0, 24);
+                            document.querySelector("#JoinTuanGOCost").textContent = ongoing_list[i].disccountPrice +　"$ /per";
+                            var num = 0;
+                            var TuanGOerLine = "";
+                            num = ongoing_list[i].SoldAmounts;
+                            localStorage.setItem('unsoldProductAmount', ongoing_list[i].TotalAmount-num);
+                            for(let j=0; j<ongoing_list[i].TotalAmount; j++){
+                                if(j<num) TuanGOerLine += '<i class="fas fa-user"></i>';
+                                else TuanGOerLine += '<i class="far fa-user"></i>';
+                            }
+                            document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + ongoing_list[i].TotalAmount;
+                        })
+                    };
+                })
             }
         }).catch(err=>{
             throw new Error(err);
@@ -434,95 +517,152 @@ $(document).ready(function(){
                 console.log("success");
                 //console.log(res);
                 var target = document.querySelector( "#complete_list" );
+                var inx = 0;
                 complete_list.forEach(function(element, idx, array){
                     if (idx === array.length - 1){ 
-                        target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-last">
-                        <div class="card">
-                        <div class="card-body text-center">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                        <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
-                        <div class="colorgraph"></div>
-                        <div class="p-2 bd-highlight border bg-light">Commodity</div>
-                        <div class="p-2 bd-highlight">${element.name}</div>
-                        <div class="p-2 bd-highlight border bg-light">Amount</div>
-                        <div class="p-2 bd-highlight">${element.count}</div>
-                        <div class="p-2 bd-highlight border bg-light">Price</div>
-                        <div class="p-2 bd-highlight">${element.price}$</div>
-                        <div class="p-2 bd-highlight border bg-light">Contract Address</div>
-                        <div class="p-2 bd-highlight">${element.contract_address}</div>
-                        <div class="colorgraph"></div>
-                        </div>
-                        </div>
-                        </div>
+                        target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_complete">
+                            <div class="colorgraph"></div>
+                            <div class="card" data-toggle="modal" data-target="#productModal">
+                            <div class="text-center" style="padding-right: 1rem;">
+                            <div class="row" style="padding: 1rem;">
+                                <div class="col-4">
+                                    <img class="img-fluid w-100 h-100" src="${element.img}" alt="card image">
+                                </div>
+                                <div class="col-8">
+                                    <div class="row">
+                                        <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                                            Product Name
+                                        </div>
+                                        <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                                            ${element.name}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>  
+                            </div>
+                            <div class="colorgraph"></div>
                         </div>`
                     }
                     else{
-                        target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-top">
-                        <div class="card">
-                        <div class="card-body text-center">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                        <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
-                        <div class="colorgraph"></div>
-                        <div class="p-2 bd-highlight border bg-light">Commodity</div>
-                        <div class="p-2 bd-highlight">${element.name}</div>
-                        <div class="p-2 bd-highlight border bg-light">Amount</div>
-                        <div class="p-2 bd-highlight">${element.count}</div>
-                        <div class="p-2 bd-highlight border bg-light">Price</div>
-                        <div class="p-2 bd-highlight">${element.price}$</div>
-                        <div class="p-2 bd-highlight border bg-light">Contract Address</div>
-                        <div class="p-2 bd-highlight">${element.contract_address}</div>
-                        <div class="colorgraph"></div>
-                        </div>
-                        </div>
-                        </div>
+                        target.innerHTML += `<div class="mb-4 joinlist_complete">
+                            <div class="colorgraph"></div>
+                            <div class="card" data-toggle="modal" data-target="#productModal">
+                            <div class="text-center" style="padding-right: 1rem;">
+                            <div class="row" style="padding: 1rem;">
+                                <div class="col-4">
+                                    <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
+                                </div>
+                                <div class="col-8">
+                                    <div class="row">
+                                        <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                                            Product Name
+                                        </div>
+                                        <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                                            ${element.name}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>  
+                            </div>
+                            <div class="colorgraph"></div>
                         </div>`
                     }
                 });
+                let cardList = document.querySelectorAll('.joinlist_complete');
+                for(let i=0; i<cardList.length; i++){
+                    $(cardList[i]).on('click', (e)=>{      //注意id綁定不包含0x
+                        e.preventDefault();
+                        document.querySelector("#JoinTuanGOProductName").textContent = complete_list[i].name;
+                        document.querySelector("#ProductImg").src = complete_list[i].img;
+                        document.querySelector("#JoinTuanGOTuanGOType").textContent = complete_list[i].TuanGOType?'unpack':'promote';
+                        document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(complete_list[i].ExpirationTime).toString().slice(0, 24);
+                        document.querySelector("#JoinTuanGOCost").textContent = complete_list[i].disccountPrice +　"$ /per";
+                        var num = 0;
+                        var TuanGOerLine = "";
+                        num = complete_list[i].SoldAmounts;
+                        localStorage.setItem('unsoldProductAmount', complete_list[i].TotalAmount-num);
+                        for(let j=0; j<complete_list[i].TotalAmount; j++){
+                            if(j<num) TuanGOerLine += '<i class="fas fa-user"></i>';
+                            else TuanGOerLine += '<i class="far fa-user"></i>';
+                        }
+                        document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + complete_list[i].TotalAmount;
+                    })
+                };
                 target = document.querySelector( "#ongoing_list" );
                 ongoing_list.forEach(function(element, idx, array){
-                    if (idx === array.length - 1){ 
-                        target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-last">
-                        <div class="card">
-                        <div class="card-body text-center">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                        <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
-                        <div class="colorgraph"></div>
-                        <div class="p-2 bd-highlight border bg-light">Commodity</div>
-                        <div class="p-2 bd-highlight">${element.name}</div>
-                        <div class="p-2 bd-highlight border bg-light">Amount</div>
-                        <div class="p-2 bd-highlight">${element.count}</div>
-                        <div class="p-2 bd-highlight border bg-light">Price</div>
-                        <div class="p-2 bd-highlight">${element.price}$</div>
-                        <div class="p-2 bd-highlight border bg-light">Contract Address</div>
-                        <div class="p-2 bd-highlight">${element.contract_address}</div>
-                        <div class="colorgraph"></div>
-                        </div>
-                        </div>
-                        </div>
+                    if (idx === array.length - 1){
+                        target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_ongoing">
+                            <div class="colorgraph"></div>
+                            <div class="card" data-toggle="modal" data-target="#productModal">
+                            <div class="text-center" style="padding-right: 1rem;">
+                            <div class="row" style="padding: 1rem;">
+                                <div class="col-4">
+                                    <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
+                                </div>
+                                <div class="col-8">
+                                    <div class="row">
+                                        <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                                            Product Name
+                                        </div>
+                                        <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                                            ${element.name}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>  
+                            </div>
+                            <div class="colorgraph"></div>
                         </div>`
                     }
                     else{
-                        target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-top">
-                        <div class="card">
-                        <div class="card-body text-center">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                        <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
+                        target.innerHTML += `<div class="mb-4 joinlist_ongoing">
                         <div class="colorgraph"></div>
-                        <div class="p-2 bd-highlight border bg-light">Commodity</div>
-                        <div class="p-2 bd-highlight">${element.name}</div>
-                        <div class="p-2 bd-highlight border bg-light">Amount</div>
-                        <div class="p-2 bd-highlight">${element.count}</div>
-                        <div class="p-2 bd-highlight border bg-light">Price</div>
-                        <div class="p-2 bd-highlight">${element.price}$</div>
-                        <div class="p-2 bd-highlight border bg-light">Contract Address</div>
-                        <div class="p-2 bd-highlight">${element.contract_address}</div>
+                        <div class="card" data-toggle="modal" data-target="#productModal">
+                        <div class="text-center" style="padding-right: 1rem;">
+                        <div class="row" style="padding: 1rem;">
+                            <div class="col-4">
+                                <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
+                            </div>
+                            <div class="col-8">
+                                <div class="row">
+                                    <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                                        Product Name
+                                    </div>
+                                    <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                                        ${element.name}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>  
+                        </div>
                         <div class="colorgraph"></div>
-                        </div>
-                        </div>
-                        </div>
-                        </div>`
+                    </div>`
                     }
-                });
+                    let cardList2 = document.querySelectorAll('.joinlist_ongoing');
+                    for(let i=0; i<cardList2.length; i++){
+                        $(cardList2[i]).on('click', (e)=>{      //注意id綁定不包含0x
+                            e.preventDefault();
+                            document.querySelector("#JoinTuanGOProductName").textContent = ongoing_list[i].name;
+                            document.querySelector("#ProductImg").src = ongoing_list[i].img;
+                            document.querySelector("#JoinTuanGOTuanGOType").textContent = ongoing_list[i].TuanGOType?'unpack':'promote';
+                            document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(ongoing_list[i].ExpirationTime).toString().slice(0, 24);
+                            document.querySelector("#JoinTuanGOCost").textContent = ongoing_list[i].disccountPrice +　"$ /per";
+                            var num = 0;
+                            var TuanGOerLine = "";
+                            num = ongoing_list[i].SoldAmounts;
+                            localStorage.setItem('unsoldProductAmount', ongoing_list[i].TotalAmount-num);
+                            for(let j=0; j<ongoing_list[i].TotalAmount; j++){
+                                if(j<num) TuanGOerLine += '<i class="fas fa-user"></i>';
+                                else TuanGOerLine += '<i class="far fa-user"></i>';
+                            }
+                            document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + ongoing_list[i].TotalAmount;
+                        })
+                    };
+                })
             }
         }, false)
     }

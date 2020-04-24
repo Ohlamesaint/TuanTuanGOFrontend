@@ -380,7 +380,7 @@ $(document).ready(function(){
                 })
                 */
                console.log("success");
-                        console.log(res);
+                        //console.log(res);
                         var target = document.querySelector( "#complete_list" );
                         complete_list.forEach(function(element, idx, array){
                             if (idx === array.length - 1){ 

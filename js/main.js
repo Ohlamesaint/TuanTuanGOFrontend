@@ -198,7 +198,7 @@ $(document).ready(function(){
                         amount: document.querySelector("#TuanGOerPurchaseAmountInPromote").value,
                     }
                 }).then((res)=>{
-                    $('.alert').alert()
+                    alert("JOIN TUANGO SUCCESS");
                     setTimeout(()=>{
                         window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html")
                     }, 3000);

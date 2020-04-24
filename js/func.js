@@ -65,7 +65,7 @@ let ongoing_list = [{
 // }
 // })}
 $(document).ready(function(){
-    var targetPage = localStorage.getItem("target");
+    var targetPage = 0;//localStorage.getItem("target");
     $(belowBar[targetPage]).addClass("actived");
     $(belowBar[targetPage]).children().addClass("actived-word");
     title.innerHTML=`
@@ -78,14 +78,17 @@ $(document).ready(function(){
         window.location.replace('../main.html');
     })
     let init = middleWrapRowList[targetPage].children;
+    console.log(init);
     $(init).addClass("fadeIn");
-    
+
+
     if(targetPage == 0){     //my profile 利用req.session來查詢並獲得
         axios({
             method: "GET",
             url: "https://tuantuango.herokuapp.com/profile",
             withCredentials: true,
         }).then(res=>{
+            
             if(!res.data.signin){    //做保險
                 console.log(res);
                 console.log("789");
@@ -93,6 +96,7 @@ $(document).ready(function(){
                     window.location.replace('./login.html');
                 }, );
             }else{
+                
                 console.log(res.data.headPaste);
                 console.log(res);
                 document.querySelector("#user").textContent = res.data.user;
@@ -238,7 +242,8 @@ $(document).ready(function(){
             }else{
                 console.log("success");
                 console.log(res);
-                document.addEventListener("#walletCash").textContent = res.data.walletCash
+                document.querySelector("#walletCash").textContent = "Balance : " + res.data.balance;
+                document.querySelector("#accounthere").textContent = "Account : " + res.data.account;
                 $('#userForm').bootstrapValidator();
                 // tl.resume();
             }
@@ -283,6 +288,7 @@ $(document).ready(function(){
     }
     for(let i=0; i<belowBar.length-1; i++){
         belowBar[i].addEventListener("click", (e)=>{
+            
             $(belowBar[i]).siblings().removeClass("actived");
             $(belowBar[i]).siblings().children().removeClass("actived-word");
             $(belowBar[i]).siblings().children().css("color", "gray");
@@ -318,6 +324,7 @@ $(document).ready(function(){
                     url: "https://tuantuango.herokuapp.com/profile",
                     withCredentials: true,
                 }).then(res=>{
+                    
                     if(!res.data.signin){    //做保險
                         console.log(res);
                         console.log("789");
@@ -341,7 +348,7 @@ $(document).ready(function(){
             else if(i == 2){
                 axios({
                     method: "GET",
-                    url: "https://tuantuango.herokuapp.com/profile",
+                    url: "https://tuantuango.herokuapp.com/userWallet",
                     withCredentials: true,
                 }).then(res=>{
                     if(!res.data.signin){    //做保險
@@ -352,32 +359,35 @@ $(document).ready(function(){
                     }else{
                         console.log("success");
                         console.log(res);
+                        document.querySelector("#walletCash").textContent = "Balance : " + res.data.balance;
+                        document.querySelector("#accounthere").textContent = "Account : " + res.data.account;
                         $('#userForm').bootstrapValidator();
-                        document.querySelector( "#money_send" ).addEventListener("click", async()=>{
-                            var flag = $('#userForm').data("bootstrapValidator").isValid();
-                            if(flag) {
-                                console.log("send_money_post ",document.querySelector( "#nn" ).value);
-                                var message = document.createElement("p");
-                                message.innerText = "Wait for sending ...";
-                                document.querySelector( "#send_message" ).appendChild(message);
-                                await t();
-                                document.querySelector( "#send_message" ).removeChild(message);
-                                $('#store').modal('hide');
-                            }
-                            else{
-                                console.log("money error");
-                            }
-                        })
                         tl.resume();
                     }
                 }).catch(err=>{
                     throw new Error(err);
                 })
+                document.querySelector( "#money_send" ).addEventListener("click", async()=>{
+                    var flag = $('#userForm').data("bootstrapValidator").isValid();
+                    if(flag) {
+                        console.log("send_money_post ",document.querySelector( "#nn" ).value);
+                        var message = document.createElement("p");
+                        message.innerText = "Wait for sending ...";
+                        document.querySelector( "#send_message" ).appendChild(message);
+                        await t();
+                        document.querySelector( "#send_message" ).removeChild(message);
+                        $('#store').modal('hide');
+                    }
+                    else{
+                        console.log("money error");
+                    }
+                })
             }
             else if(i == 1){
+                /*
                 axios({
                     method: "GET",
-                    url: "https://tuantuango.herokuapp.com/profile",
+                    url: "https://tuantuango.herokuapp.com/userTuangoList",
                     withCredentials: true,
                 }).then(res=>{
                     if(!res.data.signin){    //做保險
@@ -387,8 +397,14 @@ $(document).ready(function(){
                             window.location.replace('./login.html');
                         }, );
                     }else{
-                        console.log("success");
-                        console.log(res);
+                        
+                    }
+                }).catch(err=>{
+                    throw new Error(err);
+                })
+                */
+               console.log("success");
+                        //console.log(res);
                         var target = document.querySelector( "#complete_list" );
                         complete_list.forEach(function(element, idx, array){
                             if (idx === array.length - 1){ 
@@ -479,10 +495,6 @@ $(document).ready(function(){
                             </div>`
                             }
                         });
-                    }
-                }).catch(err=>{
-                    throw new Error(err);
-                })
             }
         }, false)
     }

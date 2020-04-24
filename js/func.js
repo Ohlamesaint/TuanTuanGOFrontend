@@ -467,36 +467,42 @@ $(document).ready(function(){
                     throw new Error(err);
                 })
                 document.querySelector( "#money_send" ).addEventListener("click", async()=>{
-                    var flag = $('#userForm').data("bootstrapValidator").isValid();
-                    var message = document.createElement("p");
-                    if(flag) {
-                        message.innerText = "Wait for sending ...";
-                        document.querySelector( "#send_message" ).appendChild(message);
-                        axios({
-                            method: "POST",
-                            url: "https://tuantuango.herokuapp.com/sendMoney",
-                            withCredentials: true,
-                            data: {
-                                money: document.querySelector( "#nn" ).value
-                            }
-                        }).then((res) => {
-                            if(res.data.success == false){
-                                alert('發生錯誤，加值失敗');
-                                throw new Error('send money failed');
-                            }
-                            document.querySelector( "#walletCash ").textContent = res.data.balance;
-                            document.querySelector( "#send_message" ).removeChild(message);
-                            $('#store').modal('hide');
-                            console.log(res);
-                        }).catch((err) => {
-                            throw new Error(err);
-                        })
-                        console.log("send_money_post ",document.querySelector( "#nn" ).value);
-                        // await t();
-                    }
-                    else{
-                        message.innerText = "Invalid Number !";
-                        console.log("money error");
+                    if(mutex){
+                        document.querySelector( "#money_send" ).disabled = true;
+                        var flag = $('#userForm').data("bootstrapValidator").isValid();
+                        var message = document.createElement("p");
+                        if(flag) {
+                            message.innerText = "Wait for sending ...";
+                            document.querySelector( "#send_message" ).appendChild(message);
+                            axios({
+                                method: "POST",
+                                url: "https://tuantuango.herokuapp.com/sendMoney",
+                                withCredentials: true,
+                                data: {
+                                    money: document.querySelector( "#nn" ).value
+                                }
+                            }).then((res) => {
+                                if(res.data.success == false){
+                                    alert('發生錯誤，加值失敗');
+                                    throw new Error('send money failed');
+                                }
+                                alert('加值成功');
+                                document.querySelector( "#walletCash ").textContent = res.data.balance;
+                                document.querySelector( "#send_message" ).removeChild(message);
+                                $('#store').modal('hide');
+                                console.log(res);
+                            }).catch((err) => {
+                                throw new Error(err);
+                            })
+                            console.log("send_money_post ",document.querySelector( "#nn" ).value);
+                            // await t();
+                        }
+                        else{
+                            message.innerText = "Invalid Number !";
+                            console.log("money error");
+                        }
+                        mutex = true;
+                        document.querySelector( "#money_send" ).disabled = false;
                     }
                 })
             }

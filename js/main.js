@@ -179,6 +179,7 @@ $(document).ready(function(){
                     document.querySelector("#footerInJoin").classList.add('show');
                     document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", (event)=>{
                         event.preventDefault();
+                        event.stopPropagation();
                         axios({
                             method: "post",
                             url: "https://tuantuango.herokuapp.com/join",

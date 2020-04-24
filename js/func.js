@@ -323,7 +323,7 @@ $(document).ready(function(){
             else if(i == 2){
                 axios({
                     method: "GET",
-                    url: "https://tuantuango.herokuapp.com/profile",
+                    url: "https://tuantuango.herokuapp.com/userWallet",
                     withCredentials: true,
                 }).then(res=>{
                     if(!res.data.signin){    //做保險
@@ -359,7 +359,7 @@ $(document).ready(function(){
             else if(i == 1){
                 axios({
                     method: "GET",
-                    url: "https://tuantuango.herokuapp.com/profile",
+                    url: "https://tuantuango.herokuapp.com/userTuangoList",
                     withCredentials: true,
                 }).then(res=>{
                     if(!res.data.signin){    //做保險

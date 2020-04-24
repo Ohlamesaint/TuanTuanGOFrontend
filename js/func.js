@@ -276,7 +276,7 @@ $(document).ready(function(){
                     throw new Error(err);
                 })
                 console.log("send_money_post ",document.querySelector( "#nn" ).value);
-                await t();
+                // await t();
             }
             else{
                 message.innerText = "Invalid Number !";

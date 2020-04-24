@@ -360,6 +360,7 @@ $(document).ready(function(){
                 })
             }
             else if(i == 1){
+                /*
                 axios({
                     method: "GET",
                     url: "https://tuantuango.herokuapp.com/userTuangoList",
@@ -372,7 +373,13 @@ $(document).ready(function(){
                             window.location.replace('./login.html');
                         }, );
                     }else{
-                        console.log("success");
+                        
+                    }
+                }).catch(err=>{
+                    throw new Error(err);
+                })
+                */
+               console.log("success");
                         console.log(res);
                         var target = document.querySelector( "#complete_list" );
                         complete_list.forEach(function(element, idx, array){
@@ -464,10 +471,6 @@ $(document).ready(function(){
                             </div>`
                             }
                         });
-                    }
-                }).catch(err=>{
-                    throw new Error(err);
-                })
             }
         }, false)
     }

@@ -151,6 +151,7 @@ $(document).ready(function(){
         document.querySelector("#TuanGOerJoinPageWrap").classList.add('show');
     })
     document.querySelector("#TuanGOerPurchaseAmountInUnpack").addEventListener("change", ()=>{
+        let TuanGOInform = JSON.parse(localStorage.getItem("TuanGOInform"));
         if(!checkNum(document.querySelector("#TuanGOerPurchaseAmountInUnpack").value, JSON.parse(localStorage.getItem('unsoldProductAmount')))){
             document.querySelector("#unpackedWarningText").textContent = 'invalid number!'
             document.querySelector("#footerInJoin").classList.remove('show')
@@ -178,6 +179,7 @@ $(document).ready(function(){
         }
     })
     document.querySelector("#TuanGOerPurchaseAmountInPromote").addEventListener("change", ()=>{
+        let TuanGOInform = JSON.parse(localStorage.getItem("TuanGOInform"));
         if(!checkNum(document.querySelector("#TuanGOerPurchaseAmountInPromote").value, JSON.parse(localStorage.getItem('unsoldProductAmount')))){
             document.querySelector("#unpackedWarningText").textContent = 'invalid number!'
             document.querySelector("#footerInJoin").classList.remove('show')

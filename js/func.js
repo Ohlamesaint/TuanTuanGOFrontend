@@ -340,6 +340,7 @@ $(document).ready(function(){
         })
         document.querySelector( "#money_send" ).addEventListener("click", async()=>{
             if(mutex){
+                document.querySelector( "#money_send" ).disabled = true;
                 mutex = false;
                 var flag = $('#userForm').data("bootstrapValidator").isValid();
                 var message = document.createElement("p");
@@ -374,6 +375,7 @@ $(document).ready(function(){
                     console.log("money error");
                 }
                 mutex = true;
+                document.querySelector( "#money_send" ).disabled = false;
             }
         })
     }

@@ -54,6 +54,16 @@ let ongoing_list = [{
     contract_address: 0x08
 }
 ];
+function t(){
+    return new Promise((resolve, reject) => {
+        // 傳入 resolve 與 reject，表示資料成功與失敗
+        if (true) {
+        setTimeout(function () {
+            // 3 秒時間後，透過 resolve 來表示完成
+            resolve();
+    }, 3000);
+}
+})}
 $(document).ready(function(){
     var targetPage = localStorage.getItem("target");
     $(belowBar[targetPage]).addClass("actived");
@@ -163,125 +173,150 @@ $(document).ready(function(){
                 })
             }
             else if(i == 2){
-                $('#userForm').bootstrapValidator();
-                function t(){
-                    return new Promise((resolve, reject) => {
-                        // 傳入 resolve 與 reject，表示資料成功與失敗
-                        if (true) {
-                          setTimeout(function () {
-                            // 3 秒時間後，透過 resolve 來表示完成
-                            resolve();
-                    }, 3000);
-                }
-                })}
-                document.querySelector( "#money_send" ).addEventListener("click", async()=>{
-                    var flag = $('#userForm').data("bootstrapValidator").isValid();
-                    if(flag) {
-                        console.log("send_money_post ",document.querySelector( "#nn" ).value);
-                        var message = document.createElement("p");
-                        message.innerText = "Wait for sending ...";
-                        document.querySelector( "#send_message" ).appendChild(message);
-                        await t();
-                        document.querySelector( "#send_message" ).removeChild(message);
-                        $('#store').modal('hide');
+                axios({
+                    method: "GET",
+                    url: "https://tuantuango.herokuapp.com/profile",
+                    withCredentials: true,
+                }).then(res=>{
+                    if(!res.data.signin){    //做保險
+                        console.log(res);
+                        setTimeout(() => {
+                            window.location.replace('./login.html');
+                        }, );
+                    }else{
+                        console.log("success");
+                        console.log(res);
+                        $('#userForm').bootstrapValidator();
+                        document.querySelector( "#money_send" ).addEventListener("click", async()=>{
+                            var flag = $('#userForm').data("bootstrapValidator").isValid();
+                            if(flag) {
+                                console.log("send_money_post ",document.querySelector( "#nn" ).value);
+                                var message = document.createElement("p");
+                                message.innerText = "Wait for sending ...";
+                                document.querySelector( "#send_message" ).appendChild(message);
+                                await t();
+                                document.querySelector( "#send_message" ).removeChild(message);
+                                $('#store').modal('hide');
+                            }
+                            else{
+                                console.log("money error");
+                            }
+                        })
+                        tl.resume();
                     }
-                    else{
-                        console.log("money error");
-                    }
+                }).catch(err=>{
+                    throw new Error(err);
                 })
-                tl.resume();
             }
             else if(i == 1){
-                var target = document.querySelector( "#complete_list" );
-                complete_list.forEach(function(element, idx, array){
-                    if (idx === array.length - 1){ 
-                        target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-last">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <div class="d-flex flex-column bd-highlight mb-3">
-                                    <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
-                                    <div class="colorgraph"></div>
-                                    <div class="p-2 bd-highlight border bg-light">Commodity</div>
-                                    <div class="p-2 bd-highlight">${element.name}</div>
-                                    <div class="p-2 bd-highlight border bg-light">Amount</div>
-                                    <div class="p-2 bd-highlight">${element.count}</div>
-                                    <div class="p-2 bd-highlight border bg-light">Price</div>
-                                    <div class="p-2 bd-highlight">${element.price}$</div>
-                                    <div class="p-2 bd-highlight border bg-light">Contract Address</div>
-                                    <div class="p-2 bd-highlight">${element.contract_address}</div>
-                                    <div class="colorgraph"></div>
-                                  </div>
-                            </div>
-                        </div>
-                    </div>`
+                axios({
+                    method: "GET",
+                    url: "https://tuantuango.herokuapp.com/profile",
+                    withCredentials: true,
+                }).then(res=>{
+                    if(!res.data.signin){    //做保險
+                        console.log(res);
+                        console.log("789");
+                        setTimeout(() => {
+                            window.location.replace('./login.html');
+                        }, );
+                    }else{
+                        console.log("success");
+                        console.log(res);
+                        var target = document.querySelector( "#complete_list" );
+                        complete_list.forEach(function(element, idx, array){
+                            if (idx === array.length - 1){ 
+                                target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-last">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <div class="d-flex flex-column bd-highlight mb-3">
+                                            <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
+                                            <div class="colorgraph"></div>
+                                            <div class="p-2 bd-highlight border bg-light">Commodity</div>
+                                            <div class="p-2 bd-highlight">${element.name}</div>
+                                            <div class="p-2 bd-highlight border bg-light">Amount</div>
+                                            <div class="p-2 bd-highlight">${element.count}</div>
+                                            <div class="p-2 bd-highlight border bg-light">Price</div>
+                                            <div class="p-2 bd-highlight">${element.price}$</div>
+                                            <div class="p-2 bd-highlight border bg-light">Contract Address</div>
+                                            <div class="p-2 bd-highlight">${element.contract_address}</div>
+                                            <div class="colorgraph"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`
+                            }
+                            else{
+                                target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-top">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <div class="d-flex flex-column bd-highlight mb-3">
+                                            <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
+                                            <div class="colorgraph"></div>
+                                            <div class="p-2 bd-highlight border bg-light">Commodity</div>
+                                            <div class="p-2 bd-highlight">${element.name}</div>
+                                            <div class="p-2 bd-highlight border bg-light">Amount</div>
+                                            <div class="p-2 bd-highlight">${element.count}</div>
+                                            <div class="p-2 bd-highlight border bg-light">Price</div>
+                                            <div class="p-2 bd-highlight">${element.price}$</div>
+                                            <div class="p-2 bd-highlight border bg-light">Contract Address</div>
+                                            <div class="p-2 bd-highlight">${element.contract_address}</div>
+                                            <div class="colorgraph"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`
+                            }
+                        });
+                        target = document.querySelector( "#ongoing_list" );
+                        ongoing_list.forEach(function(element, idx, array){
+                            if (idx === array.length - 1){ 
+                                target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-last">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <div class="d-flex flex-column bd-highlight mb-3">
+                                            <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
+                                            <div class="colorgraph"></div>
+                                            <div class="p-2 bd-highlight border bg-light">Commodity</div>
+                                            <div class="p-2 bd-highlight">${element.name}</div>
+                                            <div class="p-2 bd-highlight border bg-light">Amount</div>
+                                            <div class="p-2 bd-highlight">${element.count}</div>
+                                            <div class="p-2 bd-highlight border bg-light">Price</div>
+                                            <div class="p-2 bd-highlight">${element.price}$</div>
+                                            <div class="p-2 bd-highlight border bg-light">Contract Address</div>
+                                            <div class="p-2 bd-highlight">${element.contract_address}</div>
+                                            <div class="colorgraph"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`
+                            }
+                            else{
+                                target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-top">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <div class="d-flex flex-column bd-highlight mb-3">
+                                            <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
+                                            <div class="colorgraph"></div>
+                                            <div class="p-2 bd-highlight border bg-light">Commodity</div>
+                                            <div class="p-2 bd-highlight">${element.name}</div>
+                                            <div class="p-2 bd-highlight border bg-light">Amount</div>
+                                            <div class="p-2 bd-highlight">${element.count}</div>
+                                            <div class="p-2 bd-highlight border bg-light">Price</div>
+                                            <div class="p-2 bd-highlight">${element.price}$</div>
+                                            <div class="p-2 bd-highlight border bg-light">Contract Address</div>
+                                            <div class="p-2 bd-highlight">${element.contract_address}</div>
+                                            <div class="colorgraph"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`
+                            }
+                        });
                     }
-                    else{
-                        target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-top">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <div class="d-flex flex-column bd-highlight mb-3">
-                                    <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
-                                    <div class="colorgraph"></div>
-                                    <div class="p-2 bd-highlight border bg-light">Commodity</div>
-                                    <div class="p-2 bd-highlight">${element.name}</div>
-                                    <div class="p-2 bd-highlight border bg-light">Amount</div>
-                                    <div class="p-2 bd-highlight">${element.count}</div>
-                                    <div class="p-2 bd-highlight border bg-light">Price</div>
-                                    <div class="p-2 bd-highlight">${element.price}$</div>
-                                    <div class="p-2 bd-highlight border bg-light">Contract Address</div>
-                                    <div class="p-2 bd-highlight">${element.contract_address}</div>
-                                    <div class="colorgraph"></div>
-                                  </div>
-                            </div>
-                        </div>
-                    </div>`
-                    }
-                });
-                target = document.querySelector( "#ongoing_list" );
-                ongoing_list.forEach(function(element, idx, array){
-                    if (idx === array.length - 1){ 
-                        target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-last">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <div class="d-flex flex-column bd-highlight mb-3">
-                                    <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
-                                    <div class="colorgraph"></div>
-                                    <div class="p-2 bd-highlight border bg-light">Commodity</div>
-                                    <div class="p-2 bd-highlight">${element.name}</div>
-                                    <div class="p-2 bd-highlight border bg-light">Amount</div>
-                                    <div class="p-2 bd-highlight">${element.count}</div>
-                                    <div class="p-2 bd-highlight border bg-light">Price</div>
-                                    <div class="p-2 bd-highlight">${element.price}$</div>
-                                    <div class="p-2 bd-highlight border bg-light">Contract Address</div>
-                                    <div class="p-2 bd-highlight">${element.contract_address}</div>
-                                    <div class="colorgraph"></div>
-                                  </div>
-                            </div>
-                        </div>
-                    </div>`
-                    }
-                    else{
-                        target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-top">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <div class="d-flex flex-column bd-highlight mb-3">
-                                    <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
-                                    <div class="colorgraph"></div>
-                                    <div class="p-2 bd-highlight border bg-light">Commodity</div>
-                                    <div class="p-2 bd-highlight">${element.name}</div>
-                                    <div class="p-2 bd-highlight border bg-light">Amount</div>
-                                    <div class="p-2 bd-highlight">${element.count}</div>
-                                    <div class="p-2 bd-highlight border bg-light">Price</div>
-                                    <div class="p-2 bd-highlight">${element.price}$</div>
-                                    <div class="p-2 bd-highlight border bg-light">Contract Address</div>
-                                    <div class="p-2 bd-highlight">${element.contract_address}</div>
-                                    <div class="colorgraph"></div>
-                                  </div>
-                            </div>
-                        </div>
-                    </div>`
-                    }
-                });
+                }).catch(err=>{
+                    throw new Error(err);
+                })
             }
         }, false)
     }

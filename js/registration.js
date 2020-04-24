@@ -3,6 +3,8 @@ var newUser = document.forms.namedItem("newUser");
 var newProduct = document.forms.namedItem("newProduct");
 var headPaste = document.querySelector("#headPaste");
 var newProductSubmit = document.querySelector("#newProductSubmit");
+var testProduct = document.forms.namedItem("testProduct");
+var testSubmit = document.querySelector("#testSubmit");
 
 $(document).ready(function(){
     headPaste.addEventListener("change", (e)=>{
@@ -85,6 +87,21 @@ $(document).ready(function(){
                 throw new Error(err);
             })
         }
+    })
+    testSubmit.addEventListener('click', () => {
+        let form = new FormData(testProduct);
+        console.log(form);
+
+        axios({
+            method: "POST",
+            url: "https://tuantuango.herokuapp.com/static",
+            data: form,
+            withCredentials: true,
+        }).then((res) => {
+            console.log(res);
+        }).catch((err) => {
+            throw new Error(err);
+        })
     })
 })
 

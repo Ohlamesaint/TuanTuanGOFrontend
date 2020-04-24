@@ -239,6 +239,7 @@ $(document).ready(function(){
                 console.log("success");
                 console.log(res);
                 document.querySelector("#walletCash").textContent = "Balance : " + res.data.balance;
+                document.querySelector("#walletCash").textContent = "Account : " + res.data.account;
                 $('#userForm').bootstrapValidator();
                 tl.resume();
             }
@@ -335,6 +336,7 @@ $(document).ready(function(){
                         console.log("success");
                         console.log(res);
                         document.querySelector("#walletCash").textContent = "Balance : " + res.data.balance;
+                        document.querySelector("#walletCash").textContent = "Account : " + res.data.account;
                         $('#userForm').bootstrapValidator();
                         tl.resume();
                     }

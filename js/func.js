@@ -118,12 +118,11 @@ $(document).ready(function(){
     else if(targetPage == 1){
         axios({
             method: "GET",
-            url: "https://tuantuango.herokuapp.com/profile",
+            url: "https://tuantuango.herokuapp.com/userTuangoList",
             withCredentials: true,
         }).then(res=>{
             if(!res.data.signin){    //做保險
                 console.log(res);
-                console.log("789");
                 setTimeout(() => {
                     window.location.replace('./login.html');
                 }, );
@@ -228,7 +227,7 @@ $(document).ready(function(){
     else if(targetPage == 2){
         axios({
             method: "GET",
-            url: "https://tuantuango.herokuapp.com/profile",
+            url: "https://tuantuango.herokuapp.com/userWallet",
             withCredentials: true,
         }).then(res=>{
             if(!res.data.signin){    //做保險
@@ -239,26 +238,27 @@ $(document).ready(function(){
             }else{
                 console.log("success");
                 console.log(res);
+                document.addEventListener("#walletCash").textContent = res.data.walletCash
                 $('#userForm').bootstrapValidator();
-                document.querySelector( "#money_send" ).addEventListener("click", async()=>{
-                    var flag = $('#userForm').data("bootstrapValidator").isValid();
-                    if(flag) {
-                        console.log("send_money_post ",document.querySelector( "#nn" ).value);
-                        var message = document.createElement("p");
-                        message.innerText = "Wait for sending ...";
-                        document.querySelector( "#send_message" ).appendChild(message);
-                        await t();
-                        document.querySelector( "#send_message" ).removeChild(message);
-                        $('#store').modal('hide');
-                    }
-                    else{
-                        console.log("money error");
-                    }
-                })
                 tl.resume();
             }
         }).catch(err=>{
             throw new Error(err);
+        })
+        document.querySelector( "#money_send" ).addEventListener("click", async()=>{
+            var flag = $('#userForm').data("bootstrapValidator").isValid();
+            if(flag) {
+                console.log("send_money_post ",document.querySelector( "#nn" ).value);
+                var message = document.createElement("p");
+                message.innerText = "Wait for sending ...";
+                document.querySelector( "#send_message" ).appendChild(message);
+                await t();
+                document.querySelector( "#send_message" ).removeChild(message);
+                $('#store').modal('hide');
+            }
+            else{
+                console.log("money error");
+            }
         })
     }
     else if(targetPage == 3){

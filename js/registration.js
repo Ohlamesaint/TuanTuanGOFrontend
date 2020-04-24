@@ -25,7 +25,6 @@ $(document).ready(function(){
         }
     })
     newUserSubmit.addEventListener("click", ()=>{
-        event.preventDefault();
         var bodyFormData = new FormData(newUser);
         var check = true;
         
@@ -38,6 +37,7 @@ $(document).ready(function(){
         if(check == false){
             document.querySelector("#error").textContent = "尚有欄位未填"
         }else{
+            document.querySelector("#error").textContent = ""
             axios({
                 method: "POST",
                 url: "https://tuantuango.herokuapp.com/registration",
@@ -54,7 +54,6 @@ $(document).ready(function(){
         }
     })
     newProductSubmit.addEventListener("click", ()=>{
-        event.preventDefault();
         var bodyFormDataProduct = new FormData(newProduct);
         var check = true;
         console.log(document.querySelector("#hasPromotion").checked);
@@ -71,6 +70,7 @@ $(document).ready(function(){
         if(check == false){
             document.querySelector("#errorProduct").textContent = "尚有欄位未填"
         }else{
+            document.querySelector("#errorProduct").textContent = ""
             axios({
                 method: "POST",
                 url: "https://tuantuango.herokuapp.com/addProduct",

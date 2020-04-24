@@ -472,9 +472,10 @@ $(document).ready(()=>{
                         document.querySelector("#wrapConclusion>p").textContent = "";
                         //網址
                         console.log(res);
-                        document.querySelector('#wrapConclusion').classList.add('blur_effect');
-                        
-                        // window.location.replace(res);
+                        alert('DEPLOY SUCCESS!');
+                        setTimeout(() => {
+                            window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html");
+                        }, 3000)
                     }).catch((err)=>{
                         throw new Error(err);
                     })

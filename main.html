@@ -251,66 +251,25 @@
                                 $(swiperSlides[i]).addClass('fadeIn')
                             }).then((res)=>{
                                 let cardList = document.querySelectorAll('.swiper-slide-active>.card-columns>div');
-                                // $(card[i]).sleep(500).children().addClass('fadeIn');
                                 for(let i=0; i<cardList.length; i++){
                                     $(cardList[i]).on('click', (e)=>{      //注意id綁定不包含0x
-                                        axios({
-                                            method:"get",
-                                            withCredentials: true,
-                                            url:"https://tuantuango.herokuapp.com/signin",
-                                        }).then(res=>{
-                                            if(!res.data.signin){    //可以順便獲得會員profile
-                                                console.log(res);
-                                                $("body").addClass("modal-open");
-                                                $("#loginPrompt").addClass("show").css("display", "block");
-                                                $("#not").on('click', ()=>{
-                                                    $("body").removeClass("modal-open");
-                                                    $("#loginPrompt").removeClass("show").css("display", "none");
-                                                })
-                                                $("#yes").on('click', ()=>{
-                                                    setTimeout(() => {
-                                                        window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/login.html');
-                                                    }, );
-                                                })
-                                            } else {
-                                                e.preventDefault();
-                                                localStorage.setItem("TuanGOInform", JSON.stringify(cardBuffer[i]));
-                                                document.querySelector("#JoinTuanGOProductName").textContent = cardBuffer[i].productName;
-                                                document.querySelector("#JoinTuanGOTuanGOType").textContent = cardBuffer[i].TuanGOType?'unpack':'promote';
-                                                document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(cardBuffer[i].ExpirationTime).toString().slice(0, 24);
-                                                document.querySelector("#JoinTuanGOCost").textContent = cardBuffer[i].disccountPrice +　"/per";
-                                                var num = 0;
-                                                var TuanGOerLine = "";
-                                                cardBuffer[i].SoldAmounts.forEach(v => {
-                                                    num = num+v;
-                                                })
-                                                localStorage.setItem('unsoldProductAmount', cardBuffer[i].TotalAmount-num);
-                                                for(let j=0; j<cardBuffer[i].TotalAmount; j++){
-                                                    if(j<num) TuanGOerLine += '<i class="fas fa-user"></i>';
-                                                    else TuanGOerLine += '<i class="far fa-user"></i>';
-                                                }
-                                                document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + cardBuffer[i].TotalAmount;
-                                            }
-                                        }).catch((err)=>{
-                                            console.log(err);
+                                        e.preventDefault();
+                                        localStorage.setItem("TuanGOInform", JSON.stringify(cardBuffer[i]));
+                                        document.querySelector("#JoinTuanGOProductName").textContent = cardBuffer[i].productName;
+                                        document.querySelector("#JoinTuanGOTuanGOType").textContent = cardBuffer[i].TuanGOType?'unpack':'promote';
+                                        document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(cardBuffer[i].ExpirationTime).toString().slice(0, 24);
+                                        document.querySelector("#JoinTuanGOCost").textContent = cardBuffer[i].disccountPrice +　"/per";
+                                        var num = 0;
+                                        var TuanGOerLine = "";
+                                        cardBuffer[i].SoldAmounts.forEach(v => {
+                                            num = num+v;
                                         })
-                                        // e.preventDefault();
-                                        // localStorage.setItem("TuanGOInform", JSON.stringify(cardBuffer[i]));
-                                        // document.querySelector("#JoinTuanGOProductName").textContent = cardBuffer[i].productName;
-                                        // document.querySelector("#JoinTuanGOTuanGOType").textContent = cardBuffer[i].TuanGOType?'unpack':'promote';
-                                        // document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(cardBuffer[i].ExpirationTime).toString().slice(0, 24);
-                                        // document.querySelector("#JoinTuanGOCost").textContent = cardBuffer[i].disccountPrice +　"/per";
-                                        // var num = 0;
-                                        // var TuanGOerLine = "";
-                                        // cardBuffer[i].SoldAmounts.forEach(v => {
-                                        //     num = num+v;
-                                        // })
-                                        // localStorage.setItem('unsoldProductAmount', cardBuffer[i].TotalAmount-num);
-                                        // for(let j=0; j<cardBuffer[i].TotalAmount; j++){
-                                        //     if(j<num) TuanGOerLine += '<i class="fas fa-user"></i>';
-                                        //     else TuanGOerLine += '<i class="far fa-user"></i>';
-                                        // }
-                                        // document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + cardBuffer[i].TotalAmount;
+                                        localStorage.setItem('unsoldProductAmount', cardBuffer[i].TotalAmount-num);
+                                        for(let j=0; j<cardBuffer[i].TotalAmount; j++){
+                                            if(j<num) TuanGOerLine += '<i class="fas fa-user"></i>';
+                                            else TuanGOerLine += '<i class="far fa-user"></i>';
+                                        }
+                                        document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + cardBuffer[i].TotalAmount;
                                     })
                                 }
                             }).catch((err)=>{
@@ -381,10 +340,6 @@
                     </li>
                 </ul>
             </footer>
-            
-            <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                Launch demo modal
-            </button>  -->
             
             <div class="modal fade" id="loginPrompt" tabindex="-1" role="dialog" aria-labelledby="loginPromptText" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">

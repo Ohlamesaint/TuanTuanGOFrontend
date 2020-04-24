@@ -100,6 +100,10 @@ $(document).ready(function(){
                 console.log(res.data.headPaste);
                 console.log(res);
                 document.querySelector("#user").textContent = res.data.user;
+                document.querySelector("#username").textContent = res.data.username;
+                document.querySelector("#phoneNumber").textContent = res.data.phoneNumber;
+                document.querySelector("#email").textContent = res.data.email;
+                document.querySelector("#address").textContent = res.data.address;
                 // document.querySelector("#region").textContent = res.data.username;
                 var blob = new Blob( [res.data.headPaste], { type: "image/jpg" } );
                 console.log(blob);

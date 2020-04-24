@@ -88,7 +88,8 @@ $(document).ready(function(){
             })
         }
     })
-    testSubmit.addEventListener('click', () => {
+    testSubmit.addEventListener('click', (e) => {
+        e.preventDefault();
         let form = new FormData(testProduct);
         console.log(form);
 
@@ -96,7 +97,7 @@ $(document).ready(function(){
             method: "POST",
             url: "https://tuantuango.herokuapp.com/static",
             data: form,
-            withCredentials: true,
+            // withCredentials: true,
         }).then((res) => {
             console.log(res);
         }).catch((err) => {

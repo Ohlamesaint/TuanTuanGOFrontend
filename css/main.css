@@ -202,12 +202,11 @@ footer ul li:last-child h3{
     width: 100vw;
     transition: all .5s ease;
     z-index: -5;
-    background-color: transparent;
+    background-color: white;
 }
 
 #TuanGOerJoinPage.show{
-    background-color: white;
-    z-index: 1020;
+    height: 100vh;
 }
 
 #JoinPageTopNav{

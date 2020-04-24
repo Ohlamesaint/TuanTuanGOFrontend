@@ -38,7 +38,7 @@ $(document).ready(function(){
                     console.log(belowBar[i].children[1].textContent);
                     localStorage.setItem("target", i)
                     window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/func.html');
-                //}
+                }
             }).catch(err=>{
                 console.log("123")
                 console.log(err);

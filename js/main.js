@@ -7,6 +7,10 @@ function element(ele){
 }
 
 $(document).ready(function(){
+    $("div").on("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+    })
     for(let i=0; i<belowBar.length-1; i++){
         belowBar[i].addEventListener("click", (e)=>{
             axios({

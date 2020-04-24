@@ -4,10 +4,11 @@ var middleWraps = document.querySelectorAll(".wrap>div");
 var back = document.querySelector("#back");
 var middleWrapRowList = document.querySelectorAll(".wrap>div>div>.row")  
 var headPaste = document.querySelector( "#headPaste" );
+// var profile_name = document.querySelector("#profile_name");
 
 
 $(document).ready(function(){
-    var targetPage = localStorage.getItem("target");
+    var targetPage = 0;//localStorage.getItem("target");
     $(belowBar[targetPage]).addClass("actived");
     $(belowBar[targetPage]).children().addClass("actived-word");
     title.innerHTML=`
@@ -20,14 +21,17 @@ $(document).ready(function(){
         window.location.replace('../main.html');
     })
     let init = middleWrapRowList[targetPage].children;
+    console.log(init);
     $(init).addClass("fadeIn");
-    
+
+
     if(targetPage == 0){     //my profile 利用req.session來查詢並獲得
         axios({
             method: "GET",
             url: "https://tuantuango.herokuapp.com/profile",
             withCredentials: true,
         }).then(res=>{
+            
             if(!res.data.signin){    //做保險
                 console.log(res);
                 console.log("789");
@@ -35,6 +39,7 @@ $(document).ready(function(){
                     window.location.replace('./login.html');
                 }, );
             }else{
+                
                 console.log(res.data.headPaste);
                 console.log(res);
                 document.querySelector("#user").textContent = res.data.user;
@@ -60,6 +65,7 @@ $(document).ready(function(){
     
     for(let i=0; i<belowBar.length-1; i++){
         belowBar[i].addEventListener("click", (e)=>{
+            
             $(belowBar[i]).siblings().removeClass("actived");
             $(belowBar[i]).siblings().children().removeClass("actived-word");
             $(belowBar[i]).siblings().children().css("color", "gray");
@@ -99,6 +105,7 @@ $(document).ready(function(){
                     url: "https://tuantuango.herokuapp.com/profile",
                     withCredentials: true,
                 }).then(res=>{
+                    
                     if(!res.data.signin){    //做保險
                         console.log(res);
                         console.log("789");

@@ -54,16 +54,16 @@ let ongoing_list = [{
     contract_address: 0x08
 }
 ];
-function t(){
-    return new Promise((resolve, reject) => {
-        // 傳入 resolve 與 reject，表示資料成功與失敗
-        if (true) {
-        setTimeout(function () {
-            // 3 秒時間後，透過 resolve 來表示完成
-            resolve();
-    }, 3000);
-}
-})}
+// function t(){
+//     return new Promise((resolve, reject) => {
+//         // 傳入 resolve 與 reject，表示資料成功與失敗
+//         if (true) {
+//         setTimeout(function () {
+//             // 3 秒時間後，透過 resolve 來表示完成
+//             resolve();
+//     }, 3000);
+// }
+// })}
 $(document).ready(function(){
     var targetPage = localStorage.getItem("target");
     $(belowBar[targetPage]).addClass("actived");
@@ -240,23 +240,41 @@ $(document).ready(function(){
                 console.log(res);
                 document.addEventListener("#walletCash").textContent = res.data.walletCash
                 $('#userForm').bootstrapValidator();
-                tl.resume();
+                // tl.resume();
             }
         }).catch(err=>{
             throw new Error(err);
         })
         document.querySelector( "#money_send" ).addEventListener("click", async()=>{
             var flag = $('#userForm').data("bootstrapValidator").isValid();
+            var message = document.createElement("p");
             if(flag) {
-                console.log("send_money_post ",document.querySelector( "#nn" ).value);
-                var message = document.createElement("p");
                 message.innerText = "Wait for sending ...";
                 document.querySelector( "#send_message" ).appendChild(message);
+                axios({
+                    method: "POST",
+                    url: "https://tuantuango.herokuapp.com/sendMoney",
+                    withCredentials: true,
+                    data: {
+                        money: document.querySelector( "#nn" ).value
+                    }
+                }).then((res) => {
+                    if(res.data.success == false){
+                        alert('發生錯誤，加值失敗');
+                        throw new Error('send money failed');
+                    }
+                    document.querySelector( "#")
+                    document.querySelector( "#send_message" ).removeChild(message);
+                    $('#store').modal('hide');
+                    console.log(res);
+                }).catch((err) => {
+                    throw new Error(err);
+                })
+                console.log("send_money_post ",document.querySelector( "#nn" ).value);
                 await t();
-                document.querySelector( "#send_message" ).removeChild(message);
-                $('#store').modal('hide');
             }
             else{
+                message.innerText = "Invalid Number !";
                 console.log("money error");
             }
         })

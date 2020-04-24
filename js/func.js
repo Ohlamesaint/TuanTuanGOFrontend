@@ -246,10 +246,10 @@ $(document).ready(function(){
             }else{
                 console.log("success");
                 console.log(res);
-                document.querySelector("#walletCash").textContent = "Balance : " + res.data.balance;
-                document.querySelector("#accounthere").textContent = "Account : " + res.data.account;
+                document.querySelector("#walletCash").textContent = res.data.balance + NT$;
+                document.querySelector("#accounthere").textContent =  res.data.account;
                 $('#userForm').bootstrapValidator();
-                // tl.resume();
+                tl.resume();
             }
         }).catch(err=>{
             throw new Error(err);
@@ -367,10 +367,10 @@ $(document).ready(function(){
                     }else{
                         console.log("success");
                         console.log(res);
-                        document.querySelector("#walletCash").textContent = "Balance : " + res.data.balance;
-                        document.querySelector("#accounthere").textContent = "Account : " + res.data.account;
+                        document.querySelector("#walletCash").textContent = res.data.balance + NT$;
+                        document.querySelector("#accounthere").textContent =  res.data.account;
                         $('#userForm').bootstrapValidator();
-                        // tl.resume();
+                        tl.resume();
                     }
                 }).catch(err=>{
                     throw new Error(err);

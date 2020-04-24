@@ -65,7 +65,7 @@ function t(){
 }
 })}
 $(document).ready(function(){
-    var targetPage = localStorage.getItem("target");
+    var targetPage = 0;//localStorage.getItem("target");
     $(belowBar[targetPage]).addClass("actived");
     $(belowBar[targetPage]).children().addClass("actived-word");
     title.innerHTML=`
@@ -238,8 +238,8 @@ $(document).ready(function(){
             }else{
                 console.log("success");
                 console.log(res);
-                document.querySelector("#walletCash").textContent = "Balance : " + res.data.balance;
-                document.querySelector("#accounthere").textContent = "Account : " + res.data.account;
+                document.querySelector("#walletCash").textContent = res.data.balance + NT$;
+                document.querySelector("#accounthere").textContent =  res.data.account;
                 $('#userForm').bootstrapValidator();
                 tl.resume();
             }
@@ -335,8 +335,8 @@ $(document).ready(function(){
                     }else{
                         console.log("success");
                         console.log(res);
-                        document.querySelector("#walletCash").textContent = "Balance : " + res.data.balance;
-                        document.querySelector("#accounthere").textContent = "Account : " + res.data.account;
+                        document.querySelector("#walletCash").textContent = res.data.balance + NT$;
+                        document.querySelector("#accounthere").textContent =  res.data.account;
                         $('#userForm').bootstrapValidator();
                         tl.resume();
                     }

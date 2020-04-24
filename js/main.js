@@ -134,10 +134,11 @@ $(document).ready(function(){
         if(TuanGOInform.TuanGOType){
             // unpack
             document.querySelector("#availableAmountInUnpack").textContent = `less than ${JSON.parse(localStorage.getItem('unsoldProductAmount'))+1}`
+            document.querySelector("#unpackedTabInJoin").addEventListener('transitionend', (e) => {
+                e.stopPropagation();
+            })
             document.querySelector("#unpackedTabInJoin").classList.add('active')
-            console.log("out of changed");
             document.querySelector("#TuanGOerPurchaseAmountInUnpack").addEventListener("change", ()=>{
-                console.log("changed");
                 if(!checkNum(document.querySelector("#TuanGOerPurchaseAmountInUnpack").value, JSON.parse(localStorage.getItem('unsoldProductAmount')))){
                     document.querySelector("#unpackedWarningText").textContent = 'invalid number!'
                     document.querySelector("#footerInJoin").classList.remove('show')
@@ -145,9 +146,6 @@ $(document).ready(function(){
                     document.querySelector("#unpackedWarningText").textContent = ''
                     document.querySelector("#footerInJoin").classList.add('show')
                     document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", (e)=>{
-                        e.preventDefault();
-                        e.stopPropagation();
-                        console.log('123');
                         axios({
                             method: "post",
                             url: "https://tuantuango.herokuapp.com/join",
@@ -169,6 +167,9 @@ $(document).ready(function(){
             })
         } else{
             document.querySelector("#availableAmountInPromote").textContent = `less than ${JSON.parse(localStorage.getItem('unsoldProductAmount'))+1}`
+            document.querySelector("#promoteTabInJoin").addEventListener('transitionend', (e) => {
+                e.stopPropagation();
+            })
             document.querySelector("#promoteTabInJoin").classList.add('active')
             document.querySelector("#TuanGOerPurchaseAmountInPromote").addEventListener("change", ()=>{
                 if(!checkNum(document.querySelector("#TuanGOerPurchaseAmountInPromote").value, JSON.parse(localStorage.getItem('unsoldProductAmount')))){

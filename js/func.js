@@ -4,8 +4,56 @@ var middleWraps = document.querySelectorAll(".wrap>div");
 var back = document.querySelector("#back");
 var middleWrapRowList = document.querySelectorAll(".wrap>div>div>.row")  
 var headPaste = document.querySelector( "#headPaste" );
-
-
+const tl = new TimelineMax({repeat:-1});
+tl.staggerFrom(['#block_chain > path:nth-child(1)', '#block_chain > path:nth-child(2)', '#block_chain > path:nth-child(3)', '#block_chain > path:nth-child(4)','#block_chain > path:nth-child(5)','#block_chain > path:nth-child(6)','#block_chain > path:nth-child(7)','#block_chain > path:nth-child(8)','#block_chain > path:nth-child(9)','#block_chain > path:nth-child(10)','#block_chain > path:nth-child(11)','#block_chain > path:nth-child(12)','#block_chain > path:nth-child(13)','#block_chain > path:nth-child(14)','#block_chain > path:nth-child(15)','#block_chain > path:nth-child(16)','#block_chain > path:nth-child(17)','#block_chain > path:nth-child(18)','#block_chain > path:nth-child(19)','#block_chain > path:nth-child(20)','#block_chain > path:nth-child(21)','#block_chain > path:nth-child(22)','#block_chain > path:nth-child(23)','#block_chain > path:nth-child(24)'], 0.5, 
+{scaleY:0, scaleX: 0, transformOrigin: "center",ease: Bounce.easeOut, stagger:0.2});
+tl.staggerTo(['#block_chain > path:nth-child(1)', '#block_chain > path:nth-child(2)', '#block_chain > path:nth-child(3)', '#block_chain > path:nth-child(4)','#block_chain > path:nth-child(5)','#block_chain > path:nth-child(6)','#block_chain > path:nth-child(7)','#block_chain > path:nth-child(8)','#block_chain > path:nth-child(9)','#block_chain > path:nth-child(10)','#block_chain > path:nth-child(11)','#block_chain > path:nth-child(12)','#block_chain > path:nth-child(13)','#block_chain > path:nth-child(14)','#block_chain > path:nth-child(15)','#block_chain > path:nth-child(16)','#block_chain > path:nth-child(17)','#block_chain > path:nth-child(18)','#block_chain > path:nth-child(19)','#block_chain > path:nth-child(20)','#block_chain > path:nth-child(21)','#block_chain > path:nth-child(22)','#block_chain > path:nth-child(23)','#block_chain > path:nth-child(24)'], 0.5, 
+{scaleY:0, scaleX: 0, transformOrigin: "center",ease: Bounce.easeOut, stagger:0.2});
+tl.pause();
+let complete_list = [{
+        name: "toilet",
+        count: 2,
+        price: 30,
+        contract_address: 0x01
+    },{
+        name: "wine",
+        count: 2,
+        price: 100,
+        contract_address: 0x02
+    },{
+        name: "apple",
+        count: 2,
+        price: 69,
+        contract_address: 0x03
+    },{
+        name: "orange",
+        count: 2,
+        price: 87,
+        contract_address: 0x04
+    }
+];
+let ongoing_list = [{
+    name: "noodle",
+    count: 2,
+    price: 100,
+    contract_address: 0x06
+},{
+    name: "cloth",
+    count: 2,
+    price: 69,
+    contract_address: 0x07
+},{
+    name: "brush",
+    count: 2,
+    price: 87,
+    contract_address: 0x08
+},{
+    name: "bag",
+    count: 2,
+    price: 87,
+    contract_address: 0x08
+}
+];
 $(document).ready(function(){
     var targetPage = localStorage.getItem("target");
     $(belowBar[targetPage]).addClass("actived");
@@ -57,7 +105,6 @@ $(document).ready(function(){
             throw new Error(err);  
         })
     }
-    
     for(let i=0; i<belowBar.length-1; i++){
         belowBar[i].addEventListener("click", (e)=>{
             $(belowBar[i]).siblings().removeClass("actived");
@@ -91,8 +138,13 @@ $(document).ready(function(){
             // var list = animateArray.filter(ele => ch.include(ele));
             // console.log(list);
             // console.log(middleWraps[i])
-            
-            
+            if(i != 2){
+                tl.pause();
+            }
+            if(i != 1){
+                document.querySelector( "#complete_list" ).innerHTML ="";
+                document.querySelector( "#ongoing_list" ).innerHTML ="";
+            }
             if(i == 0){     //my profile 利用req.session來查詢並獲得
                 axios({
                     method: "GET",
@@ -118,6 +170,128 @@ $(document).ready(function(){
                 }).catch(err=>{
                     throw new Error(err);
                 })
+            }
+            else if(i == 2){
+                $('#userForm').bootstrapValidator();
+                function t(){
+                    return new Promise((resolve, reject) => {
+                        // 傳入 resolve 與 reject，表示資料成功與失敗
+                        if (true) {
+                          setTimeout(function () {
+                            // 3 秒時間後，透過 resolve 來表示完成
+                            resolve();
+                    }, 3000);
+                }
+                })}
+                document.querySelector( "#money_send" ).addEventListener("click", async()=>{
+                    var flag = $('#userForm').data("bootstrapValidator").isValid();
+                    if(flag) {
+                        console.log("send_money_post ",document.querySelector( "#nn" ).value);
+                        var message = document.createElement("p");
+                        message.innerText = "Wait for sending ...";
+                        document.querySelector( "#send_message" ).appendChild(message);
+                        await t();
+                        document.querySelector( "#send_message" ).removeChild(message);
+                        $('#store').modal('hide');
+                    }
+                    else{
+                        console.log("money error");
+                    }
+                })
+                //tl.set(['#block_chain > path:nth-child(1)', '#block_chain > path:nth-child(2)', '#block_chain > path:nth-child(3)', '#block_chain > path:nth-child(4)','#block_chain > path:nth-child(5)','#block_chain > path:nth-child(6)','#block_chain > path:nth-child(7)','#block_chain > path:nth-child(8)','#block_chain > path:nth-child(9)','#block_chain > path:nth-child(10)','#block_chain > path:nth-child(11)','#block_chain > path:nth-child(12)','#block_chain > path:nth-child(13)','#block_chain > path:nth-child(14)','#block_chain > path:nth-child(15)','#block_chain > path:nth-child(16)','#block_chain > path:nth-child(17)','#block_chain > path:nth-child(18)','#block_chain > path:nth-child(19)','#block_chain > path:nth-child(20)','#block_chain > path:nth-child(21)','#block_chain > path:nth-child(22)','#block_chain > path:nth-child(23)','#block_chain > path:nth-child(24)'], {clearProps: 'all'});
+                tl.resume();
+            }
+            else if(i == 1){
+                var target = document.querySelector( "#complete_list" );
+                complete_list.forEach(function(element, idx, array){
+                    if (idx === array.length - 1){ 
+                        target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-last">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <div class="d-flex flex-column bd-highlight mb-3">
+                                    <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
+                                    <div class="colorgraph"></div>
+                                    <div class="p-2 bd-highlight border bg-light">Commodity</div>
+                                    <div class="p-2 bd-highlight">${element.name}</div>
+                                    <div class="p-2 bd-highlight border bg-light">Amount</div>
+                                    <div class="p-2 bd-highlight">${element.count}</div>
+                                    <div class="p-2 bd-highlight border bg-light">Price</div>
+                                    <div class="p-2 bd-highlight">${element.price}$</div>
+                                    <div class="p-2 bd-highlight border bg-light">Contract Address</div>
+                                    <div class="p-2 bd-highlight">${element.contract_address}</div>
+                                    <div class="colorgraph"></div>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>`
+                    }
+                    else{
+                        target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-top">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <div class="d-flex flex-column bd-highlight mb-3">
+                                    <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
+                                    <div class="colorgraph"></div>
+                                    <div class="p-2 bd-highlight border bg-light">Commodity</div>
+                                    <div class="p-2 bd-highlight">${element.name}</div>
+                                    <div class="p-2 bd-highlight border bg-light">Amount</div>
+                                    <div class="p-2 bd-highlight">${element.count}</div>
+                                    <div class="p-2 bd-highlight border bg-light">Price</div>
+                                    <div class="p-2 bd-highlight">${element.price}$</div>
+                                    <div class="p-2 bd-highlight border bg-light">Contract Address</div>
+                                    <div class="p-2 bd-highlight">${element.contract_address}</div>
+                                    <div class="colorgraph"></div>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>`
+                    }
+                });
+                target = document.querySelector( "#ongoing_list" );
+                ongoing_list.forEach(function(element, idx, array){
+                    if (idx === array.length - 1){ 
+                        target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-last">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <div class="d-flex flex-column bd-highlight mb-3">
+                                    <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
+                                    <div class="colorgraph"></div>
+                                    <div class="p-2 bd-highlight border bg-light">Commodity</div>
+                                    <div class="p-2 bd-highlight">${element.name}</div>
+                                    <div class="p-2 bd-highlight border bg-light">Amount</div>
+                                    <div class="p-2 bd-highlight">${element.count}</div>
+                                    <div class="p-2 bd-highlight border bg-light">Price</div>
+                                    <div class="p-2 bd-highlight">${element.price}$</div>
+                                    <div class="p-2 bd-highlight border bg-light">Contract Address</div>
+                                    <div class="p-2 bd-highlight">${element.contract_address}</div>
+                                    <div class="colorgraph"></div>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>`
+                    }
+                    else{
+                        target.innerHTML += `<div class="col-xs-12 col-sm-6 col-md-4 card-top">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <div class="d-flex flex-column bd-highlight mb-3">
+                                    <div class="p-2 bd-highlight"><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></div>
+                                    <div class="colorgraph"></div>
+                                    <div class="p-2 bd-highlight border bg-light">Commodity</div>
+                                    <div class="p-2 bd-highlight">${element.name}</div>
+                                    <div class="p-2 bd-highlight border bg-light">Amount</div>
+                                    <div class="p-2 bd-highlight">${element.count}</div>
+                                    <div class="p-2 bd-highlight border bg-light">Price</div>
+                                    <div class="p-2 bd-highlight">${element.price}$</div>
+                                    <div class="p-2 bd-highlight border bg-light">Contract Address</div>
+                                    <div class="p-2 bd-highlight">${element.contract_address}</div>
+                                    <div class="colorgraph"></div>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>`
+                    }
+                });
             }
             // <i class="fas ${belowBar[i].dataset.icon} mb-1 fa-1x"></i> |
             // if(i == 1){                     //會員資料

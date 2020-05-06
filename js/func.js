@@ -826,7 +826,7 @@ $(document).ready(function(){
                             document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(transfer_list[i].ExpirationTime).toString().slice(0, 24);
                             document.querySelector("#JoinTuanGOCost").textContent = transfer_list[i].disccountPrice +　"$ /per";
                             console.log(transfer_list[i].contract_address);
-                            document.querySelector("JoinTuanGOContractAddress").textContent = String(transfer_list[i].contract_address);
+                            document.querySelector("JoinTuanGOContractAddress").textContent = "123";
                             var num = 0;
                             var TuanGOerLine = "";
                             num = transfer_list[i].SoldAmounts;

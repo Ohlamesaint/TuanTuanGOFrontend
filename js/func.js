@@ -302,7 +302,8 @@ $(document).ready(function(){
                         <div class="colorgraph"></div>
                     </div>`
                     }
-                    let cardList2 = document.querySelectorAll('.joinlist_ongoing');
+                })
+                let cardList2 = document.querySelectorAll('.joinlist_ongoing');
                     for(let i=0; i<cardList2.length; i++){
                         $(cardList2[i]).on('click', (e)=>{      //注意id綁定不包含0x
                             e.preventDefault();
@@ -323,7 +324,6 @@ $(document).ready(function(){
                             document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + ongoing_list[i].TotalAmount;
                         })
                     };
-                })
                 target = document.querySelector( "#transfer_list" );
                 transfer_list.forEach(function(element, idx, array){
                     if (idx === array.length - 1){
@@ -376,9 +376,10 @@ $(document).ready(function(){
                         <div class="colorgraph"></div>
                     </div>`
                     }
-                    let cardList2 = document.querySelectorAll('.joinlist_transfer');
-                    for(let i=0; i<cardList2.length; i++){
-                        $(cardList2[i]).on('click', (e)=>{      //注意id綁定不包含0x
+                })
+                let cardList3 = document.querySelectorAll('.joinlist_transfer');
+                    for(let i=0; i<cardList3.length; i++){
+                        $(cardList3[i]).on('click', (e)=>{      //注意id綁定不包含0x
                             e.preventDefault();
                             document.querySelector("#JoinTuanGOProductName").textContent = transfer_list[i].name;
                             document.querySelector("#ProductImg").src = transfer_list[i].img;
@@ -397,7 +398,6 @@ $(document).ready(function(){
                             document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + transfer_list[i].TotalAmount;
                         })
                     };
-                })
             }
         }).catch(err=>{
             throw new Error(err);
@@ -499,6 +499,7 @@ $(document).ready(function(){
             if(i != 1){
                 document.querySelector( "#complete_list" ).innerHTML ="";
                 document.querySelector( "#ongoing_list" ).innerHTML ="";
+                document.querySelector( "#transfer_list" ).innerHTML ="";
             }
             if(i == 0){     //my profile 利用req.session來查詢並獲得
                 axios({
@@ -742,7 +743,9 @@ $(document).ready(function(){
                         <div class="colorgraph"></div>
                     </div>`
                     }
-                    let cardList2 = document.querySelectorAll('.joinlist_ongoing');
+                    
+                })
+                let cardList2 = document.querySelectorAll('.joinlist_ongoing');
                     for(let i=0; i<cardList2.length; i++){
                         $(cardList2[i]).on('click', (e)=>{      //注意id綁定不包含0x
                             e.preventDefault();
@@ -763,7 +766,6 @@ $(document).ready(function(){
                             document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + ongoing_list[i].TotalAmount;
                         })
                     };
-                })
                 target = document.querySelector( "#transfer_list" );
                 transfer_list.forEach(function(element, idx, array){
                     if (idx === array.length - 1){
@@ -816,17 +818,17 @@ $(document).ready(function(){
                         <div class="colorgraph"></div>
                     </div>`
                     }
-                    let cardList2 = document.querySelectorAll('.joinlist_transfer');
-                    for(let i=0; i<cardList2.length; i++){
-                        $(cardList2[i]).on('click', (e)=>{      //注意id綁定不包含0x
+                })
+                let cardList3 = document.querySelectorAll('.joinlist_transfer');
+                    for(let i=0; i<cardList3.length; i++){
+                        $(cardList3[i]).on('click', (e)=>{      //注意id綁定不包含0x
                             e.preventDefault();
                             document.querySelector("#JoinTuanGOProductName").textContent = transfer_list[i].name;
                             document.querySelector("#ProductImg").src = transfer_list[i].img;
                             document.querySelector("#JoinTuanGOTuanGOType").textContent = transfer_list[i].TuanGOType?'unpack':'promote';
                             document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(transfer_list[i].ExpirationTime).toString().slice(0, 24);
                             document.querySelector("#JoinTuanGOCost").textContent = transfer_list[i].disccountPrice +　"$ /per";
-                            console.log(transfer_list[i].contract_address);
-                            document.querySelector("JoinTuanGOContractAddress").textContent = "123";
+                            document.querySelector("JoinTuanGOContractAddress").textContent = transfer_list[i].contract_address;
                             var num = 0;
                             var TuanGOerLine = "";
                             num = transfer_list[i].SoldAmounts;
@@ -838,7 +840,6 @@ $(document).ready(function(){
                             document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + transfer_list[i].TotalAmount;
                         })
                     };
-                })
             }
         }, false)
     }

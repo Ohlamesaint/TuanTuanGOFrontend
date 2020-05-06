@@ -104,7 +104,10 @@
                         <a class="nav-link active" data-toggle="pill" href="#home">已完成</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#menu1">已參與</a>
+                        <a class="nav-link" data-toggle="pill" href="#menu1">配對中</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#menu2">運送中</a>
                       </li>
                     </ul>
                   
@@ -112,14 +115,23 @@
                     <div class="tab-content">
                       <div id="home" class="container tab-pane active"><br>
                             <div style="overflow-y: scroll;" id="complete_list">
-                                <!-- contract list -->
+                                <!-- 已完成 list -->
                                 
                             </div>
                       </div>
                       <div id="menu1" class="container tab-pane fade"><br>
                         <div class="container">
                             <div class="row" style="overflow-y: scroll;" id="ongoing_list">
-                                <!-- contract list -->
+                                <!-- 配對中 list -->
+                                
+                            </div>
+                        </div>
+
+                      </div>
+                      <div id="menu2" class="container tab-pane fade"><br>
+                        <div class="container">
+                            <div class="row" style="overflow-y: scroll;" id="transfer_list">
+                                <!-- 運送中 list -->
                                 
                             </div>
                         </div>
@@ -299,6 +311,12 @@
                                             Expiration date
                                         </div>
                                         <div class="card-body" id="JoinTuanGOExpirationDate">
+                                            <p class="card-text"></p>
+                                        </div>
+                                        <div class="card-header" style="color: rgb(145, 93, 93)">
+                                            Contract Address
+                                        </div>
+                                        <div class="card-body" id="JoinTuanGOContractAddress">
                                             <p class="card-text"></p>
                                         </div>
                                     </div>

@@ -92,7 +92,7 @@ let ongoing_list = [{
 // }
 // })}
 $(document).ready(function(){
-    var targetPage = 0;//localStorage.getItem("target");
+    var targetPage = localStorage.getItem("target");
     $(belowBar[targetPage]).addClass("actived");
     $(belowBar[targetPage]).children().addClass("actived-word");
     title.innerHTML=`

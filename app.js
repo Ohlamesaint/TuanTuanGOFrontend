@@ -1,23 +1,5 @@
 const vapidKey = 'BBm9Lg4XNHlqrXibp3jvAOUQQ4QrFSV-ibDBznIqWku2ygTmH6Siy25n_koaK6NGmhfvLxCmnqkqKtG-WrHi2ts';
 
-
-if("serviceWorker" in navigator){
-    send().catch(err => console.log(err));
-    navigator.serviceWorker.register("./sw.js")
-    .then((reg) => {
-        console.log("service worker registered", reg) 
-        let enableNotifications = document.querySelectorAll('.enable-notification');
-        if('Notification' in window) {
-            for(let i=0; i<enableNotifications.length; i++){
-                enableNotifications[i].style.display = 'inline-block';
-                enableNotifications[i].addEventListener('click', askForNotificationPermission);
-            }
-        }
-    }).catch((err) => {
-        console.log(new Error("service worker not registered"), err)
-    })
-}
-
 const send = async () => {
     try{
         const register = await navigator.serviceWorker.register('./sw.js');
@@ -36,6 +18,25 @@ const send = async () => {
         console.log('something went wrong => app => send', err);
     }
 }
+
+if("serviceWorker" in navigator){
+    send().catch(err => console.log(err));
+    navigator.serviceWorker.register("./sw.js")
+    .then((reg) => {
+        console.log("service worker registered", reg) 
+        let enableNotifications = document.querySelectorAll('.enable-notification');
+        if('Notification' in window) {
+            for(let i=0; i<enableNotifications.length; i++){
+                enableNotifications[i].style.display = 'inline-block';
+                enableNotifications[i].addEventListener('click', askForNotificationPermission);
+            }
+        }
+    }).catch((err) => {
+        console.log(new Error("service worker not registered"), err)
+    })
+}
+
+
 
 function askForNotificationPermission() {
     Notification.requestPermission((status) => {

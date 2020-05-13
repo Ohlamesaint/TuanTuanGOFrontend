@@ -58,7 +58,7 @@ self.addEventListener("fetch", evt => {
     )
 });
 
-self.addEventListener('push', e => { displayNotification(e) });
+self.addEventListener('push', e => { return displayNotification(e) });
 
 
 function displayNotification(e) {

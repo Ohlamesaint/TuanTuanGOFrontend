@@ -79,7 +79,7 @@
                 if(sub === null){
                     let vapidKey = 'BDS16gOHo-U1qqgD6cGbLMTEZe_lrbgk3aKAs3T38YQiFvoucK7hSRjJUJhuj8e4_PxqIWm-CWc3OFOi2sSXbZI';
                     let convertedVapidKey = urlBase64ToUint8Array(vapidKey);
-                    PushManager.subscribe({
+                    ServiceWorkerRegistration.pushManager.subscribe({
                         userVisibleOnly: true,
                         applicationServerKey: convertedVapidKey
                     }).then((newSub) => {

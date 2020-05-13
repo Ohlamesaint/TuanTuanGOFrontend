@@ -53,27 +53,64 @@
                 })
             }
         }
-
+        
+        function urlBase64ToUint8Array(base64String) {
+            const padding = '='.repeat((4 - base64String.length % 4) % 4);
+            const base64 = (base64String + padding)
+            .replace(/-/g, '+')
+            .replace(/_/g, '/');
+            
+            const rawData = window.atob(base64);
+            const outputArray = new Uint8Array(rawData.length);
+            
+            for (let i = 0; i < rawData.length; ++i) {
+                outputArray[i] = rawData.charCodeAt(i);
+            }
+            return outputArray;
+        }
+        
+        
         function setPushSubcribe() {
             navigator.serviceWorker.ready
-                .then((sw) => {
-                    return sw.pushManager.getSubscription();
-                }).then((sub) => {
-                    console.log(sub);
-                    if(sub === null){
-                        reg.pushManager.subscribe({
-                            userVisibleOnly: true
-                        });
-                    } else {
-                        
-                    }
-                })
+            .then((sw) => {
+                return sw.pushManager.getSubscription();
+            }).then((sub) => {
+                console.log(sub);
+                if(sub === null){
+                    let vapidKey = 'BDS16gOHo-U1qqgD6cGbLMTEZe_lrbgk3aKAs3T38YQiFvoucK7hSRjJUJhuj8e4_PxqIWm-CWc3OFOi2sSXbZI';
+                    let convertedVapidKey = urlBase64ToUint8Array(vapidKey);
+                    reg.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: convertedVapidKey
+                    }).then((newSub) => {
+                        console.log(newSub);
+                        return axios({
+                            method:'post',
+                            url: "https://tuantuango.herokuapp.com/subscribe",
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            data: newSub
+                        }).then((res) => {
+                            console.log('subscribe success', res);
+                            if(response.ok){
+                                displayNotification();
+                            }
+                        }).catch((err) => {
+                            console.log('Something went wrong => fallback => newSub', err);
+                        })
+                    });
+                } else {
+                    
+                }
+            })
         }
-
+        
         self.addEventListener('notificationonclick', (event) => {
             var notification = event.notification;
             var action = event.action;
-
+            
             console.log(notification);
             if(action == 'confirm'){
                 console.log('使用者點選確認');
@@ -89,4 +126,5 @@
     </script>
     
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
 </html>

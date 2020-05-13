@@ -471,7 +471,18 @@ $(document).ready(()=>{
                     }).then((res)=>{
                         document.querySelector("#wrapConclusion>p").textContent = "";
                         //網址
-                        document.querySelector('#wrapConclusion').setAttribute('style', 'opacity: .3');
+                        document.querySelector('#conclusionInform').setAttribute('style', 'height: 100vh');
+                        const goto = document.querySelectorAll('#conclusionInform>a')
+                        goto[0].addEventListener('click', (e)=> {
+                            e.preventDefault();
+                            localStorage.setItem('tagetPage', 2)
+                            window.location.replace('./func.html');
+                        });
+                        goto[1].addEventListener('click', (e) => {
+                            e.preventDefault();
+                            localStorage.setItem('targetPage', 1);
+                            window.location.replace('./func.html');
+                        });
                     }).catch((err)=>{
                         throw new Error(err);
                     })

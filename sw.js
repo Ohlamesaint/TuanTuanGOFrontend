@@ -58,7 +58,29 @@ self.addEventListener("fetch", evt => {
     )
 });
 
-self.addEventListener('push', e => { return displayNotification(e) });
+self.addEventListener('push', e => { 
+    console.log('in push');
+    const data = e.data.json();
+    if('serviceWorker' in navigator){
+        var options = {
+            body: data.content,
+            icon: './public/img/tuantuango196.png',
+            image: './public/img/tuantuango196.png',
+            dir: 'ltr',
+            lang: 'zh-Hant',
+            vibrate: [100],
+            badge: './public/img/tuantuango196.png',
+            tag: 'confirm-notification',
+            renotify: true,
+            actions: [{
+                action: 'confirm', title: '確認', icon: './public/img/tuantuango196.png'
+            },{
+                action: 'cancel', title: '取消', icon: './public/img/tuantuango196.png'
+            }]
+        };
+        self.registration .showNotification(data.title, options);
+    }
+ });
 
 
 function displayNotification(e) {

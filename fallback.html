@@ -36,14 +36,14 @@
                     icon: './public/img/tuantuango196.png',
                     dir: 'ltr',
                     lang: 'zh-Hant',
-                    vibrate: [100],
+                    vibrate: [100, 50, 200],
                     badge: './public/img/tuantuango196.png',
                     tag: 'confirm-notification',
                     renotify: true,
                     actions: [{
-                        actions: 'confirm', title: '確認', icon: './public/img/tuantuango196.png'
+                        actions: 'confirm', title: '確認'
                     },{
-                        actions: 'cancel', title: '取消', icon: './public/img/tuantuango196.png'
+                        actions: 'cancel', title: '取消'
                     }]
                 };
                 navigator.serviceWorker.ready

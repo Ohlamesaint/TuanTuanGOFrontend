@@ -161,7 +161,10 @@ const initQrCodeScanner = () => {
 
 
 $(document).ready(()=>{
-    
+    back.addEventListener("click", (evt) => {
+        evt.preventDefault();
+        window.location.replace('../main.html');
+    })
     var i = 0;
     pathALL.forEach((el)=>{
         el.forEach((el, i) => {

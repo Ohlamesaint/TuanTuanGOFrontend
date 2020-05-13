@@ -21,19 +21,19 @@ const send = async () => {
 
 if("serviceWorker" in navigator){
     send().catch(err => console.log(err));
-    navigator.serviceWorker.register("./sw.js")
-    .then((reg) => {
-        console.log("service worker registered", reg) 
-        let enableNotifications = document.querySelectorAll('.enable-notification');
-        if('Notification' in window) {
-            for(let i=0; i<enableNotifications.length; i++){
-                enableNotifications[i].style.display = 'inline-block';
-                enableNotifications[i].addEventListener('click', askForNotificationPermission);
-            }
-        }
-    }).catch((err) => {
-        console.log(new Error("service worker not registered"), err)
-    })
+    // navigator.serviceWorker.register("./sw.js")
+    // .then((reg) => {
+    //     console.log("service worker registered", reg) 
+    //     let enableNotifications = document.querySelectorAll('.enable-notification');
+    //     if('Notification' in window) {
+    //         for(let i=0; i<enableNotifications.length; i++){
+    //             enableNotifications[i].style.display = 'inline-block';
+    //             enableNotifications[i].addEventListener('click', askForNotificationPermission);
+    //         }
+    //     }
+    // }).catch((err) => {
+    //     console.log(new Error("service worker not registered"), err)
+    // })
 }
 
 

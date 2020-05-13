@@ -939,13 +939,13 @@ document.querySelector("#bluetooth").addEventListener("click", () => {
             console.log("拒收並退款");
             console.log(document.querySelector("#JoinTuanGOCost").textContent);
             var str = document.querySelector("#JoinTuanGOCost").textContent;
-            tmp = str.split(" ");
+            var tmp = str.split(" ");
             axios({
                 method: "POST",
                 url: "https://tuantuango.herokuapp.com/sendMoney",
                 withCredentials: true,
                 data: {
-                    money: tmp[0]*tmp[2]
+                    money: tmp[0]*tmp[5]
                 }
             }).then((res) => {
                 if (res.data.success == false) {
@@ -958,7 +958,7 @@ document.querySelector("#bluetooth").addEventListener("click", () => {
             }).catch((err) => {
                 throw new Error(err);
             })
-            console.log("send_money_post ",tmp[0]*tmp[2]);
+            console.log("send_money_post ",tmp[0]*tmp[5]);
         });
         var contract_address = document.querySelector('#JoinTuanGOContractAddress');
         plt(contract_address.textContent,0);

@@ -24,7 +24,7 @@
                 if(status!=='granted'){
                     console.log('user denied');
                 } else {
-                    displayNotification();
+                    setPushSubcribe();
                 }
             })
         }
@@ -54,6 +54,22 @@
             }
         }
 
+        function setPushSubcribe() {
+            navigator.serviceWorker.ready
+                .then((sw) => {
+                    return sw.pushManager.getSubscription();
+                }).then((sub) => {
+                    console.log(sub);
+                    if(sub === null){
+                        reg.pushManager.subscribe({
+                            userVisibleOnly: true
+                        });
+                    } else {
+                        
+                    }
+                })
+        }
+
         self.addEventListener('notificationonclick', (event) => {
             var notification = event.notification;
             var action = event.action;
@@ -66,6 +82,9 @@
             } else {
                 console.log(action);
             }
+        })
+        self.addEventListener('notificationonclose', (event) => {
+            alert('使用者沒興趣');
         })
     </script>
     

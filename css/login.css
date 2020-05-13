@@ -135,3 +135,12 @@ body{
     display: block;
     clear: both;
 }
+
+#visitor {
+    position: absolute;
+    top: 90vh;
+    height: 10vh;
+    width: 100vh;
+    text-align: center;
+    line-height: 10vh;
+}

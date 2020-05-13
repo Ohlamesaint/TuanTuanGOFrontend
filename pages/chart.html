@@ -1,0 +1,174 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js-rangeslider@1.2.5/dist/RangeSlider-all.min.css">
+<canvas id="ini" width="500" height="300"></canvas>
+
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<h1>test</h1>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/gsap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
+<script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+<script src="https://cdn.jsdelivr.net/npm/nouislider@14.4.0/distribute/nouislider.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js-rangeslider@1.2.5/dist/RangeSlider-all.min.js"></script>
+<script>
+
+    //this is just for debug
+        randomTo = function (from, to) {
+            return Math.floor(Math.random() * (to - from + 1) + from);
+        };
+    // line chart data
+    var iniData = {
+        labels:[
+            "2000",
+            "2001",
+            "2002",
+            "2003",
+            "2004",
+            "2005",
+            "2006",
+            "2007",
+            "2008",
+            "2009",
+            "2011",
+            "2012",
+            "2013",
+            "2014",
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020"
+        ],
+        datasets:[{
+            label: "Rangeslider Line 1",
+            fillColor:"rgba(172,194,132,0)",
+            strokeColor:"#C45662",
+            pointColor:"#C45662",
+            pointStrokeColor:"#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "#C45662",
+            /*You only put numeric data here*/
+            data:[
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+            ]
+        },
+        {
+            label: "Rangeslider Line 2",
+            fillColor:"rgba(172,194,132,0)",
+            strokeColor:"#C45662",
+            pointColor:"#C45662",
+            pointStrokeColor:"#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "#C45662",
+            /*You only put numeric data here*/
+            data:[
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+                randomTo(480, 600),
+            ],
+        }]
+    },
+
+
+    // create the options
+    options = {
+        scaleBeginAtZero: true,
+        /*This is how to customize the way the labels look :) */
+        tooltipTemplate: "<%if (label){%><%=label%>: <%}%>$<%= value %>",
+        label: 'test'
+    },
+
+
+
+    // get line chart canvas
+    ini = document.getElementById('ini').getContext('2d')
+
+
+    rs = new RangeSliderChart({
+
+        chartData: iniData,
+        chartOpts: options,
+        chartType: 'line',
+        chartCTX: ini,
+
+        class: 'my-chart-ranger',
+
+        initial: [3, 10]
+    })
+
+</script>

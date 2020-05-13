@@ -268,7 +268,8 @@ footer ul li{
 canvas {
     width: 100% !important;
     height: auto !important;
-    max-height: 300px;
+    max-height: 600px;
+    pointer-events: none;
   }
 
 /* #back>p{

@@ -472,7 +472,7 @@ $(document).ready(()=>{
                             amount : TuanGOType?$("#unpackedProductNum").val():$("#promoteProductNum").val(),
                         }
                     }).then((res)=>{
-                        document.querySelector("#wrapConclusion>p").textContent = "";
+                        document.querySelector("#wrapConclusion>p").textContent = "TuanGO successed!";
                         //網址
                         
                         document.querySelector('#conclusionInform').classList.remove('hide');

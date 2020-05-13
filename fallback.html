@@ -17,7 +17,7 @@
                 enableNotifications[i].addEventListener('click', askForNotificationPermission);
             }
         }
-
+        
         function askForNotificationPermission() {
             Notification.requestPermission((status) => {
                 console.log('User choice', status);
@@ -29,14 +29,29 @@
             })
         }
         
-        // function displayNotification() {
-        //     if('serviceWorker' in Navigator){
-        //         var options = {
-        //             body: '團購訊息'
-        //         };
-        //         navigator
-        //     }
-        // }
+        function displayNotification() {
+            if('serviceWorker' in navigator){
+                var options = {
+                    body: '團購中的訊息',
+                    icon: './public/img/tuantuango196.png',
+                    dir: 'ltr',
+                    lang: 'zh-Hant',
+                    vibrate: [100],
+                    badge: './public/img/tuantuango196.png',
+                    tag: 'confirm-notification',
+                    renotify: true,
+                    actions: [{
+                        actions: 'confirm', title: '確認', icon: './public/img/tuantuango196.png'
+                    },{
+                        actions: 'cancel', title: '取消', icon: './public/img/tuantuango196.png'
+                    }]
+                };
+                navigator.serviceWorker.ready
+                .then((sw) => {
+                    sw.showNotification('訂閱成功', options);
+                })
+            }
+        }
     </script>
     
 </body>

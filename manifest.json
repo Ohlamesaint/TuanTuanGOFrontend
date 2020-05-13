@@ -8,12 +8,12 @@
     "orientation" : "protrait-primary",
     "icons" :[
         {
-            "src" : "./public/img/top1.png",
+            "src" : "./public/img/tuantuango196.png",
             "type" : "image/png",
-            "sizes" : "192x192"
+            "sizes" : "196x196"
         },
         {
-            "src" : "./public/img/top.png",
+            "src" : "./public/img/tuantuango512.png",
             "type" : "image/png",
             "sizes" : "512x512"
         }

@@ -39,6 +39,8 @@ self.addEventListener("activate", evt => {
     )
 });
 
+
+
 self.addEventListener("fetch", evt => {
     // console.log("service worker gotvddcdbsffd fetched", evt);
     evt.respondWith(                    //service worker中途攔截
@@ -55,3 +57,46 @@ self.addEventListener("fetch", evt => {
         })
     )
 });
+
+self.addEventListener('push', e => { displayNotification(e) });
+
+
+function displayNotification(e) {
+    const data = e.data.json();
+    if('serviceWorker' in navigator){
+        var options = {
+            body: data.content,
+            icon: './public/img/tuantuango196.png',
+            image: './public/img/tuantuango196.png',
+            dir: 'ltr',
+            lang: 'zh-Hant',
+            vibrate: [100],
+            badge: './public/img/tuantuango196.png',
+            tag: 'confirm-notification',
+            renotify: true,
+            actions: [{
+                action: 'confirm', title: '確認', icon: './public/img/tuantuango196.png'
+            },{
+                action: 'cancel', title: '取消', icon: './public/img/tuantuango196.png'
+            }]
+        };
+        self.registration .showNotification(data.title, options);
+    }
+}
+
+self.addEventListener('notificationonclick', (event) => {
+    var notification = event.notification;
+    var action = event.action;
+    
+    console.log(notification);
+    if(action == 'confirm'){
+        console.log('使用者點選確認');
+        localStorage.setItem('target', 1);
+        window.location.replace('./pages/func.html');
+    } else {
+        console.log(action);
+    }
+})
+self.addEventListener('notificationonclose', (event) => {
+    alert('使用者沒興趣');
+})

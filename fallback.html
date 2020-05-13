@@ -53,6 +53,20 @@
                 })
             }
         }
+
+        self.addEventListener('notificationonclick', (event) => {
+            var notification = event.notification;
+            var action = event.action;
+
+            console.log(notification);
+            if(action == 'confirm'){
+                console.log('使用者點選確認');
+                localStorage.setItem('target', 1);
+                window.location.replace('./pages/func.html');
+            } else {
+                console.log(action);
+            }
+        })
     </script>
     
 </body>

@@ -471,7 +471,7 @@ $(document).ready(()=>{
                     }).then((res)=>{
                         document.querySelector("#wrapConclusion>p").textContent = "";
                         //網址
-                        document.querySelector('#wrapConclusion').setAttribute('style', 'height: 20vh');
+                        document.querySelector('#wrapConclusion').setAttribute('style', 'opacity: .3');
                     }).catch((err)=>{
                         throw new Error(err);
                     })

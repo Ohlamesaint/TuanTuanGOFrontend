@@ -8,5 +8,36 @@
 </head>
 <body>
     <button class="enable-notification">允許推播</button>
+    <script>
+        let enableNotifications = document.querySelectorAll('.enable-notification');
+        
+        if('Notification' in window) {
+            for(let i=0; i<enableNotifications.length; i++){
+                enableNotifications[i].style.display = 'inline-block';
+                enableNotifications[i].addEventListener('click', askForNotificationPermission);
+            }
+        }
+
+        function askForNotificationPermission() {
+            Notification.requestPermission((status) => {
+                console.log('User choice', status);
+                if(status!=='granted'){
+                    console.log('user denied');
+                } else {
+                    displayNotification();
+                }
+            })
+        }
+        
+        // function displayNotification() {
+        //     if('serviceWorker' in Navigator){
+        //         var options = {
+        //             body: '團購訊息'
+        //         };
+        //         navigator
+        //     }
+        // }
+    </script>
+    
 </body>
 </html>

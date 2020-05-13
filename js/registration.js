@@ -95,7 +95,7 @@ $(document).ready(function(){
 
         axios({
             method: "POST",
-            url: "https://tuantuango.herokuapp.com/static",
+            url: "https://tuantuango.herokuapp.com/static/test",
             data: form,
             // withCredentials: true,
         }).then((res) => {

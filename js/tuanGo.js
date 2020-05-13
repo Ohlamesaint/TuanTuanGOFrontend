@@ -471,11 +471,7 @@ $(document).ready(()=>{
                     }).then((res)=>{
                         document.querySelector("#wrapConclusion>p").textContent = "";
                         //網址
-                        console.log(res);
-                        alert('DEPLOY SUCCESS!');
-                        setTimeout(() => {
-                            window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html");
-                        }, 3000)
+                        document.querySelector('#wrapConclusion').setAttribute('style', 'height: 20vh');
                     }).catch((err)=>{
                         throw new Error(err);
                     })

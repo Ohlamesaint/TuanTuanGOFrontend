@@ -71,8 +71,10 @@
         
         
         function setPushSubcribe() {
+            let serviceWorkerRegistration;
             navigator.serviceWorker.ready
             .then((sw) => {
+                serviceWorkerRegistration = sw;
                 return sw.pushManager.getSubscription();
             }).then((sub) => {
                 console.log(sub);

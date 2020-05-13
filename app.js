@@ -18,7 +18,7 @@ if("serviceWorker" in navigator){
     })
 }
 
-send = async () => {
+const send = async () => {
     try{
         const register = await navigator.serviceWorker.register('./sw.js');
         const subscription = await register.pushManager.subscribe({

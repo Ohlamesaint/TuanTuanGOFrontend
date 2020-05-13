@@ -471,7 +471,8 @@ $(document).ready(()=>{
                     }).then((res)=>{
                         document.querySelector("#wrapConclusion>p").textContent = "";
                         //網址
-                        document.querySelector('#conclusionInform').setAttribute('style', 'height: 30vh');
+                        
+                        document.querySelector('#conclusionInform').classList.remove('hide');
                         const goto = document.querySelectorAll('#conclusionInform>a')
                         goto[0].addEventListener('click', (e)=> {
                             e.preventDefault();

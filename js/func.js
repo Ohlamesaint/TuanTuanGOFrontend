@@ -937,8 +937,9 @@ document.querySelector("#bluetooth").addEventListener("click", () => {
         deny_bt.addEventListener("click", () => {
             deny_bt.disabled = true;
             console.log("拒收並退款");
-            console.log(document.querySelector("#JoinTuanGOCost").textContent);
-            var tmp = document.querySelector("#JoinTuanGOCost").textContent.split(" ");
+            console.logdocu(ment.querySelector("#JoinTuanGOCost").textContent);
+            var str = document.querySelector("#JoinTuanGOCost").textContent;
+            tmp = str.split(" ");
             axios({
                 method: "POST",
                 url: "https://tuantuango.herokuapp.com/sendMoney",

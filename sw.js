@@ -105,7 +105,7 @@ function displayNotification(e) {
     }
 }
 
-self.addEventListener('notificationonclick', (event) => {
+self.addEventListener('notificationclick', (event) => {
     var notification = event.notification;
     var action = event.action;
     console.log('123')
@@ -118,6 +118,6 @@ self.addEventListener('notificationonclick', (event) => {
         console.log(action);
     }
 })
-self.addEventListener('notificationonclose', (event) => {
+self.addEventListener('notificationclose', (event) => {
     alert('使用者沒興趣');
 })

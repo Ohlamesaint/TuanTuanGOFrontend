@@ -60,6 +60,7 @@ self.addEventListener("fetch", evt => {
 
 self.addEventListener('push', async e => { 
     const data = e.data.json();
+    console.log('in push');
     if('serviceWorker' in navigator){
         var options = {
             body: data.content,

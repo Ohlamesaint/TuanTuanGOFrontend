@@ -79,7 +79,8 @@ self.addEventListener('push', async e => {
             }]
         };
         console.log(data, options);
-        self.ready.then((sw) => {
+        console.log(self);
+        self.serviceWorker.ready.then((sw) => {
             sw.showNotification(data.title, options);
         })
     

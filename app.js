@@ -10,15 +10,15 @@ const send = async () => {
                 applicationServerKey: urlBase64ToUint8Array(vapidKey)
             })
             await fetch('https://tuantuango.herokuapp.com/subscribe', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(subscription) 
-            })
-        } else {
-            console.log('user denied');
-        }
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(subscription) 
+        })
+    } else {
+        console.log('user denied');
+    }
 } catch (err) {
     console.log('something went wrong => app => send', err);
 }

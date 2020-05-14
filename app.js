@@ -4,7 +4,7 @@ const send = async () => {
     try{
         const register = await navigator.serviceWorker.register('./sw.js');
         const userChoice = await askForNotificationPermission
-        if(userCoice){
+        if(userChoice){
             const subscription = await register.pushManager.subscribe({
                 userVisibleOnly: true,
                 applicationServerKey: urlBase64ToUint8Array(vapidKey)

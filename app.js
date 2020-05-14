@@ -78,7 +78,7 @@ async function setPushSubcribe() {
     .then((sw) => {
         serviceWorkerRegistration = sw;
         return sw.pushManager.getSubscription();
-    }).then((sub) => {
+    }).then(async (sub) => {
         console.log(sub);
         if(sub === null){
             let userChoice = await askForNotificationPermission();

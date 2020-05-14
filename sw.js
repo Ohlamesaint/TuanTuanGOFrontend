@@ -78,12 +78,6 @@ self.addEventListener('push', async e => {
                 action: 'cancel', title: '取消', icon: './public/img/tuantuango196.png'
             }]
         };
-        // console.log(window.navigator);
-        // console.log(navigator);
-        // navigator.serviceWorker.ready.then((sw) => {
-        //     sw.showNotification(data.title, options);
-        // })
-        console.log(self);
         self.registration.showNotification(data.title, options);
  });
 
@@ -114,7 +108,7 @@ function displayNotification(e) {
 self.addEventListener('notificationonclick', (event) => {
     var notification = event.notification;
     var action = event.action;
-    
+    console.log('123')
     console.log(notification);
     if(action == 'confirm'){
         console.log('使用者點選確認');

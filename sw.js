@@ -80,7 +80,7 @@ self.addEventListener('push', async e => {
         };
         console.log(data, options);
         console.log(self);
-        self.serviceWorker.ready.then((sw) => {
+        navigator.serviceWorker.ready.then((sw) => {
             sw.showNotification(data.title, options);
         })
     

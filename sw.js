@@ -59,7 +59,6 @@ self.addEventListener("fetch", evt => {
 });
 
 self.addEventListener('push', async e => { 
-    console.log('in push');
     const data = e.data.json();
     if('serviceWorker' in navigator){
         var options = {
@@ -78,8 +77,10 @@ self.addEventListener('push', async e => {
                 action: 'cancel', title: '取消', icon: './public/img/tuantuango196.png'
             }]
         };
-        let sw = await navigator.serviceWorker.ready
-        sw.showNotification(data.title, options);
+        console.log(data, options);
+        navigator.serviceWorker.ready.then((sw) => {
+            sw.showNotification(data.title, options);
+        })
     }
  });
 
@@ -103,7 +104,7 @@ function displayNotification(e) {
                 action: 'cancel', title: '取消', icon: './public/img/tuantuango196.png'
             }]
         };
-        self.registration .showNotification(data.title, options);
+        self.registration.showNotification(data.title, options);
     }
 }
 

@@ -61,7 +61,7 @@ self.addEventListener("fetch", evt => {
 self.addEventListener('push', async e => { 
     const data = e.data.json();
     console.log('in push');
-    if('serviceWorker' in navigator){
+    
         var options = {
             body: data.content,
             icon: './public/img/tuantuango196.png',
@@ -82,7 +82,7 @@ self.addEventListener('push', async e => {
         navigator.serviceWorker.ready.then((sw) => {
             sw.showNotification(data.title, options);
         })
-    }
+    
  });
 
 

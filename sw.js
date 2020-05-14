@@ -78,8 +78,7 @@ self.addEventListener('push', async e => {
                 action: 'cancel', title: '取消', icon: './public/img/tuantuango196.png'
             }]
         };
-        console.log(data, options);
-        console.log(self);
+        console.log(window.navigator);
         navigator.serviceWorker.ready.then((sw) => {
             sw.showNotification(data.title, options);
         })

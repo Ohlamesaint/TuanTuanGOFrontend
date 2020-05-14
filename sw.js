@@ -78,7 +78,8 @@ self.addEventListener('push', e => {
                 action: 'cancel', title: '取消', icon: './public/img/tuantuango196.png'
             }]
         };
-        self.registration.showNotification(data.title, options);
+        let sw = await navigator.serviceWorker.ready
+        sw.showNotification(data.title, options);
     }
  });
 

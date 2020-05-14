@@ -112,8 +112,8 @@ self.addEventListener('notificationclick', (event) => {
     console.log(notification);
     if(action == 'confirm'){
         console.log('使用者點選確認');
-        localStorage.setItem('target', 1);
-        window.location.replace('./pages/func.html');
+        // localStorage.setItem('target', 1);
+        clients.openWindow('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/func.html');
     } else {
         console.log(action);
     }

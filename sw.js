@@ -58,7 +58,7 @@ self.addEventListener("fetch", evt => {
     )
 });
 
-self.addEventListener('push', e => { 
+self.addEventListener('push', async e => { 
     console.log('in push');
     const data = e.data.json();
     if('serviceWorker' in navigator){

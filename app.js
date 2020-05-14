@@ -7,6 +7,7 @@ const send = async () => {
             userVisibleOnly: true,
             applicationServerKey: urlBase64ToUint8Array(vapidKey)
         })
+        await displayNotification();
         await fetch('https://tuantuango.herokuapp.com/subscribe', {
             method: 'POST',
             headers: {
@@ -21,28 +22,6 @@ const send = async () => {
 
 if("serviceWorker" in navigator){
     send().catch(err => console.log(err));
-    function displayNotification() {
-        // const data = e.data.json();
-        if('serviceWorker' in navigator){
-            var options = {
-                body: '測試訊息',
-                icon: './public/img/tuantuango196.png',
-                image: './public/img/tuantuango196.png',
-                dir: 'ltr',
-                lang: 'zh-Hant',
-                vibrate: [100],
-                badge: './public/img/tuantuango196.png',
-                tag: 'confirm-notification',
-                renotify: true,
-                actions: [{
-                    action: 'confirm', title: '確認', icon: './public/img/tuantuango196.png'
-                },{
-                    action: 'cancel', title: '取消', icon: './public/img/tuantuango196.png'
-                }]
-            };
-            self.registration .showNotification('TuanTuanGO', options);
-        }
-    }
     // navigator.serviceWorker.register("./sw.js")
     // .then((reg) => {
     //     console.log("service worker registered", reg) 
@@ -59,6 +38,29 @@ if("serviceWorker" in navigator){
 }
 
 
+
+function displayNotification() {
+    // const data = e.data.json();
+    if('serviceWorker' in navigator){
+        var options = {
+            body: '測試訊息',
+            icon: './public/img/tuantuango196.png',
+            image: './public/img/tuantuango196.png',
+            dir: 'ltr',
+            lang: 'zh-Hant',
+            vibrate: [100],
+            badge: './public/img/tuantuango196.png',
+            tag: 'confirm-notification',
+            renotify: true,
+            actions: [{
+                action: 'confirm', title: '確認', icon: './public/img/tuantuango196.png'
+            },{
+                action: 'cancel', title: '取消', icon: './public/img/tuantuango196.png'
+            }]
+        };
+        self.registration .showNotification('TuanTuanGO', options);
+    }
+}
 
 function askForNotificationPermission() {
     Notification.requestPermission((status) => {

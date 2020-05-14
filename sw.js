@@ -108,8 +108,6 @@ function displayNotification(e) {
 self.addEventListener('notificationclick', (event) => {
     var notification = event.notification;
     var action = event.action;
-    console.log('123')
-    console.log(notification);
     if(action == 'confirm'){
         console.log('使用者點選確認');
         // localStorage.setItem('target', 1);

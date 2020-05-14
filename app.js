@@ -3,26 +3,25 @@ const vapidKey = 'BGxHf6ZQkHVoIdROO4Fir61eouPlqUp3IzxsV4ud10FeXgS5vvG9q3Gw5J7lsp
 const send = async () => {
     try{
         const register = await navigator.serviceWorker.register('./sw.js');
-        let response = await setPushSubcribe();
-        if(!response) {
-            console.log('user denied!');
-        }
-        // const userChoice = await askForNotificationPermission();
-        // if(userChoice){
-        //     const subscription = await register.pushManager.subscribe({
-        //         userVisibleOnly: true,
-        //         applicationServerKey: urlBase64ToUint8Array(vapidKey)
-        //     })
-        //     await fetch('https://tuantuango.herokuapp.com/subscribe', {
-        //     method: 'POST',
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(subscription) 
-        // })
-    } catch (err) {
-    console.log('something went wrong => app => send', err);
+        const userChoice = await askForNotificationPermission
+        if(userChoice){
+            const subscription = await register.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array(vapidKey)
+            })
+            await fetch('https://tuantuango.herokuapp.com/subscribe', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(subscription) 
+        })
+    } else {
+        console.log('user denied');
     }
+} catch (err) {
+    console.log('something went wrong => app => send', err);
+}
 }
 
 if("serviceWorker" in navigator){
@@ -72,32 +71,37 @@ function urlBase64ToUint8Array(base64String) {
     return outputArray;
 }
 
-async function setPushSubcribe() {
+function setPushSubcribe() {
     let serviceWorkerRegistration;
     navigator.serviceWorker.ready
     .then((sw) => {
         serviceWorkerRegistration = sw;
         return sw.pushManager.getSubscription();
-    }).then(async (sub) => {
+    }).then((sub) => {
         console.log(sub);
         if(sub === null){
-            let userChoice = await askForNotificationPermission();
-            if(!userChoice){
-                return false;
-            }
-            const subscription = await register.pushManager.subscribe({
+            let vapidKey = 'BBm9Lg4XNHlqrXibp3jvAOUQQ4QrFSV-ibDBznIqWku2ygTmH6Siy25n_koaK6NGmhfvLxCmnqkqKtG-WrHi2ts';
+            let convertedVapidKey = urlBase64ToUint8Array(vapidKey);
+            serviceWorkerRegistration.pushManager.subscribe({
                 userVisibleOnly: true,
-                applicationServerKey: urlBase64ToUint8Array(vapidKey)
-            })
-            await fetch('https://tuantuango.herokuapp.com/subscribe', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(subscription) 
-            })
+                applicationServerKey: convertedVapidKey
+            }).then((newSub) => {
+                console.log(newSub);
+                return axios({
+                    method:'post',
+                    url: "https://tuantuango.herokuapp.com/subscribe",
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    data: newSub
+                }).then((res) => {
+                    console.log('push registration success', res);
+                }).catch((err) => {
+                    console.log('Something went wrong => fallback => newSub', err);
+                })
+            });
         } else {
-        console.log(sub);
+            console.log(sub);
         }
     })
 }

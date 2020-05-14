@@ -79,6 +79,7 @@ self.addEventListener('push', async e => {
             }]
         };
         console.log(window.navigator);
+        console.log(navigator);
         navigator.serviceWorker.ready.then((sw) => {
             sw.showNotification(data.title, options);
         })

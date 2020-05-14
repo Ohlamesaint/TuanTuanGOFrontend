@@ -7,7 +7,6 @@ const send = async () => {
             userVisibleOnly: true,
             applicationServerKey: urlBase64ToUint8Array(vapidKey)
         })
-        await displayNotification();
         await fetch('https://tuantuango.herokuapp.com/subscribe', {
             method: 'POST',
             headers: {

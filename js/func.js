@@ -1063,7 +1063,7 @@ function handleLedStatusChanged(event) {
       else if(over_count == over_num){
         file_string += json_string;
         console.log(file_string);
-        console.log(file_string[data_count]["time"]);
+        console.log(file_string[0]["time"]);
         var data_len = Object.keys(file_string).length
         var data_time = [];
         var data_collision = [];

@@ -988,7 +988,7 @@ document.querySelector("#bluetooth").addEventListener("click", async event => {
         });
         // var contract_address = document.querySelector('#JoinTuanGOContractAddress');
         // plt(contract_address.textContent,0);
-    }, 3000);
+    }, 500);
 });
 function plt(contract_address,type) {
     console.log(contract_address);
@@ -1063,7 +1063,7 @@ function handleLedStatusChanged(event) {
       else if(over_count == over_num){
         file_string += json_string;
         console.log(file_string);
-
+        console.log(file_string[data_count]["time"]);
         var data_len = Object.keys(file_string).length
         var data_time = [];
         var data_collision = [];

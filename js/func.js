@@ -1068,7 +1068,7 @@ function handleLedStatusChanged(event) {
         var data_time = [];
         var data_collision = [];
         var data_temperature = [];
-        for(data_count = 0; data_count < data_len; data_count++){
+        for(let data_count = 0; data_count < data_len; data_count++){
             data_time.push(file_string[data_count]["time"]);
             data_collision.push(file_string[data_count]["collision"]);
             data_temperature.push(file_string[data_count]["temperature"]);

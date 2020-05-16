@@ -6,6 +6,15 @@ var middleWrapRowList = document.querySelectorAll(".wrap>div>div>.row")
 var headPaste = document.querySelector("#headPaste");
 var mutex = true;
 const tl = new TimelineMax({ repeat: -1 });
+
+/* bluetooth var */
+var file_string = "";
+var over_count = 0;
+var over_num = 0;
+var over = 0;
+var balenaBLE = new BalenaBLE();
+/* bluetooth var */
+
 tl.staggerFrom(['#block_chain > path:nth-child(1)', '#block_chain > path:nth-child(2)', '#block_chain > path:nth-child(3)', '#block_chain > path:nth-child(4)', '#block_chain > path:nth-child(5)', '#block_chain > path:nth-child(6)', '#block_chain > path:nth-child(7)', '#block_chain > path:nth-child(8)', '#block_chain > path:nth-child(9)', '#block_chain > path:nth-child(10)', '#block_chain > path:nth-child(11)', '#block_chain > path:nth-child(12)', '#block_chain > path:nth-child(13)', '#block_chain > path:nth-child(14)', '#block_chain > path:nth-child(15)', '#block_chain > path:nth-child(16)', '#block_chain > path:nth-child(17)', '#block_chain > path:nth-child(18)', '#block_chain > path:nth-child(19)', '#block_chain > path:nth-child(20)', '#block_chain > path:nth-child(21)', '#block_chain > path:nth-child(22)', '#block_chain > path:nth-child(23)', '#block_chain > path:nth-child(24)'], 0.5,
     { scaleY: 0, scaleX: 0, transformOrigin: "center", ease: Bounce.easeOut, stagger: 0.2 });
 tl.staggerTo(['#block_chain > path:nth-child(1)', '#block_chain > path:nth-child(2)', '#block_chain > path:nth-child(3)', '#block_chain > path:nth-child(4)', '#block_chain > path:nth-child(5)', '#block_chain > path:nth-child(6)', '#block_chain > path:nth-child(7)', '#block_chain > path:nth-child(8)', '#block_chain > path:nth-child(9)', '#block_chain > path:nth-child(10)', '#block_chain > path:nth-child(11)', '#block_chain > path:nth-child(12)', '#block_chain > path:nth-child(13)', '#block_chain > path:nth-child(14)', '#block_chain > path:nth-child(15)', '#block_chain > path:nth-child(16)', '#block_chain > path:nth-child(17)', '#block_chain > path:nth-child(18)', '#block_chain > path:nth-child(19)', '#block_chain > path:nth-child(20)', '#block_chain > path:nth-child(21)', '#block_chain > path:nth-child(22)', '#block_chain > path:nth-child(23)', '#block_chain > path:nth-child(24)'], 0.5,
@@ -913,7 +922,22 @@ if (!document.getElementById("modal_close").onclick) {
         belowBar[1].click();
     });
 }
-document.querySelector("#bluetooth").addEventListener("click", () => {
+
+//document.querySelector("#bluetooth").addEventListener("click", () => {
+document.querySelector("#bluetooth").addEventListener("click", async event => {
+    try {
+        await balenaBLE.request();
+        await balenaBLE.connect();
+        await balenaBLE.setLedCharacteristic();
+        await balenaBLE.setDeviceCharacteristic();
+        
+        read_count(); // get data
+    } 
+    catch (error) {
+        console.log(error.message);
+    }
+
+
     var bt = document.querySelector("#bluetooth");
     bt.disabled = true;
     var loading = document.createElement('i');
@@ -1007,4 +1031,56 @@ function plt(contract_address,type) {
         complete_list.push(transfer_list[findindex]);
         transfer_list.splice(findindex,1);
     }
+}
+
+
+//bluetooth function
+
+function handleLedStatusChanged(event) {
+    //let status = event.target.value.getUint8(1);
+    var textDecorder = new TextDecoder('utf-8');
+    let json_string = textDecorder.decode(event.target.value);
+    console.log(json_string);
+    console.log(event.target);
+    if(over == 0){
+      console.log(json_string);
+      over_num = parseInt(json_string, 10);
+      over = 1;
+      if(over_count < over_num){
+        over_count += 1;
+        read_repeat();
+      }
+    }
+    else{
+      if(over_count < over_num){
+        over_count += 1;
+        read_repeat();
+        file_string += json_string;
+        
+      }
+      else if(over_count == over_num){
+        file_string += json_string;
+        console.log(file_string);
+      }
+    }
+}
+
+/* helper function to decode message sent from peripheral */
+function decode(buf) {
+    let dec = new TextDecoder("utf-8");
+    return dec.decode(buf);
+}
+
+/* Disconnect from peripheral and update UI */
+function disconnect() {
+    balenaBLE.disconnect();
+}
+
+async function read_count(){
+    balenaBLE.readLed();
+}
+
+async function read_repeat(){
+    console.log(over_num);
+    balenaBLE.readLed();
 }

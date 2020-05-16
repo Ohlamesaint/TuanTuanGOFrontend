@@ -109,7 +109,7 @@ class BalenaBLE {
 
   /* handler to run when device successfully disconnects */
   onDisconnected() {
-    alert("Device is disconnected.");
-    location.reload();
+    //alert("Device is disconnected.");
+    //location.reload();
   }
 }

@@ -911,16 +911,12 @@ if (!document.getElementById("modal_close").onclick) {
     // event undefined
     document.querySelector("#modal_close").addEventListener("click", () => {
         document.querySelector("#bluetooth").disabled = true;
-        console.log("123")
         document.querySelector("#complete_list").innerHTML = "";
         document.querySelector("#ongoing_list").innerHTML = "";
         document.querySelector("#transfer_list").innerHTML = "";
         try {document.getElementById('transfer_information').remove()}catch{};
-        console.log("4")
         try {document.getElementById('canvas').remove();}catch{};
-        console.log("5")
         try{document.getElementById('deny_button').remove();}catch{};
-        console.log("6")
         belowBar[1].click();
     });
 }
@@ -947,6 +943,12 @@ document.querySelector("#bluetooth").addEventListener("click", async event => {
     bt.appendChild(loading);
     setTimeout(function () {
         bt.removeChild(loading);
+        var confirm = document.createElement("button");
+        confirm.innerText = '確認收貨';
+        confirm.className = 'btn btn-primary justify-content-start';
+        confirm.id = 'confirm_button';
+        confirm.append(bt);
+        bt.remove();
         var info = document.querySelector('#JoinTuanGOProductInformation');
         if(!document.getElementById('canvas')){
             info.innerHTML += `<div class="card-header" id ="transfer_information" style="color: rgb(145, 93, 93)" >配送資訊</div>

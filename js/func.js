@@ -943,11 +943,12 @@ document.querySelector("#bluetooth").addEventListener("click", async event => {
     bt.appendChild(loading);
     setTimeout(function () {
         bt.removeChild(loading);
+        var foot = document.getElementById("foot");
         var confirm = document.createElement("button");
         confirm.innerText = '確認收貨';
         confirm.className = 'btn btn-primary justify-content-start';
         confirm.id = 'confirm_button';
-        confirm.prepend(bt);
+        foot.prepend(confirm);
         var info = document.querySelector('#JoinTuanGOProductInformation');
         if(!document.getElementById('canvas')){
             info.innerHTML += `<div class="card-header" id ="transfer_information" style="color: rgb(145, 93, 93)" >配送資訊</div>

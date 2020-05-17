@@ -943,11 +943,18 @@ document.querySelector("#bluetooth").addEventListener("click", async event => {
     bt.appendChild(loading);
     setTimeout(function () {
         bt.removeChild(loading);
+        bt.remove();
         var foot = document.getElementById("foot");
         var confirm = document.createElement("button");
         confirm.innerText = '確認收貨';
         confirm.className = 'btn btn-primary justify-content-start';
         confirm.id = 'confirm_button';
+        confirm.addEventListener("click",event => {
+            setTimeout(function () {
+                document.getElementById("confirm_button").remove();
+                document.querySelector("#modal_close").click();
+            },1000);
+        });
         foot.prepend(confirm);
         var info = document.querySelector('#JoinTuanGOProductInformation');
         if(!document.getElementById('canvas')){

@@ -953,7 +953,7 @@ document.querySelector("#bluetooth").addEventListener("click", async event => {
         confirm.addEventListener("click",event => {
             setTimeout(function () {
                 document.getElementById("confirm_button").remove();
-                var findindex = transfer_list.findIndex(e => e.contract_address == document.querySelector('#JoinTuanGOContractAddress').contract_address);
+                var findindex = transfer_list.findIndex(e => e.contract_address == document.querySelector('#JoinTuanGOContractAddress').innerText);
                 complete_list.push(transfer_list[findindex]);
                 transfer_list.splice(findindex,1);
                 document.querySelector("#modal_close").disabled = false;

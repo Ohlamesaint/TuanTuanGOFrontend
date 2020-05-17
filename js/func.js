@@ -541,9 +541,7 @@ $(document).ready(function () {
             document.querySelector("#complete_list").innerHTML = "";
             document.querySelector("#ongoing_list").innerHTML = "";
             document.querySelector("#transfer_list").innerHTML = "";
-            $('#productModal').modal({
-                show: false
-              });
+            $('#productModal').modal('hide');
             for (let j = 0; j < middleWrapRowList.length; j++) {
                 if (j == i) {
                     let ch = middleWrapRowList[j].children;

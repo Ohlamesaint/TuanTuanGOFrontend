@@ -945,7 +945,6 @@ document.querySelector("#bluetooth").addEventListener("click", async event => {
     setTimeout(function () {
         bt.removeChild(loading);
         bt.remove();
-        document.querySelector("#modal_close").disabled = false;
         var foot = document.getElementById("foot");
         var confirm = document.createElement("button");
         confirm.innerText = '確認收貨';
@@ -954,6 +953,10 @@ document.querySelector("#bluetooth").addEventListener("click", async event => {
         confirm.addEventListener("click",event => {
             setTimeout(function () {
                 document.getElementById("confirm_button").remove();
+                var findindex = transfer_list.findIndex(e => e.contract_address == contract_address);
+                complete_list.push(transfer_list[findindex]);
+                transfer_list.splice(findindex,1);
+                document.querySelector("#modal_close").disabled = false;
                 document.querySelector("#modal_close").click();
             },1000);
         });

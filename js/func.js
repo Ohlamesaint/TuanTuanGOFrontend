@@ -554,6 +554,9 @@ $(document).ready(function () {
             if (i != 2) {
                 tl.pause();
             }
+            if(i != 1){
+                document.querySelector("#modal_close").click();
+            }
             if (i == 0) {     //my profile 利用req.session來查詢並獲得
                 axios({
                     method: "GET",

@@ -910,10 +910,10 @@ $(document).ready(function () {
 if (!document.getElementById("modal_close").onclick) {
     // event undefined
     document.querySelector("#modal_close").addEventListener("click", () => {
-        document.querySelector("#bluetooth").disabled = true;
         document.querySelector("#complete_list").innerHTML = "";
         document.querySelector("#ongoing_list").innerHTML = "";
         document.querySelector("#transfer_list").innerHTML = "";
+        try {document.querySelector("#bluetooth").disabled = true;} catch{console.log('Bluetooth button had been remove')};
         try {document.getElementById('transfer_information').remove()}catch{};
         try {document.getElementById('canvas').remove();}catch{};
         try{document.getElementById('deny_button').remove();}catch{};

@@ -942,6 +942,7 @@ document.querySelector("#bluetooth").addEventListener("click", async event => {
     loading.className = 'fa fa-spinner fa-spin';
     bt.appendChild(loading);
     document.querySelector("#modal_close").disabled = true;
+    document.querySelector('.close').disabled = true;
     setTimeout(function () {
         bt.removeChild(loading);
         bt.remove();

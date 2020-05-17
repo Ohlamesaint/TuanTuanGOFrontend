@@ -941,9 +941,11 @@ document.querySelector("#bluetooth").addEventListener("click", async event => {
     var loading = document.createElement('i');
     loading.className = 'fa fa-spinner fa-spin';
     bt.appendChild(loading);
+    document.querySelector("#modal_close").disabled = true;
     setTimeout(function () {
         bt.removeChild(loading);
         bt.remove();
+        document.querySelector("#modal_close").disabled = false;
         var foot = document.getElementById("foot");
         var confirm = document.createElement("button");
         confirm.innerText = '確認收貨';

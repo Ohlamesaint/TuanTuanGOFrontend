@@ -541,6 +541,9 @@ $(document).ready(function () {
             document.querySelector("#complete_list").innerHTML = "";
             document.querySelector("#ongoing_list").innerHTML = "";
             document.querySelector("#transfer_list").innerHTML = "";
+            $('#productModal').modal({
+                show: false
+              });
             for (let j = 0; j < middleWrapRowList.length; j++) {
                 if (j == i) {
                     let ch = middleWrapRowList[j].children;
@@ -553,11 +556,6 @@ $(document).ready(function () {
             }
             if (i != 2) {
                 tl.pause();
-            }
-            if(i != 1){
-                $('#myModal').modal({
-                    show: false
-                  });
             }
             if (i == 0) {     //my profile 利用req.session來查詢並獲得
                 axios({

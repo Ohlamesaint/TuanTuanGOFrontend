@@ -947,8 +947,7 @@ document.querySelector("#bluetooth").addEventListener("click", async event => {
         confirm.innerText = '確認收貨';
         confirm.className = 'btn btn-primary justify-content-start';
         confirm.id = 'confirm_button';
-        confirm.append(bt);
-        bt.remove();
+        confirm.prepend(bt);
         var info = document.querySelector('#JoinTuanGOProductInformation');
         if(!document.getElementById('canvas')){
             info.innerHTML += `<div class="card-header" id ="transfer_information" style="color: rgb(145, 93, 93)" >配送資訊</div>

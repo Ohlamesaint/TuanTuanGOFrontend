@@ -253,7 +253,7 @@
                                         e.preventDefault();
                                         localStorage.setItem("TuanGOInform", JSON.stringify(cardBuffer[i]));
                                         document.querySelector("#JoinTuanGOProductName").textContent = cardBuffer[i].productName;
-                                        document.querySelector("#JoinTuanGOTuanGOType").textContent = cardBuffer[i].tuangoType?'unpack':'promote';
+                                        document.querySelector("#JoinTuanGOTuanGOType").textContent = cardBuffer[i].tuangoType=='UNPACK'?'unpack':'promote';
                                         document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(cardBuffer[i].expirationTime).toString().slice(0, 24);
                                         document.querySelector("#JoinTuanGOCost").textContent = cardBuffer[i].price +　"/per";
                                         var num = 0;
@@ -266,7 +266,7 @@
                                             if(j<num) TuanGOerLine += '<i class="fas fa-user"></i>';
                                             else TuanGOerLine += '<i class="far fa-user"></i>';
                                         }
-                                        document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + cardBuffer[i].TotalAmount;
+                                        document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + cardBuffer[i].totalAmount;
                                     })
                                 }
                             }).catch((err)=>{

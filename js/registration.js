@@ -49,6 +49,7 @@ $(document).ready(function(){
                 },
                 data: bodyFormData,
             }).then(res => {
+                console.log('Bearer '+res.data.token);
                 axios({
                     method: "POST",
                     url: "http://localhost:3000/api/v1/user/image",

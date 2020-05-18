@@ -42,13 +42,23 @@ $(document).ready(function(){
             document.querySelector("#error").textContent = ""
             axios({
                 method: "POST",
-                url: "https://tuantuango.herokuapp.com/registration",
+                url: "http://tuantuango-backend.herokuapp.com/api/v1/user/signUp",
                 headers: {
                     'Content-Type':  'multipart/form-data',
                 },
                 data: bodyFormData,
             }).then(res => {
+                axios({
+                    method: "POST",
+                    url: "https://tuantuango.herokuapp.com/addProduct",
+                    headers: {
+                        'content-type': 'multipart/form-data',
+                        'authorization': res.token
+                    },
+                    data: bodyFormDataProduct,
+                })
                 console.log(res);
+                // localStorage.setItem('token', res.token);
             })
             .catch(err=>{
                 throw new Error(err);
@@ -81,6 +91,7 @@ $(document).ready(function(){
                 },
                 data: bodyFormDataProduct,
             }).then(res => {
+                
                 console.log(res);
             })
             .catch(err=>{

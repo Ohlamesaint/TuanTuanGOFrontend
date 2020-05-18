@@ -40,9 +40,8 @@ $(document).ready(function(){
             window.setInterval(animateCSS(loading, 'bounce'), 1000);
             axios({
                 headers: { 'Content-Type': 'application/json' },
-                baseURL: 'https://luffy.ee.ncku.edu.tw/~Shang/TuanTuanGO/login.html',
                 method: 'post',
-                url: 'https://tuantuango.herokuapp.com/signin',
+                url: 'http://tuantuango-backend.herokuapp.com/api/v1/user/login',
                 data: login,
                 responseType: 'json',
                 withCredentials: true

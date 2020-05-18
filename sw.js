@@ -1,4 +1,4 @@
-const staticCacheName = "site-static-v3";      //name of cache, CHANGE EVERY TIME//
+const staticCacheName = "site-static-v4";      //name of cache, CHANGE EVERY TIME//
 const assets = [
     "/",
     // "login.html",

@@ -101,7 +101,7 @@ const initQrCodeScanner = () => {
         }).catch(console.error);
         
         scanner.addListener('scan', content => {
-            let HTTPScheck = /^(https):\/\/(tuantuango-backend.herokuapp.com)\/(api)\/(v1)\/(product)\/(getProduct)/;
+            let HTTPScheck = /^(https):\/\/(tuantuango-backend.herokuapp.com)\/(api)\/(v1)\/(product)\/(getProduct)\/[\d]*$/;
             let URLresult = content;
             if(HTTPScheck.test(URLresult)){
                 console.log("result = " + URLresult);

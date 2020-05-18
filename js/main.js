@@ -57,6 +57,7 @@ $(document).ready(function(){
     signOut.addEventListener("click", (e)=>{
         localStorage.removeItem('token');
     }, false)
+    
     document.querySelector("#JoinTuanGO").addEventListener("click", ()=>{
         axios({
             method:"get",

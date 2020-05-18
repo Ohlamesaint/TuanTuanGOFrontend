@@ -194,21 +194,7 @@ $(document).ready(function () {
             document.querySelector("#email").textContent = res.data.data.email;
             document.querySelector("#address").textContent = res.data.data.address;
             document.querySelector("#region").textContent = res.data.data.region+', Taiwan';
-            document.querySelector("#headPaste").setAttribute('style', `backgound-image: url("${res.data.data.headPaste}")`)
-            // var blob = new Blob([res.data.headPaste], { type: "image/jpg" });
-            // console.log(blob);
-            // var urlCreator = window.URL || window.webkitURL;
-            // var imageUrl = urlCreator.createObjectURL(blob);
-            // var reader = new FileReader();
-            // reader.onload = (() => {
-            //     console.log(reader.result);
-            //     var image = new Image();
-            //     image.src = reader.result;
-            //     document.body.appendChild(image);
-            //     // headPaste.setAttribute("style", `backgound-image: url(${reader.result})`);
-            // })
-            // reader.readAsDataURL(blob);
-            
+            document.querySelector("#headPaste").setAttribute('style', `backgound-image: "${res.data.data.headPaste}"`)
         }).catch(err => {
             throw new Error(err);
         })

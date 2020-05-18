@@ -41,7 +41,7 @@ $(document).ready(function(){
             axios({
                 headers: { 'Content-Type': 'application/json' },
                 method: 'post',
-                url: 'http://tuantuango-backend.herokuapp.com/api/v1/user/login',
+                url: 'https://tuantuango-backend.herokuapp.com/api/v1/user/login',
                 data: login,
                 responseType: 'json',
                 withCredentials: true

@@ -122,9 +122,7 @@ function t() {
 
 $(document).ready(function () {
     let TOKEN = "Bearer "+localStorage.getItem('token');
-    axios.defaults.headers({
-        'Authorization': TOKEN
-    })
+    axios.defaults.headers,common['Authorization'] = TOKEN;
     var targetPage = localStorage.getItem("target");
     $(belowBar[targetPage]).addClass("actived");
     $(belowBar[targetPage]).children().addClass("actived-word");

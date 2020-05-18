@@ -245,12 +245,12 @@ $(document).ready(()=>{
             document.querySelector("input[name=promoteExpiration]").min = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+1).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
             document.querySelector("input[name=promoteExpiration]").value = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+1).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
             document.querySelector("input[name=promoteExpiration]").max = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+7).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
-            document.querySelector("#promoteProductNumLabel").textContent = `Please input the amount that you want to purchase (less than ${productInform.data[0].PromotionlowestNum+1}) :`;
+            document.querySelector("#promoteProductNumLabel").textContent = `Please input the amount that you want to purchase (less than ${productInform.data[0].promotionLowestNum}) :`;
             
             document.querySelector("input[name=Expiration]").min = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+1).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
             document.querySelector("input[name=Expiration]").value = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+1).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
             document.querySelector("input[name=Expiration]").max = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+7).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
-            document.querySelector("#unpackedProductNumLabel").textContent = `Please input the amount that you want to purchase (less than ${productDetail.data[0].unpackableAmount+1}) :`;
+            document.querySelector("#unpackedProductNumLabel").textContent = `Please input the amount that you want to purchase (less than ${productDetail.data[0].unpackableAmount}) :`;
             
             if(productDetail.data[0].hasPromotion === false){
                 $("#promoteFallback").removeClass('hide').addClass('showUp');

@@ -1,5 +1,5 @@
 const submit = document.querySelector("#accountSubmit");
-const accountTextfield = document.querySelector("#username");
+const accountTextfield = document.querySelector("#account");
 const passwordTextfield = document.querySelector("#password");
 const signinLoading = document.querySelector("#signinLoading");
 const loading = document.querySelector("#loading");
@@ -27,9 +27,9 @@ $(document).ready(function(){
     $(signinLoading).hide();
     submit.addEventListener("click", (event)=>{
         event.preventDefault();
-        login.username = document.querySelector("#account").value;
+        login.account = document.querySelector("#account").value;
         login.password = document.querySelector("#password").value;
-        if(!login.username){
+        if(!login.account){
             document.querySelector("#accountWrong").textContent = "請輸入會員帳號!";
         }
         else if(!login.password){

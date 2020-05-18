@@ -473,7 +473,7 @@ $(document).ready(()=>{
                     console.log(res.data);
                     document.querySelector("#wrapConclusion>p").textContent = "adding member...";
                     axios({
-                        method: "post",
+                        method: "put",
                         withCredentials: true,
                         url:"http://localhost:3000/api/v1/tuango/joinTuango",
                         data:{

@@ -462,7 +462,7 @@ $(document).ready(()=>{
                 axios({
                     method:"post",
                     withCredentials: true,
-                    url:"https://tuantuango-backend.herokuapp.com/api/v1/tuango/addTuango",
+                    url:"https://localhost:3000/api/v1/tuango/addTuango",
                     data:{
                         type: TuanGOType,
                         productID : productInform.data[0].productID,
@@ -475,7 +475,7 @@ $(document).ready(()=>{
                     axios({
                         method: "post",
                         withCredentials: true,
-                        url:"https://tuantuango.herokuapp.com/api/v1/tuango/joinTuango",
+                        url:"https://localhost:3000/api/v1/tuango/joinTuango",
                         data:{
                             contractAddress: res.data.contractAddress,
                             amount : TuanGOType?$("#unpackedProductNum").val():$("#promoteProductNum").val(),

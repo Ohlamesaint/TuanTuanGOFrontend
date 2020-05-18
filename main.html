@@ -234,7 +234,7 @@
                                     console.log(ExpirationTime.toString().slice(0, 24));
                                     card.push(document.createElement('div'));
                                     card[i].innerHTML = `
-                                    <div id="${res.data.data[i].TuanGOAddress.slice(2)}" data*-num=${i} data-toggle="modal" data-target="#productModal" class="w-100 card mt-3" style="box-shadow: 1px 1px 1px 0px silver">
+                                    <div id="${res.data.data[i].tuangoAddress.slice(2)}" data*-num=${i} data-toggle="modal" data-target="#productModal" class="w-100 card mt-3" style="box-shadow: 1px 1px 1px 0px silver">
                                         <img src="${res.data.data[i].productPhoto}" class="card-img-top" alt="...">
                                         <div class="card-body" style="text-align : left; background: white; color: rgb(145, 93, 93))">
                                             <h4 class="card-title" style=" font-size: 1.5rem">${res.data.data[i].TuanGOType?`$${res.data.data[i].price} for Each`:`$${res.data.data[i].originalPrice}→$${res.data.data[i].price}`}</h4>

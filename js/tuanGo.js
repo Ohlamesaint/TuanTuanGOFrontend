@@ -115,7 +115,7 @@ const initQrCodeScanner = () => {
                     }else{
                         console.log("can't not vibrate");
                     }
-                    console.log(JSON.stringify(res.data, 2));
+                    let getJson = JSON.stringify(res.data);
                     QRcode.innerHTML =  `
                     <div id="${res.data.data[0].productID}" class="w-100 card mt-3" style="box-shadow: 1px 1px 1px 0px silver">
                     <img src="${res.data.data[0].productPhoto}" class="card-img-top" alt="...">

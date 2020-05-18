@@ -222,7 +222,7 @@
                             axios({
                                 method: "GET",
                                 withCredentials: true,
-                                url:`http://tuantuango-backend.herokuapp.com/api/v1/tuango/mainPageGet/${typeTabLists[i].id}/0/10`,
+                                url:`https://tuantuango-backend.herokuapp.com/api/v1/tuango/mainPageGet/${typeTabLists[i].id}/0/10`,
                             }).then((res)=>{
                                 console.log(res);
                                 document.querySelector(".swiper-slide-active>.card-columns").innerHTML = '';

@@ -53,7 +53,7 @@ $(document).ready(function(){
                 signinLoading.setAttribute("style", "opacity: 0.8; background-color: white");
                 loading.setAttribute("style", "opacity: 0.0;");
                 signinLoading.addEventListener("transitionend", ()=>{
-                    greeting.textContent = `HI, ${response.data.data.username}:D`;
+                    greeting.textContent = `HI, ${response.data.username}:D`;
                     animateCSS(greeting, 'flipInX', function(){
                         greeting.setAttribute("style", "opacity: 0.0;");
                         console.log(response);

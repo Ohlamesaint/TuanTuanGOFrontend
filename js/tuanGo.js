@@ -103,6 +103,7 @@ const initQrCodeScanner = () => {
         scanner.addListener('scan', content => {
             let HTTPScheck = /^(https):\/\/(tuantuango-backend.herokuapp.com)\/(api)\/(v1)\/(product)\/(getProduct)\/[\d]*$/;
             let URLresult = content;
+            console.log(content);
             if(HTTPScheck.test(URLresult)){
                 console.log("result = " + URLresult);
                 let result = document.createElement("div");

@@ -411,7 +411,7 @@ $(document).ready(function () {
                     message.innerText = "Wait for sending ...";
                     document.querySelector("#send_message").appendChild(message);
                     axios({
-                        method: "POST",
+                        method: "PUT",
                         url: "https://tuantuango-backend.herokuapp.com/api/v1/blockchain/sendMoney",
                         withCredentials: true,
                         data: {

@@ -240,28 +240,28 @@ $(document).ready(()=>{
             title.textContent = "2. TuanGO Setting";
             $(tuanGoer[1]).addClass('firstMove');
             tuanGoer[1].addEventListener('transitionend', showEventTwo, false)          //第二個畫面出現
-            document.querySelector(".name").textContent = productInform.productName;
+            document.querySelector(".name").textContent = productInform.data[0].productName;
             document.querySelector("input[name=promoteExpiration]").min = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+1).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
             document.querySelector("input[name=promoteExpiration]").value = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+1).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
             document.querySelector("input[name=promoteExpiration]").max = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+7).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
-            document.querySelector("#promoteProductNumLabel").textContent = `Please input the amount that you want to purchase (less than ${productInform.PromotionlowestNum+1}) :`;
+            document.querySelector("#promoteProductNumLabel").textContent = `Please input the amount that you want to purchase (less than ${productInform.data[0].PromotionlowestNum+1}) :`;
             
             document.querySelector("input[name=Expiration]").min = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+1).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
             document.querySelector("input[name=Expiration]").value = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+1).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
             document.querySelector("input[name=Expiration]").max = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+7).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
-            document.querySelector("#unpackedProductNumLabel").textContent = `Please input the amount that you want to purchase (less than ${productDetail.unpackableAmount+1}) :`;
+            document.querySelector("#unpackedProductNumLabel").textContent = `Please input the amount that you want to purchase (less than ${productDetail.data[0].unpackableAmount+1}) :`;
             
-            if(productDetail.hasPromotion === false){
+            if(productDetail.data[0].hasPromotion === false){
                 $("#promoteFallback").removeClass('hide').addClass('showUp');
                 $("#promoteForm").addClass('hide');
             }
-            if(productDetail.unpackable === false){
+            if(productDetail.data[0].unpackable === false){
                 $("#unpackedFallback").removeClass('hide').addClass('showUp');
                 $("#unpackedForm").addClass('hide');
             }
             $("#promoteToggle").on("click", ()=>{
                 TuanGOType = 0;     //promote
-                if(productDetail.hasPromotion === false){
+                if(productDetail.data[0].hasPromotion === false){
                     $("#promoteFallback").removeClass('hide').addClass('showUp');
                     $("#promoteForm").addClass('hide');
                 }else{
@@ -288,8 +288,8 @@ $(document).ready(()=>{
                 })
                 document.querySelector("#promoteProductNum").addEventListener("change", ()=>{
                     console.log($("#promoteProductNum").val());
-                    console.log(productDetail.PromotionlowestNum);
-                    if($("#promoteProductNum").val() > productDetail.PromotionlowestNum){
+                    console.log(productDetail.data[0].promotionlowestNum);
+                    if($("#promoteProductNum").val() > productDetail.data[0].promotionLowestNum){
                         $("#promoteWarningText").text("您超過了最多可選擇的數量!");
                         $(footer[1]).children().css("color", "white");
                         $(footer[1]).css("background-color", "rgb(177, 177, 177)")

@@ -49,13 +49,14 @@ $(document).ready(function(){
                 },
                 data: bodyFormData,
             }).then(res => {
-                console.log('Bearer '+res.data.token);
+                console.log(res.data);
+                console.log('Bearer '+res.data.data.token);
                 axios({
                     method: "POST",
                     url: "http://localhost:3000/api/v1/user/image",
                     headers: {
                         'Content-Type': 'multipart/form-data',
-                        'Authorization': 'Bearer '+res.data.token
+                        'Authorization': 'Bearer '+res.data.data.token
                     },
                     responseType: 'json',
                     data: bodyFormData,

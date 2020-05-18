@@ -117,10 +117,10 @@ const initQrCodeScanner = () => {
                     }
                     console.log(JSON.stringify(res.data, 2));
                     result.innerHTML =  `
-                    <div id="${res.data.data.productID}" class="w-100 card mt-3" style="box-shadow: 1px 1px 1px 0px silver">
-                    <img src="${res.data.data.productPhoto}" class="card-img-top" alt="...">
+                    <div id="${res.data.productID}" class="w-100 card mt-3" style="box-shadow: 1px 1px 1px 0px silver">
+                    <img src="${res.data.productPhoto}" class="card-img-top" alt="...">
                     <div class="card-body" style="text-align : left; background: white; color: rgb(145, 93, 93))">
-                    <h4 class="card-title" style=" font-size: 1.5rem">${res.data.data.productName}}</h4>
+                    <h4 class="card-title" style=" font-size: 1.5rem">${res.data.productName}}</h4>
                     </div>
                     </div>
                     `;

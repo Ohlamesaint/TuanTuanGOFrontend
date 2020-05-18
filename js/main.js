@@ -68,22 +68,6 @@ $(document).ready(function(){
     
     var signOut = document.querySelector("#signOut");
     signOut.addEventListener("click", (e)=>{
-        // axios({
-        //     method:"get",
-        //     withCredentials: true,
-        //     url:"https://tuantuango.herokuapp.com/signOut",
-        // }).then(res=>{
-        //     if(res.data.signin){    //可以順便獲得會員profile
-        //         console.log(res);
-        //         console.log("456");
-        //     }else{
-        //         console.log(res);
-        //         console.log("789");
-        //     }
-        // }).catch(err=>{
-        //     console.log("123")
-        //     console.log(err);
-        // })
         localStorage.removeItem('token');
     }, false)
     document.querySelector("#JoinTuanGO").addEventListener("click", ()=>{

@@ -101,7 +101,7 @@ const initQrCodeScanner = () => {
         }).catch(console.error);
         
         scanner.addListener('scan', content => {
-            let HTTPScheck = /^(https):\/\/(tuantuango.herokuapp.com)\/(products)\/([\d]{6})$/;
+            let HTTPScheck = /^(https):\/\/(tuantuango-backend.herokuapp.com)\/(api)\/(v1)\/(product)\/(getProduct)/;
             let URLresult = content;
             if(HTTPScheck.test(URLresult)){
                 console.log("result = " + URLresult);
@@ -112,7 +112,6 @@ const initQrCodeScanner = () => {
                 }).then(res => {
                     var supportsVibrate = "vibrate" in navigator;
                     if(supportsVibrate){
-                        console.log(supportsVibrate);
                         navigator.vibrate(300);
                     }else{
                         console.log("can't not vibrate");
@@ -121,10 +120,16 @@ const initQrCodeScanner = () => {
                     var getJson = JSON.stringify(res.data);
                     console.log(getJson);
                     result.innerHTML =  `
-                    <p>${res.data.productName}</p>
+                    <div id="${res.data.data.productID}" data*-num=${i} data-toggle="modal" data-target="#productModal" class="w-100 card mt-3" style="box-shadow: 1px 1px 1px 0px silver">
+                    <img src="${res.data.data.productPhoto}" class="card-img-top" alt="...">
+                    <div class="card-body" style="text-align : left; background: white; color: rgb(145, 93, 93))">
+                    <h4 class="card-title" style=" font-size: 1.5rem">${res.data.data.productName}}</h4>
+                    </div>
+                    </div>
                     `;
                     QRcode.appendChild(result);
-                    document.getElementById('preview').setAttribute('class', 'blur_effect');
+                    scanner.stop();
+                    // document.getElementById('preview').setAttribute('class', 'blur_effect');
                     $(footer[0]).children().css("color", "rgb(145, 93, 93);");
                     $(footer[0]).css("background-color", "rgba(192, 121, 121, 0.5)")
                     tuanGoer[0].removeEventListener('transitionend', showEventOne, false);
@@ -267,10 +272,8 @@ $(document).ready(()=>{
             {        
                 let check = 0;
                 document.querySelector("input[name=promoteExpiration]").addEventListener("click", ()=>{
-                    console.log("123");
                     
                     document.querySelector("input[name=promoteExpiration]").min = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+1).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
-                    // document.querySelector("input[name=promoteExpiration]").value = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+1).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
                     document.querySelector("input[name=promoteExpiration]").max = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+7).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
                     if(check === 0||check === 2){
                         $("#promoteWarningText").text("尚未設定購買數量!");

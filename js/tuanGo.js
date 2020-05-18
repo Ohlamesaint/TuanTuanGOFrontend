@@ -464,6 +464,7 @@ $(document).ready(()=>{
                         ExpirationTime : TuanGOType?document.querySelector("input[name=Expiration]").value:document.querySelector("input[name=promoteExpiration]").value,
                     }
                 }).then((res)=>{
+                    console.log(res.data);
                     document.querySelector("#wrapConclusion>p").textContent = "adding member...";
                     axios({
                         method: "post",

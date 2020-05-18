@@ -876,7 +876,7 @@ document.querySelector("#bluetooth").addEventListener("click", async event => {
             var str = document.querySelector("#JoinTuanGOCost").textContent;
             var tmp = str.split(" ");
             axios({
-                method: "POST",
+                method: "PUT",
                 url: "https://tuantuango.herokuapp.com/sendMoney",
                 withCredentials: true,
                 data: {

@@ -103,9 +103,7 @@ const initQrCodeScanner = () => {
         scanner.addListener('scan', content => {
             let HTTPScheck = /^(https):\/\/(tuantuango-backend.herokuapp.com)\/(api)\/(v1)\/(product)\/(getProduct)\/[0-9]*$/;
             let URLresult = content;
-            console.log(content);
             if(HTTPScheck.test(URLresult)){
-                console.log("result = " + URLresult);
                 let result = document.createElement("div");
                 axios({
                     method: 'GET',
@@ -117,11 +115,9 @@ const initQrCodeScanner = () => {
                     }else{
                         console.log("can't not vibrate");
                     }
-                    console.log(res);
-                    var getJson = JSON.stringify(res.data);
-                    console.log(getJson);
+                    console.log(JSON.stringify(res.data, 2));
                     result.innerHTML =  `
-                    <div id="${res.data.data.productID}" data*-num=${i} data-toggle="modal" data-target="#productModal" class="w-100 card mt-3" style="box-shadow: 1px 1px 1px 0px silver">
+                    <div id="${res.data.data.productID}" class="w-100 card mt-3" style="box-shadow: 1px 1px 1px 0px silver">
                     <img src="${res.data.data.productPhoto}" class="card-img-top" alt="...">
                     <div class="card-body" style="text-align : left; background: white; color: rgb(145, 93, 93))">
                     <h4 class="card-title" style=" font-size: 1.5rem">${res.data.data.productName}}</h4>

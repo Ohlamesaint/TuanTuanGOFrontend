@@ -47,14 +47,13 @@ $(document).ready(function(){
                 withCredentials: true
             })
             .then(function (response) {
-                console.log(response);
                 localStorage.setItem('token', response.data.data.token);
                 document.querySelector("#passwordWrong").textContent = "";
                 document.querySelector("#accountWrong").textContent = "";
                 signinLoading.setAttribute("style", "opacity: 0.8; background-color: white");
                 loading.setAttribute("style", "opacity: 0.0;");
                 signinLoading.addEventListener("transitionend", ()=>{
-                    greeting.textContent = `HI, ${response.user.username}:D`;
+                    greeting.textContent = `HI, ${response.data.data.user[0].username}:D`;
                     animateCSS(greeting, 'flipInX', function(){
                         greeting.setAttribute("style", "opacity: 0.0;");
                         console.log(response);

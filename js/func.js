@@ -160,8 +160,12 @@ $(document).ready(function () {
         axios({
             method: "GET",
             url: "https://tuantuango-backend.herokuapp.com/api/v1/tuango/getUserTuango",
+            params: {
+                status: "DONE"
+            },
             withCredentials: true,
         }).then(res => {
+            console.log(res);
             var target = document.querySelector("#complete_list");
             complete_list.forEach(function (element, idx, array) {
                 if (idx === array.length - 1) {

@@ -220,12 +220,9 @@
                         if($(swiperSlides[i]).hasClass('swiper-slide-active')){
                             typeTabLists[i].classList.add('active');
                             axios({
-                                method: "post",
+                                method: "GET",
                                 withCredentials: true,
-                                url:"https://tuantuango.herokuapp.com/mainPageProducts",
-                                data:{
-                                    productType: typeTabLists[i].id
-                                }
+                                url:`https://tuantuango-backend.herokuapp.com/api/v1/tuango/mainPageGet/${typeTabLists[i].id}`,
                             }).then((res)=>{
                                 console.log(res);
                                 document.querySelector(".swiper-slide-active>.card-columns").innerHTML = '';

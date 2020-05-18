@@ -252,6 +252,7 @@
                                     $(cardList[i]).on('click', (e)=>{      //注意id綁定不包含0x
                                         e.preventDefault();
                                         localStorage.setItem("TuanGOInform", JSON.stringify(cardBuffer[i]));
+                                        document.querySelector("#joinModalTopImage").src = cardBuffer[i].productPhoto;
                                         document.querySelector("#JoinTuanGOProductName").textContent = cardBuffer[i].productName;
                                         document.querySelector("#JoinTuanGOTuanGOType").textContent = cardBuffer[i].tuangoType=='UNPACK'?'unpack':'promote';
                                         document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(cardBuffer[i].expirationTime).toString().slice(0, 24);
@@ -376,7 +377,7 @@
                                     <div class="col-12">
                                         <div class="card-columns">
                                             <div class="card mt-3">
-                                                <img src="https://picsum.photos/400/200?image=10" class="card-img-top" alt="...">
+                                                <img id="joinModalTopImage" class="card-img-top" alt="...">
                                                 <div class="card-header" style="color: rgb(145, 93, 93)">
                                                     Product Name
                                                 </div>

@@ -167,6 +167,8 @@ const initQrCodeScanner = () => {
 
 
 $(document).ready(()=>{
+    const TOKEN = 'Bearer '+localStorage.getItem('token');
+    axios.defaults.headers.common['Authorization'] = TOKEN
     back.addEventListener("click", (evt) => {
         evt.preventDefault();
         window.location.replace('../main.html');

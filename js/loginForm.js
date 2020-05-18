@@ -47,34 +47,25 @@ $(document).ready(function(){
                 withCredentials: true
             })
             .then(function (response) {
-                if(response.data.accountValid == false){
-                    document.querySelector("#usernameWrong").textContent = "無此會員帳號!";
-                    $(signinLoading).hide();
-                }
-                else if(response.data.passwordValid == false){
-                    document.querySelector("#usernameWrong").textContent = "";
-                    document.querySelector("#passwordWrong").textContent = "帳號密碼錯誤!"
-                    $(signinLoading).hide();
-                }
-                else{
-                    document.querySelector("#passwordWrong").textContent = "";
-                    document.querySelector("#usernameWrong").textContent = "";
-                    signinLoading.setAttribute("style", "opacity: 0.8; background-color: white");
-                    loading.setAttribute("style", "opacity: 0.0;");
-                    signinLoading.addEventListener("transitionend", ()=>{
-                        greeting.textContent = `HI, ${response.data.user}:D`;
-                        animateCSS(greeting, 'flipInX', function(){
-                            greeting.setAttribute("style", "opacity: 0.0;");
-                            console.log(response);
-                            setTimeout(() => {
-                                window.location.replace('../main.html');
-                            }, 1000);
-                        });
-                    })
-                }
+                localStorage.setItem('token', response.data.data.token);
+                document.querySelector("#passwordWrong").textContent = "";
+                document.querySelector("#usernameWrong").textContent = "";
+                signinLoading.setAttribute("style", "opacity: 0.8; background-color: white");
+                loading.setAttribute("style", "opacity: 0.0;");
+                signinLoading.addEventListener("transitionend", ()=>{
+                    greeting.textContent = `HI, ${response.data.user}:D`;
+                    animateCSS(greeting, 'flipInX', function(){
+                        greeting.setAttribute("style", "opacity: 0.0;");
+                        console.log(response);
+                        setTimeout(() => {
+                            window.location.replace('../main.html');
+                        }, 1000);
+                    });
+                })
             })
             .catch(function (error) {
-                console.log(error);
+                document.querySelector("#passwordWrong").textContent = "帳號密碼錯誤!"
+                $(signinLoading).hide();
             });
         }
     })

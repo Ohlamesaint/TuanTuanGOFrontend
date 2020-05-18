@@ -104,7 +104,7 @@ const initQrCodeScanner = () => {
             let HTTPScheck = /^(https):\/\/(tuantuango-backend.herokuapp.com)\/(api)\/(v1)\/(product)\/(getProduct)\/[0-9]*$/;
             let URLresult = content;
             if(HTTPScheck.test(URLresult)){
-                let result = document.createElement("div");
+                // let result = document.createElement("div");
                 axios({
                     method: 'GET',
                     url: URLresult,
@@ -116,7 +116,7 @@ const initQrCodeScanner = () => {
                         console.log("can't not vibrate");
                     }
                     console.log(JSON.stringify(res.data, 2));
-                    result.innerHTML =  `
+                    QRcode.innerHTML =  `
                     <div id="${res.data.data[0].productID}" class="w-100 card mt-3" style="box-shadow: 1px 1px 1px 0px silver">
                     <img src="${res.data.data[0].productPhoto}" class="card-img-top" alt="...">
                     <div class="card-body" style="text-align : left; background: white; color: rgb(145, 93, 93))">
@@ -124,7 +124,7 @@ const initQrCodeScanner = () => {
                     </div>
                     </div>
                     `;
-                    QRcode.appendChild(result);
+                    // QRcode.appendChild(result);
                     scanner.stop();
                     // document.getElementById('preview').setAttribute('class', 'blur_effect');
                     $(footer[0]).children().css("color", "rgb(145, 93, 93);");

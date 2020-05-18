@@ -176,14 +176,13 @@ $(document).ready(function () {
         window.location.replace('../main.html');
     })
     let init = middleWrapRowList[targetPage].children;
-    console.log(init);
     $(init).addClass("fadeIn");
     
     
     if (targetPage == 0) {     //my profile 利用req.session來查詢並獲得
         axios({
             method: "GET",
-            url: "https://tuantuango-backend.herokuapp.com/api/v1/user/login",
+            url: "https://tuantuango-backend.herokuapp.com/api/v1/user/profile",
             headers: {
                 'Authorization': TOKEN
             },

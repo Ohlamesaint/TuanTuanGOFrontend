@@ -51,7 +51,7 @@ $(document).ready(function(){
             }).then(res => {
                 axios({
                     method: "POST",
-                    url: "https://tuantuango.herokuapp.com/api/v1/user/image",
+                    url: "https://tuantuango-backend.herokuapp.com/api/v1/user/image",
                     headers: {
                         'content-type': 'multipart/form-data',
                         'authorization': res.token

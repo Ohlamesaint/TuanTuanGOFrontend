@@ -477,7 +477,7 @@ $(document).ready(()=>{
                         withCredentials: true,
                         url:"http://localhost:3000/api/v1/tuango/joinTuango",
                         data:{
-                            contractAddress: res.data.contractAddress,
+                            contractAddress: res.data._id,
                             amount : TuanGOType?$("#unpackedProductNum").val():$("#promoteProductNum").val(),
                         }
                     }).then((res)=>{

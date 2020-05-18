@@ -830,7 +830,6 @@ document.querySelector("#bluetooth").addEventListener("click", async event => {
         console.log(error.message);
     }
     
-    
     var bt = document.querySelector("#bluetooth");
     bt.disabled = true;
     var loading = document.createElement('i');
@@ -849,9 +848,9 @@ document.querySelector("#bluetooth").addEventListener("click", async event => {
         confirm.addEventListener("click",event => {
             setTimeout(function () {
                 document.getElementById("confirm_button").remove();
-                var findindex = transfer_list.findIndex(e => e.contract_address == document.querySelector('#JoinTuanGOContractAddress').innerText);
-                complete_list.push(transfer_list[findindex]);
-                transfer_list.splice(findindex,1);
+                // var findindex = transfer_list.findIndex(e => e.contract_address == document.querySelector('#JoinTuanGOContractAddress').innerText);
+                // complete_list.push(transfer_list[findindex]);
+                // transfer_list.splice(findindex,1);
                 document.querySelector("#modal_close").disabled = false;
                 document.querySelector("#modal_close").click();
             },1000);

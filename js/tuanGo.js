@@ -470,14 +470,13 @@ $(document).ready(()=>{
                         ExpirationTime : TuanGOType?document.querySelector("input[name=Expiration]").value:document.querySelector("input[name=promoteExpiration]").value,
                     }
                 }).then((res)=>{
-                    console.log(res.data);
                     document.querySelector("#wrapConclusion>p").textContent = "adding member...";
                     axios({
                         method: "put",
                         withCredentials: true,
                         url:"http://localhost:3000/api/v1/tuango/joinTuango",
                         data:{
-                            contractAddress: res.data._id,
+                            contractAddress: res.data.data._id,
                             amount : TuanGOType?$("#unpackedProductNum").val():$("#promoteProductNum").val(),
                         }
                     }).then((res)=>{

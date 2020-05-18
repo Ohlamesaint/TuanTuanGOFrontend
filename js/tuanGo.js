@@ -459,7 +459,7 @@ $(document).ready(()=>{
                     url:"https://tuantuango-backend.herokuapp.com/api/v1/tuango/addTuango",
                     data:{
                         type: TuanGOType,
-                        productID : productInform.productID,
+                        productID : productInform.data[0].productID,
                         setUpTime: moment().format('YYYY')+"-"+moment().format('MM')+"-"+parseInt(moment().format('DD')).toString()+"T"+moment().format('hh')+":"+moment().format('mm'),
                         ExpirationTime : TuanGOType?document.querySelector("input[name=Expiration]").value:document.querySelector("input[name=promoteExpiration]").value,
                     }

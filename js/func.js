@@ -194,7 +194,7 @@ $(document).ready(function () {
             document.querySelector("#email").textContent = res.data.data.email;
             document.querySelector("#address").textContent = res.data.data.address;
             document.querySelector("#region").textContent = res.data.data.region+', Taiwan';
-            document.querySelector("#headPaste").setAttribute('style', `backgound-image: "${res.data.data.headPaste}"`)
+            document.querySelector("#headPaste").style.backgroundImage = `url("${res.data.data.headPaste}")`;
         }).catch(err => {
             throw new Error(err);
         })

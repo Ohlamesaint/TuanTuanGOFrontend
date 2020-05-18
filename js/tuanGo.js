@@ -418,13 +418,13 @@ $(document).ready(()=>{
                 cardTextList[0].textContent = productInform.data[0].productName;
                 cardTextList[1].textContent = "Promote";
                 cardTextList[2].textContent = `${res}(in ${productInform.data[0].promotionLowestNum})`;
-                cardTextList[3].textContent = `${productInform.promotionPrice*res}$(${productInform.promotionPrice}$/per)`;
+                cardTextList[3].textContent = `${productInform.data[0].promotionPrice*res}$(${productInform.data[0].promotionPrice}$/per)`;
                 cardTextList[4].textContent = `${document.querySelector("input[name=promoteExpiration]").value}`;
             }else if(TuanGOType === 1){
                 cardTextList[0].textContent = productInform.data[0].productName;
                 cardTextList[1].textContent = "Unpack";
                 cardTextList[2].textContent = `${res}(in ${productInform.unpackableAmount})`;
-                cardTextList[3].textContent = `${productInform.price*res}$(${productInform.price}$/per)`;
+                cardTextList[3].textContent = `${productInform.data[0].price*res}$(${productInform.data[0].price}$/per)`;
                 cardTextList[4].textContent = `${document.querySelector("input[name=Expiration]").value}`;
             }
             $(footer[2]).children().css("color", "rgb(145, 93, 93);");
@@ -456,22 +456,19 @@ $(document).ready(()=>{
                 axios({
                     method:"post",
                     withCredentials: true,
-                    url:"https://tuantuango.herokuapp.com/deploy",
+                    url:"https://tuantuango-backend.herokuapp.com/api/v1/tuango/addTuango",
                     data:{
                         type: TuanGOType,
                         productID : productInform.productID,
                         setUpTime: moment().format('YYYY')+"-"+moment().format('MM')+"-"+parseInt(moment().format('DD')).toString()+"T"+moment().format('hh')+":"+moment().format('mm'),
                         ExpirationTime : TuanGOType?document.querySelector("input[name=Expiration]").value:document.querySelector("input[name=promoteExpiration]").value,
-                        //for deploy
                     }
                 }).then((res)=>{
                     document.querySelector("#wrapConclusion>p").textContent = "adding member...";
-                    console.log(res);
-                    console.log($("#promoteProductNum").val());
                     axios({
                         method: "post",
                         withCredentials: true,
-                        url:"https://tuantuango.herokuapp.com/join",
+                        url:"https://tuantuango.herokuapp.com/api/v1/tuango/joinTuango",
                         data:{
                             contractAddress: res.data.contractAddress,
                             amount : TuanGOType?$("#unpackedProductNum").val():$("#promoteProductNum").val(),

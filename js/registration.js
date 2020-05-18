@@ -43,7 +43,7 @@ $(document).ready(function(){
             document.querySelector("#error").textContent = ""
             axios({
                 method: "POST",
-                url: "http://tuantuango-backend.herokuapp.com/api/v1/user/signUp",
+                url: "https://tuantuango-backend.herokuapp.com/api/v1/user/signUp",
                 headers: {
                     'Content-Type':  'multipart/form-data',
                 },
@@ -51,7 +51,7 @@ $(document).ready(function(){
             }).then(res => {
                 axios({
                     method: "POST",
-                    url: "http://tuantuango-backend.herokuapp.com/api/v1/user/image",
+                    url: "https://tuantuango-backend.herokuapp.com/api/v1/user/image",
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'Authorization': 'Bearer '+res.data.data.token

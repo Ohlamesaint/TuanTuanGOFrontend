@@ -193,8 +193,8 @@ $(document).ready(function () {
             document.querySelector("#phoneNumber").textContent = res.data.data.phoneNumber;
             document.querySelector("#email").textContent = res.data.data.email;
             document.querySelector("#address").textContent = res.data.data.address;
-            document.querySelector("#region").textContent = res.data.data.username+', Taiwan';
-            document.querySelector("#headPaste").setAttribute('style', `backgound-image: url(${res.data.data.headPaste})`)
+            document.querySelector("#region").textContent = res.data.data.region+', Taiwan';
+            document.querySelector("#headPaste").setAttribute('style', `backgound-image: url('${res.data.data.headPaste}')`)
             // var blob = new Blob([res.data.headPaste], { type: "image/jpg" });
             // console.log(blob);
             // var urlCreator = window.URL || window.webkitURL;

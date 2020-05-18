@@ -162,8 +162,11 @@ function t() {
 
 
 $(document).ready(function () {
-    var targetPage = localStorage.getItem("target");
     let TOKEN = "Bearer "+localStorage.getItem('token');
+    axios.defaults.headers({
+        'Authorization': TOKEN
+    })
+    var targetPage = localStorage.getItem("target");
     $(belowBar[targetPage]).addClass("actived");
     $(belowBar[targetPage]).children().addClass("actived-word");
     title.innerHTML = `
@@ -183,9 +186,6 @@ $(document).ready(function () {
         axios({
             method: "GET",
             url: "https://tuantuango-backend.herokuapp.com/api/v1/user/profile",
-            headers: {
-                'Authorization': TOKEN
-            },
             withCredentials: true,
         }).then(res => {
             document.querySelector("#account").textContent = res.data.data.account;
@@ -441,24 +441,15 @@ $(document).ready(function () {
         })
     }
     else if (targetPage == 2) {
+        tl.resume();
         axios({
             method: "GET",
-            url: "https://tuantuango.herokuapp.com/userWallet",
+            url: "https://tuantuango-backend.herokuapp.com/api/v1/blockchain/getWallet",
             withCredentials: true,
         }).then(res => {
-            if (!res.data.signin) {    //做保險
-                console.log(res);
-                setTimeout(() => {
-                    window.location.replace('./login.html');
-                });
-            } else {
-                console.log("success");
-                console.log(res);
-                document.querySelector("#walletCash").textContent = res.data.balance + "NT$";
-                document.querySelector("#accounthere").textContent = res.data.account;
-                $('#userForm').bootstrapValidator();
-                tl.resume();
-            }
+            document.querySelector("#walletCash").textContent = res.data.data.balance + "NT$";
+            document.querySelector("#accounthere").textContent = res.data.data.account;
+            $('#userForm').bootstrapValidator();
         }).catch(err => {
             throw new Error(err);
         })
@@ -473,7 +464,7 @@ $(document).ready(function () {
                     document.querySelector("#send_message").appendChild(message);
                     axios({
                         method: "POST",
-                        url: "https://tuantuango.herokuapp.com/sendMoney",
+                        url: "https://tuantuango-backend.herokuapp.com/api/v1/blockchain/sendMoney",
                         withCredentials: true,
                         data: {
                             money: document.querySelector("#nn").value

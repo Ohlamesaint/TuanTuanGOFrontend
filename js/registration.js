@@ -53,8 +53,8 @@ $(document).ready(function(){
                     method: "POST",
                     url: "https://tuantuango-backend.herokuapp.com/api/v1/user/image",
                     headers: {
-                        'content-type': 'multipart/form-data',
-                        'authorization': res.data.token
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': res.data.token
                     },
                     data: bodyFormData,
                 }).then((res) => {

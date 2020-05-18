@@ -12,37 +12,23 @@ $(document).ready(function(){
     })
     for(let i=0; i<belowBar.length-1; i++){
         belowBar[i].addEventListener("click", (e)=>{
-            axios({
-                method:"get",
-                withCredentials: true,
-                url:"https://tuantuango.herokuapp.com/signin",
-            }).then(res=>{
-                if(!res.data.signin){    //可以順便獲得會員profile
-                    console.log(res);
-                    console.log(res);
-                    $("body").addClass("modal-open");
-                    $("#loginPrompt").addClass("show").css("display", "block");
-                    $("#not").on('click', ()=>{
-                        $("body").removeClass("modal-open");
-                        $("#loginPrompt").removeClass("show").css("display", "none");
-                    })
-                    $("#yes").on('click', ()=>{
-                        setTimeout(() => {
-                            window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/login.html');
-                        }, );
-                    })
-                    // console.log("789");
-                }else{
-                    console.log(res);
-                    console.log("456");
-                    console.log(belowBar[i].children[1].textContent);
-                    localStorage.setItem("target", i)
-                    window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/func.html');
-                }
-            }).catch(err=>{
-                console.log("123")
-                console.log(err);
-            })
+            if(!localStorage.getItem('token')){   
+                $("body").addClass("modal-open");
+                $("#loginPrompt").addClass("show").css("display", "block");
+                $("#not").on('click', ()=>{
+                    $("body").removeClass("modal-open");
+                    $("#loginPrompt").removeClass("show").css("display", "none");
+                })
+                $("#yes").on('click', ()=>{
+                    setTimeout(() => {
+                        window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/login.html');
+                    }, );
+                })
+            }else{
+                console.log(belowBar[i].children[1].textContent);
+                localStorage.setItem("target", i)
+                window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/func.html');
+            }
         }, false)
     }
     
@@ -82,22 +68,23 @@ $(document).ready(function(){
     
     var signOut = document.querySelector("#signOut");
     signOut.addEventListener("click", (e)=>{
-        axios({
-            method:"get",
-            withCredentials: true,
-            url:"https://tuantuango.herokuapp.com/signOut",
-        }).then(res=>{
-            if(res.data.signin){    //可以順便獲得會員profile
-                console.log(res);
-                console.log("456");
-            }else{
-                console.log(res);
-                console.log("789");
-            }
-        }).catch(err=>{
-            console.log("123")
-            console.log(err);
-        })
+        // axios({
+        //     method:"get",
+        //     withCredentials: true,
+        //     url:"https://tuantuango.herokuapp.com/signOut",
+        // }).then(res=>{
+        //     if(res.data.signin){    //可以順便獲得會員profile
+        //         console.log(res);
+        //         console.log("456");
+        //     }else{
+        //         console.log(res);
+        //         console.log("789");
+        //     }
+        // }).catch(err=>{
+        //     console.log("123")
+        //     console.log(err);
+        // })
+        localStorage.removeItem('token');
     }, false)
     document.querySelector("#JoinTuanGO").addEventListener("click", ()=>{
         axios({

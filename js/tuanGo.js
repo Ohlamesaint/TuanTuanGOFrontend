@@ -240,7 +240,7 @@ $(document).ready(()=>{
             title.textContent = "2. TuanGO Setting";
             $(tuanGoer[1]).addClass('firstMove');
             tuanGoer[1].addEventListener('transitionend', showEventTwo, false)          //第二個畫面出現
-            document.querySelector(".topPhoto").style.backgroundImage = `url("${productImform.data[0].productPhoto}")`
+            document.querySelector(".topPhoto").style.backgroundImage = `url("${productInform.data[0].productPhoto}")`
             document.querySelector(".name").textContent = productInform.data[0].productName;
             document.querySelector("input[name=promoteExpiration]").min = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+1).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
             document.querySelector("input[name=promoteExpiration]").value = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+1).toString()+"T"+moment().format('hh')+":"+moment().format('mm');

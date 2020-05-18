@@ -452,7 +452,13 @@ $(document).ready(()=>{
                     return("next");
                 }, 1000)
             }).then((res)=>{
-                document.querySelector("#wrapConclusion>p").textContent = "deploying contract..."
+                document.querySelector("#wrapConclusion>p").textContent = "deploying contract...";
+                console.log({
+                    type: TuanGOType,
+                    productID : productInform.data[0].productID,
+                    setUpTime: moment().format('YYYY')+"-"+moment().format('MM')+"-"+parseInt(moment().format('DD')).toString()+"T"+moment().format('hh')+":"+moment().format('mm'),
+                    ExpirationTime : TuanGOType?document.querySelector("input[name=Expiration]").value:document.querySelector("input[name=promoteExpiration]").value,
+                })
                 axios({
                     method:"post",
                     withCredentials: true,

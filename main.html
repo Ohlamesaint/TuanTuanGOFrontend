@@ -258,7 +258,7 @@
                                         document.querySelector("#JoinTuanGOCost").textContent = cardBuffer[i].price +　"/per";
                                         var num = 0;
                                         var TuanGOerLine = "";
-                                        cardBuffer[i].soldAmounts.forEach(v => {
+                                        cardBuffer[i].soldAmount.forEach(v => {
                                             num = num+v;
                                         })
                                         localStorage.setItem('unsoldProductAmount', cardBuffer[i].totalAmount-num);

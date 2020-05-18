@@ -56,6 +56,7 @@ $(document).ready(function(){
                         'Content-Type': 'multipart/form-data',
                         'Authorization': 'Bearer '+res.data.token
                     },
+                    responseType: 'json',
                     data: bodyFormData,
                 }).then((res) => {
                     console.log(res);

@@ -26,7 +26,8 @@ $(document).ready(function(){
             document.querySelector("#promotionPrice").disabled = true;
         }
     })
-    newUserSubmit.addEventListener("click", ()=>{
+    newUserSubmit.addEventListener("click", (e)=>{
+        e.preventDefault();
         var bodyFormData = new FormData(newUser);
         var check = true;
         
@@ -56,6 +57,10 @@ $(document).ready(function(){
                         'authorization': res.token
                     },
                     data: bodyFormDataProduct,
+                }).then((res) => {
+                    console.log(res);
+                }).catch((err) => {
+                    throw new Error(err);
                 })
                 console.log(res);
                 // localStorage.setItem('token', res.token);

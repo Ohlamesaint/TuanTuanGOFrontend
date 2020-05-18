@@ -322,8 +322,8 @@ $(document).ready(()=>{
             };
             $("#unpackToggle").on("click", ()=>{
                 TuanGOType = 1;     //unpack
-                if(productDetail.unpackable === false){
-                    console.log("productDetail.unpackable = " + productDetail.unpackable)
+                if(productDetail.data[0].unpackable === false){
+                    console.log("productDetail.unpackable = " + productDetail.data[0].unpackable)
                     $("#unpackedFallback").removeClass('hide').addClass('showUp');
                     $("#unpackedForm").addClass('hide');
                 }else{
@@ -350,8 +350,8 @@ $(document).ready(()=>{
                 })
                 document.querySelector("#unpackedProductNum").addEventListener("change", ()=>{
                     console.log($("#unpackedProductNum").val());
-                    console.log(productDetail.unpackableAmount);
-                    if($("#unpackedProductNum").val() > productDetail.unpackableAmount){
+                    console.log(productDetail.data[0].unpackableAmount);
+                    if($("#unpackedProductNum").val() > productDetail.data[0].unpackableAmount){
                         $("#unpackedWarningText").text("您超過了最多可選擇的數量!");
                         $(footer[1]).children().css("color", "white");
                         $(footer[1]).css("background-color", "rgb(177, 177, 177)")
@@ -412,14 +412,16 @@ $(document).ready(()=>{
             tuanGoer[2].addEventListener('transitionend', showEventThree, false)          //第三個畫面出現
             $("#contentThree").removeClass("hide");
             let cardTextList = document.querySelectorAll("#contentThree .card-text");
+            let cardPhoto = document.querySelector("#contentThree .card-img-top")
+            cardPhoto.src = productInform.data[0].productPhoto;
             if(TuanGOType === 0){
-                cardTextList[0].textContent = productInform.productName;
+                cardTextList[0].textContent = productInform.data[0].productName;
                 cardTextList[1].textContent = "Promote";
-                cardTextList[2].textContent = `${res}(in ${productInform.PromotionlowestNum})`;
-                cardTextList[3].textContent = `${productInform.PromotionPrice*res}$(${productInform.PromotionPrice}$/per)`;
+                cardTextList[2].textContent = `${res}(in ${productInform.data[0].promotionLowestNum})`;
+                cardTextList[3].textContent = `${productInform.promotionPrice*res}$(${productInform.promotionPrice}$/per)`;
                 cardTextList[4].textContent = `${document.querySelector("input[name=promoteExpiration]").value}`;
             }else if(TuanGOType === 1){
-                cardTextList[0].textContent = productInform.productName;
+                cardTextList[0].textContent = productInform.data[0].productName;
                 cardTextList[1].textContent = "Unpack";
                 cardTextList[2].textContent = `${res}(in ${productInform.unpackableAmount})`;
                 cardTextList[3].textContent = `${productInform.price*res}$(${productInform.price}$/per)`;

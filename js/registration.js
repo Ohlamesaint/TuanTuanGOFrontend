@@ -56,7 +56,7 @@ $(document).ready(function(){
                         'content-type': 'multipart/form-data',
                         'authorization': res.token
                     },
-                    data: bodyFormDataProduct,
+                    data: bodyFormData,
                 }).then((res) => {
                     console.log(res);
                 }).catch((err) => {

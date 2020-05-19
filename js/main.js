@@ -138,13 +138,7 @@ $(document).ready(function(){
                 }).then((res)=>{
                     alert(res);
                     setTimeout(()=>{
-                        document.querySelector("#TuanGOerJoinPage").classList.remove("show");
-                        document.querySelector("#TuanGOerJoinPageWrap").classList.remove("show");
-                        document.querySelector("#unpackedTabInJoin").classList.remove('active')
-                        document.querySelector("#JoinPageTopNav").classList.remove('show')
-                        document.querySelector("#footerInJoin").classList.remove('show')
-                        document.querySelector("#promoteTabInJoin").classList.remove('active')
-                        $("body").css('overflow', '');
+                        window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/login.html");
                     }, 100);
                 }).catch((err)=>{
                     console.log(err);
@@ -174,13 +168,7 @@ $(document).ready(function(){
                 }).then((res)=>{
                     alert("JOIN TUANGO SUCCESS");
                     setTimeout(()=>{
-                        document.querySelector("#TuanGOerJoinPage").classList.remove("show");
-                        document.querySelector("#TuanGOerJoinPageWrap").classList.remove("show");
-                        document.querySelector("#unpackedTabInJoin").classList.remove('active')
-                        document.querySelector("#JoinPageTopNav").classList.remove('show')
-                        document.querySelector("#footerInJoin").classList.remove('show')
-                        document.querySelector("#promoteTabInJoin").classList.remove('active')
-                        $("body").css('overflow', '');                    
+                        window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/login.html");
                     }, 100);
                 }).catch((err)=>{
                     console.log(err);

@@ -129,7 +129,7 @@ $(document).ready(function(){
             document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", (e)=>{
                 axios({
                     method: "put",
-                    url: "http://tuantuango-backend.herokuapp.com/api/v1/tuango/joinTuango",
+                    url: "https://tuantuango-backend.herokuapp.com/api/v1/tuango/joinTuango",
                     withCredentials: true,
                     data: {
                         tuangoID: TuanGOInform.id,
@@ -159,7 +159,7 @@ $(document).ready(function(){
                 event.stopPropagation();
                 axios({
                     method: "put",
-                    url: "http://tuantuango-backend.herokuapp.com/api/v1/tuango/joinTuango",
+                    url: "https://tuantuango-backend.herokuapp.com/api/v1/tuango/joinTuango",
                     withCredentials: true,
                     data: {
                         tuangoID: TuanGOInform.id,

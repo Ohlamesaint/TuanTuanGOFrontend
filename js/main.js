@@ -81,6 +81,7 @@ $(document).ready(function(){
         e.preventDefault();
         e.stopPropagation();
         let TuanGOInform = JSON.parse(localStorage.getItem("TuanGOInform"));
+        document.querySelector("#TuanGOerJoinPageWrap>#topPhoto").style.backgroundImage = `url("${TuanGOInform.productPhoto}")`;
         document.querySelector("#TuanGOerJoinPageWrap>#name").textContent = TuanGOInform.productName;
         document.querySelector("#TuanGOerJoinPageWrap>#TuanGOType").textContent = TuanGOInform.TuanGOType?'unpack':'promote';
         if(TuanGOInform.TuanGOType){

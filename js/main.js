@@ -132,7 +132,7 @@ $(document).ready(function(){
                     url: "http://localhost:3000/api/v1/tuango/joinTuango",
                     withCredentials: true,
                     data: {
-                        tuangoID: TuanGOInform._id,
+                        tuangoID: TuanGOInform.id,
                         amount: document.querySelector("#TuanGOerPurchaseAmountInUnpack").value,
                     }
                 }).then((res)=>{
@@ -145,7 +145,7 @@ $(document).ready(function(){
                         document.querySelector("#footerInJoin").classList.remove('show')
                         document.querySelector("#promoteTabInJoin").classList.remove('active')
                         $("body").css('overflow', '');
-                    }, 1000);
+                    }, 100);
                 }).catch((err)=>{
                     console.log(err);
                 })
@@ -168,7 +168,7 @@ $(document).ready(function(){
                     url: "http://localhost:3000/api/v1/tuango/joinTuango",
                     withCredentials: true,
                     data: {
-                        tuangoID: TuanGOInform._id,
+                        tuangoID: TuanGOInform.id,
                         amount: document.querySelector("#TuanGOerPurchaseAmountInPromote").value,
                     }
                 }).then((res)=>{
@@ -181,7 +181,7 @@ $(document).ready(function(){
                         document.querySelector("#footerInJoin").classList.remove('show')
                         document.querySelector("#promoteTabInJoin").classList.remove('active')
                         $("body").css('overflow', '');                    
-                    }, 3000);
+                    }, 100);
                 }).catch((err)=>{
                     console.log(err);
                 })

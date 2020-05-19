@@ -822,6 +822,7 @@ if (!document.getElementById("modal_close").onclick) {
 
 //document.querySelector("#bluetooth").addEventListener("click", () => {
 document.querySelector("#bluetooth").addEventListener("click", async event => {
+    var check_bluetooth = 0;
     try {
         await balenaBLE.request();
         await balenaBLE.connect();
@@ -831,77 +832,81 @@ document.querySelector("#bluetooth").addEventListener("click", async event => {
         read_count(); // get data
     } 
     catch (error) {
+        check_bluetooth = 1;
         console.log(error.message);
     }
     
-    var bt = document.querySelector("#bluetooth");
-    bt.disabled = true;
-    var loading = document.createElement('i');
-    loading.className = 'fa fa-spinner fa-spin';
-    bt.appendChild(loading);
-    document.querySelector("#modal_close").disabled = true;
-    document.querySelector('.close').disabled = true;
-    setTimeout(function () {
-        bt.removeChild(loading);
-        bt.remove();
-        var foot = document.getElementById("foot");
-        var confirm = document.createElement("button");
-        confirm.innerText = '確認收貨';
-        confirm.className = 'btn btn-primary justify-content-start';
-        confirm.id = 'confirm_button';
-        confirm.addEventListener("click",event => {
-            setTimeout(function () {
-                document.getElementById("confirm_button").remove();
-                // var findindex = transfer_list.findIndex(e => e.contract_address == document.querySelector('#JoinTuanGOContractAddress').innerText);
-                // complete_list.push(transfer_list[findindex]);
-                // transfer_list.splice(findindex,1);
-                document.querySelector("#modal_close").disabled = false;
-                document.querySelector("#modal_close").click();
-            },1000);
-        });
-        foot.prepend(confirm);
-        var info = document.querySelector('#JoinTuanGOProductInformation');
-        if(!document.getElementById('canvas')){
-            info.innerHTML += `<div class="card-header" id ="transfer_information" style="color: rgb(145, 93, 93)" >配送資訊</div>
-            <canvas id="canvas" width="300" height="300">Sorry, your browser doesn't support the &lt;canvas&gt; element.</canvas>
-            `;
-        }
-        var deny_bt = document.createElement("button");
-        deny_bt.className = 'btn btn-danger';
-        deny_bt.id = 'deny_button';
-        var t=document.createTextNode("拒收");
-        deny_bt.appendChild(t);
-        info.append(deny_bt);
-        //<button type="button" class="btn btn-danger">拒收</button>
-        deny_bt.addEventListener("click", () => {
-            deny_bt.disabled = true;
-            console.log("拒收並退款");
-            console.log(document.querySelector("#JoinTuanGOCost").textContent);
-            var str = document.querySelector("#JoinTuanGOCost").textContent;
-            var tmp = str.split(" ");
-            axios({
-                method: "PUT",
-                url: "https://tuantuango.herokuapp.com/sendMoney",
-                withCredentials: true,
-                data: {
-                    money: tmp[0]*tmp[5]
-                }
-            }).then((res) => {
-                if (res.data.success == false) {
-                    alert('發生錯誤，退款失敗');
-                    throw new Error('send money failed');
-                }
-                alert('拒收並退款成功');
-                document.getElementById("modal_close").click();
-                console.log(res);
-            }).catch((err) => {
-                throw new Error(err);
-            })
-            console.log("send_money_post ",tmp[0]*tmp[5]);
-        });
-        // var contract_address = document.querySelector('#JoinTuanGOContractAddress');
-        // plt(contract_address.textContent,0);
-    }, 3000);
+    if(check_bluetooth == 0){
+        var bt = document.querySelector("#bluetooth");
+        bt.disabled = true;
+        var loading = document.createElement('i');
+        loading.className = 'fa fa-spinner fa-spin';
+        bt.appendChild(loading);
+        document.querySelector("#modal_close").disabled = true;
+        document.querySelector('.close').disabled = true;
+        setTimeout(function () {
+            bt.removeChild(loading);
+            bt.remove();
+            var foot = document.getElementById("foot");
+            var confirm = document.createElement("button");
+            confirm.innerText = '確認收貨';
+            confirm.className = 'btn btn-primary justify-content-start';
+            confirm.id = 'confirm_button';
+            confirm.addEventListener("click",event => {
+                setTimeout(function () {
+                    document.getElementById("confirm_button").remove();
+                    // var findindex = transfer_list.findIndex(e => e.contract_address == document.querySelector('#JoinTuanGOContractAddress').innerText);
+                    // complete_list.push(transfer_list[findindex]);
+                    // transfer_list.splice(findindex,1);
+                    document.querySelector("#modal_close").disabled = false;
+                    document.querySelector("#modal_close").click();
+                },1000);
+            });
+            foot.prepend(confirm);
+            var info = document.querySelector('#JoinTuanGOProductInformation');
+            if(!document.getElementById('canvas')){
+                info.innerHTML += `<div class="card-header" id ="transfer_information" style="color: rgb(145, 93, 93)" >配送資訊</div>
+                <canvas id="canvas" width="300" height="300">Sorry, your browser doesn't support the &lt;canvas&gt; element.</canvas>
+                `;
+            }
+            var deny_bt = document.createElement("button");
+            deny_bt.className = 'btn btn-danger';
+            deny_bt.id = 'deny_button';
+            var t=document.createTextNode("拒收");
+            deny_bt.appendChild(t);
+            info.append(deny_bt);
+            //<button type="button" class="btn btn-danger">拒收</button>
+            deny_bt.addEventListener("click", () => {
+                deny_bt.disabled = true;
+                console.log("拒收並退款");
+                console.log(document.querySelector("#JoinTuanGOCost").textContent);
+                var str = document.querySelector("#JoinTuanGOCost").textContent;
+                var tmp = str.split(" ");
+                axios({
+                    method: "PUT",
+                    url: "https://tuantuango.herokuapp.com/sendMoney",
+                    withCredentials: true,
+                    data: {
+                        money: tmp[0]*tmp[5]
+                    }
+                }).then((res) => {
+                    if (res.data.success == false) {
+                        alert('發生錯誤，退款失敗');
+                        throw new Error('send money failed');
+                    }
+                    alert('拒收並退款成功');
+                    document.getElementById("modal_close").click();
+                    console.log(res);
+                }).catch((err) => {
+                    throw new Error(err);
+                })
+                console.log("send_money_post ",tmp[0]*tmp[5]);
+            });
+            // var contract_address = document.querySelector('#JoinTuanGOContractAddress');
+            // plt(contract_address.textContent,0);
+        }, 3000);
+    }
+    
 });
 function plt(contract_address,type) {
     console.log(contract_address);

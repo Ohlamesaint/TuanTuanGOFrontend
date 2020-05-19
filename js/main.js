@@ -85,7 +85,7 @@ $(document).ready(function(){
         document.querySelector("#footerInJoin").classList.remove('show')
         document.querySelector("#promoteTabInJoin").classList.remove('active')
         document.querySelector("#TuanGOerPurchaseAmountInPromote").value = 0;
-        checkNum(document.querySelector("#TuanGOerPurchaseAmountInUnpack").value = 0;
+        document.querySelector("#TuanGOerPurchaseAmountInUnpack").value = 0;
         $("body").css('overflow', '');
     })
     document.querySelector("#TuanGOerJoinPage").addEventListener("transitionend", (e)=>{

@@ -80,32 +80,35 @@ $(document).ready(function(){
         e.preventDefault();
         document.querySelector("#TuanGOerJoinPage").classList.remove("show");
         document.querySelector("#TuanGOerJoinPageWrap").classList.remove("show");
+        document.querySelector("#unpackedTabInJoin").classList.remove('active')
     })
     document.querySelector("#TuanGOerJoinPage").addEventListener("transitionend", (e)=>{
         e.preventDefault();
         e.stopPropagation();
-        let TuanGOInform = JSON.parse(localStorage.getItem("TuanGOInform"));
-        document.querySelector("#TuanGOerJoinPageWrap>#topPhoto").style.backgroundImage = `url("${TuanGOInform.productPhoto}")`;
-        document.querySelector("#TuanGOerJoinPageWrap>#name").textContent = TuanGOInform.productName;
-        document.querySelector("#TuanGOerJoinPageWrap>#TuanGOType").textContent = TuanGOInform.TuanGOType?'unpack':'promote';
-        if(TuanGOInform.TuanGOType){
-            // unpack
-            document.querySelector("#availableAmountInUnpack").textContent = `less than ${JSON.parse(localStorage.getItem('unsoldProductAmount'))+1}`
-            document.querySelector("#unpackedTabInJoin").addEventListener('transitionend', (e) => {
-                e.stopPropagation();
-            })
-            document.querySelector("#unpackedTabInJoin").classList.add('active')
-            
-        } else{
-            document.querySelector("#availableAmountInPromote").textContent = `less than ${JSON.parse(localStorage.getItem('unsoldProductAmount'))+1}`
-            document.querySelector("#promoteTabInJoin").addEventListener('transitionend', (e) => {
-                e.stopPropagation();
-            })
-            document.querySelector("#promoteTabInJoin").classList.add('active')
-            
+        if($("#TuanGOerJoinPage").hasClass("show")) {
+            let TuanGOInform = JSON.parse(localStorage.getItem("TuanGOInform"));
+            document.querySelector("#TuanGOerJoinPageWrap>#topPhoto").style.backgroundImage = `url("${TuanGOInform.productPhoto}")`;
+            document.querySelector("#TuanGOerJoinPageWrap>#name").textContent = TuanGOInform.productName;
+            document.querySelector("#TuanGOerJoinPageWrap>#TuanGOType").textContent = TuanGOInform.TuanGOType?'unpack':'promote';
+            if(TuanGOInform.TuanGOType){
+                // unpack
+                document.querySelector("#availableAmountInUnpack").textContent = `less than ${JSON.parse(localStorage.getItem('unsoldProductAmount'))+1}`
+                document.querySelector("#unpackedTabInJoin").addEventListener('transitionend', (e) => {
+                    e.stopPropagation();
+                })
+                document.querySelector("#unpackedTabInJoin").classList.add('active')
+                
+            } else{
+                document.querySelector("#availableAmountInPromote").textContent = `less than ${JSON.parse(localStorage.getItem('unsoldProductAmount'))+1}`
+                document.querySelector("#promoteTabInJoin").addEventListener('transitionend', (e) => {
+                    e.stopPropagation();
+                })
+                document.querySelector("#promoteTabInJoin").classList.add('active')
+                
+            }
+            document.querySelector("#JoinPageTopNav").classList.add('show');
+            document.querySelector("#TuanGOerJoinPageWrap").classList.add('show');
         }
-        document.querySelector("#JoinPageTopNav").classList.add('show');
-        document.querySelector("#TuanGOerJoinPageWrap").classList.add('show');
     })
     document.querySelector("#TuanGOerPurchaseAmountInUnpack").addEventListener("change", ()=>{
         let TuanGOInform = JSON.parse(localStorage.getItem("TuanGOInform"));

@@ -127,7 +127,7 @@ $(document).ready(function(){
             document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", (e)=>{
                 axios({
                     method: "post",
-                    url: "https://localhost:3000/api/v1/tuango/joinTuango",
+                    url: "http://localhost:3000/api/v1/tuango/joinTuango",
                     withCredentials: true,
                     data: {
                         tuangoID: TuanGOInform._id,
@@ -163,7 +163,7 @@ $(document).ready(function(){
                 event.stopPropagation();
                 axios({
                     method: "post",
-                    url: "https://localhost:3000/api/v1/tuango/joinTuango",
+                    url: "http://localhost:3000/api/v1/tuango/joinTuango",
                     withCredentials: true,
                     data: {
                         tuangoID: TuanGOInform._id,
@@ -172,7 +172,13 @@ $(document).ready(function(){
                 }).then((res)=>{
                     alert("JOIN TUANGO SUCCESS");
                     setTimeout(()=>{
-                        window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html")
+                        document.querySelector("#TuanGOerJoinPage").classList.remove("show");
+                        document.querySelector("#TuanGOerJoinPageWrap").classList.remove("show");
+                        document.querySelector("#unpackedTabInJoin").classList.remove('active')
+                        document.querySelector("#JoinPageTopNav").classList.remove('show')
+                        document.querySelector("#footerInJoin").classList.remove('show')
+                        document.querySelector("#promoteTabInJoin").classList.remove('active')
+                        $("body").css('overflow', '');                    
                     }, 3000);
                 }).catch((err)=>{
                     console.log(err);

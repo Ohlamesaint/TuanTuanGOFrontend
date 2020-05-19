@@ -161,10 +161,10 @@ $(document).ready(function(){
                 event.stopPropagation();
                 axios({
                     method: "post",
-                    url: "https://tuantuango.herokuapp.com/join",
+                    url: "https://localhost:3000/api/v1/tuango/joinTuango",
                     withCredentials: true,
                     data: {
-                        contractAddress: TuanGOInform.TuanGOAddress,
+                        tuangoID: TuanGOInform._id,
                         amount: document.querySelector("#TuanGOerPurchaseAmountInPromote").value,
                     }
                 }).then((res)=>{

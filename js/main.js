@@ -7,6 +7,8 @@ function element(ele){
 }
 
 $(document).ready(function(){
+    const TOKEN = 'Bearer '+localStorage.getItem('token');
+    axios.defaults.headers.common['Authorization'] = TOKEN;
     $("#TuanGOerJoinPage>div").on("transitionend", (e) => {
         e.stopPropagation();
     })

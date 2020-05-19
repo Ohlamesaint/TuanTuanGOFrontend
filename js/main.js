@@ -59,30 +59,23 @@ $(document).ready(function(){
     }, false)
     
     document.querySelector("#JoinTuanGO").addEventListener("click", ()=>{
-        axios({
-            method:"get",
-            withCredentials: true,
-            url:"https://tuantuango.herokuapp.com/signin",
-        }).then(res=>{
-            if(!res.data.signin){    //可以順便獲得會員profile
-                console.log(res);
-                $("body").addClass("modal-open");
-                $("#loginPrompt").addClass("show").css("display", "block");
-                $("#not").on('click', ()=>{
-                    $("body").removeClass("modal-open");
-                    $("#loginPrompt").removeClass("show").css("display", "none");
-                })
-                $("#yes").on('click', ()=>{
-                    setTimeout(() => {
-                        window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/login.html');
-                    }, );
-                })
-            } else {
-                document.querySelector("#TuanGOerJoinPage").classList.add("show");
-                console.log("show the tuango");
-                document.querySelector('body').setAttribute('style', "overflow: hidden");
-            }
-        })
+        if(!localStorage.getItem('token')){    //可以順便獲得會員profile
+            $("body").addClass("modal-open");
+            $("#loginPrompt").addClass("show").css("display", "block");
+            $("#not").on('click', ()=>{
+                $("body").removeClass("modal-open");
+                $("#loginPrompt").removeClass("show").css("display", "none");
+            })
+            $("#yes").on('click', ()=>{
+                setTimeout(() => {
+                    window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/login.html');
+                }, );
+            })
+        } else {
+            document.querySelector("#TuanGOerJoinPage").classList.add("show");
+            console.log("show the tuango");
+            document.querySelector('body').setAttribute('style', "overflow: hidden");
+        }
     })
     document.querySelector("#TuanGOerJoinPage").addEventListener("transitionend", (e)=>{
         e.preventDefault();

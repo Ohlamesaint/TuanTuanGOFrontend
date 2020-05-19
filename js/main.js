@@ -84,7 +84,7 @@ $(document).ready(function(){
         document.querySelector("#JoinPageTopNav").classList.remove('show')
         document.querySelector("#footerInJoin").classList.remove('show')
         document.querySelector("#promoteTabInJoin").classList.remove('active')
-        document.querySelector("body").removeAttribute('overflow');
+        document.querySelector("body").style.overflow('');
     })
     document.querySelector("#TuanGOerJoinPage").addEventListener("transitionend", (e)=>{
         e.preventDefault();

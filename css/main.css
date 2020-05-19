@@ -195,7 +195,7 @@ footer ul li:last-child h3{
 }
 
 #TuanGOerJoinPage{
-    position: fixed;
+    position: relative;
     left: 0;
     top: 0;
     height: 0px;

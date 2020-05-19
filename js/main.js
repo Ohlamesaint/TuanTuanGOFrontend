@@ -73,9 +73,12 @@ $(document).ready(function(){
             })
         } else {
             document.querySelector("#TuanGOerJoinPage").classList.add("show");
-            console.log("show the tuango");
             document.querySelector('body').setAttribute('style', "overflow: hidden");
         }
+    })
+    document.querySelector("#back").addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelector("#TuanGOerJoinPage").classList.remove("show");
     })
     document.querySelector("#TuanGOerJoinPage").addEventListener("transitionend", (e)=>{
         e.preventDefault();

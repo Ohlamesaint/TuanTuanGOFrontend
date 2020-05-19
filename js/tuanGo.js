@@ -425,7 +425,7 @@ $(document).ready(()=>{
                 cardTextList[0].textContent = productInform.data[0].productName;
                 cardTextList[1].textContent = "Unpack";
                 cardTextList[2].textContent = `${res}(in ${productInform.data[0].unpackableAmount})`;
-                cardTextList[3].textContent = `${(Math.floor(productInform.data[0].price/product.data[0].unpackableAmount)+1)*res}$(${Math.floor(productInform.data[0].price)+1}$/per)`;
+                cardTextList[3].textContent = `${(Math.floor(productInform.data[0].price/product.data[0].unpackableAmount)+1)*res}$(${Math.floor(productInform.data[0].price/product.data[0].unpackableAmount)+1}$/per)`;
                 cardTextList[4].textContent = `${document.querySelector("input[name=Expiration]").value}`;
             }
             $(footer[2]).children().css("color", "rgb(145, 93, 93);");

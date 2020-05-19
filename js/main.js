@@ -125,7 +125,7 @@ $(document).ready(function(){
             document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", (e)=>{
                 axios({
                     method: "post",
-                    url: "https://tuantuango-backend.herokuapp.com/api/v1/tuango/joinTuango",
+                    url: "https://localhost:3000/api/v1/tuango/joinTuango",
                     withCredentials: true,
                     data: {
                         tuangoID: TuanGOInform._id,

@@ -161,7 +161,7 @@ $(document).ready(function () {
             method: "GET",
             url: "https://tuantuango-backend.herokuapp.com/api/v1/tuango/getUserTuango",
             params: {
-                status: "DONE"
+                status: "QUEUE"
             },
             withCredentials: true,
         }).then(res => {

@@ -59,7 +59,7 @@ $(document).ready(function(){
     }, false)
     
     document.querySelector("#JoinTuanGO").addEventListener("click", ()=>{
-        if(!localStorage.getItem('token')){    //可以順便獲得會員profile
+        if(!localStorage.getItem('token')){    
             $("body").addClass("modal-open");
             $("#loginPrompt").addClass("show").css("display", "block");
             $("#not").on('click', ()=>{

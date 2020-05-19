@@ -426,6 +426,8 @@ $(document).ready(()=>{
                 cardTextList[0].textContent = productInform.data[0].productName;
                 cardTextList[1].textContent = "Unpack";
                 cardTextList[2].textContent = `${res}(in ${productInform.data[0].unpackableAmount})`;
+                let buffer = (productInform.data[0].price)/(productInform.data[0].unpackableAmount);
+                console.log(buffer);
                 cardTextList[3].textContent = `${(productInform.data[0].price)*res}$(${productInform.data[0].price}$/per)`;
                 cardTextList[4].textContent = `${document.querySelector("input[name=Expiration]").value}`;
             }

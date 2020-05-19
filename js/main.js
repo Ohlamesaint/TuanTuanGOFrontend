@@ -126,7 +126,7 @@ $(document).ready(function(){
             document.querySelector("#footerInJoin").classList.add('show')
             document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", (e)=>{
                 axios({
-                    method: "post",
+                    method: "put",
                     url: "http://localhost:3000/api/v1/tuango/joinTuango",
                     withCredentials: true,
                     data: {
@@ -162,7 +162,7 @@ $(document).ready(function(){
                 event.preventDefault();
                 event.stopPropagation();
                 axios({
-                    method: "post",
+                    method: "put",
                     url: "http://localhost:3000/api/v1/tuango/joinTuango",
                     withCredentials: true,
                     data: {

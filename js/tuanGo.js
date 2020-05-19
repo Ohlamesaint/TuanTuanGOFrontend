@@ -422,13 +422,16 @@ $(document).ready(()=>{
                 cardTextList[3].textContent = `${productInform.data[0].promotionPrice*res}$(${productInform.data[0].promotionPrice}$/per)`;
                 cardTextList[4].textContent = `${document.querySelector("input[name=promoteExpiration]").value}`;
             }else if(TuanGOType === 1){
-                console.log(productInform.data[0]);
+                console.log(productInform.data[0])
                 cardTextList[0].textContent = productInform.data[0].productName;
                 cardTextList[1].textContent = "Unpack";
                 cardTextList[2].textContent = `${res}(in ${productInform.data[0].unpackableAmount})`;
                 console.log(productInform.data[0].price, product.data[0].unpackableAmount, productInform.data[0].price/product.data[0].unpackableAmount);
+                console.log(123)
                 console.log(Math.floor(productInform.data[0].price/product.data[0].unpackableAmount)+1);
+                console.log(456)
                 console.log((Math.floor(productInform.data[0].price/product.data[0].unpackableAmount)+1)*res)
+                console.log(789)
                 cardTextList[3].textContent = `${(Math.floor(productInform.data[0].price/product.data[0].unpackableAmount)+1)*res}$(${Math.floor(productInform.data[0].price/product.data[0].unpackableAmount)+1}$/per)`;
                 cardTextList[4].textContent = `${document.querySelector("input[name=Expiration]").value}`;
             }

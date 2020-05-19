@@ -79,6 +79,7 @@ $(document).ready(function(){
     document.querySelector("#back").addEventListener('click', (e) => {
         e.preventDefault();
         document.querySelector("#TuanGOerJoinPage").classList.remove("show");
+        document.querySelector("#TuanGOerJoinPageWrap").classList.remove("show");
     })
     document.querySelector("#TuanGOerJoinPage").addEventListener("transitionend", (e)=>{
         e.preventDefault();

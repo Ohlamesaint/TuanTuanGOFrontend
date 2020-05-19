@@ -427,7 +427,7 @@ $(document).ready(()=>{
                 cardTextList[1].textContent = "Unpack";
                 cardTextList[2].textContent = `${res}(in ${productInform.data[0].unpackableAmount})`;
                 console.log(555);
-                console.log(productInform.data[0].price, product.data[0].unpackableAmount, productInform.data[0].price/product.data[0].unpackableAmount);
+                console.log(productInform.data[0].price, product.data[0].unpackableAmount);
                 console.log(123)
                 console.log(Math.floor(productInform.data[0].price/product.data[0].unpackableAmount)+1);
                 console.log(456)

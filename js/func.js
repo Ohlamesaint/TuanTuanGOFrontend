@@ -123,8 +123,6 @@ function t() {
 $(document).ready(async function () {
     let TOKEN = "Bearer "+localStorage.getItem('token');
     axios.defaults.headers.common['Authorization'] = TOKEN;
-    let test = indexedDBGetTargetPage();
-    console.log(test);
     var targetPage = await indexedDBGetTargetPage();
     console.log(targetPage);
     $(belowBar[targetPage]).addClass("actived");

@@ -223,6 +223,16 @@ async function indexedDBStoreTargetPage(num){
                 }
             } else {
                 data.targetPage = num;
+
+                let putTargetRequest = await store.put(data);
+
+                putTargetRequest.onerror = e => {
+                    console.log('put targetPage store error', e.target.errorCode);
+                }
+
+                putTargetRequest.onsuccess = e => {
+                    console.log('request targetPage', e.target.result)
+                }
                 console.log(data);
             }
         }

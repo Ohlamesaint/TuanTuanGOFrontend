@@ -223,7 +223,7 @@ async function indexedDBStoreTargetPage(num){
                     console.log('request targetPage', e.target.result);
                 }
             } else {
-                return data;
+                data = num;
             }
         }
         

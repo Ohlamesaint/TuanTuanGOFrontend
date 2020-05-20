@@ -192,7 +192,7 @@ async function indexedDBStoreTargetPage(num){
         console.log('Something went wrong in indexDB', e.target.errorCode);
     }
 
-    request.onsuccess = e => {      // when the db open request is done
+    request.onsuccess = async e => {      // when the db open request is done
         db = e.target.result;       // request.result
         transaction = db.transaction('targetPageStore', 'readwrite');       // establish the connection 
         store = transaction.objectStore('targetPageStore');

@@ -211,8 +211,7 @@ async function indexedDBStoreTargetPage(num){
 
         // check if the targetPage is exist
         getTargetRequest.onsuccess = async e => {
-            let data = e.target.result.target;
-            console.log(data);
+            let data = e.target.result;
             if(!data){
                 let setTargetRequest = await store.put({ targetPage: num });
 

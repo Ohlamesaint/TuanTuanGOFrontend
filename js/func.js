@@ -1094,7 +1094,7 @@ async function indexedDBGetTargetPage() {
         store = transaction.objectStore('targetPageStore');
         
         // get the index 1 item in targetPageStore in request result db
-        let targetPage = await store.get(1)
+        let targetPage = await store.get(0)
 
         transaction.oncomplete = () => {
             db.close();

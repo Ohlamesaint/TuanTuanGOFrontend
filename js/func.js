@@ -1030,51 +1030,6 @@ async function read_repeat(){
     balenaBLE.readLed();
 }
 
-async function indexedDBStoreTargetPage(num){
-
-    if(!window.indexedDB){
-        throw new Error('Browser does not support indexedDB');
-    }
-    const DBName = 'target'
-    let request = await window.indexedDB.open(DBName, 1);       //version 1 => create database
-    let db, transaction, store, index;
-
-    request.onerror = e => {
-        console.log('Something went wrong in indexDB', e.target.errorCode);
-    }
-
-    // when the db open request is done
-    request.onsuccess = async e => {  
-        
-        // request.result    
-        db = e.target.result;    
-
-        // establish the connection
-        transaction = db.transaction('targetPageStore', 'readwrite');        
-        store = transaction.objectStore('targetPageStore');
-
-        // because of the propagation of the error 
-        // the error in here is global
-        db.error = e => {       
-            console.log('ERROR', e.target.errorCode)
-        }
-
-        await store.put({ targetPage: num });
-        let test = await store.get(1);
-
-        transaction.oncomplete = async () => {
-            await db.close();
-        }
-        
-        return;
-    }
-
-    request.onupgradeneeded = async e => {
-        let db = e.target.result,
-            store = await db.createObjectStore('targetPageStore',{ autoIncrement: true })
-    }
-}
-
 async function indexedDBGetTargetPage() {
     if(!window.indexedDB) {
         throw new Error('Browser does not support indexedDB');

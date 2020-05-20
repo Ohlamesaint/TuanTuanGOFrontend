@@ -233,8 +233,11 @@ async function indexedDBStoreTargetPage(num){
                     }
 
                     putTargetRequest.onerror = e => {
-                        console.log(e.errorCode);
+                        console.log(e.target.errorCode);
                     }
+                }
+                deleteTargetRequest.onerror = e => {
+                    console.log(e.target.errorCode);
                 }
             }
         }

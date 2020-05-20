@@ -206,17 +206,17 @@ async function indexedDBStoreTargetPage(num){
 
         await store.put({ targetPage: num });
 
-        transaction.oncomplete = () => {
-            db.close();
+        transaction.oncomplete = async () => {
+            await db.close();
         }
         
-        return null;
+        return;
     }
 
-    request.onupgradeneeded = e => {
+    request.onupgradeneeded = async e => {
         let db = e.target.result,
-            store = db.createObjectStore('targetPageStore',{ keyPath: 'target' }),
-            index = store.createIndex('target', 'target', { unique: true });
+            store = await db.createObjectStore('targetPageStore',{ keyPath: 'target' }),
+            index = await store.createIndex('target', 'target', { unique: true });
     }
 }
 

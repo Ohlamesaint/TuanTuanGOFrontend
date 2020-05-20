@@ -202,10 +202,15 @@ async function indexedDBStoreTargetPage(num){
         db.error = e => {       
             console.log('ERROR', e.target.errorCode)
         }
+
+        // 如果只是要使用index查找資料，使用store.index
+        // 若要使用自定義的index查找資料，則必須定義index，並且利用store.
         console.log(num)
-        console.log('index1', await store.index(1));
-        console.log('index0', await store.index(0));
-        if(store.index(0))
+        console.log('index1', await index.get(1));
+        console.log('index0', await index.get(0));
+        if(await index.get(0)){
+            console.log('in0');
+        }
         await store.put({ targetPage: num });
         const request = await store.get('targetPage');
 

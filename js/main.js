@@ -197,7 +197,7 @@ async function indexedDBStoreTargetPage(num){
         transaction = db.transaction('targetPageStore', 'readwrite');       // establish the connection 
         store = transaction.objectStore('targetPageStore');
         index = store.index('title');
-
+        // store.put({ title: 'targetPage', targetPage: 0 })
         // because of the propagation of the error 
         // the error in here is global
         db.error = e => {       
@@ -249,8 +249,7 @@ async function indexedDBStoreTargetPage(num){
     request.onupgradeneeded = async e => {
         let db = e.target.result,
             store = await db.createObjectStore('targetPageStore',{ autoIncrement: true })
-
-            store.put({ title: 'targetPage', targetPage: 0 })
+            index = store.createIndex('title', 'title', { unique: true });
     }
 }
 

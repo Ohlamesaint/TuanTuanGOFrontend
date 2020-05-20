@@ -120,12 +120,13 @@ function t() {
 }
 
 
-$(document).ready(function () {
+$(document).ready(async function () {
     let TOKEN = "Bearer "+localStorage.getItem('token');
     axios.defaults.headers.common['Authorization'] = TOKEN;
     let test = indexedDBGetTargetPage();
     console.log(test);
-    var targetPage = localStorage.getItem("target");
+    var targetPage = await indexedDBGetTargetPage();
+    console.log(targetPage);
     $(belowBar[targetPage]).addClass("actived");
     $(belowBar[targetPage]).children().addClass("actived-word");
     title.innerHTML = `
@@ -1031,14 +1032,59 @@ async function read_repeat(){
     balenaBLE.readLed();
 }
 
+async function indexedDBStoreTargetPage(num){
+
+    if(!window.indexedDB){
+        throw new Error('Browser does not support indexedDB');
+    }
+    const DBName = 'target'
+    let request = await window.indexedDB.open(DBName, 1);       //version 1 => create database
+    let db, transaction, store, index;
+
+    request.onerror = e => {
+        console.log('Something went wrong in indexDB', e.target.errorCode);
+    }
+
+    // when the db open request is done
+    request.onsuccess = async e => {  
+        
+        // request.result    
+        db = e.target.result;    
+
+        // establish the connection
+        transaction = db.transaction('targetPageStore', 'readwrite');        
+        store = transaction.objectStore('targetPageStore');
+
+        // because of the propagation of the error 
+        // the error in here is global
+        db.error = e => {       
+            console.log('ERROR', e.target.errorCode)
+        }
+
+        await store.put({ targetPage: num });
+        let test = await store.get(1);
+
+        transaction.oncomplete = async () => {
+            await db.close();
+        }
+        
+        return;
+    }
+
+    request.onupgradeneeded = async e => {
+        let db = e.target.result,
+            store = await db.createObjectStore('targetPageStore',{ autoIncrement: true })
+    }
+}
+
 async function indexedDBGetTargetPage() {
     if(!window.indexedDB) {
         throw new Error('Browser does not support indexedDB');
     }
 
     const DBName = 'target'
-    let request = window.indexedDB.open(DBname, 1);
-    let db, transaction, store, index;
+    let request = window.indexedDB.open(DBName, 1);
+    let db, transaction, store;
     
     request.onerror = e => {
         console.log('Something went wrong in indexDB', e.target.errorCode);

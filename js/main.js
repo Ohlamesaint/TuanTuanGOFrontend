@@ -205,8 +205,8 @@ async function indexedDBStoreTargetPage(num){
         console.log(num)
         // if(store.get)
         await store.put({ targetPage: num });
-        const request = await store.get(0);
-
+        const request = await store.get(1);
+        
         request.onerror = e => {
             console.log('Get targetPage store error', e.target.errorCode);
         }

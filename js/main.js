@@ -202,20 +202,31 @@ async function indexedDBStoreTargetPage(num){
         db.error = e => {       
             console.log('ERROR', e.target.errorCode)
         }
-        console.log(num)
-        // if(store.get)
-        await store.put({ targetPage: num });
-        const request = await store.get(1);
+
+        let getTargetRequest = await store.get(1).target;
+
+        getTargetRequest.onerror = e => {
+            console.log('Something went wrong => main => indexedDBStoreTargetPage', e.target.errorCode);
+        }
+
+        // check if the targetPage is exist
+        getTargetRequest.onsuccess = e => {
+            let data = e.target.result.target;
+            if(!data){
+                let setTargetRequest = await store.put({ targetPage: num });
+
+                setTargetRequest.onerror = e => {
+                    console.log('Get targetPage store error', e.target.errorCode);
+                }
         
-        request.onerror = e => {
-            console.log('Get targetPage store error', e.target.errorCode);
+                setTargetRequest.onsuccess = e => {
+                    console.log('request targetPage', e.target.result);
+                }
+            } else {
+                return data;
+            }
         }
-
-        request.onsuccess = e => {
-            console.log('request targetPage', e.target.result);
-        }
-        // console.log(test);
-
+        
         transaction.oncomplete = async () => {
             await db.close();
         }

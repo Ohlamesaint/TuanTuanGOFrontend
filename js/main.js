@@ -222,18 +222,19 @@ async function indexedDBStoreTargetPage(num){
                     console.log('request targetPage', e.target.result);
                 }
             } else {
-                data.targetPage = num;
+                let deleteTargetRequest = await store.deleteIndex(1);
+                
+                deleteTargetRequest.onsuccess = e => {
+                    let putTargetRequest = await store.put({ targetPage: num });
 
-                let putTargetRequest = await store.put(data);
+                    putTargetRequest.onsucess = e => {
+                        console.log(e.target.result);
+                    }
 
-                putTargetRequest.onerror = e => {
-                    console.log('put targetPage store error', e.target.errorCode);
+                    putTargetRequest.onerror = e => {
+                        console.log(e.errorCode);
+                    }
                 }
-
-                putTargetRequest.onsuccess = e => {
-                    console.log('request targetPage', e.target.result)
-                }
-                console.log(data);
             }
         }
         

@@ -209,6 +209,8 @@ async function indexedDBStoreTargetPage(num){
         transaction.oncomplete = () => {
             db.close();
         }
+        
+        return null;
     }
 
     request.onupgradeneeded = e => {

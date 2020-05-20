@@ -1028,3 +1028,12 @@ async function read_repeat(){
     console.log(over_num);
     balenaBLE.readLed();
 }
+
+async function indexedDBGetTargetPage() {
+    if(!window.indexedDB) {
+        throw new Error('Browser does not support indexedDB');
+    }
+
+    const DBName = 'target'
+    
+}

@@ -13,7 +13,7 @@ $(document).ready(function(){
         e.stopPropagation();
     })
     for(let i=0; i<belowBar.length-1; i++){
-        belowBar[i].addEventListener("click", (e)=>{
+        belowBar[i].addEventListener("click", async (e)=>{
             if(!localStorage.getItem('token')){   
                 $("body").addClass("modal-open");
                 $("#loginPrompt").addClass("show").css("display", "block");

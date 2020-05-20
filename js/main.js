@@ -223,7 +223,7 @@ async function indexedDBStoreTargetPage(num){
                     console.log('request targetPage', e.target.result);
                 }
             } else {
-                let deleteTargetRequest = await store.delete('targetPage');
+                let deleteTargetRequest = await store.delete('targetPageStore');
                 
                 deleteTargetRequest.onsuccess = async e => {
                     let putTargetRequest = await store.put({ title: 'targetPage', targetPage: num });

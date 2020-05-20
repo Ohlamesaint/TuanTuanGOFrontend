@@ -224,6 +224,7 @@ async function indexedDBStoreTargetPage(num){
                 }
             } else {
                 data.target = num;
+                console.log(data);
             }
         }
         

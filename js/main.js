@@ -190,6 +190,7 @@ async function indexedDBStoreTargetPage(num){
     }
     request.onsuccess = e => {
         let db = e.target.result;
+        console.log(e.target);
         console.log(db);
         // let targetPage = db.create
     }

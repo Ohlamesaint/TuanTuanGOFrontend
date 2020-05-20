@@ -204,7 +204,7 @@ async function indexedDBStoreTargetPage(num){
             console.log('ERROR', e.target.errorCode)
         }
 
-        store.put({ targetPage: num });
+        await store.put({ targetPage: num });
 
         transaction.oncomplete = () => {
             db.close();

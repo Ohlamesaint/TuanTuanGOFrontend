@@ -186,7 +186,7 @@ async function indexedDBStoreTargetPage(num){
     }
     const DBName = 'target'
     let request = await window.indexedDB.open(DBName, 1);       //version 1 => create database
-    let db, transaction, store, index;
+    let db, transaction, store;
 
     request.onerror = e => {
         console.log('Something went wrong in indexDB', e.target.errorCode);
@@ -196,6 +196,7 @@ async function indexedDBStoreTargetPage(num){
         db = e.target.result;       // request.result
         transaction = db.transaction('targetPageStore', 'readwrite');       // establish the connection 
         store = transaction.objectStore('targetPageStore');
+        index = store.index('title');
 
         // because of the propagation of the error 
         // the error in here is global
@@ -203,7 +204,7 @@ async function indexedDBStoreTargetPage(num){
             console.log('ERROR', e.target.errorCode)
         }
 
-        let getTargetRequest = await store.get(1);
+        let getTargetRequest = await index.get('targetPage');
         getTargetRequest.onerror = e => {
             console.log('Something went wrong => main => indexedDBStoreTargetPage', e.target.errorCode);
         }
@@ -212,7 +213,7 @@ async function indexedDBStoreTargetPage(num){
         getTargetRequest.onsuccess = async e => {
             let data = e.target.result;
             if(!data){
-                let setTargetRequest = await store.put({ targetPage: num });
+                let setTargetRequest = await store.put({ title: 'targetPage', targetPage: num });
 
                 setTargetRequest.onerror = e => {
                     console.log('Get targetPage store error', e.target.errorCode);
@@ -222,10 +223,10 @@ async function indexedDBStoreTargetPage(num){
                     console.log('request targetPage', e.target.result);
                 }
             } else {
-                let deleteTargetRequest = await store.delete(1);
+                let deleteTargetRequest = await index.delete('targetPage');
                 
                 deleteTargetRequest.onsuccess = async e => {
-                    let putTargetRequest = await store.put({ targetPage: num });
+                    let putTargetRequest = await store.put({ title: 'targetPage', targetPage: num });
 
                     putTargetRequest.onsucess = e => {
                         console.log(e.target.result);

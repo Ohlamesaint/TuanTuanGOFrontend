@@ -249,6 +249,8 @@ async function indexedDBStoreTargetPage(num){
     request.onupgradeneeded = async e => {
         let db = e.target.result,
             store = await db.createObjectStore('targetPageStore',{ autoIncrement: true })
+
+            store.put({ title: 'targetPage', targetPage: 0 })
     }
 }
 

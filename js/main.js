@@ -223,23 +223,23 @@ async function indexedDBStoreTargetPage(num){
                     console.log('request targetPage', e.target.result);
                 }
             } else {
-                console.log('123');
-                let deleteTargetRequest = await store.delete('targetPage');
+                deleteData(db);
+                let deleteTargetRequest = await store.delete('targetPageStore');
                 
-                deleteTargetRequest.onsuccess = async e => {
-                    let putTargetRequest = await store.put({ title: 'targetPage', targetPage: num });
+                // deleteTargetRequest.onsuccess = async e => {
+                //     let putTargetRequest = await store.put({ title: 'targetPage', targetPage: num });
 
-                    putTargetRequest.onsucess = e => {
-                        console.log(e.target.result);
-                    }
+                //     putTargetRequest.onsucess = e => {
+                //         console.log(e.target.result);
+                //     }
 
-                    putTargetRequest.onerror = e => {
-                        console.log(e.target.errorCode);
-                    }
-                }
-                deleteTargetRequest.onerror = e => {
-                    console.log(e.target.errorCode);
-                }
+                //     putTargetRequest.onerror = e => {
+                //         console.log(e.target.errorCode);
+                //     }
+                // }
+                // deleteTargetRequest.onerror = e => {
+                //     console.log(e.target.errorCode);
+                // }
             }
         }
         
@@ -255,6 +255,10 @@ async function indexedDBStoreTargetPage(num){
             store = await db.createObjectStore('targetPageStore',{ autoIncrement: true })
             index = store.createIndex('title', 'title', { unique: true });
     }
+}
+
+async function deleteData(db) {
+    var transaction = db.transaction('')
 }
 
 function checkNum(num, border){

@@ -204,7 +204,6 @@ async function indexedDBStoreTargetPage(num){
         }
 
         let getTargetRequest = await store.get(1);
-        console.log(getTargetRequest);
         getTargetRequest.onerror = e => {
             console.log('Something went wrong => main => indexedDBStoreTargetPage', e.target.errorCode);
         }
@@ -223,7 +222,7 @@ async function indexedDBStoreTargetPage(num){
                     console.log('request targetPage', e.target.result);
                 }
             } else {
-                data.target = num;
+                data.targetPage = num;
                 console.log(data);
             }
         }

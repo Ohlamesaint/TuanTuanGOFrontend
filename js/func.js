@@ -1094,12 +1094,13 @@ async function indexedDBGetTargetPage() {
         store = transaction.objectStore('targetPageStore');
         
         // get the index 1 item in targetPageStore in request result db
-        let targetPage = await store.get(0)
-
+        let targetPage = await store.get(0);
+        let targetPage2 = await store.get(1);
         transaction.oncomplete = () => {
             db.close();
         }
-
+        console.log(target2, '566');
+        console.log(targetPage, 1231)
         return targetPage;
     }
 }

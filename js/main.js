@@ -206,6 +206,7 @@ async function indexedDBStoreTargetPage(num){
         await store.put({ targetPage: num });
         let test = await store.get(1);
         console.log(test);
+
         transaction.oncomplete = async () => {
             await db.close();
         }
@@ -215,7 +216,7 @@ async function indexedDBStoreTargetPage(num){
 
     request.onupgradeneeded = async e => {
         let db = e.target.result,
-            store = await db.createObjectStore('targetPageStore',{ autoIncrement: true }),
+            store = await db.createObjectStore('targetPageStore',{ autoIncrement: true })
     }
 }
 

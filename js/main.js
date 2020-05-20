@@ -204,7 +204,7 @@ async function indexedDBStoreTargetPage(num){
         }
         console.log(num)
         await store.put({ targetPage: num });
-        let test = await store.get(1);
+        let test = await store.get(0);
         console.log(test);
 
         transaction.oncomplete = async () => {

@@ -28,6 +28,7 @@ $(document).ready(function(){
                 })
             }else{
                 console.log(belowBar[i].children[1].textContent);
+                
                 localStorage.setItem("target", i)
                 window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/func.html');
             }
@@ -177,6 +178,23 @@ $(document).ready(function(){
         }
     })
 })
+
+async function indexedDBStoreTargetPage(num){
+    if(!window.indexedDB){
+        throw new Error('Browser does not support indexedDB');
+    }
+    const DBName = 'targetPage'
+    let request = await window.indexedDB.open(DBName, 1);
+    request.onerror = e => {
+        console.log('Something went wrong in indexDB', e.target.errorCode);
+    }
+    request.onsuccess = e => {
+        let db = e.target.result;
+        console.log(db);
+        // let targetPage = db.create
+    }
+
+}
 
 function checkNum(num, border){
     console.log(num, border);

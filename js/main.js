@@ -180,21 +180,42 @@ $(document).ready(function(){
 })
 
 async function indexedDBStoreTargetPage(num){
+
     if(!window.indexedDB){
         throw new Error('Browser does not support indexedDB');
     }
-    const DBName = 'targetPage'
-    let request = await window.indexedDB.open(DBName, 1);
+    const DBName = 'target'
+    let request = await window.indexedDB.open(DBName, 1);       //version 1 => create database
+    let db, transaction, store, index;
+
     request.onerror = e => {
         console.log('Something went wrong in indexDB', e.target.errorCode);
     }
-    request.onsuccess = e => {
-        let db = e.target.result;
-        console.log(e.target);
-        console.log(db);
-        // let targetPage = db.create
+
+    request.onsuccess = e => {      // when the db open request is done
+        db = e.target.result;       // request.result
+        transaction = db.transaction('targetPageStore', 'readwrite');       // establish the connection 
+        store = transaction.objectStore('targetPageStore');
+        index = store.index('target');
+
+        // because of the propagation of the error 
+        // the error in here is global
+        db.error = e => {       
+            console.log('ERROR', e.target.errorCode)
+        }
+
+        store.put({ targetPage: num });
+
+        transaction.oncomplete = () => {
+            db.close();
+        }
     }
 
+    request.onupgradeneeded = e => {
+        let db = e.target.result,
+            store = db.createObjectStore('targetPageStore',{ keyPath: 'target' }),
+            index = store.createIndex('target', 'target', { unique: true });
+    }
 }
 
 function checkNum(num, border){

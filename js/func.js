@@ -1092,14 +1092,18 @@ async function indexedDBGetTargetPage() {
         db = e.target.result;
         transaction = db.transaction('targetPageStore', 'readonly');
         store = transaction.objectStore('targetPageStore');
-        
+        console.log('before');
         // get the index 1 item in targetPageStore in request result db
         let targetPage = await store.get(0);
+        console.log('after1');
+
         let targetPage2 = await store.get(1);
+        console.log('after2');
+
         transaction.oncomplete = () => {
             db.close();
         }
-        console.log(target2, '566');
+        console.log(targetPage2, '566');
         console.log(targetPage, 1231)
         return targetPage;
     }

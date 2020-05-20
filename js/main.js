@@ -203,7 +203,7 @@ async function indexedDBStoreTargetPage(num){
             console.log('ERROR', e.target.errorCode)
         }
 
-        let getTargetRequest = await store.get(1).target;
+        let getTargetRequest = await store.get(1);
 
         getTargetRequest.onerror = e => {
             console.log('Something went wrong => main => indexedDBStoreTargetPage', e.target.errorCode);

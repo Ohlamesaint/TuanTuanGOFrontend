@@ -123,6 +123,8 @@ function t() {
 $(document).ready(function () {
     let TOKEN = "Bearer "+localStorage.getItem('token');
     axios.defaults.headers.common['Authorization'] = TOKEN;
+    let test = indexedDBGetTargetPage();
+    console.log(test);
     var targetPage = localStorage.getItem("target");
     $(belowBar[targetPage]).addClass("actived");
     $(belowBar[targetPage]).children().addClass("actived-word");
@@ -1035,5 +1037,25 @@ async function indexedDBGetTargetPage() {
     }
 
     const DBName = 'target'
+    let request = window.indexedDB.open(DBname, 1);
+    let db, transaction, store, index;
     
+    request.onerror = e => {
+        console.log('Something went wrong in indexDB', e.target.errorCode);
+    }
+
+    request.onsuccess = async e => {
+        db = e.target.result;
+        transaction = db.transaction('targetPageStore', 'readonly');
+        store = transaction.objectStore('targetPageStore');
+        
+        // get the index 1 item in targetPageStore in request result db
+        let targetPage = await store.get(1)
+
+        transaction.oncomplete = () => {
+            db.close();
+        }
+
+        return targetPage;
+    }
 }

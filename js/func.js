@@ -123,9 +123,12 @@ function t() {
 $(document).ready(function () {
     let TOKEN = "Bearer "+localStorage.getItem('token');
     axios.defaults.headers.common['Authorization'] = TOKEN;
-    let targetPage = localStorage.getItem('target');
-    // var targetPage = await indexedDBGetTargetPage();
-    // console.log(targetPage);
+    // let targetPage = localStorage.getItem('target');
+    let targetPage;
+    (async () => {
+        targetPage = await indexedDBGetTargetPage();
+    })
+    console.log(targetPage);
     $(belowBar[targetPage]).addClass("actived");
     $(belowBar[targetPage]).children().addClass("actived-word");
     title.innerHTML = `
@@ -1032,35 +1035,11 @@ async function read_repeat(){
 }
 
 async function indexedDBGetTargetPage() {
-    if(!window.indexedDB) {
-        throw new Error('Browser does not support indexedDB');
-    }
-
-    const DBName = 'target'
-    let request = window.indexedDB.open(DBName, 1);
-    let db, transaction, store;
     
-    request.onerror = e => {
-        console.log('Something went wrong in indexDB', e.target.errorCode);
-    }
+    const db = Dexie('targetPageDB');
 
-    request.onsuccess = async e => {
-        db = e.target.result;
-        transaction = db.transaction('targetPageStore', 'readonly');
-        store = transaction.objectStore('targetPageStore');
-        console.log('before');
-        // get the index 1 item in targetPageStore in request result db
-        let targetPage = await store.get(0);
-        console.log('after1');
-
-        let targetPage2 = await store.get(1);
-        console.log('after2');
-
-        transaction.oncomplete = () => {
-            db.close();
-        }
-        console.log(targetPage2, '566');
-        console.log(targetPage, 1231)
-        return targetPage;
-    }
+    db.open();
+    let target = await db.targetPage.get(1)
+    console.log('123456789')
+    return target.target;
 }

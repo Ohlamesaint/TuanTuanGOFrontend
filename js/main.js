@@ -7,16 +7,14 @@ function element(ele){
 }
 
 $(document).ready(function(){
-    const TOKEN = 'Bearer '+localStorage.getItem('token');
-    // await indexedDBStoreTargetPage(i);
-    
+    const TOKEN = 'Bearer '+localStorage.getItem('token');    
 
     axios.defaults.headers.common['Authorization'] = TOKEN;
     $("#TuanGOerJoinPage>div").on("transitionend", (e) => {
         e.stopPropagation();
     })
     for(let i=0; i<belowBar.length-1; i++){
-        belowBar[i].addEventListener("click", (e)=>{
+        belowBar[i].addEventListener("click", async (e)=>{
             if(!localStorage.getItem('token')){   
                 $("body").addClass("modal-open");
                 $("#loginPrompt").addClass("show").css("display", "block");
@@ -31,8 +29,10 @@ $(document).ready(function(){
                 })
             }else{
                 console.log(belowBar[i].children[1].textContent);
-                localStorage.setItem("target", i)
-                window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/func.html');
+                await indexedDBStoreTargetPage(i);
+                // localStorage.setItem("target", i)
+                window.location.replace('http://localhost:5500/pages/func.html');
+                // window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/func.html');
             }
         }, false)
     }
@@ -181,102 +181,22 @@ $(document).ready(function(){
     })
 })
 
-// async function indexedDBStoreTargetPage(num){
+async function indexedDBStoreTargetPage(num){
     
-//    var db = new Dexie("targetPageDB");
-//    db.version(1).stores({
-//      targetPage: "++id,target"
-//    });
-//    db.open();
-
-   //
-   // Manipulate and Query Database
-   //
-//    db.friends.add({name: "Josephine", age: 21}).then(function() {
-//        return db.friends.where("age").below(25).toArray();
-//    }).then(function (youngFriends) {
-//        alert ("My young friends: " + JSON.stringify(youngFriends));
-//    }).catch(function (e) {
-//        alert ("Error: " + (e.stack || e));
-//    });
-    // if(!window.indexedDB){
-    //     throw new Error('Browser does not support indexedDB');
-    // }
-    // const DBName = 'target'
-    // let request = await window.indexedDB.open(DBName, 1);       //version 1 => create database
-    // let db, transaction, store;
+    var db = new Dexie("targetPageDB");
+    db.version(1).stores({
+        targetPage: "++id,target"
+    });
+    db.open();
     
-    // request.onerror = e => {
-    //     console.log('Something went wrong in indexDB', e.target.errorCode);
-    // }
     
-    // request.onsuccess = async e => {      // when the db open request is done
-    //     db = e.target.result;       // request.result
-    //     transaction = db.transaction('targetPageStore', 'readwrite');       // establish the connection 
-    //     store = transaction.objectStore('targetPageStore');
-    //     index = store.index('title');
-    //     // store.put({ title: 'targetPage', targetPage: 0 })
-    //     // because of the propagation of the error 
-    //     // the error in here is global
-    //     db.error = e => {       
-    //         console.log('ERROR', e.target.errorCode)
-    //     }
-    
-    //     let getTargetRequest = await index.get('targetPage');
-    //     getTargetRequest.onerror = e => {
-    //         console.log('Something went wrong => main => indexedDBStoreTargetPage', e.target.errorCode);
-    //     }
-    
-    //     // check if the targetPage is exist
-    //     getTargetRequest.onsuccess = async e => {
-    //         let data = e.target.result;
-    //         if(!data){
-    //             let setTargetRequest = await store.put({ title: 'targetPage', targetPage: num });
-    
-    //             setTargetRequest.onerror = e => {
-    //                 console.log('Get targetPage store error', e.target.errorCode);
-    //             }
-    
-    //             setTargetRequest.onsuccess = e => {
-    //                 console.log('request targetPage', e.target.result);
-    //             }
-    //         } else {
-    //             let deleteTargetRequest = await store.delete('target');
-    
-    //             deleteTargetRequest.onsuccess = async e => {
-    //                 let putTargetRequest = await store.put({ title: 'targetPage', targetPage: num });
-    
-    //                 putTargetRequest.onsucess = e => {
-    //                     console.log(e.target.result);
-    //                 }
-    
-    //                 putTargetRequest.onerror = e => {
-    //                     console.log(e.target.errorCode);
-    //                 }
-    //             }
-    //             deleteTargetRequest.onerror = e => {
-    //                 console.log(e.target.errorCode);
-    //             }
-    //         }
-    //     }
-    
-    //     transaction.oncomplete = async () => {
-    //         await db.close();
-    //     }
-    
-    //     return;
-    // }
-    
-    // request.onupgradeneeded = async e => {
-    //     let db = e.target.result,
-    //         store = await db.createObjectStore('targetPageStore',{ autoIncrement: true })
-    //         index = store.createIndex('title', 'title', { unique: true });
-    // }
-// }
-
-// async function deleteData(db) {
-//     var transaction = db.transaction('')
-// }
+    if(await db.targetPage.count() == 0){
+        db.targetPage.add({ target: num })
+        return 
+    }
+    db.targetPage.update(1, { target: num })
+    console.log(await db.targetPage.get(1));
+}
 
 function checkNum(num, border){
     console.log(num, border);

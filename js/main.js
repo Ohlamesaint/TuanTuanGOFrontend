@@ -17,6 +17,7 @@ $(document).ready(async function(){
     })
     for(let i=0; i<belowBar.length-1; i++){
         belowBar[i].addEventListener("click", async (e)=>{
+            console.log(123);
             if(!localStorage.getItem('token')){   
                 $("body").addClass("modal-open");
                 $("#loginPrompt").addClass("show").css("display", "block");

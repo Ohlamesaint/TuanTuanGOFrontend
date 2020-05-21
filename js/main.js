@@ -6,7 +6,7 @@ function element(ele){
     document.querySelector(`#${ele}`);
 }
 
-$(document).ready(async function(){
+$(document).ready(function(){
     const TOKEN = 'Bearer '+localStorage.getItem('token');
     // await indexedDBStoreTargetPage(i);
     
@@ -16,8 +16,7 @@ $(document).ready(async function(){
         e.stopPropagation();
     })
     for(let i=0; i<belowBar.length-1; i++){
-        belowBar[i].addEventListener("click", async (e)=>{
-            console.log(123);
+        belowBar[i].addEventListener("click", (e)=>{
             if(!localStorage.getItem('token')){   
                 $("body").addClass("modal-open");
                 $("#loginPrompt").addClass("show").css("display", "block");

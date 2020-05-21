@@ -123,458 +123,52 @@ function t() {
 $(document).ready(function () {
     let TOKEN = "Bearer "+localStorage.getItem('token');
     axios.defaults.headers.common['Authorization'] = TOKEN;
-    // let targetPage = localStorage.getItem('target');
-    let targetPage;
-    (async () => {
-        targetPage = await indexedDBGetTargetPage();
-    })
-    console.log(targetPage);
-    $(belowBar[targetPage]).addClass("actived");
-    $(belowBar[targetPage]).children().addClass("actived-word");
-    title.innerHTML = `
-    ${belowBar[targetPage].dataset.name}
-    `;
-    $(middleWraps[targetPage]).siblings().removeClass("activePage");
-    $(middleWraps[targetPage]).addClass("activePage");
-    back.addEventListener("click", (evt) => {
-        evt.preventDefault();
-        window.location.replace('../main.html');
-    })
-    let init = middleWrapRowList[targetPage].children;
-    $(init).addClass("fadeIn");
-    
-    
-    if (targetPage == 0) {     
-        axios({
-            method: "GET",
-            url: "https://tuantuango-backend.herokuapp.com/api/v1/user/profile",
-            withCredentials: true,
-        }).then(res => {
-            document.querySelector("#account").textContent = res.data.data.account;
-            document.querySelector("#username").textContent = res.data.data.username;
-            document.querySelector("#phoneNumber").textContent = res.data.data.phoneNumber;
-            document.querySelector("#email").textContent = res.data.data.email;
-            document.querySelector("#address").textContent = res.data.data.address;
-            document.querySelector("#region").textContent = res.data.data.region+', Taiwan';
-            document.querySelector("#headPaste").style.backgroundImage = `url("${res.data.data.headPaste}")`;
-        }).catch(err => {
-            throw new Error(err);
+    indexedDBGetTargetPage()
+    .then(res => {
+        let targetPage = res.target;
+        $(belowBar[targetPage]).addClass("actived");
+        $(belowBar[targetPage]).children().addClass("actived-word");
+        title.innerHTML = `
+        ${belowBar[targetPage].dataset.name}
+        `;
+        $(middleWraps[targetPage]).siblings().removeClass("activePage");
+        $(middleWraps[targetPage]).addClass("activePage");
+        back.addEventListener("click", (evt) => {
+            evt.preventDefault();
+            window.location.replace('../main.html');
         })
-    }
-    else if (targetPage == 1) {
-        axios({
-            method: "GET",
-            url: "http://localhost:3000/api/v1/tuango/getUserTuango",
-            params: {
-                status: "QUEUE"
-            },
-            withCredentials: true,
-        }).then(res => {
-            console.log(res);
-            var target = document.querySelector("#complete_list");
-            complete_list.forEach(function (element, idx, array) {
-                if (idx === array.length - 1) {
-                    target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_complete">
-                    <div class="colorgraph"></div>
-                    <div class="card" data-toggle="modal" data-target="#productModal">
-                    <div class="text-center" style="padding-right: 1rem;">
-                    <div class="row" style="padding: 1rem;">
-                    <div class="col-4">
-                    <img class="img-fluid w-100 h-100" src="${element.img}" alt="card image">
-                    </div>
-                    <div class="col-8">
-                    <div class="row">
-                    <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
-                    商品名稱
-                    </div>
-                    <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
-                    ${element.name}
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>  
-                    </div>
-                    <div class="colorgraph"></div>
-                    </div>`
-                }
-                else {
-                    target.innerHTML += `<div class="mb-4 joinlist_complete">
-                    <div class="colorgraph"></div>
-                    <div class="card" data-toggle="modal" data-target="#productModal">
-                    <div class="text-center" style="padding-right: 1rem;">
-                    <div class="row" style="padding: 1rem;">
-                    <div class="col-4">
-                    <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
-                    </div>
-                    <div class="col-8">
-                    <div class="row">
-                    <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
-                    商品名稱
-                    </div>
-                    <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
-                    ${element.name}
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>  
-                    </div>
-                    <div class="colorgraph"></div>
-                    </div>`
-                }
-            });
-            let cardList = document.querySelectorAll('.joinlist_complete');
-            for (let i = 0; i < cardList.length; i++) {
-                $(cardList[i]).on('click', (e) => {      //注意id綁定不包含0x
-                    e.preventDefault();
-                    document.querySelector("#JoinTuanGOProductName").textContent = complete_list[i].name;
-                    document.querySelector("#ProductImg").src = complete_list[i].img;
-                    document.querySelector("#JoinTuanGOTuanGOType").textContent = complete_list[i].TuanGOType ? 'unpack' : 'promote';
-                    document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(complete_list[i].ExpirationTime).toString().slice(0, 24);
-                    document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].disccountPrice} $ /per , 你買了 ${complete_list[i].count} 件`;
-                    document.querySelector("#JoinTuanGOContractAddress").textContent = complete_list[i].contract_address;
-                    var num = 0;
-                    var TuanGOerLine = "";
-                    num = complete_list[i].SoldAmounts;
-                    localStorage.setItem('unsoldProductAmount', complete_list[i].TotalAmount - num);
-                    for (let j = 0; j < complete_list[i].TotalAmount; j++) {
-                        if (j < num) TuanGOerLine += '<i class="fas fa-user"></i>';
-                        else TuanGOerLine += '<i class="far fa-user"></i>';
-                    }
-                    document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + complete_list[i].TotalAmount;
-                })
-            };
-            target = document.querySelector("#ongoing_list");
-            ongoing_list.forEach(function (element, idx, array) {
-                if (idx === array.length - 1) {
-                    target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_ongoing">
-                    <div class="colorgraph"></div>
-                    <div class="card" data-toggle="modal" data-target="#productModal">
-                    <div class="text-center" style="padding-right: 1rem;">
-                    <div class="row" style="padding: 1rem;">
-                    <div class="col-4">
-                    <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
-                    </div>
-                    <div class="col-8">
-                    <div class="row">
-                    <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
-                    商品名稱
-                    </div>
-                    <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
-                    ${element.name}
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>  
-                    </div>
-                    <div class="colorgraph"></div>
-                    </div>`
-                }
-                else {
-                    target.innerHTML += `<div class="mb-4 joinlist_ongoing">
-                    <div class="colorgraph"></div>
-                    <div class="card" data-toggle="modal" data-target="#productModal">
-                    <div class="text-center" style="padding-right: 1rem;">
-                    <div class="row" style="padding: 1rem;">
-                    <div class="col-4">
-                    <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
-                    </div>
-                    <div class="col-8">
-                    <div class="row">
-                    <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
-                    商品名稱
-                    </div>
-                    <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
-                    ${element.name}
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>  
-                    </div>
-                    <div class="colorgraph"></div>
-                    </div>`
-                }
+        let init = middleWrapRowList[targetPage].children;
+        $(init).addClass("fadeIn");
+        
+        
+        if (targetPage == 0) {     
+            axios({
+                method: "GET",
+                url: "https://tuantuango-backend.herokuapp.com/api/v1/user/profile",
+                withCredentials: true,
+            }).then(res => {
+                document.querySelector("#account").textContent = res.data.data.account;
+                document.querySelector("#username").textContent = res.data.data.username;
+                document.querySelector("#phoneNumber").textContent = res.data.data.phoneNumber;
+                document.querySelector("#email").textContent = res.data.data.email;
+                document.querySelector("#address").textContent = res.data.data.address;
+                document.querySelector("#region").textContent = res.data.data.region+', Taiwan';
+                document.querySelector("#headPaste").style.backgroundImage = `url("${res.data.data.headPaste}")`;
+            }).catch(err => {
+                throw new Error(err);
             })
-            let cardList2 = document.querySelectorAll('.joinlist_ongoing');
-            for (let i = 0; i < cardList2.length; i++) {
-                $(cardList2[i]).on('click', (e) => {      //注意id綁定不包含0x
-                    e.preventDefault();
-                    document.querySelector("#JoinTuanGOProductName").textContent = ongoing_list[i].name;
-                    document.querySelector("#ProductImg").src = ongoing_list[i].img;
-                    document.querySelector("#JoinTuanGOTuanGOType").textContent = ongoing_list[i].TuanGOType ? 'unpack' : 'promote';
-                    document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(ongoing_list[i].ExpirationTime).toString().slice(0, 24);
-                    document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].disccountPrice} $ /per , 你買了 ${complete_list[i].count} 件`;
-                    document.querySelector("#JoinTuanGOContractAddress").textContent = ongoing_list[i].contract_address;
-                    var num = 0;
-                    var TuanGOerLine = "";
-                    num = ongoing_list[i].SoldAmounts;
-                    localStorage.setItem('unsoldProductAmount', ongoing_list[i].TotalAmount - num);
-                    for (let j = 0; j < ongoing_list[i].TotalAmount; j++) {
-                        if (j < num) TuanGOerLine += '<i class="fas fa-user"></i>';
-                        else TuanGOerLine += '<i class="far fa-user"></i>';
-                    }
-                    document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + ongoing_list[i].TotalAmount;
-                })
-            };
-            target = document.querySelector("#transfer_list");
-            transfer_list.forEach(function (element, idx, array) {
-                if (idx === array.length - 1) {
-                    target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_transfer">
-                    <div class="colorgraph"></div>
-                    <div class="card" data-toggle="modal" data-target="#productModal">
-                    <div class="text-center" style="padding-right: 1rem;">
-                    <div class="row" style="padding: 1rem;">
-                    <div class="col-4">
-                    <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
-                    </div>
-                    <div class="col-8">
-                    <div class="row">
-                    <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
-                    商品名稱
-                    </div>
-                    <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
-                    ${element.name}
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>  
-                    </div>
-                    <div class="colorgraph"></div>
-                    </div>`
-                }
-                else {
-                    target.innerHTML += `<div class="mb-4 joinlist_transfer">
-                    <div class="colorgraph"></div>
-                    <div class="card" data-toggle="modal" data-target="#productModal">
-                    <div class="text-center" style="padding-right: 1rem;">
-                    <div class="row" style="padding: 1rem;">
-                    <div class="col-4">
-                    <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
-                    </div>
-                    <div class="col-8">
-                    <div class="row">
-                    <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
-                    商品名稱
-                    </div>
-                    <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
-                    ${element.name}
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>  
-                    </div>
-                    <div class="colorgraph"></div>
-                    </div>`
-                }
-            })
-            let cardList3 = document.querySelectorAll('.joinlist_transfer');
-            for (let i = 0; i < cardList3.length; i++) {
-                $(cardList3[i]).on('click', (e) => {      //注意id綁定不包含0x
-                    e.preventDefault();
-                    document.querySelector("#JoinTuanGOProductName").textContent = transfer_list[i].name;
-                    document.querySelector("#ProductImg").src = transfer_list[i].img;
-                    document.querySelector("#JoinTuanGOTuanGOType").textContent = transfer_list[i].TuanGOType ? 'unpack' : 'promote';
-                    document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(transfer_list[i].ExpirationTime).toString().slice(0, 24);
-                    document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].disccountPrice} $ /per , 你買了 ${complete_list[i].count} 件`;
-                    document.querySelector("#JoinTuanGOContractAddress").textContent = transfer_list[i].contract_address;
-                    var num = 0;
-                    var TuanGOerLine = "";
-                    num = transfer_list[i].SoldAmounts;
-                    localStorage.setItem('unsoldProductAmount', transfer_list[i].TotalAmount - num);
-                    for (let j = 0; j < transfer_list[i].TotalAmount; j++) {
-                        if (j < num) TuanGOerLine += '<i class="fas fa-user"></i>';
-                        else TuanGOerLine += '<i class="far fa-user"></i>';
-                    }
-                    document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + transfer_list[i].TotalAmount;
-                })
-            };
-        }).catch(err => {
-            throw new Error(err);
-        })
-    }
-    else if (targetPage == 2) {
-        tl.resume();
-        axios({
-            method: "GET",
-            url: "https://tuantuango-backend.herokuapp.com/api/v1/blockchain/getWallet",
-            withCredentials: true,
-        }).then(res => {
-            document.querySelector("#walletCash").textContent = res.data.data.balance + "NT$";
-            document.querySelector("#accounthere").textContent = res.data.data.account;
-            $('#userForm').bootstrapValidator();
-        }).catch(err => {
-            throw new Error(err);
-        })
-        document.querySelector("#money_send").addEventListener("click", async () => {
-            if (mutex) {
-                mutex = false;
-                var flag = $('#userForm').data("bootstrapValidator").isValid();
-                var message = document.createElement("p");
-                if (flag) {
-                    document.querySelector("#money_send").disabled = true;
-                    message.innerText = "Wait for sending ...";
-                    document.querySelector("#send_message").appendChild(message);
-                    axios({
-                        method: "PUT",
-                        url: "https://tuantuango-backend.herokuapp.com/api/v1/blockchain/sendMoney",
-                        withCredentials: true,
-                        data: {
-                            money: document.querySelector("#nn").value
-                        }
-                    }).then((res) => {
-                        if (!res.data.data.balance) {
-                            alert('發生錯誤，加值失敗');
-                            throw new Error('send money failed');
-                        }
-                        alert('加值成功');
-                        document.querySelector("#walletCash ").textContent = res.data.data.balance;
-                        document.querySelector("#send_message").removeChild(message);
-                        $('#store').modal('hide');
-                        console.log(res);
-                        document.querySelector("#money_send").disabled = false;
-                    }).catch((err) => {
-                        throw new Error(err);
-                    })
-                    console.log("send_money_post ", document.querySelector("#nn").value);
-                }
-                else {
-                    message.innerText = "Invalid Number !";
-                    console.log("money error");
-                }
-                mutex = true;
-            }
-        })
-    }
-    else if (targetPage == 3) {
-    }
-    for (let i = 0; i < belowBar.length - 1; i++) {
-        belowBar[i].addEventListener("click", (e) => {
-            
-            $(belowBar[i]).siblings().removeClass("actived");
-            $(belowBar[i]).siblings().children().removeClass("actived-word");
-            $(belowBar[i]).siblings().children().css("color", "gray");
-            $(belowBar[4]).children().css("color", "rgb(145, 93, 93)");
-            $(belowBar[i]).addClass("actived");
-            $(belowBar[i]).children().addClass("actived-word");
-            title.innerHTML = `
-            ${belowBar[i].dataset.name}
-            `;
-            $(middleWraps[i]).siblings().removeClass("activePage");
-            $(middleWraps[i]).addClass("activePage");
-            document.querySelector("#complete_list").innerHTML = "";
-            document.querySelector("#ongoing_list").innerHTML = "";
-            document.querySelector("#transfer_list").innerHTML = "";
-            $('#productModal').modal('hide');
-            for (let j = 0; j < middleWrapRowList.length; j++) {
-                if (j == i) {
-                    let ch = middleWrapRowList[j].children;
-                    $(ch).addClass("fadeIn");
-                }
-                else {
-                    let cs = middleWrapRowList[j].children;
-                    $(cs).removeClass("fadeIn")
-                }
-            }
-            if (i != 2) {
-                tl.pause();
-            }
-            if (i == 0) {     //my profile 利用req.session來查詢並獲得
-                axios({
-                    method: "GET",
-                    url: "https://tuantuango-backend.herokuapp.com/api/v1/user/profile",
-                    withCredentials: true,
-                }).then(res => {
-                    document.querySelector("#account").textContent = res.data.data.account;
-                    document.querySelector("#username").textContent = res.data.data.username;
-                    document.querySelector("#phoneNumber").textContent = res.data.data.phoneNumber;
-                    document.querySelector("#email").textContent = res.data.data.email;
-                    document.querySelector("#address").textContent = res.data.data.address;
-                    document.querySelector("#region").textContent = res.data.data.region + ', Taiwan';
-                    document.querySelector("#headPaste").style.backgroundImage = `url("${res.data.data.headPaste}")`;
-                }).catch(err => {
-                    throw new Error(err);
-                })
-            }
-            else if (i == 2) {
-                tl.resume();
-                axios({
-                    method: "GET",
-                    url: "https://tuantuango-backend.herokuapp.com/api/v1/blockchain/getWallet",
-                    withCredentials: true,
-                }).then(res => {
-                    document.querySelector("#walletCash").textContent = res.data.data.balance + "NT$";
-                    document.querySelector("#accounthere").textContent = res.data.data.account;
-                    $('#userForm').bootstrapValidator();
-                }).catch(err => {
-                    throw new Error(err);
-                })
-                document.querySelector("#money_send").addEventListener("click", async () => {
-                    if (mutex) {
-                        var flag = $('#userForm').data("bootstrapValidator").isValid();
-                        var message = document.createElement("p");
-                        if (flag) {
-                            document.querySelector("#money_send").disabled = true;
-                            message.innerText = "Wait for sending ...";
-                            document.querySelector("#send_message").appendChild(message);
-                            axios({
-                                method: "PUT",
-                                url: "https://tuantuango-backend.herokuapp.com/api/v1/blockchain/sendMoney",
-                                withCredentials: true,
-                                data: {
-                                    money: document.querySelector("#nn").value
-                                }
-                            }).then((res) => {
-                                if (!res.data.data.balance) {
-                                    alert('發生錯誤，加值失敗');
-                                    throw new Error('send money failed');
-                                }
-                                alert('加值成功');
-                                document.querySelector("#walletCash ").textContent = res.data.data.balance;
-                                document.querySelector("#send_message").removeChild(message);
-                                $('#store').modal('hide');
-                                console.log(res);
-                                document.querySelector("#money_send").disabled = false;
-                            }).catch((err) => {
-                                throw new Error(err);
-                            })
-                        }
-                        else {
-                            message.innerText = "Invalid Number !";
-                            console.log("money error");
-                        }
-                        mutex = true;
-                    }
-                })
-            }
-            else if (i == 1) {
-                /*
-                axios({
-                    method: "GET",
-                    url: "https://tuantuango.herokuapp.com/userTuangoList",
-                    withCredentials: true,
-                }).then(res=>{
-                    if(!res.data.signin){    //做保險
-                        console.log(res);
-                        console.log("789");
-                        setTimeout(() => {
-                            window.location.replace('./login.html');
-                        }, );
-                    }else{
-                        
-                    }
-                }).catch(err=>{
-                    throw new Error(err);
-                })
-                */
-                console.log("success");
-                //console.log(res);
+        }
+        else if (targetPage == 1) {
+            axios({
+                method: "GET",
+                url: "http://tuantuango-backend.herokuapp.com/api/v1/tuango/getUserTuango",
+                params: {
+                    status: "QUEUE"
+                },
+                withCredentials: true,
+            }).then(res => {
+                console.log(res);
                 var target = document.querySelector("#complete_list");
-                var inx = 0;
                 complete_list.forEach(function (element, idx, array) {
                     if (idx === array.length - 1) {
                         target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_complete">
@@ -646,15 +240,6 @@ $(document).ready(function () {
                             else TuanGOerLine += '<i class="far fa-user"></i>';
                         }
                         document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + complete_list[i].TotalAmount;
-                        var info = document.querySelector('#JoinTuanGOProductInformation');
-                        if(!document.getElementById('canvas')){
-                            info.innerHTML += `<div class="card-header" id ="transfer_information" style="color: rgb(145, 93, 93)" >配送資訊</div>
-                            <canvas id="canvas" width="300" height="300">Sorry, your browser doesn't support the &lt;canvas&gt; element.</canvas>
-                            `;
-                        }
-                        
-                        var contract_address = document.querySelector('#JoinTuanGOContractAddress');
-                        plt(contract_address.textContent,1);
                     })
                 };
                 target = document.querySelector("#ongoing_list");
@@ -709,7 +294,6 @@ $(document).ready(function () {
                         <div class="colorgraph"></div>
                         </div>`
                     }
-                    
                 })
                 let cardList2 = document.querySelectorAll('.joinlist_ongoing');
                 for (let i = 0; i < cardList2.length; i++) {
@@ -804,12 +388,426 @@ $(document).ready(function () {
                             else TuanGOerLine += '<i class="far fa-user"></i>';
                         }
                         document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + transfer_list[i].TotalAmount;
-                        document.querySelector("#bluetooth").disabled = false;
                     })
                 };
-            }
-        }, false)
-    }
+            }).catch(err => {
+                throw new Error(err);
+            })
+        }
+        else if (targetPage == 2) {
+            tl.resume();
+            axios({
+                method: "GET",
+                url: "https://tuantuango-backend.herokuapp.com/api/v1/blockchain/getWallet",
+                withCredentials: true,
+            }).then(res => {
+                document.querySelector("#walletCash").textContent = res.data.data.balance + "NT$";
+                document.querySelector("#accounthere").textContent = res.data.data.account;
+                $('#userForm').bootstrapValidator();
+            }).catch(err => {
+                throw new Error(err);
+            })
+            document.querySelector("#money_send").addEventListener("click", async () => {
+                if (mutex) {
+                    mutex = false;
+                    var flag = $('#userForm').data("bootstrapValidator").isValid();
+                    var message = document.createElement("p");
+                    if (flag) {
+                        document.querySelector("#money_send").disabled = true;
+                        message.innerText = "Wait for sending ...";
+                        document.querySelector("#send_message").appendChild(message);
+                        axios({
+                            method: "PUT",
+                            url: "https://tuantuango-backend.herokuapp.com/api/v1/blockchain/sendMoney",
+                            withCredentials: true,
+                            data: {
+                                money: document.querySelector("#nn").value
+                            }
+                        }).then((res) => {
+                            if (!res.data.data.balance) {
+                                alert('發生錯誤，加值失敗');
+                                throw new Error('send money failed');
+                            }
+                            alert('加值成功');
+                            document.querySelector("#walletCash ").textContent = res.data.data.balance;
+                            document.querySelector("#send_message").removeChild(message);
+                            $('#store').modal('hide');
+                            console.log(res);
+                            document.querySelector("#money_send").disabled = false;
+                        }).catch((err) => {
+                            throw new Error(err);
+                        })
+                        console.log("send_money_post ", document.querySelector("#nn").value);
+                    }
+                    else {
+                        message.innerText = "Invalid Number !";
+                        console.log("money error");
+                    }
+                    mutex = true;
+                }
+            })
+        }
+        else if (targetPage == 3) {
+        }
+        for (let i = 0; i < belowBar.length - 1; i++) {
+            belowBar[i].addEventListener("click", (e) => {
+                
+                $(belowBar[i]).siblings().removeClass("actived");
+                $(belowBar[i]).siblings().children().removeClass("actived-word");
+                $(belowBar[i]).siblings().children().css("color", "gray");
+                $(belowBar[4]).children().css("color", "rgb(145, 93, 93)");
+                $(belowBar[i]).addClass("actived");
+                $(belowBar[i]).children().addClass("actived-word");
+                title.innerHTML = `
+                ${belowBar[i].dataset.name}
+                `;
+                $(middleWraps[i]).siblings().removeClass("activePage");
+                $(middleWraps[i]).addClass("activePage");
+                document.querySelector("#complete_list").innerHTML = "";
+                document.querySelector("#ongoing_list").innerHTML = "";
+                document.querySelector("#transfer_list").innerHTML = "";
+                $('#productModal').modal('hide');
+                for (let j = 0; j < middleWrapRowList.length; j++) {
+                    if (j == i) {
+                        let ch = middleWrapRowList[j].children;
+                        $(ch).addClass("fadeIn");
+                    }
+                    else {
+                        let cs = middleWrapRowList[j].children;
+                        $(cs).removeClass("fadeIn")
+                    }
+                }
+                if (i != 2) {
+                    tl.pause();
+                }
+                if (i == 0) {     //my profile 利用req.session來查詢並獲得
+                    axios({
+                        method: "GET",
+                        url: "https://tuantuango-backend.herokuapp.com/api/v1/user/profile",
+                        withCredentials: true,
+                    }).then(res => {
+                        document.querySelector("#account").textContent = res.data.data.account;
+                        document.querySelector("#username").textContent = res.data.data.username;
+                        document.querySelector("#phoneNumber").textContent = res.data.data.phoneNumber;
+                        document.querySelector("#email").textContent = res.data.data.email;
+                        document.querySelector("#address").textContent = res.data.data.address;
+                        document.querySelector("#region").textContent = res.data.data.region + ', Taiwan';
+                        document.querySelector("#headPaste").style.backgroundImage = `url("${res.data.data.headPaste}")`;
+                    }).catch(err => {
+                        throw new Error(err);
+                    })
+                }
+                else if (i == 2) {
+                    tl.resume();
+                    axios({
+                        method: "GET",
+                        url: "https://tuantuango-backend.herokuapp.com/api/v1/blockchain/getWallet",
+                        withCredentials: true,
+                    }).then(res => {
+                        document.querySelector("#walletCash").textContent = res.data.data.balance + "NT$";
+                        document.querySelector("#accounthere").textContent = res.data.data.account;
+                        $('#userForm').bootstrapValidator();
+                    }).catch(err => {
+                        throw new Error(err);
+                    })
+                    document.querySelector("#money_send").addEventListener("click", async () => {
+                        if (mutex) {
+                            var flag = $('#userForm').data("bootstrapValidator").isValid();
+                            var message = document.createElement("p");
+                            if (flag) {
+                                document.querySelector("#money_send").disabled = true;
+                                message.innerText = "Wait for sending ...";
+                                document.querySelector("#send_message").appendChild(message);
+                                axios({
+                                    method: "PUT",
+                                    url: "https://tuantuango-backend.herokuapp.com/api/v1/blockchain/sendMoney",
+                                    withCredentials: true,
+                                    data: {
+                                        money: document.querySelector("#nn").value
+                                    }
+                                }).then((res) => {
+                                    if (!res.data.data.balance) {
+                                        alert('發生錯誤，加值失敗');
+                                        throw new Error('send money failed');
+                                    }
+                                    alert('加值成功');
+                                    document.querySelector("#walletCash ").textContent = res.data.data.balance;
+                                    document.querySelector("#send_message").removeChild(message);
+                                    $('#store').modal('hide');
+                                    console.log(res);
+                                    document.querySelector("#money_send").disabled = false;
+                                }).catch((err) => {
+                                    throw new Error(err);
+                                })
+                            }
+                            else {
+                                message.innerText = "Invalid Number !";
+                                console.log("money error");
+                            }
+                            mutex = true;
+                        }
+                    })
+                }
+                else if (i == 1) {
+                    /*
+                    axios({
+                        method: "GET",
+                        url: "https://tuantuango.herokuapp.com/userTuangoList",
+                        withCredentials: true,
+                    }).then(res=>{
+                        if(!res.data.signin){    //做保險
+                            console.log(res);
+                            console.log("789");
+                            setTimeout(() => {
+                                window.location.replace('./login.html');
+                            }, );
+                        }else{
+                            
+                        }
+                    }).catch(err=>{
+                        throw new Error(err);
+                    })
+                    */
+                    console.log("success");
+                    //console.log(res);
+                    var target = document.querySelector("#complete_list");
+                    var inx = 0;
+                    complete_list.forEach(function (element, idx, array) {
+                        if (idx === array.length - 1) {
+                            target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_complete">
+                            <div class="colorgraph"></div>
+                            <div class="card" data-toggle="modal" data-target="#productModal">
+                            <div class="text-center" style="padding-right: 1rem;">
+                            <div class="row" style="padding: 1rem;">
+                            <div class="col-4">
+                            <img class="img-fluid w-100 h-100" src="${element.img}" alt="card image">
+                            </div>
+                            <div class="col-8">
+                            <div class="row">
+                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                            商品名稱
+                            </div>
+                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                            ${element.name}
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>  
+                            </div>
+                            <div class="colorgraph"></div>
+                            </div>`
+                        }
+                        else {
+                            target.innerHTML += `<div class="mb-4 joinlist_complete">
+                            <div class="colorgraph"></div>
+                            <div class="card" data-toggle="modal" data-target="#productModal">
+                            <div class="text-center" style="padding-right: 1rem;">
+                            <div class="row" style="padding: 1rem;">
+                            <div class="col-4">
+                            <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
+                            </div>
+                            <div class="col-8">
+                            <div class="row">
+                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                            商品名稱
+                            </div>
+                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                            ${element.name}
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>  
+                            </div>
+                            <div class="colorgraph"></div>
+                            </div>`
+                        }
+                    });
+                    let cardList = document.querySelectorAll('.joinlist_complete');
+                    for (let i = 0; i < cardList.length; i++) {
+                        $(cardList[i]).on('click', (e) => {      //注意id綁定不包含0x
+                            e.preventDefault();
+                            document.querySelector("#JoinTuanGOProductName").textContent = complete_list[i].name;
+                            document.querySelector("#ProductImg").src = complete_list[i].img;
+                            document.querySelector("#JoinTuanGOTuanGOType").textContent = complete_list[i].TuanGOType ? 'unpack' : 'promote';
+                            document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(complete_list[i].ExpirationTime).toString().slice(0, 24);
+                            document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].disccountPrice} $ /per , 你買了 ${complete_list[i].count} 件`;
+                            document.querySelector("#JoinTuanGOContractAddress").textContent = complete_list[i].contract_address;
+                            var num = 0;
+                            var TuanGOerLine = "";
+                            num = complete_list[i].SoldAmounts;
+                            localStorage.setItem('unsoldProductAmount', complete_list[i].TotalAmount - num);
+                            for (let j = 0; j < complete_list[i].TotalAmount; j++) {
+                                if (j < num) TuanGOerLine += '<i class="fas fa-user"></i>';
+                                else TuanGOerLine += '<i class="far fa-user"></i>';
+                            }
+                            document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + complete_list[i].TotalAmount;
+                            var info = document.querySelector('#JoinTuanGOProductInformation');
+                            if(!document.getElementById('canvas')){
+                                info.innerHTML += `<div class="card-header" id ="transfer_information" style="color: rgb(145, 93, 93)" >配送資訊</div>
+                                <canvas id="canvas" width="300" height="300">Sorry, your browser doesn't support the &lt;canvas&gt; element.</canvas>
+                                `;
+                            }
+                            
+                            var contract_address = document.querySelector('#JoinTuanGOContractAddress');
+                            plt(contract_address.textContent,1);
+                        })
+                    };
+                    target = document.querySelector("#ongoing_list");
+                    ongoing_list.forEach(function (element, idx, array) {
+                        if (idx === array.length - 1) {
+                            target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_ongoing">
+                            <div class="colorgraph"></div>
+                            <div class="card" data-toggle="modal" data-target="#productModal">
+                            <div class="text-center" style="padding-right: 1rem;">
+                            <div class="row" style="padding: 1rem;">
+                            <div class="col-4">
+                            <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
+                            </div>
+                            <div class="col-8">
+                            <div class="row">
+                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                            商品名稱
+                            </div>
+                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                            ${element.name}
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>  
+                            </div>
+                            <div class="colorgraph"></div>
+                            </div>`
+                        }
+                        else {
+                            target.innerHTML += `<div class="mb-4 joinlist_ongoing">
+                            <div class="colorgraph"></div>
+                            <div class="card" data-toggle="modal" data-target="#productModal">
+                            <div class="text-center" style="padding-right: 1rem;">
+                            <div class="row" style="padding: 1rem;">
+                            <div class="col-4">
+                            <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
+                            </div>
+                            <div class="col-8">
+                            <div class="row">
+                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                            商品名稱
+                            </div>
+                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                            ${element.name}
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>  
+                            </div>
+                            <div class="colorgraph"></div>
+                            </div>`
+                        }
+                        
+                    })
+                    let cardList2 = document.querySelectorAll('.joinlist_ongoing');
+                    for (let i = 0; i < cardList2.length; i++) {
+                        $(cardList2[i]).on('click', (e) => {      //注意id綁定不包含0x
+                            e.preventDefault();
+                            document.querySelector("#JoinTuanGOProductName").textContent = ongoing_list[i].name;
+                            document.querySelector("#ProductImg").src = ongoing_list[i].img;
+                            document.querySelector("#JoinTuanGOTuanGOType").textContent = ongoing_list[i].TuanGOType ? 'unpack' : 'promote';
+                            document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(ongoing_list[i].ExpirationTime).toString().slice(0, 24);
+                            document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].disccountPrice} $ /per , 你買了 ${complete_list[i].count} 件`;
+                            document.querySelector("#JoinTuanGOContractAddress").textContent = ongoing_list[i].contract_address;
+                            var num = 0;
+                            var TuanGOerLine = "";
+                            num = ongoing_list[i].SoldAmounts;
+                            localStorage.setItem('unsoldProductAmount', ongoing_list[i].TotalAmount - num);
+                            for (let j = 0; j < ongoing_list[i].TotalAmount; j++) {
+                                if (j < num) TuanGOerLine += '<i class="fas fa-user"></i>';
+                                else TuanGOerLine += '<i class="far fa-user"></i>';
+                            }
+                            document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + ongoing_list[i].TotalAmount;
+                        })
+                    };
+                    target = document.querySelector("#transfer_list");
+                    transfer_list.forEach(function (element, idx, array) {
+                        if (idx === array.length - 1) {
+                            target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_transfer">
+                            <div class="colorgraph"></div>
+                            <div class="card" data-toggle="modal" data-target="#productModal">
+                            <div class="text-center" style="padding-right: 1rem;">
+                            <div class="row" style="padding: 1rem;">
+                            <div class="col-4">
+                            <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
+                            </div>
+                            <div class="col-8">
+                            <div class="row">
+                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                            商品名稱
+                            </div>
+                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                            ${element.name}
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>  
+                            </div>
+                            <div class="colorgraph"></div>
+                            </div>`
+                        }
+                        else {
+                            target.innerHTML += `<div class="mb-4 joinlist_transfer">
+                            <div class="colorgraph"></div>
+                            <div class="card" data-toggle="modal" data-target="#productModal">
+                            <div class="text-center" style="padding-right: 1rem;">
+                            <div class="row" style="padding: 1rem;">
+                            <div class="col-4">
+                            <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
+                            </div>
+                            <div class="col-8">
+                            <div class="row">
+                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                            商品名稱
+                            </div>
+                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                            ${element.name}
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>  
+                            </div>
+                            <div class="colorgraph"></div>
+                            </div>`
+                        }
+                    })
+                    let cardList3 = document.querySelectorAll('.joinlist_transfer');
+                    for (let i = 0; i < cardList3.length; i++) {
+                        $(cardList3[i]).on('click', (e) => {      //注意id綁定不包含0x
+                            e.preventDefault();
+                            document.querySelector("#JoinTuanGOProductName").textContent = transfer_list[i].name;
+                            document.querySelector("#ProductImg").src = transfer_list[i].img;
+                            document.querySelector("#JoinTuanGOTuanGOType").textContent = transfer_list[i].TuanGOType ? 'unpack' : 'promote';
+                            document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(transfer_list[i].ExpirationTime).toString().slice(0, 24);
+                            document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].disccountPrice} $ /per , 你買了 ${complete_list[i].count} 件`;
+                            document.querySelector("#JoinTuanGOContractAddress").textContent = transfer_list[i].contract_address;
+                            var num = 0;
+                            var TuanGOerLine = "";
+                            num = transfer_list[i].SoldAmounts;
+                            localStorage.setItem('unsoldProductAmount', transfer_list[i].TotalAmount - num);
+                            for (let j = 0; j < transfer_list[i].TotalAmount; j++) {
+                                if (j < num) TuanGOerLine += '<i class="fas fa-user"></i>';
+                                else TuanGOerLine += '<i class="far fa-user"></i>';
+                            }
+                            document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + transfer_list[i].TotalAmount;
+                            document.querySelector("#bluetooth").disabled = false;
+                        })
+                    };
+                }
+            }, false)
+        }
+    })
 })
 if (!document.getElementById("modal_close").onclick) {
     // event undefined
@@ -1036,10 +1034,10 @@ async function read_repeat(){
 
 async function indexedDBGetTargetPage() {
     
-    const db = Dexie('targetPageDB');
-
+    const db = new Dexie('targetPageDB');
+    db.version(1).stores({
+        targetPage: "++id,target"
+    });
     db.open();
-    let target = await db.targetPage.get(1)
-    console.log('123456789')
-    return target.target;
+    return await db.targetPage.get(1)
 }

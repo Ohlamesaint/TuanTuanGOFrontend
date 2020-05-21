@@ -28,9 +28,9 @@ $(document).ready(function(){
                 })
             }else{
                 console.log(belowBar[i].children[1].textContent);
-                await indexedDBStoreTargetPage(i);
+                // await indexedDBStoreTargetPage(i);
                 localStorage.setItem("target", i)
-                //window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/func.html');
+                window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/func.html');
             }
         }, false)
     }

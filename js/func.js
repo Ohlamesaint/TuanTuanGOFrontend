@@ -123,8 +123,9 @@ function t() {
 $(document).ready(async function () {
     let TOKEN = "Bearer "+localStorage.getItem('token');
     axios.defaults.headers.common['Authorization'] = TOKEN;
-    var targetPage = await indexedDBGetTargetPage();
-    console.log(targetPage);
+    let targetPage = localStorage.getItem('target');
+    // var targetPage = await indexedDBGetTargetPage();
+    // console.log(targetPage);
     $(belowBar[targetPage]).addClass("actived");
     $(belowBar[targetPage]).children().addClass("actived-word");
     title.innerHTML = `

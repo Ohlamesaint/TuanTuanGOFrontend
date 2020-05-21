@@ -182,13 +182,13 @@ $(document).ready(async function(){
     })
 })
 
-async function indexedDBStoreTargetPage(num){
+// async function indexedDBStoreTargetPage(num){
     
-   var db = new Dexie("targetPageDB");
-   db.version(1).stores({
-     targetPage: "++id,target"
-   });
-   db.open();
+//    var db = new Dexie("targetPageDB");
+//    db.version(1).stores({
+//      targetPage: "++id,target"
+//    });
+//    db.open();
 
    //
    // Manipulate and Query Database
@@ -273,11 +273,11 @@ async function indexedDBStoreTargetPage(num){
     //         store = await db.createObjectStore('targetPageStore',{ autoIncrement: true })
     //         index = store.createIndex('title', 'title', { unique: true });
     // }
-}
+// }
 
-async function deleteData(db) {
-    var transaction = db.transaction('')
-}
+// async function deleteData(db) {
+//     var transaction = db.transaction('')
+// }
 
 function checkNum(num, border){
     console.log(num, border);

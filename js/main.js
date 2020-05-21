@@ -8,7 +8,8 @@ function element(ele){
 
 $(document).ready(async function(){
     const TOKEN = 'Bearer '+localStorage.getItem('token');
-    await indexedDBStoreTargetPage(i);
+    // await indexedDBStoreTargetPage(i);
+    
 
     axios.defaults.headers.common['Authorization'] = TOKEN;
     $("#TuanGOerJoinPage>div").on("transitionend", (e) => {

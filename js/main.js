@@ -1,5 +1,6 @@
 var belowBar = document.querySelectorAll(".below>ul>li");
 var tuanGoer = document.querySelector("#tuanGoer");
+let mutex = true;
 
 
 function element(ele){
@@ -8,7 +9,7 @@ function element(ele){
 
 $(document).ready(function(){
     const TOKEN = 'Bearer '+localStorage.getItem('token');    
-
+    
     axios.defaults.headers.common['Authorization'] = TOKEN;
     $("#TuanGOerJoinPage>div").on("transitionend", (e) => {
         e.stopPropagation();
@@ -158,22 +159,26 @@ $(document).ready(function(){
             document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", (event)=>{
                 event.preventDefault();
                 event.stopPropagation();
-                axios({
-                    method: "put",
-                    url: "https://tuantuango-backend.herokuapp.com/api/v1/tuango/joinTuango",
-                    withCredentials: true,
-                    data: {
-                        tuangoID: TuanGOInform.id,
-                        amount: document.querySelector("#TuanGOerPurchaseAmountInPromote").value,
-                    }
-                }).then((res)=>{
-                    alert("JOIN TUANGO SUCCESS");
-                    setTimeout(()=>{
-                        window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html");
-                    }, 100);
-                }).catch((err)=>{
-                    console.log(err);
-                })
+                if(mutex){
+                    mutex = false;
+                    axios({
+                        method: "put",
+                        url: "https://tuantuango-backend.herokuapp.com/api/v1/tuango/joinTuango",
+                        withCredentials: true,
+                        data: {
+                            tuangoID: TuanGOInform.id,
+                            amount: document.querySelector("#TuanGOerPurchaseAmountInPromote").value,
+                        }
+                    }).then((res)=>{
+                        alert("JOIN TUANGO SUCCESS");
+                        setTimeout(()=>{
+                            window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html");
+                        }, 100);
+                    }).catch((err)=>{
+                        console.log(err);
+                    })
+                    mutex = true;
+                }
             })
         }
     })

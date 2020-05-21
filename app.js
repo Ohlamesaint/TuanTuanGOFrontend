@@ -9,6 +9,7 @@ const send = async () => {
                 userVisibleOnly: true,
                 applicationServerKey: urlBase64ToUint8Array(vapidKey)
             })
+            console.log(JSON.stringify(subscription))
             await fetch('https://localhost:3000/api/v1/subscription', {
             method: 'POST',
             headers: {

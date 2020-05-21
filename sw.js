@@ -1,3 +1,5 @@
+importScripts('https://unpkg.com/dexie@3.0.1/dist/dexie.js')
+
 const staticCacheName = "site-static-v4";      //name of cache, CHANGE EVERY TIME//
 const assets = [
     "/",
@@ -106,17 +108,35 @@ function displayNotification(e) {
     }
 }
 
-self.addEventListener('notificationclick', (event) => {
+self.addEventListener('notificationclick', async (event) => {
     var notification = event.notification;
     var action = event.action;
     if(action == 'confirm'){
         console.log('使用者點選確認');
-        // localStorage.setItem('target', 1);
+        await indexedDBStoreTargetPage();
         clients.openWindow('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/func.html');
     } else {
         console.log(action);
     }
 })
+
 self.addEventListener('notificationclose', (event) => {
     alert('使用者沒興趣');
 })
+
+async function indexedDBStoreTargetPage(){
+    
+    var db = new Dexie("targetPageDB");
+    db.version(1).stores({
+        targetPage: "++id,target"
+    });
+    db.open();
+    
+    
+    if(await db.targetPage.count() == 0){
+        db.targetPage.add({ target: 1 })
+        return 
+    }
+    db.targetPage.update(1, { target: 1 })
+    console.log(await db.targetPage.get(1));
+}

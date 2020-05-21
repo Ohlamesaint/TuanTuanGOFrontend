@@ -140,7 +140,7 @@ $(document).ready(async function(){
                 }).then((res)=>{
                     alert(res);
                     setTimeout(()=>{
-                        window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/login.html");
+                        window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html");
                     }, 100);
                 }).catch((err)=>{
                     console.log(err);
@@ -187,7 +187,7 @@ async function indexedDBStoreTargetPage(num){
      targetPage: "++id,target"
    });
    db.open();
-   
+
    //
    // Manipulate and Query Database
    //

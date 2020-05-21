@@ -6,8 +6,10 @@ function element(ele){
     document.querySelector(`#${ele}`);
 }
 
-$(document).ready(function(){
+$(document).ready(async function(){
     const TOKEN = 'Bearer '+localStorage.getItem('token');
+    await indexedDBStoreTargetPage(i);
+
     axios.defaults.headers.common['Authorization'] = TOKEN;
     $("#TuanGOerJoinPage>div").on("transitionend", (e) => {
         e.stopPropagation();
@@ -28,7 +30,6 @@ $(document).ready(function(){
                 })
             }else{
                 console.log(belowBar[i].children[1].textContent);
-                // await indexedDBStoreTargetPage(i);
                 localStorage.setItem("target", i)
                 window.location.replace('https://ohlamesaint.github.io/TuanTuanGOFrontend/pages/func.html');
             }
@@ -180,80 +181,96 @@ $(document).ready(function(){
 })
 
 async function indexedDBStoreTargetPage(num){
-
-    if(!window.indexedDB){
-        throw new Error('Browser does not support indexedDB');
-    }
-    const DBName = 'target'
-    let request = await window.indexedDB.open(DBName, 1);       //version 1 => create database
-    let db, transaction, store;
-
-    request.onerror = e => {
-        console.log('Something went wrong in indexDB', e.target.errorCode);
-    }
-
-    request.onsuccess = async e => {      // when the db open request is done
-        db = e.target.result;       // request.result
-        transaction = db.transaction('targetPageStore', 'readwrite');       // establish the connection 
-        store = transaction.objectStore('targetPageStore');
-        index = store.index('title');
-        // store.put({ title: 'targetPage', targetPage: 0 })
-        // because of the propagation of the error 
-        // the error in here is global
-        db.error = e => {       
-            console.log('ERROR', e.target.errorCode)
-        }
-
-        let getTargetRequest = await index.get('targetPage');
-        getTargetRequest.onerror = e => {
-            console.log('Something went wrong => main => indexedDBStoreTargetPage', e.target.errorCode);
-        }
-
-        // check if the targetPage is exist
-        getTargetRequest.onsuccess = async e => {
-            let data = e.target.result;
-            if(!data){
-                let setTargetRequest = await store.put({ title: 'targetPage', targetPage: num });
-
-                setTargetRequest.onerror = e => {
-                    console.log('Get targetPage store error', e.target.errorCode);
-                }
-        
-                setTargetRequest.onsuccess = e => {
-                    console.log('request targetPage', e.target.result);
-                }
-            } else {
-                let deleteTargetRequest = await store.delete('target');
-                
-                deleteTargetRequest.onsuccess = async e => {
-                    let putTargetRequest = await store.put({ title: 'targetPage', targetPage: num });
-
-                    putTargetRequest.onsucess = e => {
-                        console.log(e.target.result);
-                    }
-
-                    putTargetRequest.onerror = e => {
-                        console.log(e.target.errorCode);
-                    }
-                }
-                deleteTargetRequest.onerror = e => {
-                    console.log(e.target.errorCode);
-                }
-            }
-        }
-        
-        transaction.oncomplete = async () => {
-            await db.close();
-        }
-        
-        return;
-    }
-
-    request.onupgradeneeded = async e => {
-        let db = e.target.result,
-            store = await db.createObjectStore('targetPageStore',{ autoIncrement: true })
-            index = store.createIndex('title', 'title', { unique: true });
-    }
+    
+   var db = new Dexie("targetPageDB");
+   db.version(1).stores({
+     targetPage: "++id,target"
+   });
+   db.open();
+   
+   //
+   // Manipulate and Query Database
+   //
+//    db.friends.add({name: "Josephine", age: 21}).then(function() {
+//        return db.friends.where("age").below(25).toArray();
+//    }).then(function (youngFriends) {
+//        alert ("My young friends: " + JSON.stringify(youngFriends));
+//    }).catch(function (e) {
+//        alert ("Error: " + (e.stack || e));
+//    });
+    // if(!window.indexedDB){
+    //     throw new Error('Browser does not support indexedDB');
+    // }
+    // const DBName = 'target'
+    // let request = await window.indexedDB.open(DBName, 1);       //version 1 => create database
+    // let db, transaction, store;
+    
+    // request.onerror = e => {
+    //     console.log('Something went wrong in indexDB', e.target.errorCode);
+    // }
+    
+    // request.onsuccess = async e => {      // when the db open request is done
+    //     db = e.target.result;       // request.result
+    //     transaction = db.transaction('targetPageStore', 'readwrite');       // establish the connection 
+    //     store = transaction.objectStore('targetPageStore');
+    //     index = store.index('title');
+    //     // store.put({ title: 'targetPage', targetPage: 0 })
+    //     // because of the propagation of the error 
+    //     // the error in here is global
+    //     db.error = e => {       
+    //         console.log('ERROR', e.target.errorCode)
+    //     }
+    
+    //     let getTargetRequest = await index.get('targetPage');
+    //     getTargetRequest.onerror = e => {
+    //         console.log('Something went wrong => main => indexedDBStoreTargetPage', e.target.errorCode);
+    //     }
+    
+    //     // check if the targetPage is exist
+    //     getTargetRequest.onsuccess = async e => {
+    //         let data = e.target.result;
+    //         if(!data){
+    //             let setTargetRequest = await store.put({ title: 'targetPage', targetPage: num });
+    
+    //             setTargetRequest.onerror = e => {
+    //                 console.log('Get targetPage store error', e.target.errorCode);
+    //             }
+    
+    //             setTargetRequest.onsuccess = e => {
+    //                 console.log('request targetPage', e.target.result);
+    //             }
+    //         } else {
+    //             let deleteTargetRequest = await store.delete('target');
+    
+    //             deleteTargetRequest.onsuccess = async e => {
+    //                 let putTargetRequest = await store.put({ title: 'targetPage', targetPage: num });
+    
+    //                 putTargetRequest.onsucess = e => {
+    //                     console.log(e.target.result);
+    //                 }
+    
+    //                 putTargetRequest.onerror = e => {
+    //                     console.log(e.target.errorCode);
+    //                 }
+    //             }
+    //             deleteTargetRequest.onerror = e => {
+    //                 console.log(e.target.errorCode);
+    //             }
+    //         }
+    //     }
+    
+    //     transaction.oncomplete = async () => {
+    //         await db.close();
+    //     }
+    
+    //     return;
+    // }
+    
+    // request.onupgradeneeded = async e => {
+    //     let db = e.target.result,
+    //         store = await db.createObjectStore('targetPageStore',{ autoIncrement: true })
+    //         index = store.createIndex('title', 'title', { unique: true });
+    // }
 }
 
 async function deleteData(db) {

@@ -3,13 +3,13 @@ const vapidKey = 'BGxHf6ZQkHVoIdROO4Fir61eouPlqUp3IzxsV4ud10FeXgS5vvG9q3Gw5J7lsp
 const send = async () => {
     try{
         const register = await navigator.serviceWorker.register('./sw.js');
-        const userChoice = await askForNotificationPermission
+        const userChoice = await askForNotificationPermission();
         if(userChoice){
             const subscription = await register.pushManager.subscribe({
                 userVisibleOnly: true,
                 applicationServerKey: urlBase64ToUint8Array(vapidKey)
             })
-            await fetch('https://tuantuango.herokuapp.com/subscribe', {
+            await fetch('https://localhost:3000/api/v1/subscription', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

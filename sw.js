@@ -61,6 +61,7 @@ self.addEventListener("fetch", evt => {
 self.addEventListener('push', async e => { 
     const data = e.data.json();
     console.log('in push');
+    console.log(data);
     
         var options = {
             body: data.content,

@@ -3,7 +3,10 @@ const vapidKey = 'BGxHf6ZQkHVoIdROO4Fir61eouPlqUp3IzxsV4ud10FeXgS5vvG9q3Gw5J7lsp
 const send = async () => {
     try{
         const register = await navigator.serviceWorker.register('./sw.js');
+        console.log(123);
         const userChoice = await askForNotificationPermission();
+        console.log(userChoice);
+        console.log(123)
         if(userChoice){
             const subscription = await register.pushManager.subscribe({
                 userVisibleOnly: true,

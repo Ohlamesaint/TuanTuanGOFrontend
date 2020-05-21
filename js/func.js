@@ -120,7 +120,7 @@ function t() {
 }
 
 
-$(document).ready(async function () {
+$(document).ready(function () {
     let TOKEN = "Bearer "+localStorage.getItem('token');
     axios.defaults.headers.common['Authorization'] = TOKEN;
     let targetPage = localStorage.getItem('target');

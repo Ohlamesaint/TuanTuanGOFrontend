@@ -1007,6 +1007,7 @@ function handleLedStatusChanged(event) {
             console.log(information_of_transfer);
             
             plt(contract_address.textContent,0);
+            disconnect();
         }
     }
 }

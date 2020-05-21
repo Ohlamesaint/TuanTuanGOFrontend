@@ -4,7 +4,7 @@ const send = async () => {
     try{
         const register = await navigator.serviceWorker.register('./sw.js');
         console.log(123);
-        const userChoice = await askForNotificationPermission();
+        const userChoice = askForNotificationPermission();
         console.log(userChoice);
         console.log(123)
         if(userChoice){

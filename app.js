@@ -85,7 +85,7 @@ function setPushSubcribe() {
     }).then((sub) => {
         console.log(sub);
         if(sub === null){
-            let vapidKey = 'BBm9Lg4XNHlqrXibp3jvAOUQQ4QrFSV-ibDBznIqWku2ygTmH6Siy25n_koaK6NGmhfvLxCmnqkqKtG-WrHi2ts';
+            let vapidKey = 'BGxHf6ZQkHVoIdROO4Fir61eouPlqUp3IzxsV4ud10FeXgS5vvG9q3Gw5J7lsp2XHnF_49aJ9RxWNV99_TD9--8';
             let convertedVapidKey = urlBase64ToUint8Array(vapidKey);
             serviceWorkerRegistration.pushManager.subscribe({
                 userVisibleOnly: true,

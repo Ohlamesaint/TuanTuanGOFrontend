@@ -49,17 +49,7 @@ if("serviceWorker" in navigator){
 
 
 
-function askForNotificationPermission() {
-    Notification.requestPermission((status) => {
-        console.log('User choice', status);
-        if(status!=='granted'){
-            console.log('user denied');
-            return false;
-        } else {
-            return true;
-        }
-    })
-} 
+
 
 function urlBase64ToUint8Array(base64String) {
     const padding = '='.repeat((4 - base64String.length % 4) % 4);

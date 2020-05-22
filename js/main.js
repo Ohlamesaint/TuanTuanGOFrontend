@@ -9,7 +9,9 @@ function element(ele){
 
 $(document).ready(function(){
     const TOKEN = 'Bearer '+localStorage.getItem('token');    
-    
+    if(TOKEN) {
+        askForNotificationPermission();
+    }
     axios.defaults.headers.common['Authorization'] = TOKEN;
     $("#TuanGOerJoinPage>div").on("transitionend", (e) => {
         e.stopPropagation();
@@ -209,3 +211,15 @@ function checkNum(num, border){
         return true;
     }
 }
+
+function askForNotificationPermission() {
+    Notification.requestPermission((status) => {
+        console.log('User choice', status);
+        if(status!=='granted'){
+            console.log('user denied');
+            return false;
+        } else {
+            return true;
+        }
+    })
+} 

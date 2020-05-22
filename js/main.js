@@ -10,6 +10,7 @@ function element(ele){
 $(document).ready(function(){
     const TOKEN = 'Bearer '+localStorage.getItem('token');    
     if(localStorage.getItem('token')!="") {
+        console.log(localStorage.getItem('token'))
         setPushSubcribe();
     }
     axios.defaults.headers.common['Authorization'] = TOKEN;

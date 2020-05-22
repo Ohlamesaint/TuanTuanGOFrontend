@@ -14,7 +14,7 @@ const assets = [
     "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css",
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css",
     "./public/img/top1.png",
-    "pages/fallback.html"
+    // "pages/fallback.html"
 ];
 const dynamicCache = "site-dynamic-v2";
 

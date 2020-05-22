@@ -81,7 +81,11 @@ self.addEventListener('push', async e => {
                 action: 'cancel', title: '取消', icon: './public/img/tuantuango196.png'
             }]
         };
-        self.registration.showNotification(data.title, options);
+        self.registration.showNotification(data.title, options).then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        });
  });
 
 

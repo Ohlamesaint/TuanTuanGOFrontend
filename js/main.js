@@ -1,5 +1,6 @@
 var belowBar = document.querySelectorAll(".below>ul>li");
 var tuanGoer = document.querySelector("#tuanGoer");
+const vapidKey = 'BGxHf6ZQkHVoIdROO4Fir61eouPlqUp3IzxsV4ud10FeXgS5vvG9q3Gw5J7lsp2XHnF_49aJ9RxWNV99_TD9--8';
 let mutex = true;
 
 
@@ -8,14 +9,21 @@ function element(ele){
 }
 
 $(document).ready(function(){
+
+    // get the token store in localstorage
     const TOKEN = 'Bearer '+localStorage.getItem('token');    
-    if(localStorage.getItem('token')!=undefined) {
+
+    // ask for the notification authorization
+    if(localStorage.getItem('token')!= undefined) {
         setPushSubcribe();
     }
+
+    // set the default axios authorization header
     axios.defaults.headers.common['Authorization'] = TOKEN;
     $("#TuanGOerJoinPage>div").on("transitionend", (e) => {
         e.stopPropagation();
     })
+
     for(let i=0; i<belowBar.length-1; i++){
         belowBar[i].addEventListener("click", async (e)=>{
             if(!localStorage.getItem('token')){   

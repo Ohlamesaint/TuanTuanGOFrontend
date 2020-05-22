@@ -394,13 +394,13 @@ $(document).ready(function () {
                         document.querySelector("#JoinTuanGOContractAddress").textContent = transfer_list[i].tuangoAddress;
                         let num = 0;
                         var TuanGOerLine = "";
-                        num = accomulate(ongoing_list[i].soldAmount);
-                        localStorage.setItem('unsoldProductAmount', ongoing_list[i].totalAmount - num);
-                        for (let j = 0; j < ongoing_list[i].totalAmount; j++) {
+                        num = accomulate(transfer_list[i].soldAmount);
+                        localStorage.setItem('unsoldProductAmount', transfer_list[i].totalAmount - num);
+                        for (let j = 0; j < transfer_list[i].totalAmount; j++) {
                             if (j < num) TuanGOerLine += '<i class="fas fa-user"></i>';
                             else TuanGOerLine += '<i class="far fa-user"></i>';
                         }
-                        document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + complete_list[i].totalAmount;
+                        document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + transfer_list[i].totalAmount;
                     })
                 };
             }).catch(err => {

@@ -314,7 +314,7 @@ $(document).ready(function () {
                         document.querySelector("#ProductImg").src = ongoing_list[i].productPhoto;
                         document.querySelector("#JoinTuanGOTuanGOType").textContent = ongoing_list[i].tuangoType == 'UNPACK' ? 'unpack' : 'promote';
                         document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(ongoing_list[i].expirationTime).toString().slice(0, 24);
-                        document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].price} $ /per , 你買了 ${complete_list[i].soldAmount[indexOfUser]} 件`;
+                        document.querySelector("#JoinTuanGOCost").textContent = `${ongoing_list[i].price} $ /per , 你買了 ${ongoing_list[i].soldAmount[indexOfUser]} 件`;
                         document.querySelector("#JoinTuanGOContractAddress").textContent = ongoing_list[i].tuangoAddress;
                         let num = 0;
                         var TuanGOerLine = "";
@@ -389,7 +389,7 @@ $(document).ready(function () {
                         document.querySelector("#ProductImg").src = transfer_list[i].productPhoto;
                         document.querySelector("#JoinTuanGOTuanGOType").textContent = transfer_list[i].tuangoType == 'UNPACK'? 'unpack' : 'promote';
                         document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(transfer_list[i].expirationTime).toString().slice(0, 24);
-                        document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].price} $ /per , 你買了 ${complete_list[i].soldAmount[indexOfUser]} 件`;
+                        document.querySelector("#JoinTuanGOCost").textContent = `${transfer_list[i].price} $ /per , 你買了 ${transfer_list[i].soldAmount[indexOfUser]} 件`;
                         document.querySelector("#JoinTuanGOContractAddress").textContent = transfer_list[i].tuangoAddress;
                         let num = 0;
                         var TuanGOerLine = "";

@@ -165,9 +165,9 @@ $(document).ready(function () {
                 withCredentials: true,
             }).then(res => {
                 console.log(res);
-                let done_list = res.data.data.forEach(ele => ele.tuangoStatus == 'DONE'?ele:null)
-                let transport_list = res.data.data.forEach(ele => ele.tuangoStatus == 'TRANSPORT'?ele:null)
-                let queue_list = res.data.data.forEach(ele => ele.tuangoStatus == 'QUEUE'?ele:null);
+                let done_list = res.data.data.filter(ele => ele.tuangoStatus == 'DONE')
+                let transport_list = res.data.data.filter(ele => ele.tuangoStatus == 'TRANSPORT')
+                let queue_list = res.data.data.filter(ele => ele.tuangoStatus == 'QUEUE')
                 console.log(done_list, transport_list, queue_list);
                 var target = document.querySelector("#complete_list");          // DONE
                 complete_list.forEach(function (element, idx, array) {

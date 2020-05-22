@@ -2,7 +2,6 @@ importScripts('https://unpkg.com/dexie@3.0.1/dist/dexie.js')
 
 const staticCacheName = "site-static-v1";      //name of cache, CHANGE EVERY TIME//
 const assets = [
-    "/",
     "./app.js",
     "./manifest.json",
     "./sw.js",

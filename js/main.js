@@ -10,7 +10,7 @@ function element(ele){
 $(document).ready(function(){
     const TOKEN = 'Bearer '+localStorage.getItem('token');    
     if(TOKEN) {
-        askForNotificationPermission();
+        setPushSubcribe();
     }
     axios.defaults.headers.common['Authorization'] = TOKEN;
     $("#TuanGOerJoinPage>div").on("transitionend", (e) => {
@@ -212,14 +212,37 @@ function checkNum(num, border){
     }
 }
 
-function askForNotificationPermission() {
-    Notification.requestPermission((status) => {
-        console.log('User choice', status);
-        if(status!=='granted'){
-            console.log('user denied');
-            return false;
+function setPushSubcribe() {
+    let serviceWorkerRegistration;
+    navigator.serviceWorker.ready
+    .then((sw) => {
+        serviceWorkerRegistration = sw;
+        return sw.pushManager.getSubscription();
+    }).then((sub) => {
+        console.log(sub);
+        if(sub === null){
+            let vapidKey = 'BGxHf6ZQkHVoIdROO4Fir61eouPlqUp3IzxsV4ud10FeXgS5vvG9q3Gw5J7lsp2XHnF_49aJ9RxWNV99_TD9--8';
+            let convertedVapidKey = urlBase64ToUint8Array(vapidKey);
+            serviceWorkerRegistration.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: convertedVapidKey
+            }).then((newSub) => {
+                console.log(newSub);
+                return axios({
+                    method:'post',
+                    url: "https://tuantuango.herokuapp.com/subscribe",
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    data: newSub
+                }).then((res) => {
+                    console.log('push registration success', res);
+                }).catch((err) => {
+                    console.log('Something went wrong => fallback => newSub', err);
+                })
+            });
         } else {
-            return true;
+            console.log(sub);
         }
     })
-} 
+}

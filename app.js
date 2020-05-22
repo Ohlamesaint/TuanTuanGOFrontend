@@ -2,7 +2,7 @@ const vapidKey = 'BGxHf6ZQkHVoIdROO4Fir61eouPlqUp3IzxsV4ud10FeXgS5vvG9q3Gw5J7lsp
 
 const send = async () => {
     try{
-        const register = await navigator.serviceWorker.register('./sw.js');
+        
         console.log(123);
         const userChoice = askForNotificationPermission();
         setPushSubcribe();
@@ -30,7 +30,12 @@ const send = async () => {
 }
 
 if("serviceWorker" in navigator){
-    send().catch(err => console.log(err));
+    navigator.serviceWorker.register('./sw.js')
+    .then(res => {
+        console.log(res);
+    }).catch(err => {
+        console.error(err);
+    });
     // navigator.serviceWorker.register("./sw.js")
     // .then((reg) => {
     //     console.log("service worker registered", reg) 
@@ -66,38 +71,5 @@ function urlBase64ToUint8Array(base64String) {
     return outputArray;
 }
 
-function setPushSubcribe() {
-    let serviceWorkerRegistration;
-    navigator.serviceWorker.ready
-    .then((sw) => {
-        serviceWorkerRegistration = sw;
-        return sw.pushManager.getSubscription();
-    }).then((sub) => {
-        console.log(sub);
-        if(sub === null){
-            let vapidKey = 'BGxHf6ZQkHVoIdROO4Fir61eouPlqUp3IzxsV4ud10FeXgS5vvG9q3Gw5J7lsp2XHnF_49aJ9RxWNV99_TD9--8';
-            let convertedVapidKey = urlBase64ToUint8Array(vapidKey);
-            serviceWorkerRegistration.pushManager.subscribe({
-                userVisibleOnly: true,
-                applicationServerKey: convertedVapidKey
-            }).then((newSub) => {
-                console.log(newSub);
-                return axios({
-                    method:'post',
-                    url: "https://tuantuango.herokuapp.com/subscribe",
-                    headers: {
-                        'content-type': 'application/json',
-                    },
-                    data: newSub
-                }).then((res) => {
-                    console.log('push registration success', res);
-                }).catch((err) => {
-                    console.log('Something went wrong => fallback => newSub', err);
-                })
-            });
-        } else {
-            console.log(sub);
-        }
-    })
-}
+
 

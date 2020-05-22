@@ -168,7 +168,7 @@ $(document).ready(function () {
                 let done_list = res.data.data.map(ele => ele.status == 'DONE')
                 let transport_list = res.data.data.map(ele => ele.status == 'TRANSPORT')
                 let queue_list = res.data.data.map(ele => ele.status == 'QUEUE');
-                console.table(done_list, transport_list, queue_list);
+                console.log(done_list, transport_list, queue_list);
                 var target = document.querySelector("#complete_list");          // DONE
                 complete_list.forEach(function (element, idx, array) {
                     if (idx === array.length - 1) {

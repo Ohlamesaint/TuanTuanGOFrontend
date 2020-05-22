@@ -250,6 +250,15 @@ $(document).ready(function () {
                             else TuanGOerLine += '<i class="far fa-user"></i>';
                         }
                         document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + complete_list[i].totalAmount;
+                        var info = document.querySelector('#JoinTuanGOProductInformation');
+                        if(!document.getElementById('canvas')){
+                            info.innerHTML += `<div class="card-header" id ="transfer_information" style="color: rgb(145, 93, 93)" >配送資訊</div>
+                            <canvas id="canvas" width="300" height="300">Sorry, your browser doesn't support the &lt;canvas&gt; element.</canvas>
+                            `;
+                        }
+                        
+                        var contract_address = document.querySelector('#JoinTuanGOContractAddress');
+                        plt(contract_address.textContent,1);
                     })
                 };
                 target = document.querySelector("#ongoing_list");               // QUEUE
@@ -400,6 +409,7 @@ $(document).ready(function () {
                             else TuanGOerLine += '<i class="far fa-user"></i>';
                         }
                         document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + transfer_list[i].totalAmount;
+                        document.querySelector("#bluetooth").disabled = false;
                     })
                 };
             }).catch(err => {
@@ -561,261 +571,253 @@ $(document).ready(function () {
                     })
                 }
                 else if (i == 1) {
-                    /*
                     axios({
                         method: "GET",
-                        url: "https://tuantuango.herokuapp.com/userTuangoList",
+                        url: "https://tuantuango-backend.herokuapp.com/api/v1/tuango/getUserTuango",
                         withCredentials: true,
-                    }).then(res=>{
-                        if(!res.data.signin){    //做保險
-                            console.log(res);
-                            console.log("789");
-                            setTimeout(() => {
-                                window.location.replace('./login.html');
-                            }, );
-                        }else{
+                    }).then(res => {
+                        console.log(res);
+                        let complete_list = res.data.data.filter(ele => ele.tuangoStatus == 'DONE')
+                        let transfer_list = res.data.data.filter(ele => ele.tuangoStatus == 'TRANSPORT')
+                        let ongoing_list = res.data.data.filter(ele => ele.tuangoStatus == 'QUEUE')
+                        var target = document.querySelector("#complete_list");
+                        var inx = 0;
+                        complete_list.forEach(function (element, idx, array) {
+                            if (idx === array.length - 1) {
+                                target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_complete">
+                                <div class="colorgraph"></div>
+                                <div class="card" data-toggle="modal" data-target="#productModal">
+                                <div class="text-center" style="padding-right: 1rem;">
+                                <div class="row" style="padding: 1rem;">
+                                <div class="col-4">
+                                <img class="img-fluid w-100 h-100" src="${element.productPhoto}" alt="card image">
+                                </div>
+                                <div class="col-8">
+                                <div class="row">
+                                <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                                商品名稱
+                                </div>
+                                <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                                ${element.productName}
+                                </div>
+                                </div>
+                                </div>
+                                </div>
+                                </div>  
+                                </div>
+                                <div class="colorgraph"></div>
+                                </div>`
+                            }
+                            else {
+                                target.innerHTML += `<div class="mb-4 joinlist_complete">
+                                <div class="colorgraph"></div>
+                                <div class="card" data-toggle="modal" data-target="#productModal">
+                                <div class="text-center" style="padding-right: 1rem;">
+                                <div class="row" style="padding: 1rem;">
+                                <div class="col-4">
+                                <img class="img-fluid w-100 h-100" src=${element.productPhoto} alt="card image">
+                                </div>
+                                <div class="col-8">
+                                <div class="row">
+                                <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                                商品名稱
+                                </div>
+                                <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                                ${element.productName}
+                                </div>
+                                </div>
+                                </div>
+                                </div>
+                                </div>  
+                                </div>
+                                <div class="colorgraph"></div>
+                                </div>`
+                            }
+                        });
+                        let cardList = document.querySelectorAll('.joinlist_complete');
+                        for (let i = 0; i < cardList.length; i++) {
+                            $(cardList[i]).on('click', (e) => {      //注意id綁定不包含0x
+                                e.preventDefault();
+                                let indexOfUser = complete_list[i].members.findIndex(ele => ele == userID);
+                                document.querySelector("#JoinTuanGOProductName").textContent = complete_list[i].productName;
+                                document.querySelector("#ProductImg").src = complete_list[i].productPhoto;
+                                document.querySelector("#JoinTuanGOTuanGOType").textContent = complete_list[i].tuangoType == 'UNPACK' ? 'unpack' : 'promote';
+                                document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(complete_list[i].expirationTime).toString().slice(0, 24);
+                                document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].price} $ /per , 你買了 ${complete_list[i].soldAmount[indexOfUser]} 件`;
+                                document.querySelector("#JoinTuanGOContractAddress").textContent = complete_list[i].tuangoAddress;
+                                let num = 0;
+                                var TuanGOerLine = "";
+                                num = accomulate(complete_list[i].soldAmount);
+                                localStorage.setItem('unsoldProductAmount', complete_list[i].totalAmount - num);
+                                for (let j = 0; j < complete_list[i].totalAmount; j++) {
+                                    if (j < num) TuanGOerLine += '<i class="fas fa-user"></i>';
+                                    else TuanGOerLine += '<i class="far fa-user"></i>';
+                                }
+                                document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + complete_list[i].totalAmount;
+                                var info = document.querySelector('#JoinTuanGOProductInformation');
+                                if(!document.getElementById('canvas')){
+                                    info.innerHTML += `<div class="card-header" id ="transfer_information" style="color: rgb(145, 93, 93)" >配送資訊</div>
+                                    <canvas id="canvas" width="300" height="300">Sorry, your browser doesn't support the &lt;canvas&gt; element.</canvas>
+                                    `;
+                                }
+                                
+                                var contract_address = document.querySelector('#JoinTuanGOContractAddress');
+                                plt(contract_address.textContent,1);
+                            })
+                        };
+                        target = document.querySelector("#ongoing_list");
+                        ongoing_list.forEach(function (element, idx, array) {
+                            if (idx === array.length - 1) {
+                                target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_ongoing">
+                                <div class="colorgraph"></div>
+                                <div class="card" data-toggle="modal" data-target="#productModal">
+                                <div class="text-center" style="padding-right: 1rem;">
+                                <div class="row" style="padding: 1rem;">
+                                <div class="col-4">
+                                <img class="img-fluid w-100 h-100" src=${element.productPhoto} alt="card image">
+                                </div>
+                                <div class="col-8">
+                                <div class="row">
+                                <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                                商品名稱
+                                </div>
+                                <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                                ${element.productName}
+                                </div>
+                                </div>
+                                </div>
+                                </div>
+                                </div>  
+                                </div>
+                                <div class="colorgraph"></div>
+                                </div>`
+                            }
+                            else {
+                                target.innerHTML += `<div class="mb-4 joinlist_ongoing">
+                                <div class="colorgraph"></div>
+                                <div class="card" data-toggle="modal" data-target="#productModal">
+                                <div class="text-center" style="padding-right: 1rem;">
+                                <div class="row" style="padding: 1rem;">
+                                <div class="col-4">
+                                <img class="img-fluid w-100 h-100" src=${element.productPhoto} alt="card image">
+                                </div>
+                                <div class="col-8">
+                                <div class="row">
+                                <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                                商品名稱
+                                </div>
+                                <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                                ${element.productName}
+                                </div>
+                                </div>
+                                </div>
+                                </div>
+                                </div>  
+                                </div>
+                                <div class="colorgraph"></div>
+                                </div>`
+                            }
                             
-                        }
-                    }).catch(err=>{
-                        throw new Error(err);
-                    })
-                    */
-                    console.log("success");
-                    //console.log(res);
-                    var target = document.querySelector("#complete_list");
-                    var inx = 0;
-                    complete_list.forEach(function (element, idx, array) {
-                        if (idx === array.length - 1) {
-                            target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_complete">
-                            <div class="colorgraph"></div>
-                            <div class="card" data-toggle="modal" data-target="#productModal">
-                            <div class="text-center" style="padding-right: 1rem;">
-                            <div class="row" style="padding: 1rem;">
-                            <div class="col-4">
-                            <img class="img-fluid w-100 h-100" src="${element.img}" alt="card image">
-                            </div>
-                            <div class="col-8">
-                            <div class="row">
-                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
-                            商品名稱
-                            </div>
-                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
-                            ${element.name}
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            </div>  
-                            </div>
-                            <div class="colorgraph"></div>
-                            </div>`
-                        }
-                        else {
-                            target.innerHTML += `<div class="mb-4 joinlist_complete">
-                            <div class="colorgraph"></div>
-                            <div class="card" data-toggle="modal" data-target="#productModal">
-                            <div class="text-center" style="padding-right: 1rem;">
-                            <div class="row" style="padding: 1rem;">
-                            <div class="col-4">
-                            <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
-                            </div>
-                            <div class="col-8">
-                            <div class="row">
-                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
-                            商品名稱
-                            </div>
-                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
-                            ${element.name}
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            </div>  
-                            </div>
-                            <div class="colorgraph"></div>
-                            </div>`
-                        }
-                    });
-                    let cardList = document.querySelectorAll('.joinlist_complete');
-                    for (let i = 0; i < cardList.length; i++) {
-                        $(cardList[i]).on('click', (e) => {      //注意id綁定不包含0x
-                            e.preventDefault();
-                            document.querySelector("#JoinTuanGOProductName").textContent = complete_list[i].name;
-                            document.querySelector("#ProductImg").src = complete_list[i].img;
-                            document.querySelector("#JoinTuanGOTuanGOType").textContent = complete_list[i].TuanGOType ? 'unpack' : 'promote';
-                            document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(complete_list[i].ExpirationTime).toString().slice(0, 24);
-                            document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].disccountPrice} $ /per , 你買了 ${complete_list[i].count} 件`;
-                            document.querySelector("#JoinTuanGOContractAddress").textContent = complete_list[i].contract_address;
-                            var num = 0;
-                            var TuanGOerLine = "";
-                            num = complete_list[i].SoldAmounts;
-                            localStorage.setItem('unsoldProductAmount', complete_list[i].TotalAmount - num);
-                            for (let j = 0; j < complete_list[i].TotalAmount; j++) {
-                                if (j < num) TuanGOerLine += '<i class="fas fa-user"></i>';
-                                else TuanGOerLine += '<i class="far fa-user"></i>';
-                            }
-                            document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + complete_list[i].TotalAmount;
-                            var info = document.querySelector('#JoinTuanGOProductInformation');
-                            if(!document.getElementById('canvas')){
-                                info.innerHTML += `<div class="card-header" id ="transfer_information" style="color: rgb(145, 93, 93)" >配送資訊</div>
-                                <canvas id="canvas" width="300" height="300">Sorry, your browser doesn't support the &lt;canvas&gt; element.</canvas>
-                                `;
-                            }
-                            
-                            var contract_address = document.querySelector('#JoinTuanGOContractAddress');
-                            plt(contract_address.textContent,1);
                         })
-                    };
-                    target = document.querySelector("#ongoing_list");
-                    ongoing_list.forEach(function (element, idx, array) {
-                        if (idx === array.length - 1) {
-                            target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_ongoing">
-                            <div class="colorgraph"></div>
-                            <div class="card" data-toggle="modal" data-target="#productModal">
-                            <div class="text-center" style="padding-right: 1rem;">
-                            <div class="row" style="padding: 1rem;">
-                            <div class="col-4">
-                            <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
-                            </div>
-                            <div class="col-8">
-                            <div class="row">
-                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
-                            商品名稱
-                            </div>
-                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
-                            ${element.name}
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            </div>  
-                            </div>
-                            <div class="colorgraph"></div>
-                            </div>`
-                        }
-                        else {
-                            target.innerHTML += `<div class="mb-4 joinlist_ongoing">
-                            <div class="colorgraph"></div>
-                            <div class="card" data-toggle="modal" data-target="#productModal">
-                            <div class="text-center" style="padding-right: 1rem;">
-                            <div class="row" style="padding: 1rem;">
-                            <div class="col-4">
-                            <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
-                            </div>
-                            <div class="col-8">
-                            <div class="row">
-                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
-                            商品名稱
-                            </div>
-                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
-                            ${element.name}
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            </div>  
-                            </div>
-                            <div class="colorgraph"></div>
-                            </div>`
-                        }
-                        
-                    })
-                    let cardList2 = document.querySelectorAll('.joinlist_ongoing');
-                    for (let i = 0; i < cardList2.length; i++) {
-                        $(cardList2[i]).on('click', (e) => {      //注意id綁定不包含0x
-                            e.preventDefault();
-                            document.querySelector("#JoinTuanGOProductName").textContent = ongoing_list[i].name;
-                            document.querySelector("#ProductImg").src = ongoing_list[i].img;
-                            document.querySelector("#JoinTuanGOTuanGOType").textContent = ongoing_list[i].TuanGOType ? 'unpack' : 'promote';
-                            document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(ongoing_list[i].ExpirationTime).toString().slice(0, 24);
-                            document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].disccountPrice} $ /per , 你買了 ${complete_list[i].count} 件`;
-                            document.querySelector("#JoinTuanGOContractAddress").textContent = ongoing_list[i].contract_address;
-                            var num = 0;
-                            var TuanGOerLine = "";
-                            num = ongoing_list[i].SoldAmounts;
-                            localStorage.setItem('unsoldProductAmount', ongoing_list[i].TotalAmount - num);
-                            for (let j = 0; j < ongoing_list[i].TotalAmount; j++) {
-                                if (j < num) TuanGOerLine += '<i class="fas fa-user"></i>';
-                                else TuanGOerLine += '<i class="far fa-user"></i>';
+                        let cardList2 = document.querySelectorAll('.joinlist_ongoing');
+                        for (let i = 0; i < cardList2.length; i++) {
+                            $(cardList2[i]).on('click', (e) => {      //注意id綁定不包含0x
+                                e.preventDefault();
+                                let indexOfUser = ongoing_list[i].members.findIndex(ele => ele == userID);
+                                document.querySelector("#JoinTuanGOProductName").textContent = ongoing_list[i].productName;
+                                document.querySelector("#ProductImg").src = ongoing_list[i].productPhoto;
+                                document.querySelector("#JoinTuanGOTuanGOType").textContent = ongoing_list[i].tuangoType == 'UNPACK' ? 'unpack' : 'promote';
+                                document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(ongoing_list[i].expirationTime).toString().slice(0, 24);
+                                document.querySelector("#JoinTuanGOCost").textContent = `${ongoing_list[i].price} $ /per , 你買了 ${ongoing_list[i].soldAmount[indexOfUser]} 件`;
+                                document.querySelector("#JoinTuanGOContractAddress").textContent = ongoing_list[i].tuangoAddress;
+                                let num = 0;
+                                var TuanGOerLine = "";
+                                num = accomulate(ongoing_list[i].soldAmount);
+                                localStorage.setItem('unsoldProductAmount', ongoing_list[i].totalAmount - num);
+                                for (let j = 0; j < ongoing_list[i].totalAmount; j++) {
+                                    if (j < num) TuanGOerLine += '<i class="fas fa-user"></i>';
+                                    else TuanGOerLine += '<i class="far fa-user"></i>';
+                                }
+                                document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + ongoing_list[i].totalAmount;
+                            })
+                        };
+                        target = document.querySelector("#transfer_list");
+                        transfer_list.forEach(function (element, idx, array) {
+                            if (idx === array.length - 1) {
+                                target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_transfer">
+                                <div class="colorgraph"></div>
+                                <div class="card" data-toggle="modal" data-target="#productModal">
+                                <div class="text-center" style="padding-right: 1rem;">
+                                <div class="row" style="padding: 1rem;">
+                                <div class="col-4">
+                                <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
+                                </div>
+                                <div class="col-8">
+                                <div class="row">
+                                <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                                商品名稱
+                                </div>
+                                <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                                ${element.name}
+                                </div>
+                                </div>
+                                </div>
+                                </div>
+                                </div>  
+                                </div>
+                                <div class="colorgraph"></div>
+                                </div>`
                             }
-                            document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + ongoing_list[i].TotalAmount;
-                        })
-                    };
-                    target = document.querySelector("#transfer_list");
-                    transfer_list.forEach(function (element, idx, array) {
-                        if (idx === array.length - 1) {
-                            target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_transfer">
-                            <div class="colorgraph"></div>
-                            <div class="card" data-toggle="modal" data-target="#productModal">
-                            <div class="text-center" style="padding-right: 1rem;">
-                            <div class="row" style="padding: 1rem;">
-                            <div class="col-4">
-                            <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
-                            </div>
-                            <div class="col-8">
-                            <div class="row">
-                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
-                            商品名稱
-                            </div>
-                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
-                            ${element.name}
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            </div>  
-                            </div>
-                            <div class="colorgraph"></div>
-                            </div>`
-                        }
-                        else {
-                            target.innerHTML += `<div class="mb-4 joinlist_transfer">
-                            <div class="colorgraph"></div>
-                            <div class="card" data-toggle="modal" data-target="#productModal">
-                            <div class="text-center" style="padding-right: 1rem;">
-                            <div class="row" style="padding: 1rem;">
-                            <div class="col-4">
-                            <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
-                            </div>
-                            <div class="col-8">
-                            <div class="row">
-                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
-                            商品名稱
-                            </div>
-                            <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
-                            ${element.name}
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            </div>  
-                            </div>
-                            <div class="colorgraph"></div>
-                            </div>`
-                        }
-                    })
-                    let cardList3 = document.querySelectorAll('.joinlist_transfer');
-                    for (let i = 0; i < cardList3.length; i++) {
-                        $(cardList3[i]).on('click', (e) => {      //注意id綁定不包含0x
-                            e.preventDefault();
-                            document.querySelector("#JoinTuanGOProductName").textContent = transfer_list[i].name;
-                            document.querySelector("#ProductImg").src = transfer_list[i].img;
-                            document.querySelector("#JoinTuanGOTuanGOType").textContent = transfer_list[i].TuanGOType ? 'unpack' : 'promote';
-                            document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(transfer_list[i].ExpirationTime).toString().slice(0, 24);
-                            document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].disccountPrice} $ /per , 你買了 ${complete_list[i].count} 件`;
-                            document.querySelector("#JoinTuanGOContractAddress").textContent = transfer_list[i].contract_address;
-                            var num = 0;
-                            var TuanGOerLine = "";
-                            num = transfer_list[i].SoldAmounts;
-                            localStorage.setItem('unsoldProductAmount', transfer_list[i].TotalAmount - num);
-                            for (let j = 0; j < transfer_list[i].TotalAmount; j++) {
-                                if (j < num) TuanGOerLine += '<i class="fas fa-user"></i>';
-                                else TuanGOerLine += '<i class="far fa-user"></i>';
+                            else {
+                                target.innerHTML += `<div class="mb-4 joinlist_transfer">
+                                <div class="colorgraph"></div>
+                                <div class="card" data-toggle="modal" data-target="#productModal">
+                                <div class="text-center" style="padding-right: 1rem;">
+                                <div class="row" style="padding: 1rem;">
+                                <div class="col-4">
+                                <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
+                                </div>
+                                <div class="col-8">
+                                <div class="row">
+                                <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center bd-highlight border bg-light" style="line-height: normal;">
+                                商品名稱
+                                </div>
+                                <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
+                                ${element.name}
+                                </div>
+                                </div>
+                                </div>
+                                </div>
+                                </div>  
+                                </div>
+                                <div class="colorgraph"></div>
+                                </div>`
                             }
-                            document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + transfer_list[i].TotalAmount;
-                            document.querySelector("#bluetooth").disabled = false;
                         })
-                    };
+                        let cardList3 = document.querySelectorAll('.joinlist_transfer');
+                        for (let i = 0; i < cardList3.length; i++) {
+                            $(cardList3[i]).on('click', (e) => {      //注意id綁定不包含0x
+                                e.preventDefault();
+                                let indexOfUser = transfer_list[i].members.findIndex(ele => ele == userID);
+                                document.querySelector("#JoinTuanGOProductName").textContent = transfer_list[i].productName;
+                                document.querySelector("#ProductImg").src = transfer_list[i].productPhoto;
+                                document.querySelector("#JoinTuanGOTuanGOType").textContent = transfer_list[i].tuangoType == 'UNPACK'? 'unpack' : 'promote';
+                                document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(transfer_list[i].expirationTime).toString().slice(0, 24);
+                                document.querySelector("#JoinTuanGOCost").textContent = `${transfer_list[i].price} $ /per , 你買了 ${transfer_list[i].soldAmount[indexOfUser]} 件`;
+                                document.querySelector("#JoinTuanGOContractAddress").textContent = transfer_list[i].tuangoAddress;
+                                let num = 0;
+                                var TuanGOerLine = "";
+                                num = accomulate(transfer_list[i].soldAmount);
+                                localStorage.setItem('unsoldProductAmount', transfer_list[i].totalAmount - num);
+                                for (let j = 0; j < transfer_list[i].totalAmount; j++) {
+                                    if (j < num) TuanGOerLine += '<i class="fas fa-user"></i>';
+                                    else TuanGOerLine += '<i class="far fa-user"></i>';
+                                }
+                                document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + transfer_list[i].totalAmount;
+                                document.querySelector("#bluetooth").disabled = false;
+                            })
+                        };
+                    })
                 }
             }, false)
         }

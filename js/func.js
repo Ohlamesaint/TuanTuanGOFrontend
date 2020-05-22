@@ -127,7 +127,7 @@ $(document).ready(function () {
     axios.get('https://tuantuango-backend.herokuapp.com/api/v1/user/profile')
     .then(res => {
         userID = res.data.data.id;
-        console.log(res)
+        console.log(userID)
     })
     .catch(err => {
         console.error(err); 
@@ -175,7 +175,7 @@ $(document).ready(function () {
             }).then(res => {
                 console.log(res);
                 let complete_list = res.data.data.filter(ele => ele.tuangoStatus == 'DONE')
-                let joinlist_complete = res.data.data.filter(ele => ele.tuangoStatus == 'TRANSPORT')
+                let transfer_list = res.data.data.filter(ele => ele.tuangoStatus == 'TRANSPORT')
                 let ongoing_list = res.data.data.filter(ele => ele.tuangoStatus == 'QUEUE')
                 console.log(done_list, transport_list, queue_list);
                 var target = document.querySelector("#complete_list");          // DONE
@@ -235,21 +235,22 @@ $(document).ready(function () {
                 for (let i = 0; i < cardList.length; i++) {
                     $(cardList[i]).on('click', async (e) => {      //注意id綁定不包含0x
                         e.preventDefault();
+                        let indexOfUser = complete_list[i].members.findIndex(ele => ele == userID);
                         document.querySelector("#JoinTuanGOProductName").textContent = complete_list[i].productName;
                         document.querySelector("#ProductImg").src = complete_list[i].productPhoto;
                         document.querySelector("#JoinTuanGOTuanGOType").textContent = complete_list[i].tuangoType == 'UNPACK' ? 'unpack' : 'promote';
                         document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(complete_list[i].expirationTime).toString().slice(0, 24);
-                        document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].price} $ /per , 你買了 ${complete_list[i].count} 件`;
+                        document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].price} $ /per , 你買了 ${complete_list[i].soldAmount[indexOfUser]} 件`;
                         document.querySelector("#JoinTuanGOContractAddress").textContent = complete_list[i].tuangoAddress;
                         let num = 0;
                         var TuanGOerLine = "";
                         num = accomulate(complete_list[i].soldAmount);
                         localStorage.setItem('unsoldProductAmount', complete_list[i].totalAmount - num);
-                        for (let j = 0; j < complete_list[i].TotalAmount; j++) {
+                        for (let j = 0; j < complete_list[i].totalAmount; j++) {
                             if (j < num) TuanGOerLine += '<i class="fas fa-user"></i>';
                             else TuanGOerLine += '<i class="far fa-user"></i>';
                         }
-                        document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + complete_list[i].TotalAmount;
+                        document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + complete_list[i].totalAmount;
                     })
                 };
                 target = document.querySelector("#ongoing_list");               // QUEUE
@@ -261,7 +262,7 @@ $(document).ready(function () {
                         <div class="text-center" style="padding-right: 1rem;">
                         <div class="row" style="padding: 1rem;">
                         <div class="col-4">
-                        <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
+                        <img class="img-fluid w-100 h-100" src=${element.productPhoto} alt="card image">
                         </div>
                         <div class="col-8">
                         <div class="row">
@@ -269,7 +270,7 @@ $(document).ready(function () {
                         商品名稱
                         </div>
                         <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
-                        ${element.name}
+                        ${element.productName}
                         </div>
                         </div>
                         </div>
@@ -286,7 +287,7 @@ $(document).ready(function () {
                         <div class="text-center" style="padding-right: 1rem;">
                         <div class="row" style="padding: 1rem;">
                         <div class="col-4">
-                        <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
+                        <img class="img-fluid w-100 h-100" src=${element.productPhoto} alt="card image">
                         </div>
                         <div class="col-8">
                         <div class="row">
@@ -294,7 +295,7 @@ $(document).ready(function () {
                         商品名稱
                         </div>
                         <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
-                        ${element.name}
+                        ${element.productName}
                         </div>
                         </div>
                         </div>
@@ -309,21 +310,22 @@ $(document).ready(function () {
                 for (let i = 0; i < cardList2.length; i++) {
                     $(cardList2[i]).on('click', (e) => {      //注意id綁定不包含0x
                         e.preventDefault();
-                        document.querySelector("#JoinTuanGOProductName").textContent = ongoing_list[i].name;
-                        document.querySelector("#ProductImg").src = ongoing_list[i].img;
-                        document.querySelector("#JoinTuanGOTuanGOType").textContent = ongoing_list[i].TuanGOType ? 'unpack' : 'promote';
-                        document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(ongoing_list[i].ExpirationTime).toString().slice(0, 24);
-                        document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].disccountPrice} $ /per , 你買了 ${complete_list[i].count} 件`;
-                        document.querySelector("#JoinTuanGOContractAddress").textContent = ongoing_list[i].contract_address;
-                        var num = 0;
+                        let indexOfUser = ongoing_list[i].members.findIndex(ele => ele == userID);
+                        document.querySelector("#JoinTuanGOProductName").textContent = ongoing_list[i].productName;
+                        document.querySelector("#ProductImg").src = ongoing_list[i].productPhoto;
+                        document.querySelector("#JoinTuanGOTuanGOType").textContent = ongoing_list[i].tuangoType == 'UNPACK' ? 'unpack' : 'promote';
+                        document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(ongoing_list[i].expirationTime).toString().slice(0, 24);
+                        document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].price} $ /per , 你買了 ${complete_list[i].soldAmount[indexOfUser]} 件`;
+                        document.querySelector("#JoinTuanGOContractAddress").textContent = ongoing_list[i].tuangoAddress;
+                        let num = 0;
                         var TuanGOerLine = "";
-                        num = ongoing_list[i].SoldAmounts;
-                        localStorage.setItem('unsoldProductAmount', ongoing_list[i].TotalAmount - num);
-                        for (let j = 0; j < ongoing_list[i].TotalAmount; j++) {
+                        num = accomulate(ongoing_list[i].soldAmount);
+                        localStorage.setItem('unsoldProductAmount', ongoing_list[i].totalAmount - num);
+                        for (let j = 0; j < ongoing_list[i].totalAmount; j++) {
                             if (j < num) TuanGOerLine += '<i class="fas fa-user"></i>';
                             else TuanGOerLine += '<i class="far fa-user"></i>';
                         }
-                        document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + ongoing_list[i].TotalAmount;
+                        document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + ongoing_list[i].totalAmount;
                     })
                 };
                 target = document.querySelector("#transfer_list");              //TRANSPORT
@@ -335,7 +337,7 @@ $(document).ready(function () {
                         <div class="text-center" style="padding-right: 1rem;">
                         <div class="row" style="padding: 1rem;">
                         <div class="col-4">
-                        <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
+                        <img class="img-fluid w-100 h-100" src=${element.productPhoto} alt="card image">
                         </div>
                         <div class="col-8">
                         <div class="row">
@@ -343,7 +345,7 @@ $(document).ready(function () {
                         商品名稱
                         </div>
                         <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
-                        ${element.name}
+                        ${element.productName}
                         </div>
                         </div>
                         </div>
@@ -360,7 +362,7 @@ $(document).ready(function () {
                         <div class="text-center" style="padding-right: 1rem;">
                         <div class="row" style="padding: 1rem;">
                         <div class="col-4">
-                        <img class="img-fluid w-100 h-100" src=${element.img} alt="card image">
+                        <img class="img-fluid w-100 h-100" src=${element.productPhoto} alt="card image">
                         </div>
                         <div class="col-8">
                         <div class="row">
@@ -368,7 +370,7 @@ $(document).ready(function () {
                         商品名稱
                         </div>
                         <div class="col-12 h-50 p-1 text-center justify-content-center align-items-center" style="line-height: normal;">
-                        ${element.name}
+                        ${element.productName}
                         </div>
                         </div>
                         </div>
@@ -383,21 +385,22 @@ $(document).ready(function () {
                 for (let i = 0; i < cardList3.length; i++) {
                     $(cardList3[i]).on('click', (e) => {      //注意id綁定不包含0x
                         e.preventDefault();
-                        document.querySelector("#JoinTuanGOProductName").textContent = transfer_list[i].name;
-                        document.querySelector("#ProductImg").src = transfer_list[i].img;
-                        document.querySelector("#JoinTuanGOTuanGOType").textContent = transfer_list[i].TuanGOType ? 'unpack' : 'promote';
-                        document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(transfer_list[i].ExpirationTime).toString().slice(0, 24);
-                        document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].disccountPrice} $ /per , 你買了 ${complete_list[i].count} 件`;
-                        document.querySelector("#JoinTuanGOContractAddress").textContent = transfer_list[i].contract_address;
-                        var num = 0;
+                        let indexOfUser = transfer_list[i].members.findIndex(ele => ele == userID);
+                        document.querySelector("#JoinTuanGOProductName").textContent = transfer_list[i].productName;
+                        document.querySelector("#ProductImg").src = transfer_list[i].productPhoto;
+                        document.querySelector("#JoinTuanGOTuanGOType").textContent = transfer_list[i].tuangoType == 'UNPACK'? 'unpack' : 'promote';
+                        document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(transfer_list[i].expirationTime).toString().slice(0, 24);
+                        document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].price} $ /per , 你買了 ${complete_list[i].soldAmount[indexOfUser]} 件`;
+                        document.querySelector("#JoinTuanGOContractAddress").textContent = transfer_list[i].tuangoAddress;
+                        let num = 0;
                         var TuanGOerLine = "";
-                        num = transfer_list[i].SoldAmounts;
-                        localStorage.setItem('unsoldProductAmount', transfer_list[i].TotalAmount - num);
-                        for (let j = 0; j < transfer_list[i].TotalAmount; j++) {
+                        num = accomulate(ongoing_list[i].soldAmount);
+                        localStorage.setItem('unsoldProductAmount', ongoing_list[i].totalAmount - num);
+                        for (let j = 0; j < ongoing_list[i].totalAmount; j++) {
                             if (j < num) TuanGOerLine += '<i class="fas fa-user"></i>';
                             else TuanGOerLine += '<i class="far fa-user"></i>';
                         }
-                        document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + transfer_list[i].TotalAmount;
+                        document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + complete_list[i].totalAmount;
                     })
                 };
             }).catch(err => {

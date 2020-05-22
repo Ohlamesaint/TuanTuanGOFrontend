@@ -14,7 +14,7 @@ const assets = [
     "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css",
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css",
     "./public/img/top1.png",
-    // "pages/fallback.html"
+    "pages/fallback.html"
 ];
 const dynamicCache = "site-dynamic-v2";
 
@@ -89,30 +89,6 @@ self.addEventListener('push', async e => {
             console.log(err);
         });
  });
-
-
-function displayNotification(e) {
-    const data = e.data.json();
-    if('serviceWorker' in navigator){
-        var options = {
-            body: data.content,
-            icon: './public/img/tuantuango196.png',
-            image: './public/img/tuantuango196.png',
-            dir: 'ltr',
-            lang: 'zh-Hant',
-            vibrate: [100],
-            badge: './public/img/tuantuango196.png',
-            tag: 'confirm-notification',
-            renotify: true,
-            actions: [{
-                action: 'confirm', title: '確認', icon: './public/img/tuantuango196.png'
-            },{
-                action: 'cancel', title: '取消', icon: './public/img/tuantuango196.png'
-            }]
-        };
-        self.registration.showNotification(data.title, options);
-    }
-}
 
 self.addEventListener('notificationclick', async (event) => {
     var notification = event.notification;

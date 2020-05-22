@@ -231,7 +231,7 @@ $(document).ready(function () {
                         </div>`
                     }
                 });
-                let cardList = document.querySelectorAll('.joinlist_complete'); //TRANS PORT
+                let cardList = document.querySelectorAll('.joinlist_complete'); 
                 for (let i = 0; i < cardList.length; i++) {
                     $(cardList[i]).on('click', async (e) => {      //注意id綁定不包含0x
                         e.preventDefault();
@@ -240,11 +240,11 @@ $(document).ready(function () {
                         document.querySelector("#JoinTuanGOTuanGOType").textContent = complete_list[i].tuangoType == 'UNPACK' ? 'unpack' : 'promote';
                         document.querySelector("#JoinTuanGOExpirationDate").textContent = new Date(complete_list[i].expirationTime).toString().slice(0, 24);
                         document.querySelector("#JoinTuanGOCost").textContent = `${complete_list[i].price} $ /per , 你買了 ${complete_list[i].count} 件`;
-                        document.querySelector("#JoinTuanGOContractAddress").textContent = complete_list[i].contract_address;
-                        var num = 0;
+                        document.querySelector("#JoinTuanGOContractAddress").textContent = complete_list[i].tuangoAddress;
+                        let num = 0;
                         var TuanGOerLine = "";
-                        num = complete_list[i].SoldAmounts;
-                        localStorage.setItem('unsoldProductAmount', complete_list[i].TotalAmount - num);
+                        num = accomulate(complete_list[i].soldAmount);
+                        localStorage.setItem('unsoldProductAmount', complete_list[i].totalAmount - num);
                         for (let j = 0; j < complete_list[i].TotalAmount; j++) {
                             if (j < num) TuanGOerLine += '<i class="fas fa-user"></i>';
                             else TuanGOerLine += '<i class="far fa-user"></i>';
@@ -326,7 +326,7 @@ $(document).ready(function () {
                         document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + ongoing_list[i].TotalAmount;
                     })
                 };
-                target = document.querySelector("#transfer_list");
+                target = document.querySelector("#transfer_list");              //TRANSPORT
                 transfer_list.forEach(function (element, idx, array) {
                     if (idx === array.length - 1) {
                         target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_transfer">
@@ -1051,4 +1051,9 @@ async function indexedDBGetTargetPage() {
     });
     db.open();
     return await db.targetPage.get(1)
+}
+
+function accomulate(arr){
+    let reducer = (accomulator, currentValue) => accomulator+currentValue;
+    return arr.reduce(reducer);
 }

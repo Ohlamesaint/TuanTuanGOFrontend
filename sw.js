@@ -42,7 +42,7 @@ self.addEventListener("fetch", evt => {
     // console.log("service worker gotvddcdbsffd fetched", evt);
     evt.respondWith(                    //service worker中途攔截
         caches.match(evt.request).then(cacheRes => {
-            console.log(evt.request.url);
+            console.log(evt.request, 'out cache');
             return cacheRes || fetch(evt.request).then(fetchRes=>{
                 console.log(123);
                 return caches.open(dynamicCache).then(cache=>{

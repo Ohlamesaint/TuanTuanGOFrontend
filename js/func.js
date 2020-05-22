@@ -162,13 +162,14 @@ $(document).ready(function () {
             axios({
                 method: "GET",
                 url: "https://tuantuango-backend.herokuapp.com/api/v1/tuango/getUserTuango",
-                params: {
-                    status: "QUEUE"
-                },
                 withCredentials: true,
             }).then(res => {
                 console.log(res);
-                var target = document.querySelector("#complete_list");
+                let done_list = res.map(ele => ele.status == 'DONE')
+                let transport_list = res.map(ele => ele.status == 'TRANSPORT')
+                let queue_list = res.map(ele => ele.status == 'QUEUE');
+                console.table(done_list, transport_list, queue_list);
+                var target = document.querySelector("#complete_list");          // DONE
                 complete_list.forEach(function (element, idx, array) {
                     if (idx === array.length - 1) {
                         target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_complete">
@@ -221,7 +222,7 @@ $(document).ready(function () {
                         </div>`
                     }
                 });
-                let cardList = document.querySelectorAll('.joinlist_complete');
+                let cardList = document.querySelectorAll('.joinlist_complete'); //TRANS PORT
                 for (let i = 0; i < cardList.length; i++) {
                     $(cardList[i]).on('click', (e) => {      //注意id綁定不包含0x
                         e.preventDefault();
@@ -242,7 +243,7 @@ $(document).ready(function () {
                         document.querySelector("#JoinTuanGOTuanGOerLine").innerHTML = TuanGOerLine + ' ' + num + '/' + complete_list[i].TotalAmount;
                     })
                 };
-                target = document.querySelector("#ongoing_list");
+                target = document.querySelector("#ongoing_list");               // QUEUE
                 ongoing_list.forEach(function (element, idx, array) {
                     if (idx === array.length - 1) {
                         target.innerHTML += `<div style="margin-bottom:6rem;" class = "joinlist_ongoing">

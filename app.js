@@ -5,27 +5,28 @@ const send = async () => {
         const register = await navigator.serviceWorker.register('./sw.js');
         console.log(123);
         const userChoice = askForNotificationPermission();
-        console.log(userChoice);
-        console.log(123)
-        if(userChoice){
-            const subscription = await register.pushManager.subscribe({
-                userVisibleOnly: true,
-                applicationServerKey: urlBase64ToUint8Array(vapidKey)
-            })
-            console.log(JSON.stringify(subscription))
-            await fetch('https://localhost:3000/api/v1/subscription', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(subscription) 
-        })
-    } else {
-        console.log('user denied');
+        setPushSubcribe();
+        // console.log(userChoice);
+        // console.log(123)
+        // if(userChoice){
+        //     const subscription = await register.pushManager.subscribe({
+        //         userVisibleOnly: true,
+        //         applicationServerKey: urlBase64ToUint8Array(vapidKey)
+        //     })
+        //     console.log(JSON.stringify(subscription))
+        //     await fetch('https://tuantuango.herokuapp.com/subscribe', {
+        //     method: 'POST',
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify(subscription) 
+        //     })
+        // } else {
+        //     console.log('user denied');
+        // }
+    } catch (err) {
+        console.log('something went wrong => app => send', err);
     }
-} catch (err) {
-    console.log('something went wrong => app => send', err);
-}
 }
 
 if("serviceWorker" in navigator){

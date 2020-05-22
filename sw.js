@@ -45,7 +45,9 @@ self.addEventListener("fetch", evt => {
         caches.match(evt.request).then(cacheRes => {
             console.log(evt.request.url);
             return cacheRes || fetch(evt.request).then(fetchRes=>{
+                console.log(123);
                 return caches.open(dynamicCache).then(cache=>{
+                    console.log(456)
                     let backendAPI = /^(https):\/\/(tuantuango-backend.herokuapp.com)\//
                     if(backendAPI.text(evt.request.url)){
                         console.log(evt.reqest.url, 'in cache');

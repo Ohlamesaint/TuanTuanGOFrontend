@@ -3,17 +3,14 @@ importScripts('https://unpkg.com/dexie@3.0.1/dist/dexie.js')
 const staticCacheName = "site-static-v4";      //name of cache, CHANGE EVERY TIME//
 const assets = [
     "/",
-    // "login.html",
-    "app.js",
-    "manifest.json",
-    "sw.js",
+    "./app.js",
+    "./manifest.json",
+    "./sw.js",
     "https://code.jquery.com/jquery-3.2.1.slim.min.js",
     "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js",
-    // "https://fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.woff2",
     "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js",
     "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css",
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css",
-    "./public/img/top1.png",
     "pages/fallback.html"
 ];
 const dynamicCache = "site-dynamic-v2";
@@ -26,7 +23,6 @@ self.addEventListener("install", evt=>{
             cache.addAll(assets);              //這事實上一系列的request)
         })
     );   
-    // self.skipWaitidfsdfng();////
 });
 
 self.addEventListener("activate", evt => {

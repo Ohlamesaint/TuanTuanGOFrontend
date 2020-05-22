@@ -177,7 +177,6 @@ $(document).ready(function () {
                 let complete_list = res.data.data.filter(ele => ele.tuangoStatus == 'DONE')
                 let transfer_list = res.data.data.filter(ele => ele.tuangoStatus == 'TRANSPORT')
                 let ongoing_list = res.data.data.filter(ele => ele.tuangoStatus == 'QUEUE')
-                console.log(done_list, transport_list, queue_list);
                 var target = document.querySelector("#complete_list");          // DONE
                 complete_list.forEach(function (element, idx, array) {
                     if (idx === array.length - 1) {

@@ -42,9 +42,7 @@ self.addEventListener("fetch", evt => {
     evt.respondWith(                    //service worker中途攔截
         caches.match(evt.request).then(cacheRes => {
             return cacheRes || fetch(evt.request).then(fetchRes=>{
-                console.log(123);
                 return caches.open(dynamicCache).then(cache=>{
-                    console.log(456)
                     let backendAPI = /^(https):\/\/(tuantuango-backend.herokuapp.com)\//
                     if(!backendAPI.test(evt.request.url)){
                         cache.put(evt.request.url, fetchRes.clone());       //key and value

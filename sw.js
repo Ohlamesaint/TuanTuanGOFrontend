@@ -1,6 +1,6 @@
 importScripts('https://unpkg.com/dexie@3.0.1/dist/dexie.js')
 
-const staticCacheName = "site-static-v4";      //name of cache, CHANGE EVERY TIME//
+const staticCacheName = "site-static-v1";      //name of cache, CHANGE EVERY TIME//
 const assets = [
     "/",
     "./app.js",
@@ -13,7 +13,7 @@ const assets = [
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css",
     "pages/fallback.html"
 ];
-const dynamicCache = "site-dynamic-v2";
+const dynamicCache = "site-dynamic-v1";
 
 self.addEventListener("install", evt=>{
     console.log("service worker is installed");

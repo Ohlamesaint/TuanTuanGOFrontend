@@ -54,7 +54,10 @@ self.addEventListener("fetch", evt => {
                     }
                     return fetchRes; 
                 })
-            }).catch(err => caches.match("pages/fallback.html").then(fallback => {return fallback}))
+            }).catch(err => { 
+                console.log(err);   
+                caches.match("pages/fallback.html").then(fallback => {return fallback})
+            })
         })
     )
 });

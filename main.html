@@ -279,7 +279,7 @@
                     }
                 })
                 for(let i=0; i<typeTabLists.length; i++){
-                    if(activeTab == i) break;
+                    if(activeTab == i) continue;
                     typeTabLists[i].classList.remove('active');
                     $(swiperSlides[i]).removeClass('fadeIn');
                 }

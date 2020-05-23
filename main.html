@@ -214,13 +214,16 @@
                 }
                 let activeTab = 0;
                 swiper.on('transitionEnd', ()=>{
-                    
+                    for(let i=0; i<typeTabLists.length; i++){
+                        typeTabLists[i].classList.remove('active');
+                        $(swiperSlides[i]).removeClass('fadeIn');
+                    }
                     for(let i=0; i<swiperSlides.length; i++){
                         if($(swiperSlides[i]).hasClass('swiper-slide-active')){
-                            if(activeTab == i) break;
-                            activeTab = i;
                             typeTabLists[i].classList.add('active');
                             console.log(typeTabLists[i]);
+                            if(activeTab == i) break;
+                            activeTab = i;
                             axios({
                                 method: "GET",
                                 withCredentials: true,
@@ -278,10 +281,7 @@
                         }
                     }
                 })
-                for(let i=0; i<typeTabLists.length; i++){
-                    typeTabLists[i].classList.remove('active');
-                    $(swiperSlides[i]).removeClass('fadeIn');
-                }
+                
             </script>
             
             

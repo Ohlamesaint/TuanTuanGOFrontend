@@ -238,7 +238,7 @@ function setPushSubcribe() {
                 console.log(newSub);
                 return axios({
                     method:'post',
-                    url: "https://tuantuango-backend.herokuapp.com/api/v1/subscription/addSub",
+                    url: "https://localhost:3000/api/v1/subscription/addSub",
                     headers: {
                         'content-type': 'application/json',
                     },

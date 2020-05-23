@@ -238,11 +238,11 @@ function setPushSubcribe() {
                 console.log(newSub);
                 return axios({
                     method:'post',
-                    url: "https://tuantuango.herokuapp.com/subscribe",
+                    url: "https://tuantuango-backend.herokuapp.com/api/v1/subscription/addSub",
                     headers: {
                         'content-type': 'application/json',
                     },
-                    data: newSub
+                    data: { newSub }
                 }).then((res) => {
                     console.log('push registration success', res);
                 }).catch((err) => {

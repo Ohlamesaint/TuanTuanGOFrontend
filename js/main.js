@@ -238,7 +238,7 @@ function setPushSubcribe() {
                 console.log(newSub);
                 return axios({
                     method:'post',
-                    url: "https://localhost:3000/api/v1/subscription/addSub",
+                    url: "http://localhost:3000/api/v1/subscription/addSub",
                     headers: {
                         'content-type': 'application/json',
                     },

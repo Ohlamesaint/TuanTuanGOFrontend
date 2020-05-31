@@ -492,7 +492,7 @@ $(document).ready(function () {
                 else if (i == 1) {
                     axios({
                         method: "GET",
-                        url: "http://localhost:3000/api/v1/tuango/getUserTuango",
+                        url: "https://tuantuango-backend.herokuapp.com/api/v1/tuango/getUserTuango",
                         withCredentials: true,
                     }).then(res => {
                         console.log(res);

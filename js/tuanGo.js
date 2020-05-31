@@ -478,7 +478,7 @@ $(document).ready(()=>{
                     axios({
                         method: "put",
                         withCredentials: true,
-                        url:"http://localhost:3000/api/v1/tuango/joinTuango",
+                        url:"https://tuantuango-backend.herokuapp.com/api/v1/tuango/joinTuango",
                         data:{
                             tuangoID: res.data.data._id,
                             amount : TuanGOType?$("#unpackedProductNum").val():$("#promoteProductNum").val(),

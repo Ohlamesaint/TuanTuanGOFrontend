@@ -159,40 +159,42 @@ $(document).ready(function(){
         }
     })
     document.querySelector("#TuanGOerPurchaseAmountInPromote").addEventListener("change", ()=>{
-        let TuanGOInform = JSON.parse(localStorage.getItem("TuanGOInform"));
         if(!checkNum(document.querySelector("#TuanGOerPurchaseAmountInPromote").value, JSON.parse(localStorage.getItem('unsoldProductAmount')))){
             document.querySelector("#unpackedWarningText").textContent = 'invalid number!'
             document.querySelector("#footerInJoin").classList.remove('show')
         } else {
             document.querySelector("#unpackedWarningText").textContent = ''
             document.querySelector("#footerInJoin").classList.add('show');
-            document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", (event)=>{
-                event.preventDefault();
-                event.stopPropagation();
-                if(mutex){
-                    mutex = false;
-                    axios({
-                        method: "put",
-                        url: "https://tuantuango-backend.herokuapp.com/api/v1/tuango/joinTuango",
-                        withCredentials: true,
-                        data: {
-                            tuangoID: TuanGOInform.id,
-                            amount: document.querySelector("#TuanGOerPurchaseAmountInPromote").value,
-                        }
-                    }).then((res)=>{
-                        alert("JOIN TUANGO SUCCESS");
-                        setTimeout(()=>{
-                            window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html");
-                        }, 100);
-                    }).catch((err)=>{
-                        console.log(err);
-                    })
-                    mutex = true;
+        }
+    })
+    document.querySelector("#comfirmMoveOnInJoin").addEventListener("click", (event)=>{
+        let TuanGOInform = JSON.parse(localStorage.getItem("TuanGOInform"));
+        event.preventDefault();
+        event.stopPropagation();
+        if(mutex){
+            mutex = false;
+            axios({
+                method: "put",
+                url: "https://tuantuango-backend.herokuapp.com/api/v1/tuango/joinTuango",
+                withCredentials: true,
+                data: {
+                    tuangoID: TuanGOInform.id,
+                    amount: document.querySelector("#TuanGOerPurchaseAmountInPromote").value,
                 }
+            }).then((res)=>{
+                alert("JOIN TUANGO SUCCESS");
+                setTimeout(()=>{
+                    window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html");
+                }, 100);
+            }).catch((err)=>{
+                console.log(err);
             })
+            mutex = true;
         }
     })
 })
+
+
 
 async function indexedDBStoreTargetPage(num){
     

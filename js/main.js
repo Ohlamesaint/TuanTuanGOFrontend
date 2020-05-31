@@ -175,7 +175,7 @@ $(document).ready(function(){
             mutex = false;
             axios({
                 method: "put",
-                url: "https://tuantuango-backend.herokuapp.com/api/v1/tuango/joinTuango",
+                url: "http://localhost:3000/api/v1/tuango/joinTuango",
                 withCredentials: true,
                 data: {
                     tuangoID: TuanGOInform.id,
@@ -184,7 +184,7 @@ $(document).ready(function(){
             }).then((res)=>{
                 alert("JOIN TUANGO SUCCESS");
                 setTimeout(()=>{
-                    window.location.replace("http://localhost:3000/TuanTuanGOFrontend/main.html");
+                    window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html");
                 }, 100);
             }).catch((err)=>{
                 console.log(err);

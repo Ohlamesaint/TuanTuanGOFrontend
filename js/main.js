@@ -184,7 +184,7 @@ $(document).ready(function(){
             }).then((res)=>{
                 alert("JOIN TUANGO SUCCESS");
                 setTimeout(()=>{
-                    window.location.replace("https://ohlamesaint.github.io/TuanTuanGOFrontend/main.html");
+                    window.location.replace("http://localhost:3000/TuanTuanGOFrontend/main.html");
                 }, 100);
             }).catch((err)=>{
                 console.log(err);

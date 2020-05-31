@@ -43,10 +43,10 @@ self.addEventListener("fetch", evt => {
         caches.match(evt.request).then(cacheRes => {
             return cacheRes || fetch(evt.request).then(fetchRes=>{
                 return caches.open(dynamicCache).then(cache=>{
-                    let backendAPI = /^(https):\/\/(tuantuango-backend.herokuapp.com)\//
-                    if(!backendAPI.test(evt.request.url)){
-                        cache.put(evt.request.url, fetchRes.clone());       //key and value
-                    }
+                    //let backendAPI = /^(https):\/\/(tuantuango-backend.herokuapp.com)\//
+                    //if(!backendAPI.test(evt.request.url)){
+                    //    cache.put(evt.request.url, fetchRes.clone());       //key and value
+                    //}
                     return fetchRes; 
                 })
             }).catch(err => { 

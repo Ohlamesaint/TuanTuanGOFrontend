@@ -229,7 +229,7 @@ function setPushSubcribe() {
     }).then((sub) => {
         console.log(sub);
         if(sub === null){
-            let vapidKey = 'BGxHf6ZQkHVoIdROO4Fir61eouPlqUp3IzxsV4ud10FeXgS5vvG9q3Gw5J7lsp2XHnF_49aJ9RxWNV99_TD9--8';
+            let vapidKey = 'BJR-j2fVxc_Y-Th-YJ2l6w1n3LmdGzNZVVYn5JgSnEp_n-pBSF9A7CnfPz26jHtCq3RAUyQWhKwdCHivTF8U7eE';
             let convertedVapidKey = urlBase64ToUint8Array(vapidKey);
             serviceWorkerRegistration.pushManager.subscribe({
                 userVisibleOnly: true,
@@ -238,7 +238,7 @@ function setPushSubcribe() {
                 console.log(newSub);
                 return axios({
                     method:'post',
-                    url: "http://localhost:3000/api/v1/subscription/addSub",
+                    url: "http://tuantuango-backend.herokuapp.com/api/v1/subscription/addSub",
                     headers: {
                         'content-type': 'application/json',
                     },

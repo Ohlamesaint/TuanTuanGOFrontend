@@ -63,9 +63,9 @@ self.addEventListener('push', async e => {
     console.log(data);
     
         var options = {
-            body: data.content,
+            body: `您參與的團購${ data.content.productName }已揪團成功，即將開始配送`,
             icon: './public/img/tuantuango196.png',
-            image: './public/img/tuantuango196.png',
+            image: data.content.productPhoto,
             dir: 'ltr',
             lang: 'zh-Hant',
             vibrate: [100],
@@ -73,7 +73,7 @@ self.addEventListener('push', async e => {
             tag: 'confirm-notification',
             renotify: true,
             actions: [{
-                action: 'confirm', title: '確認', icon: './public/img/tuantuango196.png'
+                action: 'confirm', title: '查看團購', icon: './public/img/tuantuango196.png'
             },{
                 action: 'cancel', title: '取消', icon: './public/img/tuantuango196.png'
             }]

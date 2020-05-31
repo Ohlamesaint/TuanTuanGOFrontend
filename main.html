@@ -222,6 +222,7 @@
                         if($(swiperSlides[i]).hasClass('swiper-slide-active')){
                             typeTabLists[i].classList.add('active');
                             console.log(typeTabLists[i]);
+                            console.log(activeTab, i);
                             if(activeTab == i) break;
                             activeTab = i;
                             axios({

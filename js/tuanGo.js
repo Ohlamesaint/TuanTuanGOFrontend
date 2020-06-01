@@ -461,7 +461,7 @@ $(document).ready(()=>{
                 console.log({
                     type: TuanGOType,
                     productID : productInform.data[0].productID,
-                    setUpTime: moment().format('YYYY')+"-"+moment().format('MM')+"-"+parseInt(moment().format('DD')).toString()+"T"+moment().format('hh')+":"+moment().format('mm'),
+                    setUpTime: moment().format('YYYY')+"-"+moment().format('MM')+"-"+moment().format('DD')+"T"+moment().format('hh')+":"+moment().format('mm'),
                     ExpirationTime : TuanGOType?document.querySelector("input[name=Expiration]").value:document.querySelector("input[name=promoteExpiration]").value,
                 })
                 axios({

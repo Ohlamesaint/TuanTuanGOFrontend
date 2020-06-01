@@ -177,6 +177,10 @@ footer ul li{
   text-decoration: none;
 }
 
+.info:active{
+    text-decoration: none;
+}
+
 .info_map
 {
   position: absolute;
@@ -192,11 +196,11 @@ footer ul li{
 
 .profile_word
 {
-    font-size: 1rem;
+    font-size: 2rem;
     padding-right: 1rem;
     text-overflow: ellipsis;
     text-align:left;
-    line-height: 1rem;
+    line-height: 2rem;
     font-family:monospace;
     opacity:0.85;
 }

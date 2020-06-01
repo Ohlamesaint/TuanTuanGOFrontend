@@ -125,13 +125,13 @@ footer ul li{
 #profile_name{
     height: 100%;
     width: 100%;
-    background-image: url(../public/img/profile_name.psvg;
+    background-image: url(../public/img/profile_name.svg);
 }
 
 #profile_gender{
     height: 100%;
     width: 100%;
-    background-image: url(../public/img/profile_gendersvgg);
+    background-image: url(../public/img/profile_gender.svg);
 }
 
 #profile_birth{

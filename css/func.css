@@ -193,6 +193,8 @@ footer ul li{
 .profile_word
 {
     font-size: 1.3rem;
+    padding-right: .5rem;
+    text-overflow: ellipsis;
     text-align:left;
     line-height: 9px;
     font-family:monospace;
@@ -269,7 +271,7 @@ canvas {
     height: auto !important;
     max-height: 600px;
     pointer-events: none;
-  }
+}
 
 /* #back>p{
     text-align: center;

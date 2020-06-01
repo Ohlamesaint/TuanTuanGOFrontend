@@ -192,11 +192,11 @@ footer ul li{
 
 .profile_word
 {
-    font-size: 1.3rem;
-    padding-right: .5rem;
+    font-size: 1rem;
+    padding-right: 1rem;
     text-overflow: ellipsis;
     text-align:left;
-    line-height: 9px;
+    line-height: 1rem;
     font-family:monospace;
     opacity:0.85;
 }

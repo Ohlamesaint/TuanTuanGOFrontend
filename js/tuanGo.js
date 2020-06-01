@@ -332,6 +332,7 @@ $(document).ready(()=>{
                 }
             })
             {
+                // 時間會有問題
                 let check = 0;
                 document.querySelector("input[name=Expiration]").addEventListener("click", ()=>{
                     console.log(moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+1).toString()+"T"+moment().format('hh')+":"+moment().format('mm'));

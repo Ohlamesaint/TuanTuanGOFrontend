@@ -335,9 +335,9 @@ $(document).ready(()=>{
                 let check = 0;
                 document.querySelector("input[name=Expiration]").addEventListener("click", ()=>{
                     console.log(moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+1).toString()+"T"+moment().format('hh')+":"+moment().format('mm'));
-                    document.querySelector("input[name=Expiration]").min = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+1).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
+                    document.querySelector("input[name=Expiration]").min = moment().format('YYYY')+"-"+moment().format('MM')+"-"+'0'+(parseInt(moment().format('DD'))+1).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
                     // document.querySelector("input[name=Expiration]").value = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+1).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
-                    document.querySelector("input[name=Expiration]").max = moment().format('YYYY')+"-"+moment().format('MM')+"-"+(parseInt(moment().format('DD'))+7).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
+                    document.querySelector("input[name=Expiration]").max = moment().format('YYYY')+"-"+moment().format('MM')+"-"+'0'+(parseInt(moment().format('DD'))+7).toString()+"T"+moment().format('hh')+":"+moment().format('mm');
                     if(check === 0||check === 2){
                         $("#unpackedWarningText").text("尚未設定團購時限!");
                         check = 2;

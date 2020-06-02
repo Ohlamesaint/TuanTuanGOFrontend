@@ -91,7 +91,7 @@ $(document).ready(function(){
             document.querySelector("#errorProduct").textContent = ""
             axios({
                 method: "POST",
-                url: "https://tuantuango.herokuapp.com/addProduct",
+                url: "https://tuantuango.herokuapp.com/api/v1/product/addProduct",
                 headers: {
                     'Content-Type':  'multipart/form-data',
                 },

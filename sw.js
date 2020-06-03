@@ -63,7 +63,7 @@ self.addEventListener('push', async e => {
     console.log(data);
     
         var options = {
-            body: `您參與的團購${ data.content.productName }已揪團成功，即將開始配送`,
+            body: `已有人發起您感興趣的團購${ data.content.productName }`,
             icon: './public/img/tuantuango196.png',
             image: data.content.productPhoto,
             dir: 'ltr',
